@@ -12,6 +12,8 @@ import BMICalculator from "./pages/calculators/BMICalculator";
 import LoanCalculator from "./pages/calculators/LoanCalculator";
 import PercentageCalculator from "./pages/calculators/PercentageCalculator";
 import LengthConverter from "./pages/calculators/LengthConverter";
+import MortgageCalculator from "./pages/calculators/MortgageCalculator";
+import CompoundInterestCalculator from "./pages/calculators/CompoundInterestCalculator";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -32,6 +34,8 @@ const App = () => (
             <Route path="/calculator/loan" element={<LoanCalculator />} />
             <Route path="/calculator/percentage" element={<PercentageCalculator />} />
             <Route path="/calculator/length" element={<LengthConverter />} />
+            <Route path="/calculator/mortgage" element={<MortgageCalculator />} />
+            <Route path="/calculator/compound-interest" element={<CompoundInterestCalculator />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
