@@ -22,6 +22,19 @@ import InvestmentReturnCalculator from "./pages/calculators/InvestmentReturnCalc
 import CurrencyConverter from "./pages/calculators/CurrencyConverter";
 import CreditCardPayoffCalculator from "./pages/calculators/CreditCardPayoffCalculator";
 import CarLoanCalculator from "./pages/calculators/CarLoanCalculator";
+import CalorieCalculator from "./pages/calculators/CalorieCalculator";
+import IdealWeightCalculator from "./pages/calculators/IdealWeightCalculator";
+import BodyFatCalculator from "./pages/calculators/BodyFatCalculator";
+import WaterIntakeCalculator from "./pages/calculators/WaterIntakeCalculator";
+import PregnancyCalculator from "./pages/calculators/PregnancyCalculator";
+import HeartRateCalculator from "./pages/calculators/HeartRateCalculator";
+import MacroCalculator from "./pages/calculators/MacroCalculator";
+import ProteinCalculator from "./pages/calculators/ProteinCalculator";
+import AverageCalculator from "./pages/calculators/AverageCalculator";
+import RatioCalculator from "./pages/calculators/RatioCalculator";
+import FractionCalculator from "./pages/calculators/FractionCalculator";
+import AgeCalculator from "./pages/calculators/AgeCalculator";
+import TemperatureConverter from "./pages/calculators/TemperatureConverter";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -52,6 +65,19 @@ const App = () => (
         <Route path="/calculator/currency" element={<CurrencyConverter />} />
         <Route path="/calculator/credit-card" element={<CreditCardPayoffCalculator />} />
         <Route path="/calculator/car-loan" element={<CarLoanCalculator />} />
+        <Route path="/calculator/calorie" element={<CalorieCalculator />} />
+        <Route path="/calculator/ideal-weight" element={<IdealWeightCalculator />} />
+        <Route path="/calculator/body-fat" element={<BodyFatCalculator />} />
+        <Route path="/calculator/water" element={<WaterIntakeCalculator />} />
+        <Route path="/calculator/pregnancy" element={<PregnancyCalculator />} />
+        <Route path="/calculator/heart-rate" element={<HeartRateCalculator />} />
+        <Route path="/calculator/macro" element={<MacroCalculator />} />
+        <Route path="/calculator/protein" element={<ProteinCalculator />} />
+        <Route path="/calculator/average" element={<AverageCalculator />} />
+        <Route path="/calculator/ratio" element={<RatioCalculator />} />
+        <Route path="/calculator/fraction" element={<FractionCalculator />} />
+        <Route path="/calculator/age" element={<AgeCalculator />} />
+        <Route path="/calculator/temperature" element={<TemperatureConverter />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

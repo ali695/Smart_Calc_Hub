@@ -1,4 +1,4 @@
-import { Calculator, Heart, Percent, Ruler, DollarSign, Activity, TrendingUp, Scale, Receipt, Target, TrendingDown, Banknote, CreditCard, Car } from "lucide-react";
+import { Calculator, Heart, Percent, Ruler, DollarSign, Activity, TrendingUp, Scale, Receipt, Target, TrendingDown, Banknote, CreditCard, Car, Utensils, Weight, Droplet, Baby, HeartPulse, Apple, Beef, BarChart3, Divide, Calendar, ThermometerSun } from "lucide-react";
 import { LucideIcon } from "lucide-react";
 
 export interface CalculatorData {
@@ -75,6 +75,86 @@ export const calculators: CalculatorData[] = [
     seoDescription: "Free BMR calculator to find your basal metabolic rate and daily calorie requirements based on your age, weight, height, and activity level."
   },
   {
+    id: "calorie",
+    title: "Calorie Calculator",
+    description: "Calculate daily calorie needs for weight goals",
+    category: "health",
+    icon: Utensils,
+    path: "/calculator/calorie",
+    seoTitle: "Calorie Calculator - Daily Calorie Needs | SmartCalc Hub",
+    seoDescription: "Calculate your daily calorie requirements for weight loss, maintenance, or muscle gain."
+  },
+  {
+    id: "ideal-weight",
+    title: "Ideal Weight Calculator",
+    description: "Find your ideal body weight range",
+    category: "health",
+    icon: Weight,
+    path: "/calculator/ideal-weight",
+    seoTitle: "Ideal Weight Calculator | SmartCalc Hub",
+    seoDescription: "Calculate your ideal body weight using multiple scientific formulas."
+  },
+  {
+    id: "body-fat",
+    title: "Body Fat Calculator",
+    description: "Estimate body fat percentage",
+    category: "health",
+    icon: Activity,
+    path: "/calculator/body-fat",
+    seoTitle: "Body Fat Calculator | SmartCalc Hub",
+    seoDescription: "Calculate body fat percentage using the U.S. Navy method."
+  },
+  {
+    id: "water",
+    title: "Water Intake Calculator",
+    description: "Calculate daily water needs",
+    category: "health",
+    icon: Droplet,
+    path: "/calculator/water",
+    seoTitle: "Water Intake Calculator | SmartCalc Hub",
+    seoDescription: "Find out how much water you should drink daily."
+  },
+  {
+    id: "pregnancy",
+    title: "Pregnancy Due Date",
+    description: "Calculate your due date",
+    category: "health",
+    icon: Baby,
+    path: "/calculator/pregnancy",
+    seoTitle: "Pregnancy Calculator | SmartCalc Hub",
+    seoDescription: "Calculate your pregnancy due date and weeks pregnant."
+  },
+  {
+    id: "heart-rate",
+    title: "Heart Rate Zones",
+    description: "Find your training heart rate zones",
+    category: "health",
+    icon: HeartPulse,
+    path: "/calculator/heart-rate",
+    seoTitle: "Heart Rate Zone Calculator | SmartCalc Hub",
+    seoDescription: "Calculate optimal heart rate zones for different workout intensities."
+  },
+  {
+    id: "macro",
+    title: "Macro Calculator",
+    description: "Calculate protein, carbs, and fat",
+    category: "health",
+    icon: Apple,
+    path: "/calculator/macro",
+    seoTitle: "Macro Calculator | SmartCalc Hub",
+    seoDescription: "Calculate optimal macronutrient distribution for your goals."
+  },
+  {
+    id: "protein",
+    title: "Protein Calculator",
+    description: "Daily protein requirements",
+    category: "health",
+    icon: Beef,
+    path: "/calculator/protein",
+    seoTitle: "Protein Calculator | SmartCalc Hub",
+    seoDescription: "Calculate your daily protein needs based on goals and activity."
+  },
+  {
     id: "weight",
     title: "Weight Converter",
     description: "Convert between kilograms, pounds, ounces, and more",
@@ -83,6 +163,56 @@ export const calculators: CalculatorData[] = [
     path: "/calculator/weight",
     seoTitle: "Weight Converter - Convert Units of Weight | SmartCalc Hub",
     seoDescription: "Free weight converter to convert between kilograms, pounds, ounces, grams and more. Quick and accurate weight conversions."
+  },
+  {
+    id: "temperature",
+    title: "Temperature Converter",
+    description: "Convert Celsius, Fahrenheit, Kelvin",
+    category: "conversion",
+    icon: ThermometerSun,
+    path: "/calculator/temperature",
+    seoTitle: "Temperature Converter | SmartCalc Hub",
+    seoDescription: "Convert between Celsius, Fahrenheit, and Kelvin instantly."
+  },
+  {
+    id: "average",
+    title: "Average Calculator",
+    description: "Calculate mean, median, mode",
+    category: "math",
+    icon: BarChart3,
+    path: "/calculator/average",
+    seoTitle: "Average Calculator | SmartCalc Hub",
+    seoDescription: "Calculate mean, median, and mode of numbers."
+  },
+  {
+    id: "ratio",
+    title: "Ratio Calculator",
+    description: "Simplify and compare ratios",
+    category: "math",
+    icon: Divide,
+    path: "/calculator/ratio",
+    seoTitle: "Ratio Calculator | SmartCalc Hub",
+    seoDescription: "Simplify ratios and convert between formats."
+  },
+  {
+    id: "fraction",
+    title: "Fraction Calculator",
+    description: "Add, subtract, multiply, divide fractions",
+    category: "math",
+    icon: Calculator,
+    path: "/calculator/fraction",
+    seoTitle: "Fraction Calculator | SmartCalc Hub",
+    seoDescription: "Perform operations on fractions with automatic simplification."
+  },
+  {
+    id: "age",
+    title: "Age Calculator",
+    description: "Calculate exact age from birth date",
+    category: "math",
+    icon: Calendar,
+    path: "/calculator/age",
+    seoTitle: "Age Calculator | SmartCalc Hub",
+    seoDescription: "Calculate your exact age in years, months, and days."
   },
   {
     id: "compound-interest",
