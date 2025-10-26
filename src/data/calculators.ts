@@ -1,4 +1,4 @@
-import { Calculator, Heart, Percent, Ruler, DollarSign, Activity, TrendingUp, Scale } from "lucide-react";
+import { Calculator, Heart, Percent, Ruler, DollarSign, Activity, TrendingUp, Scale, Receipt, Target, TrendingDown, Banknote, CreditCard, Car } from "lucide-react";
 import { LucideIcon } from "lucide-react";
 
 export interface CalculatorData {
@@ -93,6 +93,66 @@ export const calculators: CalculatorData[] = [
     path: "/calculator/compound-interest",
     seoTitle: "Compound Interest Calculator - Calculate Investment Growth | SmartCalc Hub",
     seoDescription: "Free compound interest calculator to see how your investments grow over time with compound interest calculations."
+  },
+  {
+    id: "tax",
+    title: "Tax Calculator",
+    description: "Calculate income tax based on earnings and deductions",
+    category: "finance",
+    icon: Receipt,
+    path: "/calculator/tax",
+    seoTitle: "Tax Calculator - Calculate Income Tax | SmartCalc Hub",
+    seoDescription: "Free tax calculator to estimate your income tax liability based on your earnings, tax rate, and deductions."
+  },
+  {
+    id: "savings-goal",
+    title: "Savings Goal Calculator",
+    description: "Calculate how long it will take to reach your savings goal",
+    category: "finance",
+    icon: Target,
+    path: "/calculator/savings-goal",
+    seoTitle: "Savings Goal Calculator - Plan Your Financial Goals | SmartCalc Hub",
+    seoDescription: "Free savings goal calculator to determine how long it takes to reach your savings target with regular contributions."
+  },
+  {
+    id: "investment-return",
+    title: "Investment Return",
+    description: "Calculate ROI and annual returns on investments",
+    category: "finance",
+    icon: TrendingDown,
+    path: "/calculator/investment-return",
+    seoTitle: "Investment Return Calculator - Calculate ROI | SmartCalc Hub",
+    seoDescription: "Free investment return calculator to analyze your ROI, total returns, and annualized performance."
+  },
+  {
+    id: "currency",
+    title: "Currency Converter",
+    description: "Convert between major world currencies",
+    category: "conversion",
+    icon: Banknote,
+    path: "/calculator/currency",
+    seoTitle: "Currency Converter - Convert World Currencies | SmartCalc Hub",
+    seoDescription: "Free currency converter for major world currencies. Quick and easy currency conversion with sample rates."
+  },
+  {
+    id: "credit-card",
+    title: "Credit Card Payoff",
+    description: "Calculate how long to pay off credit card debt",
+    category: "finance",
+    icon: CreditCard,
+    path: "/calculator/credit-card",
+    seoTitle: "Credit Card Payoff Calculator - Debt Freedom Timeline | SmartCalc Hub",
+    seoDescription: "Free credit card payoff calculator to see how long it takes to eliminate debt and how much interest you'll pay."
+  },
+  {
+    id: "car-loan",
+    title: "Car Loan Calculator",
+    description: "Calculate monthly payments for auto loans",
+    category: "finance",
+    icon: Car,
+    path: "/calculator/car-loan",
+    seoTitle: "Car Loan Calculator - Auto Loan Payments | SmartCalc Hub",
+    seoDescription: "Free car loan calculator to estimate monthly payments, total interest, and overall cost of your auto loan."
   }
 ];
 
