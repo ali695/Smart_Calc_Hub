@@ -1,26 +1,52 @@
-import { Search, Calculator as CalcIcon } from "lucide-react";
+import { Search, Calculator as CalcIcon, TrendingUp, Users, CheckCircle, DollarSign, Activity, Percent, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { calculators, categories } from "@/data/calculators";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Index = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
 
   const filteredCalculators = calculators.filter(calc =>
     calc.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
     calc.description.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  const scrollToCalculators = () => {
+    document.getElementById("calculators")?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const featuredCalculators = [
+    { icon: DollarSign, title: "Loan Calculator", path: "/calculator/loan", color: "text-emerald-500" },
+    { icon: Activity, title: "BMI Calculator", path: "/calculator/bmi", color: "text-rose-500" },
+    { icon: Percent, title: "Percentage Calculator", path: "/calculator/percentage", color: "text-blue-500" },
+    { icon: Clock, title: "Age Calculator", path: "/calculator/age", color: "text-purple-500" },
+  ];
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-hero py-20 md:py-32">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center space-y-8">
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight animate-fade-in">
+      <section className="relative bg-gradient-hero py-20 md:py-32 overflow-hidden">
+        {/* Geometric Grid Background */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(214_32%_91%_/_0.3)_1px,transparent_1px),linear-gradient(to_bottom,hsl(214_32%_91%_/_0.3)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]" />
+        
+        <div className="container mx-auto px-4 relative">
+          <div className={`max-w-4xl mx-auto text-center space-y-8 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            {/* Tagline */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
+              <CalcIcon className="h-4 w-4 text-primary" />
+              <span className="text-sm font-medium text-primary">All-in-One Calculator Hub</span>
+            </div>
+
+            {/* Main Headline */}
+            <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
               Fast, Simple & Smart
               <span className="block bg-gradient-primary bg-clip-text text-transparent mt-2">
                 Calculators for Everyone
@@ -32,14 +58,25 @@ const Index = () => {
               Get instant, accurate results with our easy-to-use tools.
             </p>
 
+            {/* CTA Button */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Button 
+                size="lg" 
+                onClick={scrollToCalculators}
+                className="shadow-large hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5"
+              >
+                Try a Calculator
+              </Button>
+            </div>
+
             {/* Search Bar */}
             <div className="max-w-2xl mx-auto">
-              <div className="relative">
+              <div className="relative group">
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                 <Input
                   type="text"
-                  placeholder="Search calculators..."
-                  className="pl-12 h-14 text-base shadow-large"
+                  placeholder="Search calculators… e.g., Loan, BMI, Tax, Age"
+                  className="pl-12 h-14 text-base shadow-large hover:shadow-xl focus:shadow-xl transition-all duration-300 rounded-xl border-2 focus:border-primary"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
@@ -54,7 +91,7 @@ const Index = () => {
                   <Button
                     key={category.id}
                     variant="secondary"
-                    className="gap-2"
+                    className="gap-2 hover:-translate-y-0.5 transition-all duration-300 shadow-soft hover:shadow-medium"
                     asChild
                   >
                     <Link to={`/categories#${category.id}`}>
@@ -69,8 +106,72 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Featured Calculators */}
+      <section className="py-12 bg-background border-b">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {featuredCalculators.map((calc, index) => {
+                const Icon = calc.icon;
+                return (
+                  <Link 
+                    key={calc.path} 
+                    to={calc.path}
+                    className={`transition-all duration-500 delay-${index * 100}`}
+                  >
+                    <Card className="h-full hover:shadow-large transition-all duration-300 hover:-translate-y-1 cursor-pointer group text-center">
+                      <CardContent className="pt-6 pb-6">
+                        <div className="inline-flex p-4 rounded-full bg-gradient-to-br from-primary/10 to-primary/5 group-hover:from-primary/20 group-hover:to-primary/10 transition-all duration-300 mb-3">
+                          <Icon className={`h-8 w-8 ${calc.color}`} />
+                        </div>
+                        <h3 className="font-semibold text-base group-hover:text-primary transition-colors">
+                          {calc.title}
+                        </h3>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats / Trust Bar */}
+      <section className="py-16 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="text-center space-y-3">
+                <div className="inline-flex p-4 rounded-full bg-gradient-to-br from-emerald-500/10 to-emerald-500/5 mb-2">
+                  <CalcIcon className="h-10 w-10 text-emerald-500" />
+                </div>
+                <h3 className="text-3xl font-bold bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">40+</h3>
+                <p className="text-muted-foreground font-medium">Calculators Available</p>
+              </div>
+              
+              <div className="text-center space-y-3">
+                <div className="inline-flex p-4 rounded-full bg-gradient-to-br from-blue-500/10 to-blue-500/5 mb-2">
+                  <TrendingUp className="h-10 w-10 text-blue-500" />
+                </div>
+                <h3 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">10,000+</h3>
+                <p className="text-muted-foreground font-medium">Calculations per Month</p>
+              </div>
+              
+              <div className="text-center space-y-3">
+                <div className="inline-flex p-4 rounded-full bg-gradient-to-br from-purple-500/10 to-purple-500/5 mb-2">
+                  <CheckCircle className="h-10 w-10 text-purple-500" />
+                </div>
+                <h3 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-purple-400 bg-clip-text text-transparent">100%</h3>
+                <p className="text-muted-foreground font-medium">Free & Instant Results</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Calculator Grid */}
-      <section className="py-16 md:py-24">
+      <section id="calculators" className="py-16 md:py-24 scroll-mt-20">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">

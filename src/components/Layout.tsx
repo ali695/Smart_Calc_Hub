@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Calculator, Moon, Sun, Menu, X } from "lucide-react";
+import { Calculator, Moon, Sun, Menu, X, Linkedin, Github, Instagram, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -206,8 +206,52 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
             </div>
           </div>
 
-          <div className="border-t mt-8 pt-8 text-center text-sm text-muted-foreground">
-            <p>© 2025 SmartCalc Hub. All rights reserved. | Fast, Simple & Smart Calculators</p>
+          <div className="border-t mt-8 pt-8 space-y-4">
+            {/* Social Icons */}
+            <div className="flex justify-center gap-4">
+              <a 
+                href="https://linkedin.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="p-2 rounded-lg bg-muted/50 hover:bg-primary/10 text-muted-foreground hover:text-primary transition-all duration-300 hover:-translate-y-0.5"
+              >
+                <Linkedin className="h-5 w-5" />
+              </a>
+              <a 
+                href="https://github.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="p-2 rounded-lg bg-muted/50 hover:bg-primary/10 text-muted-foreground hover:text-primary transition-all duration-300 hover:-translate-y-0.5"
+              >
+                <Github className="h-5 w-5" />
+              </a>
+              <a 
+                href="https://instagram.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="p-2 rounded-lg bg-muted/50 hover:bg-primary/10 text-muted-foreground hover:text-primary transition-all duration-300 hover:-translate-y-0.5"
+              >
+                <Instagram className="h-5 w-5" />
+              </a>
+            </div>
+
+            {/* Copyright & Legal */}
+            <div className="text-center text-sm text-muted-foreground space-y-2">
+              <div className="flex items-center justify-center gap-1">
+                <span>Made with</span>
+                <Heart className="h-4 w-4 text-rose-500 fill-rose-500" />
+                <span>in Germany · © 2025 SmartCalc Hub</span>
+              </div>
+              <div className="flex items-center justify-center gap-4">
+                <Link to="/privacy" className="hover:text-foreground transition-colors">
+                  Privacy Policy
+                </Link>
+                <span>|</span>
+                <Link to="/terms" className="hover:text-foreground transition-colors">
+                  Terms of Service
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </footer>
