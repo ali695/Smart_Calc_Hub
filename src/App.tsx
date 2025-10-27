@@ -35,6 +35,23 @@ import RatioCalculator from "./pages/calculators/RatioCalculator";
 import FractionCalculator from "./pages/calculators/FractionCalculator";
 import AgeCalculator from "./pages/calculators/AgeCalculator";
 import TemperatureConverter from "./pages/calculators/TemperatureConverter";
+import RetirementCalculator from "./pages/calculators/RetirementCalculator";
+import InflationCalculator from "./pages/calculators/InflationCalculator";
+import LTVCalculator from "./pages/calculators/LTVCalculator";
+import BreakEvenCalculator from "./pages/calculators/BreakEvenCalculator";
+import DebtToIncomeCalculator from "./pages/calculators/DebtToIncomeCalculator";
+import BloodPressureCalculator from "./pages/calculators/BloodPressureCalculator";
+import SleepCalculator from "./pages/calculators/SleepCalculator";
+import StepsCalculator from "./pages/calculators/StepsCalculator";
+import BasalTempCalculator from "./pages/calculators/BasalTempCalculator";
+import MenstrualCalculator from "./pages/calculators/MenstrualCalculator";
+import QuadraticCalculator from "./pages/calculators/QuadraticCalculator";
+import PercentageChangeCalculator from "./pages/calculators/PercentageChangeCalculator";
+import AreaPerimeterCalculator from "./pages/calculators/AreaPerimeterCalculator";
+import VolumeCalculator from "./pages/calculators/VolumeCalculator";
+import PrimeNumberCalculator from "./pages/calculators/PrimeNumberCalculator";
+import ProfitMarginCalculator from "./pages/calculators/ProfitMarginCalculator";
+import TimezoneConverter from "./pages/calculators/TimezoneConverter";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -76,8 +93,25 @@ const App = () => (
         <Route path="/calculator/average" element={<AverageCalculator />} />
         <Route path="/calculator/ratio" element={<RatioCalculator />} />
         <Route path="/calculator/fraction" element={<FractionCalculator />} />
-        <Route path="/calculator/age" element={<AgeCalculator />} />
-        <Route path="/calculator/temperature" element={<TemperatureConverter />} />
+            <Route path="/calculator/age" element={<AgeCalculator />} />
+            <Route path="/calculator/temperature" element={<TemperatureConverter />} />
+            <Route path="/calculator/retirement" element={<RetirementCalculator />} />
+            <Route path="/calculator/inflation" element={<InflationCalculator />} />
+            <Route path="/calculator/ltv" element={<LTVCalculator />} />
+            <Route path="/calculator/break-even" element={<BreakEvenCalculator />} />
+            <Route path="/calculator/debt-to-income" element={<DebtToIncomeCalculator />} />
+            <Route path="/calculator/blood-pressure" element={<BloodPressureCalculator />} />
+            <Route path="/calculator/sleep" element={<SleepCalculator />} />
+            <Route path="/calculator/steps" element={<StepsCalculator />} />
+            <Route path="/calculator/basal-temp" element={<BasalTempCalculator />} />
+            <Route path="/calculator/menstrual" element={<MenstrualCalculator />} />
+            <Route path="/calculator/quadratic" element={<QuadraticCalculator />} />
+            <Route path="/calculator/percentage-change" element={<PercentageChangeCalculator />} />
+            <Route path="/calculator/area-perimeter" element={<AreaPerimeterCalculator />} />
+            <Route path="/calculator/volume" element={<VolumeCalculator />} />
+            <Route path="/calculator/prime" element={<PrimeNumberCalculator />} />
+            <Route path="/calculator/profit-margin" element={<ProfitMarginCalculator />} />
+            <Route path="/calculator/timezone" element={<TimezoneConverter />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

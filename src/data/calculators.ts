@@ -1,4 +1,4 @@
-import { Calculator, Heart, Percent, Ruler, DollarSign, Activity, TrendingUp, Scale, Receipt, Target, TrendingDown, Banknote, CreditCard, Car, Utensils, Weight, Droplet, Baby, HeartPulse, Apple, Beef, BarChart3, Divide, Calendar, ThermometerSun } from "lucide-react";
+import { Calculator, Heart, Percent, Ruler, DollarSign, Activity, TrendingUp, Scale, Receipt, Target, TrendingDown, Banknote, CreditCard, Car, Utensils, Weight, Droplet, Baby, HeartPulse, Apple, Beef, BarChart3, Divide, Calendar, ThermometerSun, PiggyBank, TrendingDown as Inflation, Globe, Home, BarChart, Calculator as CalcIcon, Wallet, Heart as BloodPressure, Moon, Footprints, ThermometerIcon, CalendarHeart, TrendingUp as PercentChange, Sigma, Shapes, Cylinder, Hash, ReceiptText, Timer, Fuel, Zap, Map, Wifi, Gauge } from "lucide-react";
 import { LucideIcon } from "lucide-react";
 
 export interface CalculatorData {
@@ -283,6 +283,240 @@ export const calculators: CalculatorData[] = [
     path: "/calculator/car-loan",
     seoTitle: "Car Loan Calculator - Auto Loan Payments | SmartCalc Hub",
     seoDescription: "Free car loan calculator to estimate monthly payments, total interest, and overall cost of your auto loan."
+  },
+  // New Finance Calculators
+  {
+    id: "retirement",
+    title: "Retirement Calculator",
+    description: "Plan your retirement savings and estimate future wealth",
+    category: "finance",
+    icon: PiggyBank,
+    path: "/calculator/retirement",
+    seoTitle: "Retirement Calculator - Plan Your Future | SmartCalc Hub",
+    seoDescription: "Free retirement calculator to estimate how much you need to save for a comfortable retirement."
+  },
+  {
+    id: "inflation",
+    title: "Inflation Calculator",
+    description: "Calculate the impact of inflation on purchasing power",
+    category: "finance",
+    icon: Inflation,
+    path: "/calculator/inflation",
+    seoTitle: "Inflation Calculator - Purchasing Power | SmartCalc Hub",
+    seoDescription: "Free inflation calculator to see how inflation affects your money over time."
+  },
+  {
+    id: "ltv",
+    title: "Loan-to-Value Calculator",
+    description: "Calculate LTV ratio for mortgages and loans",
+    category: "finance",
+    icon: Home,
+    path: "/calculator/ltv",
+    seoTitle: "LTV Calculator - Loan to Value Ratio | SmartCalc Hub",
+    seoDescription: "Free LTV calculator to determine your loan-to-value ratio for mortgages."
+  },
+  {
+    id: "break-even",
+    title: "Break-Even Calculator",
+    description: "Find your business break-even point",
+    category: "finance",
+    icon: BarChart,
+    path: "/calculator/break-even",
+    seoTitle: "Break-Even Calculator - Business Analysis | SmartCalc Hub",
+    seoDescription: "Free break-even calculator for business planning and financial analysis."
+  },
+  {
+    id: "debt-to-income",
+    title: "Debt-to-Income Calculator",
+    description: "Calculate your DTI ratio for loan applications",
+    category: "finance",
+    icon: Wallet,
+    path: "/calculator/debt-to-income",
+    seoTitle: "Debt-to-Income Calculator - DTI Ratio | SmartCalc Hub",
+    seoDescription: "Free DTI calculator to determine your debt-to-income ratio for mortgage and loan approval."
+  },
+  // New Health Calculators
+  {
+    id: "blood-pressure",
+    title: "Blood Pressure Checker",
+    description: "Check if your blood pressure is in healthy range",
+    category: "health",
+    icon: BloodPressure,
+    path: "/calculator/blood-pressure",
+    seoTitle: "Blood Pressure Calculator - Check Your BP | SmartCalc Hub",
+    seoDescription: "Free blood pressure checker to determine if your BP is in a healthy range."
+  },
+  {
+    id: "sleep",
+    title: "Ideal Sleep Calculator",
+    description: "Find your optimal sleep duration and wake time",
+    category: "health",
+    icon: Moon,
+    path: "/calculator/sleep",
+    seoTitle: "Sleep Calculator - Optimal Sleep Time | SmartCalc Hub",
+    seoDescription: "Free sleep calculator to find your ideal sleep duration and wake-up time."
+  },
+  {
+    id: "steps",
+    title: "Daily Step Goal",
+    description: "Calculate your daily step goal for fitness",
+    category: "health",
+    icon: Footprints,
+    path: "/calculator/steps",
+    seoTitle: "Step Goal Calculator - Daily Steps | SmartCalc Hub",
+    seoDescription: "Free step calculator to determine your daily step goal based on fitness level."
+  },
+  {
+    id: "basal-temp",
+    title: "Basal Temperature",
+    description: "Track basal body temperature for fertility",
+    category: "health",
+    icon: ThermometerIcon,
+    path: "/calculator/basal-temp",
+    seoTitle: "Basal Temperature Calculator | SmartCalc Hub",
+    seoDescription: "Track your basal body temperature for fertility awareness."
+  },
+  {
+    id: "menstrual",
+    title: "Menstrual Cycle",
+    description: "Track and predict your menstrual cycle",
+    category: "health",
+    icon: CalendarHeart,
+    path: "/calculator/menstrual",
+    seoTitle: "Menstrual Cycle Calculator | SmartCalc Hub",
+    seoDescription: "Free menstrual cycle calculator to track and predict your period."
+  },
+  // New Math Calculators
+  {
+    id: "quadratic",
+    title: "Quadratic Equation",
+    description: "Solve quadratic equations step by step",
+    category: "math",
+    icon: CalcIcon,
+    path: "/calculator/quadratic",
+    seoTitle: "Quadratic Equation Solver | SmartCalc Hub",
+    seoDescription: "Free quadratic equation solver with step-by-step solutions."
+  },
+  {
+    id: "percentage-change",
+    title: "Percentage Change",
+    description: "Calculate percentage increase or decrease",
+    category: "math",
+    icon: PercentChange,
+    path: "/calculator/percentage-change",
+    seoTitle: "Percentage Change Calculator | SmartCalc Hub",
+    seoDescription: "Calculate percentage increase or decrease between two values."
+  },
+  {
+    id: "mean-median-mode",
+    title: "Mean, Median & Mode",
+    description: "Statistical measures calculator",
+    category: "math",
+    icon: Sigma,
+    path: "/calculator/mean-median-mode",
+    seoTitle: "Mean Median Mode Calculator | SmartCalc Hub",
+    seoDescription: "Calculate mean, median, and mode for any set of numbers."
+  },
+  {
+    id: "area-perimeter",
+    title: "Area & Perimeter",
+    description: "Calculate area and perimeter of shapes",
+    category: "math",
+    icon: Shapes,
+    path: "/calculator/area-perimeter",
+    seoTitle: "Area & Perimeter Calculator | SmartCalc Hub",
+    seoDescription: "Calculate area and perimeter for circles, squares, rectangles, and triangles."
+  },
+  {
+    id: "volume",
+    title: "Volume Calculator",
+    description: "Calculate volume of 3D shapes",
+    category: "math",
+    icon: Cylinder,
+    path: "/calculator/volume",
+    seoTitle: "Volume Calculator - 3D Shapes | SmartCalc Hub",
+    seoDescription: "Calculate volume for cubes, cylinders, spheres, and cones."
+  },
+  {
+    id: "prime",
+    title: "Prime Number Checker",
+    description: "Check if a number is prime",
+    category: "math",
+    icon: Hash,
+    path: "/calculator/prime",
+    seoTitle: "Prime Number Checker | SmartCalc Hub",
+    seoDescription: "Free prime number checker to determine if a number is prime."
+  },
+  {
+    id: "profit-margin",
+    title: "Profit Margin",
+    description: "Calculate profit margin and markup",
+    category: "math",
+    icon: ReceiptText,
+    path: "/calculator/profit-margin",
+    seoTitle: "Profit Margin Calculator | SmartCalc Hub",
+    seoDescription: "Calculate profit margin, markup, and revenue for business planning."
+  },
+  // New Conversion Calculators
+  {
+    id: "timezone",
+    title: "Time Zone Converter",
+    description: "Convert time between different time zones",
+    category: "conversion",
+    icon: Timer,
+    path: "/calculator/timezone",
+    seoTitle: "Time Zone Converter | SmartCalc Hub",
+    seoDescription: "Free time zone converter for global time conversions."
+  },
+  {
+    id: "fuel",
+    title: "Fuel Efficiency",
+    description: "Convert MPG to L/100km and vice versa",
+    category: "conversion",
+    icon: Fuel,
+    path: "/calculator/fuel",
+    seoTitle: "Fuel Efficiency Converter | SmartCalc Hub",
+    seoDescription: "Convert between MPG and L/100km for fuel efficiency."
+  },
+  {
+    id: "energy",
+    title: "Energy Converter",
+    description: "Convert Joules, Calories, kWh, and more",
+    category: "conversion",
+    icon: Zap,
+    path: "/calculator/energy",
+    seoTitle: "Energy Unit Converter | SmartCalc Hub",
+    seoDescription: "Convert between Joules, Calories, kWh, and other energy units."
+  },
+  {
+    id: "area-unit",
+    title: "Area Unit Converter",
+    description: "Convert square feet, meters, acres, and more",
+    category: "conversion",
+    icon: Map,
+    path: "/calculator/area-unit",
+    seoTitle: "Area Unit Converter | SmartCalc Hub",
+    seoDescription: "Convert between square feet, square meters, acres, and hectares."
+  },
+  {
+    id: "data-transfer",
+    title: "Data Transfer Rate",
+    description: "Convert Mbps, MB/s, and more",
+    category: "conversion",
+    icon: Wifi,
+    path: "/calculator/data-transfer",
+    seoTitle: "Data Transfer Rate Converter | SmartCalc Hub",
+    seoDescription: "Convert between Mbps, MB/s, and other data transfer rates."
+  },
+  {
+    id: "pressure",
+    title: "Pressure Converter",
+    description: "Convert bar, psi, kPa, and more",
+    category: "conversion",
+    icon: Gauge,
+    path: "/calculator/pressure",
+    seoTitle: "Pressure Converter | SmartCalc Hub",
+    seoDescription: "Convert between bar, psi, kPa, and other pressure units."
   }
 ];
 
