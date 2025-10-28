@@ -1,4 +1,5 @@
-import { Calculator, Heart, Target, Users } from "lucide-react";
+import { Calculator, Heart, Target, Users, Lightbulb, Shield, Zap, CheckCircle } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const About = () => {
   return (
@@ -23,6 +24,71 @@ const About = () => {
                 Our mission is to provide free, accurate calculators for finance, health, math, and conversions that 
                 help people make informed decisions in their daily lives.
               </p>
+            </div>
+
+            <div className="bg-card rounded-2xl p-8 shadow-soft">
+              <h2 className="text-2xl font-bold mb-4 flex items-center gap-3">
+                <Lightbulb className="h-6 w-6 text-primary" />
+                Our Vision
+              </h2>
+              <p className="text-muted-foreground leading-relaxed">
+                We envision a world where powerful calculation tools are accessible to everyone, regardless of technical 
+                expertise or financial resources. By combining innovation with simplicity, we're making complex 
+                calculations easy and helping millions make better-informed decisions every day.
+              </p>
+            </div>
+
+            <div className="bg-card rounded-2xl p-8 shadow-soft">
+              <h2 className="text-2xl font-bold mb-4 flex items-center gap-3">
+                <Shield className="h-6 w-6 text-primary" />
+                Core Values
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="flex items-start gap-3">
+                  <div className="p-2 rounded-lg bg-primary/10">
+                    <CheckCircle className="h-5 w-5 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold mb-1">Accuracy</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Every formula is verified and tested to ensure reliable results you can trust.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="p-2 rounded-lg bg-primary/10">
+                    <Shield className="h-5 w-5 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold mb-1">Transparency</h3>
+                    <p className="text-sm text-muted-foreground">
+                      We show you the formulas behind every calculation, so you understand how results are derived.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="p-2 rounded-lg bg-primary/10">
+                    <Zap className="h-5 w-5 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold mb-1">Accessibility</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Free, fast, and works on any device - no barriers between you and the tools you need.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="p-2 rounded-lg bg-primary/10">
+                    <Heart className="h-5 w-5 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold mb-1">Trust</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Your privacy matters. We don't store your data or track your calculations.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div className="bg-card rounded-2xl p-8 shadow-soft">
@@ -63,42 +129,51 @@ const About = () => {
                 We offer a comprehensive suite of calculators across four main categories:
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="p-4 bg-primary/5 rounded-lg">
-                  <h3 className="font-semibold mb-2">💰 Finance</h3>
+                <Link to="/categories#finance" className="p-4 bg-primary/5 rounded-lg hover:bg-primary/10 transition-colors">
+                  <h3 className="font-semibold mb-2">Finance</h3>
                   <p className="text-sm text-muted-foreground">
-                    Loan, mortgage, compound interest, and salary calculators
+                    Loan, mortgage, compound interest, and investment calculators
                   </p>
-                </div>
-                <div className="p-4 bg-primary/5 rounded-lg">
-                  <h3 className="font-semibold mb-2">❤️ Health</h3>
+                </Link>
+                <Link to="/categories#health" className="p-4 bg-primary/5 rounded-lg hover:bg-primary/10 transition-colors">
+                  <h3 className="font-semibold mb-2">Health</h3>
                   <p className="text-sm text-muted-foreground">
                     BMI, BMR, calorie, and body composition calculators
                   </p>
-                </div>
-                <div className="p-4 bg-primary/5 rounded-lg">
-                  <h3 className="font-semibold mb-2">📐 Math</h3>
+                </Link>
+                <Link to="/categories#math" className="p-4 bg-primary/5 rounded-lg hover:bg-primary/10 transition-colors">
+                  <h3 className="font-semibold mb-2">Math</h3>
                   <p className="text-sm text-muted-foreground">
                     Percentage, average, ratio, and geometry calculators
                   </p>
-                </div>
-                <div className="p-4 bg-primary/5 rounded-lg">
-                  <h3 className="font-semibold mb-2">🔄 Conversion</h3>
+                </Link>
+                <Link to="/categories#conversion" className="p-4 bg-primary/5 rounded-lg hover:bg-primary/10 transition-colors">
+                  <h3 className="font-semibold mb-2">Conversion</h3>
                   <p className="text-sm text-muted-foreground">
                     Length, weight, temperature, and currency converters
                   </p>
-                </div>
+                </Link>
               </div>
             </div>
 
             <div className="bg-card rounded-2xl p-8 shadow-soft">
               <h2 className="text-2xl font-bold mb-4 flex items-center gap-3">
                 <Users className="h-6 w-6 text-primary" />
-                Join Our Community
+                Our Team
               </h2>
               <p className="text-muted-foreground leading-relaxed">
-                Thousands of people use SmartCalc Hub every day to make quick calculations and informed decisions. 
-                Whether you're planning a loan, tracking your health, doing math homework, or converting units, 
-                we're here to help make your life easier.
+                SmartCalc Hub is created by a passionate team of data enthusiasts led by{" "}
+                <a 
+                  href="https://www.linkedin.com/in/ali-haider-seo-consultant/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline font-medium"
+                >
+                  Ali Haider
+                </a>
+                , an SEO & Digital Product Designer dedicated to building tools that make complex calculations simple 
+                and accessible for everyone. Our mission is to empower users with accurate, instant calculations that 
+                help them make better decisions in their daily lives.
               </p>
             </div>
           </div>

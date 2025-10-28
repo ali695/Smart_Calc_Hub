@@ -264,6 +264,25 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Schema Markup */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "name": "SmartCalc Hub",
+          "url": "https://smartcalchub.com",
+          "description": "Free online calculators for finance, health, math, and conversions. Get instant, accurate results with our easy-to-use tools.",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://smartcalchub.com/categories?q={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+          }
+        })}
+      </script>
     </div>
   );
 };

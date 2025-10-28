@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Calculator, Moon, Sun, Menu, X, Linkedin, Github, Instagram, Heart } from "lucide-react";
+import { Calculator, Moon, Sun, Menu, X, Linkedin, Instagram, Heart, Facebook } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -47,6 +47,12 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
               </Link>
               <Link to="/contact" className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors">
                 Contact
+              </Link>
+              <Link to="/faq" className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors">
+                FAQ
+              </Link>
+              <Link to="/blog" className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors">
+                Blog
               </Link>
               <Button
                 variant="ghost"
@@ -109,6 +115,20 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
                 onClick={() => setIsMenuOpen(false)}
               >
                 Contact
+              </Link>
+              <Link
+                to="/faq"
+                className="block text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                FAQ
+              </Link>
+              <Link
+                to="/blog"
+                className="block text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Blog
               </Link>
             </nav>
           )}
@@ -210,37 +230,49 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
             {/* Social Icons */}
             <div className="flex justify-center gap-4">
               <a 
-                href="https://linkedin.com" 
+                href="https://www.linkedin.com/in/ali-haider-seo-consultant/" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="p-2 rounded-lg bg-muted/50 hover:bg-primary/10 text-muted-foreground hover:text-primary transition-all duration-300 hover:-translate-y-0.5"
+                className="p-2 rounded-lg bg-muted/50 hover:bg-blue-500/10 text-muted-foreground hover:text-blue-500 transition-all duration-300 hover:-translate-y-0.5"
+                aria-label="LinkedIn"
               >
                 <Linkedin className="h-5 w-5" />
               </a>
               <a 
-                href="https://github.com" 
+                href="https://www.instagram.com/ali_haiderseo/" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="p-2 rounded-lg bg-muted/50 hover:bg-primary/10 text-muted-foreground hover:text-primary transition-all duration-300 hover:-translate-y-0.5"
-              >
-                <Github className="h-5 w-5" />
-              </a>
-              <a 
-                href="https://instagram.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="p-2 rounded-lg bg-muted/50 hover:bg-primary/10 text-muted-foreground hover:text-primary transition-all duration-300 hover:-translate-y-0.5"
+                className="p-2 rounded-lg bg-muted/50 hover:bg-pink-500/10 text-muted-foreground hover:text-pink-500 transition-all duration-300 hover:-translate-y-0.5"
+                aria-label="Instagram"
               >
                 <Instagram className="h-5 w-5" />
+              </a>
+              <a 
+                href="https://www.facebook.com/AliHadi768" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="p-2 rounded-lg bg-muted/50 hover:bg-blue-600/10 text-muted-foreground hover:text-blue-600 transition-all duration-300 hover:-translate-y-0.5"
+                aria-label="Facebook"
+              >
+                <Facebook className="h-5 w-5" />
               </a>
             </div>
 
             {/* Copyright & Legal */}
             <div className="text-center text-sm text-muted-foreground space-y-2">
               <div className="flex items-center justify-center gap-1">
-                <span>Made with</span>
-                <Heart className="h-4 w-4 text-rose-500 fill-rose-500" />
-                <span>in Germany · © 2025 SmartCalc Hub</span>
+                <span>© 2025 SmartCalc Hub. All rights reserved.</span>
+              </div>
+              <div className="flex items-center justify-center gap-1">
+                <span>Built and designed by</span>
+                <a 
+                  href="https://www.linkedin.com/in/ali-haider-seo-consultant/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline font-medium"
+                >
+                  Ali Haider
+                </a>
               </div>
               <div className="flex items-center justify-center gap-4">
                 <Link to="/privacy" className="hover:text-foreground transition-colors">

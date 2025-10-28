@@ -8,6 +8,8 @@ import Index from "./pages/Index";
 import Categories from "./pages/Categories";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import FAQ from "./pages/FAQ";
+import Blog from "./pages/Blog";
 import BMICalculator from "./pages/calculators/BMICalculator";
 import LoanCalculator from "./pages/calculators/LoanCalculator";
 import PercentageCalculator from "./pages/calculators/PercentageCalculator";
@@ -68,6 +70,9 @@ const App = () => (
             <Route path="/categories" element={<Categories />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:id" element={<Blog />} />
             <Route path="/calculator/bmi" element={<BMICalculator />} />
             <Route path="/calculator/loan" element={<LoanCalculator />} />
             <Route path="/calculator/percentage" element={<PercentageCalculator />} />

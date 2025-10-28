@@ -1,4 +1,4 @@
-import { Mail, MessageSquare, Send } from "lucide-react";
+import { Mail, MessageSquare, Send, Linkedin, Instagram, Facebook } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -12,8 +12,8 @@ const Contact = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     toast({
-      title: "Message sent!",
-      description: "Thank you for contacting us. We'll get back to you soon.",
+      title: "Thank you for contacting SmartCalc Hub!",
+      description: "We've received your message and will reply soon.",
     });
   };
 
@@ -88,9 +88,49 @@ const Contact = () => {
                   <p className="text-muted-foreground mb-2">
                     For general inquiries and support:
                   </p>
-                  <a href="mailto:hello@smartcalchub.com" className="text-primary hover:underline font-medium">
-                    hello@smartcalchub.com
+                  <a href="mailto:ma7122671@gmail.com" className="text-primary hover:underline font-medium">
+                    ma7122671@gmail.com
                   </a>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>Connect with Us</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Follow us on social media for updates and tips:
+                  </p>
+                  <div className="flex gap-3">
+                    <a 
+                      href="https://www.linkedin.com/in/ali-haider-seo-consultant/" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="p-3 rounded-lg bg-blue-500/10 hover:bg-blue-500/20 text-blue-600 dark:text-blue-400 transition-all duration-300 hover:-translate-y-0.5"
+                      aria-label="LinkedIn"
+                    >
+                      <Linkedin className="h-5 w-5" />
+                    </a>
+                    <a 
+                      href="https://www.instagram.com/ali_haiderseo/" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="p-3 rounded-lg bg-pink-500/10 hover:bg-pink-500/20 text-pink-600 dark:text-pink-400 transition-all duration-300 hover:-translate-y-0.5"
+                      aria-label="Instagram"
+                    >
+                      <Instagram className="h-5 w-5" />
+                    </a>
+                    <a 
+                      href="https://www.facebook.com/AliHadi768" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="p-3 rounded-lg bg-blue-600/10 hover:bg-blue-600/20 text-blue-700 dark:text-blue-500 transition-all duration-300 hover:-translate-y-0.5"
+                      aria-label="Facebook"
+                    >
+                      <Facebook className="h-5 w-5" />
+                    </a>
+                  </div>
                 </CardContent>
               </Card>
 
@@ -100,30 +140,72 @@ const Contact = () => {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div>
-                    <h3 className="font-semibold mb-1">Are the calculators really free?</h3>
+                    <h3 className="font-semibold mb-1">Are all calculators free to use?</h3>
                     <p className="text-sm text-muted-foreground">
-                      Yes! All our calculators are 100% free with no hidden costs or sign-up required.
+                      Yes! SmartCalc Hub provides 100% free calculators with no hidden fees or sign-ups.
                     </p>
                   </div>
                   
                   <div>
-                    <h3 className="font-semibold mb-1">How accurate are the calculations?</h3>
+                    <h3 className="font-semibold mb-1">How are results calculated?</h3>
                     <p className="text-sm text-muted-foreground">
                       Our calculators use industry-standard formulas and are regularly tested for accuracy.
                     </p>
                   </div>
                   
                   <div>
-                    <h3 className="font-semibold mb-1">Can I suggest a new calculator?</h3>
+                    <h3 className="font-semibold mb-1">Do I need to create an account?</h3>
                     <p className="text-sm text-muted-foreground">
-                      Absolutely! We'd love to hear your suggestions. Just send us a message using the form.
+                      No account needed! All tools are instantly accessible without any registration.
                     </p>
                   </div>
                   
                   <div>
-                    <h3 className="font-semibold mb-1">Do you store my data?</h3>
+                    <h3 className="font-semibold mb-1">Can I request a new calculator?</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Absolutely! We'd love to hear your suggestions. Just send us a message using the form.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h3 className="font-semibold mb-1">Do you save my data?</h3>
                     <p className="text-sm text-muted-foreground">
                       No, we don't store any of your calculation data. Everything is processed in your browser.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h3 className="font-semibold mb-1">Are results medically or financially certified?</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Our calculators provide estimates for informational purposes. Always consult professionals for medical or financial advice.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h3 className="font-semibold mb-1">How often are formulas updated?</h3>
+                    <p className="text-sm text-muted-foreground">
+                      We regularly review and update our formulas to ensure they reflect current standards and best practices.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h3 className="font-semibold mb-1">Can I share my results?</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Yes! You can bookmark pages or take screenshots to save and share your calculation results.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h3 className="font-semibold mb-1">Is there an app version coming soon?</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Our website works great on mobile! A dedicated app may come in the future based on user demand.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h3 className="font-semibold mb-1">Can I embed these calculators on my own site?</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Please contact us to discuss embedding options and proper attribution requirements.
                     </p>
                   </div>
                 </CardContent>

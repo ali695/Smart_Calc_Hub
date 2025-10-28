@@ -293,6 +293,22 @@ const Categories = () => {
           </section>
         </div>
       </div>
+
+      {/* Schema Markup */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          "name": "All Calculators - SmartCalc Hub",
+          "description": "Browse 40+ free online calculators for finance, health, math, and conversions",
+          "itemListElement": calculators.slice(0, 20).map((calc, index) => ({
+            "@type": "ListItem",
+            "position": index + 1,
+            "name": calc.title,
+            "url": `https://smartcalchub.com${calc.path}`
+          }))
+        })}
+      </script>
     </div>
   );
 };
