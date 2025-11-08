@@ -98,7 +98,7 @@ const Categories = () => {
           {!searchQuery && (
             <section className="mb-16">
               <div className="text-center mb-8">
-                <h2 className="text-3xl font-bold mb-2">⭐ Popular Calculators</h2>
+                <h2 className="text-3xl font-bold mb-2">Popular Calculators</h2>
                 <p className="text-muted-foreground">Most-used calculators by our community</p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
