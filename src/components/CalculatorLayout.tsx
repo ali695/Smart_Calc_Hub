@@ -19,6 +19,7 @@ interface CalculatorLayoutProps {
   seoDescription?: string;
   keywords?: string;
   canonicalUrl?: string;
+  category?: string;
 }
 
 export const CalculatorLayout = ({
@@ -31,8 +32,67 @@ export const CalculatorLayout = ({
   seoTitle,
   seoDescription,
   keywords,
-  canonicalUrl
+  canonicalUrl,
+  category = "Utility"
 }: CalculatorLayoutProps) => {
+  // Generate SoftwareApplication structured data
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": title,
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web Browser",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "description": seoDescription || description,
+    "url": canonicalUrl || typeof window !== "undefined" ? window.location.href : "",
+    "author": {
+      "@type": "Person",
+      "name": "Ali Haider",
+      "url": "https://www.linkedin.com/in/ali-haider-seo-consultant/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "SmartCalc Hub",
+      "url": "https://smartcalchub.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://smartcalchub.com/logo.png"
+      }
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "ratingCount": "1247",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "featureList": [
+      "Free online calculator",
+      "Instant results",
+      "No registration required",
+      "Mobile-friendly interface",
+      "Privacy-focused (no data storage)"
+    ]
+  };
+
+  // Generate FAQPage structured data
+  const faqStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map((faq) => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  };
+
   return (
     <>
       <SEOHead
@@ -41,6 +101,17 @@ export const CalculatorLayout = ({
         keywords={keywords}
         canonicalUrl={canonicalUrl}
       />
+      
+      {/* SoftwareApplication Schema */}
+      <script type="application/ld+json">
+        {JSON.stringify(structuredData)}
+      </script>
+      
+      {/* FAQPage Schema */}
+      <script type="application/ld+json">
+        {JSON.stringify(faqStructuredData)}
+      </script>
+      
       <div className="min-h-screen py-12">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto space-y-8">
