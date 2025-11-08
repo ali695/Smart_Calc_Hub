@@ -1,6 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { ReactNode } from "react";
+import { SEOHead } from "@/components/SEOHead";
 
 interface FAQ {
   question: string;
@@ -14,6 +15,10 @@ interface CalculatorLayoutProps {
   howItWorks: string;
   formula: string;
   faqs: FAQ[];
+  seoTitle?: string;
+  seoDescription?: string;
+  keywords?: string;
+  canonicalUrl?: string;
 }
 
 export const CalculatorLayout = ({
@@ -22,10 +27,21 @@ export const CalculatorLayout = ({
   children,
   howItWorks,
   formula,
-  faqs
+  faqs,
+  seoTitle,
+  seoDescription,
+  keywords,
+  canonicalUrl
 }: CalculatorLayoutProps) => {
   return (
-    <div className="min-h-screen py-12">
+    <>
+      <SEOHead
+        title={seoTitle || `${title} | SmartCalc Hub`}
+        description={seoDescription || description}
+        keywords={keywords}
+        canonicalUrl={canonicalUrl}
+      />
+      <div className="min-h-screen py-12">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto space-y-8">
           {/* Header */}
@@ -68,5 +84,6 @@ export const CalculatorLayout = ({
         </div>
       </div>
     </div>
+    </>
   );
 };
