@@ -4,6 +4,9 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { schemas, validateInput, safeParseFloat } from "@/lib/validation";
+import { toast } from "sonner";
+import { z } from "zod";
 
 const CalorieCalculator = () => {
   const [age, setAge] = useState("");
@@ -16,11 +19,21 @@ const CalorieCalculator = () => {
   const [goalCalories, setGoalCalories] = useState<number | null>(null);
 
   const calculate = () => {
-    const w = parseFloat(weight);
-    const h = parseFloat(height);
-    const a = parseFloat(age);
-    
-    if (w > 0 && h > 0 && a > 0) {
+    const weightValue = safeParseFloat(weight);
+    const heightValue = safeParseFloat(height);
+    const ageValue = safeParseFloat(age);
+
+    if (weightValue === null || heightValue === null || ageValue === null) {
+      toast.error("Please enter valid numbers for all fields");
+      return;
+    }
+
+    try {
+      const validatedData = validateInput(schemas.calorie, { age: ageValue, weight: weightValue, height: heightValue });
+      const w = validatedData.weight;
+      const h = validatedData.height;
+      const a = validatedData.age;
+      
       let bmr;
       if (gender === "male") {
         bmr = 10 * w + 6.25 * h - 5 * a + 5;
@@ -36,6 +49,10 @@ const CalorieCalculator = () => {
       
       setCalories(Math.round(tdee));
       setGoalCalories(Math.round(goalCal));
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        toast.error(error.errors[0].message);
+      }
     }
   };
 

@@ -3,6 +3,9 @@ import { CalculatorLayout } from "@/components/CalculatorLayout";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { schemas, validateInput, safeParseFloat } from "@/lib/validation";
+import { toast } from "sonner";
+import { z } from "zod";
 
 const LoanCalculator = () => {
   const [principal, setPrincipal] = useState("");
@@ -13,11 +16,21 @@ const LoanCalculator = () => {
   const [totalInterest, setTotalInterest] = useState<number | null>(null);
 
   const calculateLoan = () => {
-    const p = parseFloat(principal);
-    const r = parseFloat(rate) / 100 / 12; // Monthly interest rate
-    const n = parseFloat(years) * 12; // Number of payments
+    const principalValue = safeParseFloat(principal);
+    const rateValue = safeParseFloat(rate);
+    const yearsValue = safeParseFloat(years);
 
-    if (p > 0 && r >= 0 && n > 0) {
+    if (principalValue === null || rateValue === null || yearsValue === null) {
+      toast.error("Please enter valid numbers for all fields");
+      return;
+    }
+
+    try {
+      const validatedData = validateInput(schemas.loan, { principal: principalValue, interestRate: rateValue, years: yearsValue });
+      const p = validatedData.principal;
+      const r = validatedData.interestRate / 100 / 12;
+      const n = validatedData.years * 12;
+
       let monthly;
       if (r === 0) {
         monthly = p / n;
@@ -31,6 +44,10 @@ const LoanCalculator = () => {
       setMonthlyPayment(parseFloat(monthly.toFixed(2)));
       setTotalPayment(parseFloat(total.toFixed(2)));
       setTotalInterest(parseFloat(interest.toFixed(2)));
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        toast.error(error.errors[0].message);
+      }
     }
   };
 

@@ -4,6 +4,8 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { safeParseFloat } from "@/lib/validation";
+import { toast } from "sonner";
 
 const CompoundInterestCalculator = () => {
   const [principal, setPrincipal] = useState("10000");
@@ -13,15 +15,27 @@ const CompoundInterestCalculator = () => {
   const [compoundFrequency, setCompoundFrequency] = useState("12");
 
   const calculateCompoundInterest = () => {
-    const p = parseFloat(principal) || 0;
-    const pmt = parseFloat(monthlyContribution) || 0;
-    const r = (parseFloat(interestRate) || 0) / 100;
-    const t = parseFloat(years) || 0;
-    const n = parseFloat(compoundFrequency) || 1;
+    const pValue = safeParseFloat(principal);
+    const pmtValue = safeParseFloat(monthlyContribution);
+    const rValue = safeParseFloat(interestRate);
+    const tValue = safeParseFloat(years);
+    const nValue = safeParseFloat(compoundFrequency);
 
-    if (p <= 0 || r <= 0 || t <= 0) {
+    if (pValue === null || pmtValue === null || rValue === null || tValue === null || nValue === null) {
+      toast.error("Please enter valid numbers for all fields");
       return { futureValue: 0, totalContributions: 0, totalInterest: 0 };
     }
+
+    if (pValue <= 0 || tValue <= 0) {
+      toast.error("Principal and time period must be greater than 0");
+      return { futureValue: 0, totalContributions: 0, totalInterest: 0 };
+    }
+
+    const p = pValue;
+    const pmt = pmtValue;
+    const r = rValue / 100;
+    const t = tValue;
+    const n = nValue;
 
     // Future value of initial principal
     const fvPrincipal = p * Math.pow(1 + r / n, n * t);

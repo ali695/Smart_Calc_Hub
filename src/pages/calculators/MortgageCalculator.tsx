@@ -4,6 +4,8 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { safeParseFloat } from "@/lib/validation";
+import { toast } from "sonner";
 
 const MortgageCalculator = () => {
   const [homePrice, setHomePrice] = useState("300000");
@@ -15,22 +17,39 @@ const MortgageCalculator = () => {
   const [pmi, setPmi] = useState("0");
 
   const calculateMortgage = () => {
-    const price = parseFloat(homePrice) || 0;
-    const down = parseFloat(downPayment) || 0;
-    const principal = price - down;
-    const rate = (parseFloat(interestRate) || 0) / 100 / 12;
-    const months = (parseFloat(loanTerm) || 0) * 12;
-    const tax = (parseFloat(propertyTax) || 0) / 12;
-    const insurance = (parseFloat(homeInsurance) || 0) / 12;
-    const pmiMonthly = parseFloat(pmi) || 0;
+    const priceValue = safeParseFloat(homePrice);
+    const downValue = safeParseFloat(downPayment);
+    const rateValue = safeParseFloat(interestRate);
+    const termValue = safeParseFloat(loanTerm);
+    const taxValue = safeParseFloat(propertyTax);
+    const insuranceValue = safeParseFloat(homeInsurance);
+    const pmiValue = safeParseFloat(pmi);
 
-    if (principal <= 0 || rate <= 0 || months <= 0) {
+    if (priceValue === null || downValue === null || rateValue === null || termValue === null ||
+        taxValue === null || insuranceValue === null || pmiValue === null) {
+      toast.error("Please enter valid numbers for all fields");
       return { monthlyPayment: 0, totalPayment: 0, totalInterest: 0, principalAndInterest: 0 };
     }
 
+    if (priceValue <= 0 || termValue <= 0) {
+      toast.error("Home price and loan term must be greater than 0");
+      return { monthlyPayment: 0, totalPayment: 0, totalInterest: 0, principalAndInterest: 0 };
+    }
+
+    const principal = priceValue - downValue;
+    if (principal <= 0) {
+      toast.error("Down payment cannot be greater than or equal to home price");
+      return { monthlyPayment: 0, totalPayment: 0, totalInterest: 0, principalAndInterest: 0 };
+    }
+
+    const rate = rateValue / 100 / 12;
+    const months = termValue * 12;
+    const tax = taxValue / 12;
+    const insurance = insuranceValue / 12;
+
     const monthlyPrincipalInterest = principal * (rate * Math.pow(1 + rate, months)) / (Math.pow(1 + rate, months) - 1);
-    const monthlyPayment = monthlyPrincipalInterest + tax + insurance + pmiMonthly;
-    const totalPayment = (monthlyPrincipalInterest * months) + (tax * months) + (insurance * months) + (pmiMonthly * months);
+    const monthlyPayment = monthlyPrincipalInterest + tax + insurance + pmiValue;
+    const totalPayment = (monthlyPrincipalInterest * months) + (tax * months) + (insurance * months) + (pmiValue * months);
     const totalInterest = (monthlyPrincipalInterest * months) - principal;
 
     return {

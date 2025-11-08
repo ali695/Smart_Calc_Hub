@@ -4,6 +4,8 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CalculatorLayout } from "@/components/CalculatorLayout";
+import { schemas, validateInput, safeParseFloat } from "@/lib/validation";
+import { toast } from "sonner";
 
 const RetirementCalculator = () => {
   const [currentAge, setCurrentAge] = useState("");

@@ -4,6 +4,9 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { schemas, validateInput, safeParseFloat } from "@/lib/validation";
+import { toast } from "sonner";
+import { z } from "zod";
 
 const PercentageCalculator = () => {
   // What is X% of Y
@@ -22,10 +25,22 @@ const PercentageCalculator = () => {
   const [result3, setResult3] = useState<number | null>(null);
 
   const calculate1 = () => {
-    const p = parseFloat(percent1);
-    const n = parseFloat(number1);
-    if (!isNaN(p) && !isNaN(n)) {
-      setResult1(parseFloat(((p / 100) * n).toFixed(2)));
+    const percentValue = safeParseFloat(percent1);
+    const numberValue = safeParseFloat(number1);
+
+    if (percentValue === null || numberValue === null) {
+      toast.error("Please enter valid numbers");
+      return;
+    }
+
+    try {
+      const validatedData = validateInput(schemas.percentage, { percent: percentValue, number: numberValue });
+      const result = (validatedData.percent / 100) * validatedData.number;
+      setResult1(parseFloat(result.toFixed(2)));
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        toast.error(error.errors[0].message);
+      }
     }
   };
 

@@ -3,6 +3,9 @@ import { CalculatorLayout } from "@/components/CalculatorLayout";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { schemas, validateInput, safeParseFloat } from "@/lib/validation";
+import { toast } from "sonner";
+import { z } from "zod";
 
 const BMICalculator = () => {
   const [height, setHeight] = useState("");
@@ -11,10 +14,18 @@ const BMICalculator = () => {
   const [category, setCategory] = useState("");
 
   const calculateBMI = () => {
-    const h = parseFloat(height) / 100; // Convert cm to meters
-    const w = parseFloat(weight);
-    
-    if (h > 0 && w > 0) {
+    const heightValue = safeParseFloat(height);
+    const weightValue = safeParseFloat(weight);
+
+    if (heightValue === null || weightValue === null) {
+      toast.error("Please enter valid numbers for height and weight");
+      return;
+    }
+
+    try {
+      const validatedData = validateInput(schemas.bmi, { height: heightValue, weight: weightValue });
+      const h = validatedData.height / 100;
+      const w = validatedData.weight;
       const bmiValue = w / (h * h);
       setBMI(parseFloat(bmiValue.toFixed(1)));
       
@@ -22,6 +33,10 @@ const BMICalculator = () => {
       else if (bmiValue < 25) setCategory("Normal weight");
       else if (bmiValue < 30) setCategory("Overweight");
       else setCategory("Obese");
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        toast.error(error.errors[0].message);
+      }
     }
   };
 
