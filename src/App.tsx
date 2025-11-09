@@ -74,6 +74,16 @@ import PermutationCombinationCalculator from "./pages/calculators/PermutationCom
 import CalorieDeficitCalculator from "./pages/calculators/CalorieDeficitCalculator";
 import PressureConverter from "./pages/calculators/PressureConverter";
 import NetWorthCalculator from "./pages/calculators/NetWorthCalculator";
+import ArcsinCalculator from "./pages/calculators/ArcsinCalculator";
+import ArccosCalculator from "./pages/calculators/ArccosCalculator";
+import ArctanCalculator from "./pages/calculators/ArctanCalculator";
+import RadianDegreeConverter from "./pages/calculators/RadianDegreeConverter";
+import ScientificNotationCalculator from "./pages/calculators/ScientificNotationCalculator";
+import BudgetPlannerCalculator from "./pages/calculators/BudgetPlannerCalculator";
+import SalaryAfterTaxCalculator from "./pages/calculators/SalaryAfterTaxCalculator";
+import WaistToHeightCalculator from "./pages/calculators/WaistToHeightCalculator";
+import BodySurfaceAreaCalculator from "./pages/calculators/BodySurfaceAreaCalculator";
+import EnergyConverter from "./pages/calculators/EnergyConverter";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -157,6 +167,16 @@ const App = () => (
             <Route path="/calculator/calorie-deficit" element={<CalorieDeficitCalculator />} />
             <Route path="/calculator/pressure-converter" element={<PressureConverter />} />
             <Route path="/calculator/net-worth" element={<NetWorthCalculator />} />
+            <Route path="/calculator/arcsin" element={<ArcsinCalculator />} />
+            <Route path="/calculator/arccos" element={<ArccosCalculator />} />
+            <Route path="/calculator/arctan" element={<ArctanCalculator />} />
+            <Route path="/calculator/radian-degree" element={<RadianDegreeConverter />} />
+            <Route path="/calculator/scientific-notation" element={<ScientificNotationCalculator />} />
+            <Route path="/calculator/budget-planner" element={<BudgetPlannerCalculator />} />
+            <Route path="/calculator/salary-after-tax" element={<SalaryAfterTaxCalculator />} />
+            <Route path="/calculator/waist-to-height" element={<WaistToHeightCalculator />} />
+            <Route path="/calculator/body-surface-area" element={<BodySurfaceAreaCalculator />} />
+            <Route path="/calculator/energy-converter" element={<EnergyConverter />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

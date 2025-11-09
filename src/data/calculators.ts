@@ -1,4 +1,4 @@
-import { Calculator, Heart, Percent, Ruler, DollarSign, Activity, TrendingUp, Scale, Receipt, Target, TrendingDown, Banknote, CreditCard, Car, Utensils, Weight, Droplet, Baby, HeartPulse, Apple, Beef, BarChart3, Divide, Calendar, ThermometerSun, PiggyBank, TrendingDown as Inflation, Globe, Home, BarChart, Calculator as CalcIcon, Wallet, Heart as BloodPressure, Moon, Footprints, ThermometerIcon, CalendarHeart, TrendingUp as PercentChange, Sigma, Shapes, Cylinder, Hash, ReceiptText, Timer, Fuel, Zap, Map, Wifi, Gauge, DollarSign as SimpleInterest, CreditCard as EMI, Tag, Flame, SquareRadical, TrendingUp as TrigIcon, Asterisk, MapPin, Navigation, Circle, Triangle, Coins, Minus, Binary, Activity as PressureIcon } from "lucide-react";
+import { Calculator, Heart, Percent, Ruler, DollarSign, Activity, TrendingUp, Scale, Receipt, Target, TrendingDown, Banknote, CreditCard, Car, Utensils, Weight, Droplet, Baby, HeartPulse, Apple, Beef, BarChart3, Divide, Calendar, ThermometerSun, PiggyBank, TrendingDown as Inflation, Globe, Home, BarChart, Calculator as CalcIcon, Wallet, Heart as BloodPressure, Moon, Footprints, ThermometerIcon, CalendarHeart, TrendingUp as PercentChange, Sigma, Shapes, Cylinder, Hash, ReceiptText, Timer, Fuel, Zap, Map, Wifi, Gauge, DollarSign as SimpleInterest, CreditCard as EMI, Tag, Flame, SquareRadical, TrendingUp as TrigIcon, Asterisk, MapPin, Navigation, Circle, Triangle, Coins, Minus, Binary, Activity as PressureIcon, RotateCcw, Repeat, Move, Globe2, Waves, UserCheck, Layers } from "lucide-react";
 import { LucideIcon } from "lucide-react";
 
 export interface CalculatorData {
@@ -725,6 +725,110 @@ export const calculators: CalculatorData[] = [
     path: "/calculator/pressure-converter",
     seoTitle: "Pressure Converter – Convert Bar, PSI, kPa, Atm | SmartCalc Hub",
     seoDescription: "Free pressure converter for bar, PSI, kilopascal, atmosphere and more."
+  },
+  // Inverse Trigonometry
+  {
+    id: "arcsin",
+    title: "Arcsine Calculator (sin⁻¹)",
+    description: "Calculate inverse sine to find angles from ratios",
+    category: "math",
+    icon: RotateCcw,
+    path: "/calculator/arcsin",
+    seoTitle: "Arcsine Calculator – Calculate sin⁻¹(x) Online | SmartCalc Hub",
+    seoDescription: "Free inverse sine (arcsin) calculator. Convert sine ratios to angles instantly."
+  },
+  {
+    id: "arccos",
+    title: "Arccosine Calculator (cos⁻¹)",
+    description: "Calculate inverse cosine to find angles from ratios",
+    category: "math",
+    icon: Repeat,
+    path: "/calculator/arccos",
+    seoTitle: "Arccosine Calculator – Calculate cos⁻¹(x) Online | SmartCalc Hub",
+    seoDescription: "Free inverse cosine (arccos) calculator. Convert cosine ratios to angles instantly."
+  },
+  {
+    id: "arctan",
+    title: "Arctangent Calculator (tan⁻¹)",
+    description: "Calculate inverse tangent to find angles from ratios",
+    category: "math",
+    icon: Move,
+    path: "/calculator/arctan",
+    seoTitle: "Arctangent Calculator – Calculate tan⁻¹(x) Online | SmartCalc Hub",
+    seoDescription: "Free inverse tangent (arctan) calculator. Convert tangent ratios to angles instantly."
+  },
+  {
+    id: "radian-degree",
+    title: "Radian Degree Converter",
+    description: "Convert angles between radians and degrees",
+    category: "math",
+    icon: Globe2,
+    path: "/calculator/radian-degree",
+    seoTitle: "Radian to Degree Converter – Convert Angles Online | SmartCalc Hub",
+    seoDescription: "Free radian to degree converter. Instantly convert between radians and degrees."
+  },
+  {
+    id: "scientific-notation",
+    title: "Scientific Notation Calculator",
+    description: "Convert to and from scientific notation",
+    category: "math",
+    icon: Waves,
+    path: "/calculator/scientific-notation",
+    seoTitle: "Scientific Notation Calculator – Convert to Exponential Form | SmartCalc Hub",
+    seoDescription: "Free scientific notation calculator. Convert numbers to and from exponential notation."
+  },
+  // Additional Finance Calculators
+  {
+    id: "budget-planner",
+    title: "Budget Planner",
+    description: "Plan monthly budget and track income vs expenses",
+    category: "finance",
+    icon: ReceiptText,
+    path: "/calculator/budget-planner",
+    seoTitle: "Budget Planner Calculator – Monthly Budget Planning | SmartCalc Hub",
+    seoDescription: "Free budget planner calculator. Track income, expenses, and savings rate."
+  },
+  {
+    id: "salary-after-tax",
+    title: "Salary After Tax",
+    description: "Calculate take-home pay after tax deductions",
+    category: "finance",
+    icon: UserCheck,
+    path: "/calculator/salary-after-tax",
+    seoTitle: "Salary After Tax Calculator – Calculate Take-Home Pay | SmartCalc Hub",
+    seoDescription: "Free salary after tax calculator. Calculate net income and take-home pay."
+  },
+  // Additional Health Calculators
+  {
+    id: "waist-to-height",
+    title: "Waist-to-Height Ratio",
+    description: "Assess health risk from body fat distribution",
+    category: "health",
+    icon: Scale,
+    path: "/calculator/waist-to-height",
+    seoTitle: "Waist-to-Height Ratio Calculator – WHtR Health Assessment | SmartCalc Hub",
+    seoDescription: "Free waist-to-height ratio calculator. Assess health risk from central obesity."
+  },
+  {
+    id: "body-surface-area",
+    title: "Body Surface Area",
+    description: "Calculate BSA for medical dosing using Du Bois formula",
+    category: "health",
+    icon: Layers,
+    path: "/calculator/body-surface-area",
+    seoTitle: "Body Surface Area Calculator – BSA for Medical Dosing | SmartCalc Hub",
+    seoDescription: "Free BSA calculator using Du Bois, Mosteller, and Haycock formulas."
+  },
+  // Additional Conversion Calculators
+  {
+    id: "energy-converter",
+    title: "Energy Converter",
+    description: "Convert between joules, calories, kWh, BTU and more",
+    category: "conversion",
+    icon: Zap,
+    path: "/calculator/energy-converter",
+    seoTitle: "Energy Converter – Joules, Calories, kWh Conversion | SmartCalc Hub",
+    seoDescription: "Free energy unit converter. Convert between joules, calories, watt-hours, BTU."
   }
 ];
 
