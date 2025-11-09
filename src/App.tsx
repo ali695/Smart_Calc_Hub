@@ -91,6 +91,14 @@ import SalaryAfterTaxCalculator from "./pages/calculators/SalaryAfterTaxCalculat
 import WaistToHeightCalculator from "./pages/calculators/WaistToHeightCalculator";
 import BodySurfaceAreaCalculator from "./pages/calculators/BodySurfaceAreaCalculator";
 import EnergyConverter from "./pages/calculators/EnergyConverter";
+import HashGeneratorCalculator from "./pages/calculators/HashGeneratorCalculator";
+import Base64Calculator from "./pages/calculators/Base64Calculator";
+import JsonFormatterCalculator from "./pages/calculators/JsonFormatterCalculator";
+import OhmsLawCalculator from "./pages/calculators/OhmsLawCalculator";
+import ForceCalculator from "./pages/calculators/ForceCalculator";
+import TorqueCalculator from "./pages/calculators/TorqueCalculator";
+import PowerCalculator from "./pages/calculators/PowerCalculator";
+import PhCalculator from "./pages/calculators/PhCalculator";
 
 const queryClient = new QueryClient();
 
@@ -199,6 +207,14 @@ const App = () => (
               <Route path="/calculator/waist-to-height" element={<WaistToHeightCalculator />} />
               <Route path="/calculator/body-surface-area" element={<BodySurfaceAreaCalculator />} />
               <Route path="/calculator/energy-converter" element={<EnergyConverter />} />
+              <Route path="/calculator/hash-generator" element={<HashGeneratorCalculator />} />
+              <Route path="/calculator/base64-encoder" element={<Base64Calculator />} />
+              <Route path="/calculator/json-formatter" element={<JsonFormatterCalculator />} />
+              <Route path="/calculator/ohms-law" element={<OhmsLawCalculator />} />
+              <Route path="/calculator/force-calculator" element={<ForceCalculator />} />
+              <Route path="/calculator/torque-calculator" element={<TorqueCalculator />} />
+              <Route path="/calculator/power-calculator" element={<PowerCalculator />} />
+              <Route path="/calculator/ph-calculator" element={<PhCalculator />} />
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/terms" element={<Terms />} />
               <Route path="*" element={<NotFound />} />
