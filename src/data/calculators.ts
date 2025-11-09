@@ -1,4 +1,4 @@
-import { Calculator, Heart, Percent, Ruler, DollarSign, Activity, TrendingUp, Scale, Receipt, Target, TrendingDown, Banknote, CreditCard, Car, Utensils, Weight, Droplet, Baby, HeartPulse, Apple, Beef, BarChart3, Divide, Calendar, ThermometerSun, PiggyBank, TrendingDown as Inflation, Globe, Home, BarChart, Calculator as CalcIcon, Wallet, Heart as BloodPressure, Moon, Footprints, ThermometerIcon, CalendarHeart, TrendingUp as PercentChange, Sigma, Shapes, Cylinder, Hash, ReceiptText, Timer, Fuel, Zap, Map, Wifi, Gauge, DollarSign as SimpleInterest, CreditCard as EMI, Tag, Flame, SquareRadical, TrendingUp as TrigIcon, Asterisk, MapPin, Navigation } from "lucide-react";
+import { Calculator, Heart, Percent, Ruler, DollarSign, Activity, TrendingUp, Scale, Receipt, Target, TrendingDown, Banknote, CreditCard, Car, Utensils, Weight, Droplet, Baby, HeartPulse, Apple, Beef, BarChart3, Divide, Calendar, ThermometerSun, PiggyBank, TrendingDown as Inflation, Globe, Home, BarChart, Calculator as CalcIcon, Wallet, Heart as BloodPressure, Moon, Footprints, ThermometerIcon, CalendarHeart, TrendingUp as PercentChange, Sigma, Shapes, Cylinder, Hash, ReceiptText, Timer, Fuel, Zap, Map, Wifi, Gauge, DollarSign as SimpleInterest, CreditCard as EMI, Tag, Flame, SquareRadical, TrendingUp as TrigIcon, Asterisk, MapPin, Navigation, Circle, Triangle, Coins, Minus, Binary, Activity as PressureIcon } from "lucide-react";
 import { LucideIcon } from "lucide-react";
 
 export interface CalculatorData {
@@ -621,6 +621,110 @@ export const calculators: CalculatorData[] = [
     path: "/calculator/speed-converter",
     seoTitle: "Speed Converter – Convert km/h, mph, m/s, Knots | SmartCalc Hub",
     seoDescription: "Free speed converter for kilometers per hour, miles per hour, meters per second, knots and Mach."
+  },
+  // Additional Math Calculators
+  {
+    id: "tangent",
+    title: "Tangent Calculator (tan θ)",
+    description: "Calculate tangent values for angles in degrees or radians",
+    category: "math",
+    icon: TrigIcon,
+    path: "/calculator/tangent",
+    seoTitle: "Tangent Calculator – Calculate tan(θ) Online | SmartCalc Hub",
+    seoDescription: "Free online tangent calculator for angles in degrees or radians. Get accurate tan(θ) values instantly."
+  },
+  {
+    id: "logarithm",
+    title: "Logarithm Calculator",
+    description: "Calculate logarithms with any base",
+    category: "math",
+    icon: CalcIcon,
+    path: "/calculator/logarithm",
+    seoTitle: "Logarithm Calculator – Calculate Log with Any Base | SmartCalc Hub",
+    seoDescription: "Free logarithm calculator to compute log values with any base. Perfect for math and science."
+  },
+  {
+    id: "exponent",
+    title: "Exponent Calculator",
+    description: "Calculate powers and exponents for any base",
+    category: "math",
+    icon: Asterisk,
+    path: "/calculator/exponent",
+    seoTitle: "Exponent Calculator – Calculate Powers Online | SmartCalc Hub",
+    seoDescription: "Free exponent calculator to compute base raised to any power. Supports all exponent types."
+  },
+  {
+    id: "triangle-area",
+    title: "Triangle Area Calculator",
+    description: "Calculate triangle area using base and height",
+    category: "math",
+    icon: Triangle,
+    path: "/calculator/triangle-area",
+    seoTitle: "Triangle Area Calculator – Calculate Triangle Area Online | SmartCalc Hub",
+    seoDescription: "Free triangle area calculator using base and height. Get instant results for any triangle."
+  },
+  {
+    id: "circle",
+    title: "Circle Calculator",
+    description: "Calculate circle area, circumference, and diameter",
+    category: "math",
+    icon: Circle,
+    path: "/calculator/circle",
+    seoTitle: "Circle Calculator – Area, Circumference, Diameter | SmartCalc Hub",
+    seoDescription: "Free circle calculator to find area, circumference, and diameter from radius."
+  },
+  {
+    id: "pythagoras",
+    title: "Pythagorean Theorem Calculator",
+    description: "Calculate hypotenuse and right triangle properties",
+    category: "math",
+    icon: Triangle,
+    path: "/calculator/pythagoras",
+    seoTitle: "Pythagorean Theorem Calculator – Right Triangle | SmartCalc Hub",
+    seoDescription: "Free Pythagorean theorem calculator to find hypotenuse and triangle properties."
+  },
+  {
+    id: "permutation-combination",
+    title: "Permutation & Combination",
+    description: "Calculate nPr and nCr for probability",
+    category: "math",
+    icon: Binary,
+    path: "/calculator/permutation-combination",
+    seoTitle: "Permutation & Combination Calculator – nPr and nCr | SmartCalc Hub",
+    seoDescription: "Free permutation and combination calculator. Calculate nPr and nCr instantly."
+  },
+  // Additional Finance Calculators
+  {
+    id: "net-worth",
+    title: "Net Worth Calculator",
+    description: "Calculate your total net worth from assets and liabilities",
+    category: "finance",
+    icon: Coins,
+    path: "/calculator/net-worth",
+    seoTitle: "Net Worth Calculator – Calculate Your Financial Worth | SmartCalc Hub",
+    seoDescription: "Free net worth calculator to track assets and liabilities. Calculate total financial worth."
+  },
+  // Additional Health Calculators
+  {
+    id: "calorie-deficit",
+    title: "Calorie Deficit Calculator",
+    description: "Calculate daily calories for weight loss goals",
+    category: "health",
+    icon: Minus,
+    path: "/calculator/calorie-deficit",
+    seoTitle: "Calorie Deficit Calculator – Weight Loss Calories | SmartCalc Hub",
+    seoDescription: "Free calorie deficit calculator for weight loss. Safe and sustainable deficit planning."
+  },
+  // Additional Conversion Calculators
+  {
+    id: "pressure-converter",
+    title: "Pressure Converter",
+    description: "Convert between bar, PSI, kPa, atm, and more",
+    category: "conversion",
+    icon: PressureIcon,
+    path: "/calculator/pressure-converter",
+    seoTitle: "Pressure Converter – Convert Bar, PSI, kPa, Atm | SmartCalc Hub",
+    seoDescription: "Free pressure converter for bar, PSI, kilopascal, atmosphere and more."
   }
 ];
 

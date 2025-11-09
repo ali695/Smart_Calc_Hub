@@ -64,6 +64,16 @@ import CosineCalculator from "./pages/calculators/CosineCalculator";
 import FactorialCalculator from "./pages/calculators/FactorialCalculator";
 import AreaConverter from "./pages/calculators/AreaConverter";
 import SpeedConverter from "./pages/calculators/SpeedConverter";
+import TangentCalculator from "./pages/calculators/TangentCalculator";
+import LogarithmCalculator from "./pages/calculators/LogarithmCalculator";
+import ExponentCalculator from "./pages/calculators/ExponentCalculator";
+import TriangleAreaCalculator from "./pages/calculators/TriangleAreaCalculator";
+import CircleCalculator from "./pages/calculators/CircleCalculator";
+import PythagorasCalculator from "./pages/calculators/PythagorasCalculator";
+import PermutationCombinationCalculator from "./pages/calculators/PermutationCombinationCalculator";
+import CalorieDeficitCalculator from "./pages/calculators/CalorieDeficitCalculator";
+import PressureConverter from "./pages/calculators/PressureConverter";
+import NetWorthCalculator from "./pages/calculators/NetWorthCalculator";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -137,6 +147,16 @@ const App = () => (
             <Route path="/calculator/factorial" element={<FactorialCalculator />} />
             <Route path="/calculator/area-converter" element={<AreaConverter />} />
             <Route path="/calculator/speed-converter" element={<SpeedConverter />} />
+            <Route path="/calculator/tangent" element={<TangentCalculator />} />
+            <Route path="/calculator/logarithm" element={<LogarithmCalculator />} />
+            <Route path="/calculator/exponent" element={<ExponentCalculator />} />
+            <Route path="/calculator/triangle-area" element={<TriangleAreaCalculator />} />
+            <Route path="/calculator/circle" element={<CircleCalculator />} />
+            <Route path="/calculator/pythagoras" element={<PythagorasCalculator />} />
+            <Route path="/calculator/permutation-combination" element={<PermutationCombinationCalculator />} />
+            <Route path="/calculator/calorie-deficit" element={<CalorieDeficitCalculator />} />
+            <Route path="/calculator/pressure-converter" element={<PressureConverter />} />
+            <Route path="/calculator/net-worth" element={<NetWorthCalculator />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
