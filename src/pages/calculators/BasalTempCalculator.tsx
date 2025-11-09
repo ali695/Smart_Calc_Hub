@@ -74,17 +74,19 @@ const BasalTempCalculator = () => {
           </div>
         </div>
 
-        <Button onClick={calculate} className="w-full" size="lg">
+        <Button onClick={calculate} className="w-full bg-gradient-to-r from-primary to-primary-glow hover:shadow-glow transition-all duration-300" size="lg">
           Analyze Temperature
         </Button>
 
         {result && (
-          <Card className="bg-primary/5 border-primary">
+          <Card className="bg-gradient-to-br from-primary/10 to-primary-glow/10 border-primary hover:scale-[1.02] transition-all duration-300 animate-fade-in shadow-large">
             <CardContent className="pt-6">
               <div className="space-y-4">
                 <div>
                   <p className="text-sm text-muted-foreground">Temperature Category</p>
-                  <p className="text-2xl font-bold text-primary">{result.category}</p>
+                  <p className="text-3xl font-bold bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
+                    {result.category}
+                  </p>
                 </div>
 
                 <div>

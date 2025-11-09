@@ -18,30 +18,42 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen py-12">
-      <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Contact Us</h1>
-            <p className="text-lg text-muted-foreground">
+    <div className="min-h-screen">
+      {/* Hero Header with Gradient */}
+      <div className="bg-gradient-to-r from-primary via-accent to-primary-glow text-primary-foreground py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="inline-flex p-4 rounded-full bg-white/10 backdrop-blur-sm mb-4">
+              <Mail className="h-8 w-8" />
+            </div>
+            <h1 className="text-5xl md:text-6xl font-bold mb-4">Contact Us</h1>
+            <p className="text-xl opacity-95">
               Have a question or feedback? We'd love to hear from you!
             </p>
           </div>
+        </div>
+      </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Contact Form */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <MessageSquare className="h-5 w-5 text-primary" />
-                  Send us a message
-                </CardTitle>
-                <CardDescription>
-                  Fill out the form below and we'll respond as soon as possible
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-4">
+      <div className="container mx-auto px-4 py-16">
+        <div className="max-w-5xl mx-auto">
+
+          <div className="grid md:grid-cols-5 gap-8">
+            {/* Contact Form - Glassmorphic Design */}
+            <div className="md:col-span-3">
+              <Card className="shadow-large border-2 border-primary/10 backdrop-blur-sm bg-card/95">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-3 text-2xl">
+                    <div className="p-2 rounded-lg bg-gradient-to-br from-primary/20 to-primary-glow/20">
+                      <MessageSquare className="h-6 w-6 text-primary" />
+                    </div>
+                    Send us a message
+                  </CardTitle>
+                  <CardDescription className="text-base">
+                    Fill out the form below and we'll respond as soon as possible
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <form onSubmit={handleSubmit} className="space-y-5">
                   <div className="space-y-2">
                     <Label htmlFor="name">Name</Label>
                     <Input id="name" placeholder="Your name" required />
@@ -67,76 +79,79 @@ const Contact = () => {
                     />
                   </div>
 
-                  <Button type="submit" className="w-full gap-2">
-                    <Send className="h-4 w-4" />
+                  <Button type="submit" className="w-full gap-2 bg-gradient-to-r from-primary to-primary-glow hover:shadow-glow transition-all duration-300 text-base h-12">
+                    <Send className="h-5 w-5" />
                     Send Message
                   </Button>
                 </form>
               </CardContent>
             </Card>
+            </div>
 
-            {/* Contact Info */}
-            <div className="space-y-6">
-              <Card>
+            {/* Contact Info Sidebar */}
+            <div className="md:col-span-2 space-y-6">
+              <Card className="shadow-large border-2 border-primary/10">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Mail className="h-5 w-5 text-primary" />
+                  <CardTitle className="flex items-center gap-3 text-xl">
+                    <div className="p-2 rounded-lg bg-gradient-to-br from-primary/20 to-primary-glow/20">
+                      <Mail className="h-6 w-6 text-primary" />
+                    </div>
                     Email Us
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground mb-2">
+                  <p className="text-muted-foreground mb-3">
                     For general inquiries and support:
                   </p>
-                  <a href="mailto:ma7122671@gmail.com" className="text-primary hover:underline font-medium">
+                  <a href="mailto:ma7122671@gmail.com" className="text-primary hover:text-primary-glow hover:underline font-semibold text-lg transition-colors">
                     ma7122671@gmail.com
                   </a>
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="shadow-large border-2 border-primary/10 bg-gradient-to-br from-card to-muted/30">
                 <CardHeader>
-                  <CardTitle>Connect with Us</CardTitle>
+                  <CardTitle className="text-xl">Connect with Us</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-muted-foreground mb-4">
+                  <p className="text-muted-foreground mb-5">
                     Follow us on social media for updates and tips:
                   </p>
-                  <div className="flex gap-3">
+                  <div className="flex flex-col gap-3">
                     <a 
                       href="https://www.linkedin.com/in/ali-haider-seo-consultant/" 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="p-3 rounded-lg bg-blue-500/10 hover:bg-blue-500/20 text-blue-600 dark:text-blue-400 transition-all duration-300 hover:-translate-y-0.5"
-                      aria-label="LinkedIn"
+                      className="flex items-center gap-3 p-4 rounded-xl bg-[#0077B5]/10 hover:bg-[#0077B5] text-[#0077B5] hover:text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg group"
                     >
-                      <Linkedin className="h-5 w-5" />
+                      <Linkedin className="h-6 w-6" />
+                      <span className="font-semibold">LinkedIn</span>
                     </a>
                     <a 
                       href="https://www.instagram.com/ali_haiderseo/" 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="p-3 rounded-lg bg-pink-500/10 hover:bg-pink-500/20 text-pink-600 dark:text-pink-400 transition-all duration-300 hover:-translate-y-0.5"
-                      aria-label="Instagram"
+                      className="flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-[#833AB4]/10 via-[#FD1D1D]/10 to-[#F77737]/10 hover:from-[#833AB4] hover:via-[#FD1D1D] hover:to-[#F77737] text-[#FD1D1D] hover:text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
                     >
-                      <Instagram className="h-5 w-5" />
+                      <Instagram className="h-6 w-6" />
+                      <span className="font-semibold">Instagram</span>
                     </a>
                     <a 
                       href="https://www.facebook.com/AliHadi768" 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="p-3 rounded-lg bg-blue-600/10 hover:bg-blue-600/20 text-blue-700 dark:text-blue-500 transition-all duration-300 hover:-translate-y-0.5"
-                      aria-label="Facebook"
+                      className="flex items-center gap-3 p-4 rounded-xl bg-[#1877F2]/10 hover:bg-[#1877F2] text-[#1877F2] hover:text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
                     >
-                      <Facebook className="h-5 w-5" />
+                      <Facebook className="h-6 w-6" />
+                      <span className="font-semibold">Facebook</span>
                     </a>
                   </div>
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="shadow-large border-2 border-primary/10">
                 <CardHeader>
-                  <CardTitle>Frequently Asked Questions</CardTitle>
+                  <CardTitle className="text-xl">Quick FAQs</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div>

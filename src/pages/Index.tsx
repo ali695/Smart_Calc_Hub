@@ -46,9 +46,9 @@ const Index = () => {
             </div>
 
             {/* Main Headline */}
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
-              Fast, Simple & Smart
-              <span className="block bg-gradient-primary bg-clip-text text-transparent mt-2">
+            <h1 className="text-5xl md:text-6xl font-bold tracking-tight leading-tight">
+              <span className="block">Fast, Smart & Accurate</span>
+              <span className="block bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent mt-2">
                 Calculators for Everyone
               </span>
             </h1>
@@ -58,14 +58,22 @@ const Index = () => {
               Get instant, accurate results with our easy-to-use tools.
             </p>
 
-            {/* CTA Button */}
+            {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Button 
                 size="lg" 
                 onClick={scrollToCalculators}
-                className="shadow-large hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5"
+                className="bg-gradient-to-r from-primary to-primary-glow hover:shadow-glow transition-all duration-300 hover:-translate-y-0.5 text-lg px-8"
               >
-                Try a Calculator
+                Explore All Calculators
+              </Button>
+              <Button 
+                size="lg" 
+                variant="outline"
+                onClick={scrollToCalculators}
+                className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:-translate-y-0.5 text-lg px-8"
+              >
+                See Popular Tools
               </Button>
             </div>
 

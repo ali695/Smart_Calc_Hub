@@ -67,22 +67,31 @@ const Blog = () => {
   ];
 
   return (
-    <div className="min-h-screen py-12">
-      <div className="container mx-auto px-4">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Blog</h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+    <div className="min-h-screen">
+      {/* Hero Header */}
+      <div className="bg-gradient-to-r from-primary via-accent to-primary-glow text-primary-foreground py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-5xl md:text-6xl font-bold mb-4">Blog & Insights</h1>
+            <p className="text-xl opacity-95 max-w-2xl mx-auto">
               Insights, tips, and guides to help you get the most out of our calculator tools
             </p>
           </div>
+        </div>
+      </div>
+
+      <div className="container mx-auto px-4 py-16">
+        <div className="max-w-6xl mx-auto">
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {blogPosts.map((post) => (
-              <Card key={post.id} className="group hover:shadow-large transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col">
-                <div className="aspect-video bg-gradient-to-br from-primary/20 to-primary/5 rounded-t-lg overflow-hidden">
-                  <div className="w-full h-full flex items-center justify-center text-muted-foreground">
-                    <span className="text-sm font-medium">{post.category}</span>
+              <Card key={post.id} className="group hover:shadow-large transition-all duration-300 hover:-translate-y-2 cursor-pointer flex flex-col border-2 border-border hover:border-primary overflow-hidden">
+                <div className="aspect-video bg-gradient-to-br from-primary/20 via-primary-glow/20 to-accent/20 overflow-hidden relative">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                  <div className="relative w-full h-full flex items-center justify-center">
+                    <span className="px-4 py-2 bg-primary text-primary-foreground rounded-full text-sm font-semibold shadow-lg">
+                      {post.category}
+                    </span>
                   </div>
                 </div>
                 <CardHeader className="flex-grow">

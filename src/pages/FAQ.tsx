@@ -1,4 +1,4 @@
-import { HelpCircle } from "lucide-react";
+import { HelpCircle, MessageSquare } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -126,24 +126,37 @@ const FAQ = () => {
   ];
 
   return (
-    <div className="min-h-screen py-12">
-      <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <div className="inline-flex p-4 rounded-full bg-primary/10 mb-4">
-              <HelpCircle className="h-8 w-8 text-primary" />
+    <div className="min-h-screen">
+      {/* Hero Header */}
+      <div className="bg-gradient-to-r from-primary via-primary-glow to-accent text-primary-foreground py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="inline-flex p-5 rounded-full bg-white/10 backdrop-blur-sm mb-4">
+              <HelpCircle className="h-10 w-10" />
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Frequently Asked Questions</h1>
-            <p className="text-lg text-muted-foreground">
+            <h1 className="text-5xl md:text-6xl font-bold mb-4">Frequently Asked Questions</h1>
+            <p className="text-xl opacity-95">
               Find answers to common questions about SmartCalc Hub calculators
             </p>
           </div>
+        </div>
+      </div>
 
-          <div className="space-y-8">
+      <div className="container mx-auto px-4 py-16">
+        <div className="max-w-4xl mx-auto">
+
+          <div className="space-y-6">
             {faqCategories.map((category, idx) => (
-              <Card key={idx} className="shadow-soft">
-                <CardContent className="pt-6">
-                  <h2 className="text-2xl font-bold mb-4 text-primary">{category.category}</h2>
+              <Card key={idx} className="shadow-large border-2 border-primary/10 hover:border-primary/30 transition-all duration-300">
+                <CardContent className="pt-8 pb-6">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="p-3 rounded-xl bg-gradient-to-br from-primary/20 to-primary-glow/20">
+                      <HelpCircle className="h-6 w-6 text-primary" />
+                    </div>
+                    <h2 className="text-3xl font-bold bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
+                      {category.category}
+                    </h2>
+                  </div>
                   <Accordion type="single" collapsible className="w-full">
                     {category.questions.map((item, qIdx) => (
                       <AccordionItem key={qIdx} value={`item-${idx}-${qIdx}`}>
@@ -161,16 +174,19 @@ const FAQ = () => {
             ))}
           </div>
 
-          <Card className="mt-8 bg-primary/5 border-primary/20">
-            <CardContent className="pt-6">
-              <div className="text-center space-y-3">
-                <h3 className="text-xl font-semibold">Still have questions?</h3>
-                <p className="text-muted-foreground">
+          <Card className="mt-12 bg-gradient-to-br from-primary/10 to-primary-glow/10 border-2 border-primary/30 shadow-large">
+            <CardContent className="pt-8 pb-8">
+              <div className="text-center space-y-4">
+                <div className="inline-flex p-4 rounded-full bg-primary/20 mb-2">
+                  <MessageSquare className="h-8 w-8 text-primary" />
+                </div>
+                <h3 className="text-2xl font-bold">Still have questions?</h3>
+                <p className="text-muted-foreground text-lg max-w-xl mx-auto">
                   Can't find the answer you're looking for? We're here to help!
                 </p>
                 <a 
                   href="/contact" 
-                  className="inline-block px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors"
+                  className="inline-block px-8 py-4 bg-gradient-to-r from-primary to-primary-glow text-primary-foreground rounded-xl font-semibold hover:shadow-glow transition-all duration-300 hover:-translate-y-1 text-lg"
                 >
                   Contact Us
                 </a>
