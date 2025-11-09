@@ -2,69 +2,9 @@ import { Calendar, User, ArrowRight } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 
+import { blogPosts } from "@/data/blogPosts";
+
 const Blog = () => {
-  const blogPosts = [
-    {
-      id: 1,
-      title: "How to Plan Your Finances Using Online Calculators",
-      excerpt: "Discover the essential financial calculators every adult should use to plan their budget, track loans, and build wealth for the future.",
-      author: "Ali Haider",
-      date: "January 15, 2025",
-      category: "Finance",
-      readTime: "8 min read",
-      image: "/placeholder.svg"
-    },
-    {
-      id: 2,
-      title: "Why BMI and BMR Matter for Your Health Goals",
-      excerpt: "Understanding the difference between BMI and BMR can transform your approach to weight management and fitness. Learn how to use both effectively.",
-      author: "Ali Haider",
-      date: "January 10, 2025",
-      category: "Health",
-      readTime: "6 min read",
-      image: "/placeholder.svg"
-    },
-    {
-      id: 3,
-      title: "Top 10 Conversions You Use Daily Without Noticing",
-      excerpt: "From cooking measurements to temperature checks, we rely on unit conversions more than we think. Here are the most common ones explained.",
-      author: "Ali Haider",
-      date: "January 5, 2025",
-      category: "Conversion",
-      readTime: "5 min read",
-      image: "/placeholder.svg"
-    },
-    {
-      id: 4,
-      title: "How Accurate Are Online Calculators?",
-      excerpt: "A deep dive into the science and formulas behind online calculators, exploring their accuracy and when to trust them for important decisions.",
-      author: "Ali Haider",
-      date: "December 28, 2024",
-      category: "General",
-      readTime: "10 min read",
-      image: "/placeholder.svg"
-    },
-    {
-      id: 5,
-      title: "Using Math Tools to Improve Daily Productivity",
-      excerpt: "Percentage calculations, ratio comparisons, and average tracking can dramatically improve your decision-making speed in work and life.",
-      author: "Ali Haider",
-      date: "December 20, 2024",
-      category: "Math",
-      readTime: "7 min read",
-      image: "/placeholder.svg"
-    },
-    {
-      id: 6,
-      title: "The Ultimate Guide to Compound Interest",
-      excerpt: "Learn how compound interest works, why Einstein called it the eighth wonder of the world, and how to use it to grow your wealth exponentially.",
-      author: "Ali Haider",
-      date: "December 15, 2024",
-      category: "Finance",
-      readTime: "12 min read",
-      image: "/placeholder.svg"
-    }
-  ];
 
   return (
     <div className="min-h-screen">
@@ -84,7 +24,7 @@ const Blog = () => {
         <div className="max-w-6xl mx-auto">
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogPosts.map((post) => (
+            {blogPosts.slice(0, 10).map((post) => (
               <Card key={post.id} className="group hover:shadow-large transition-all duration-300 hover:-translate-y-2 cursor-pointer flex flex-col border-2 border-border hover:border-primary overflow-hidden">
                 <div className="aspect-video bg-gradient-to-br from-primary/20 via-primary-glow/20 to-accent/20 overflow-hidden relative">
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />

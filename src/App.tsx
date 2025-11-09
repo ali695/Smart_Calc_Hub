@@ -12,6 +12,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import FAQ from "./pages/FAQ";
 import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 import BMICalculator from "./pages/calculators/BMICalculator";
 import LoanCalculator from "./pages/calculators/LoanCalculator";
 import PercentageCalculator from "./pages/calculators/PercentageCalculator";
