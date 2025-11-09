@@ -37,45 +37,48 @@ export const AIChatbot = () => {
     setInput("");
     setIsLoading(true);
 
-    // Simulate AI response with contextual FAQ/calculator suggestions
-    setTimeout(() => {
-      const response = generateResponse(input);
-      setMessages((prev) => [...prev, { role: "assistant", content: response }]);
+    try {
+      // Call DeepSeek AI through edge function
+      const response = await fetch(
+        'https://lbcpqynztwwvatcviatc.supabase.co/functions/v1/deepseek-chat',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            messages: [...messages, userMessage].map(msg => ({
+              role: msg.role,
+              content: msg.content
+            }))
+          }),
+        }
+      );
+
+      const data = await response.json();
+      
+      if (data.error) {
+        console.error('DeepSeek API error:', data.error);
+      }
+
+      setMessages((prev) => [
+        ...prev,
+        { role: "assistant", content: data.message }
+      ]);
+    } catch (error) {
+      console.error('Error calling DeepSeek:', error);
+      setMessages((prev) => [
+        ...prev,
+        { 
+          role: "assistant", 
+          content: "I'm having trouble connecting right now. But I can still help! We have 90+ calculators for Finance, Health, Math, and Conversions. What would you like to calculate?" 
+        }
+      ]);
+    } finally {
       setIsLoading(false);
-    }, 1000);
+    }
   };
 
-  const generateResponse = (query: string): string => {
-    const lowerQuery = query.toLowerCase();
-
-    // BMI queries
-    if (lowerQuery.includes("bmi") || lowerQuery.includes("body mass")) {
-      return "To calculate your BMI (Body Mass Index), use our BMI Calculator at /calculator/bmi. Simply enter your height and weight to get instant results with category classification.";
-    }
-
-    // Loan/Finance queries
-    if (lowerQuery.includes("loan") || lowerQuery.includes("emi") || lowerQuery.includes("mortgage")) {
-      return "For loan calculations, we have several tools:\n\n• Loan Calculator - Calculate monthly payments and interest\n• EMI Calculator - Find your equated monthly installment\n• Mortgage Calculator - Home loan with taxes\n\nWhich one would you like to use?";
-    }
-
-    // Weight loss/health queries
-    if (lowerQuery.includes("weight loss") || lowerQuery.includes("calories")) {
-      return "For weight management, I recommend:\n\n1. BMR Calculator - Find your basal metabolic rate\n2. Calorie Calculator - Daily calorie needs\n3. Macro Calculator - Protein, carbs, fat distribution\n\nStart with BMR to understand your baseline calorie needs!";
-    }
-
-    // Math queries
-    if (lowerQuery.includes("percentage") || lowerQuery.includes("percent")) {
-      return "Our Percentage Calculator can help you with:\n• Finding percentages\n• Percentage change/increase/decrease\n• What percent of a number\n\nVisit /calculator/percentage to get started!";
-    }
-
-    // Conversion queries
-    if (lowerQuery.includes("convert") || lowerQuery.includes("conversion")) {
-      return "We have converters for:\n• Length (meters, feet, inches)\n• Weight (kg, lbs, ounces)\n• Temperature (Celsius, Fahrenheit, Kelvin)\n• Currency\n• Area, Speed, Pressure & more!\n\nWhat do you need to convert?";
-    }
-
-    // General help
-    return "I can help you find the right calculator! We have 90+ tools for:\n\n📊 Finance - Loans, investments, savings\n❤️ Health - BMI, calories, fitness\n🔢 Math - Percentages, fractions, algebra\n🔄 Conversions - Units of measurement\n\nWhat would you like to calculate today?";
-  };
 
   return (
     <>
