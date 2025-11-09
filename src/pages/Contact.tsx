@@ -1,4 +1,3 @@
-import { Layout } from "@/components/Layout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -38,7 +37,7 @@ const Contact = () => {
   };
 
   return (
-    <Layout>
+    <>
       <SEOHead
         title="Contact Us | SmartCalc Hub - Get in Touch"
         description="Have questions about our calculators? Contact SmartCalc Hub for support, suggestions, or feedback. We're here to help you with all your calculation needs."
@@ -144,7 +143,7 @@ const Contact = () => {
           </div>
         </div>
       </div>
-    </Layout>
+    </>
   );
 };
 
