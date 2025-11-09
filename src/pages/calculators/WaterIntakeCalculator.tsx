@@ -48,6 +48,8 @@ const WaterIntakeCalculator = () => {
     <CalculatorLayout
       title="Water Intake Calculator"
       description="Calculate your daily water intake needs"
+      category="health"
+      calculatorId="water"
       howItWorks="This calculator estimates your daily water needs based on your body weight, activity level, and climate. The base calculation uses 33ml per kg of body weight, adjusted for physical activity and environmental factors."
       formula="Water Intake (L) = Weight (kg) × 0.033 × Activity Multiplier × Climate Multiplier"
       faqs={faqs}

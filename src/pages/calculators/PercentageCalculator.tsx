@@ -88,6 +88,7 @@ const PercentageCalculator = () => {
       keywords="percentage calculator, percent calculator, calculate percentage, percentage change, percentage increase, percentage decrease"
       canonicalUrl="https://smartcalchub.com/calculator/percentage"
       category="math"
+      calculatorId="percentage"
       howItWorks="This percentage calculator offers three main functions: finding what a percentage of a number is, determining what percentage one number is of another, and calculating percentage change between two values. Simply select the type of calculation you need and enter your values for instant results."
       formula="Basic: (Percentage / 100) × Number | Reverse: (Part / Total) × 100 | Change: ((New - Old) / Old) × 100"
       faqs={faqs}

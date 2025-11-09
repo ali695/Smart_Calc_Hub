@@ -47,6 +47,8 @@ const PregnancyCalculator = () => {
     <CalculatorLayout
       title="Pregnancy Due Date Calculator"
       description="Calculate your expected due date based on last menstrual period"
+      category="health"
+      calculatorId="pregnancy"
       howItWorks="This calculator uses Naegele's rule to estimate your due date by adding 280 days (40 weeks) to the first day of your last menstrual period. It also shows how many weeks pregnant you currently are."
       formula="Due Date = Last Menstrual Period + 280 days (40 weeks)"
       faqs={faqs}

@@ -64,6 +64,7 @@ const BMICalculator = () => {
       title="BMI Calculator"
       description="Calculate your Body Mass Index and check if you're in a healthy weight range"
       category="health"
+      calculatorId="bmi"
       howItWorks="The BMI calculator uses your height and weight to calculate your Body Mass Index. Simply enter your height in centimeters and weight in kilograms, and the calculator will instantly determine your BMI and category. BMI is calculated by dividing your weight in kilograms by the square of your height in meters."
       formula="BMI = weight (kg) / [height (m)]²"
       faqs={faqs}

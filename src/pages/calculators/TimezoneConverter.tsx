@@ -30,7 +30,7 @@ const TimezoneConverter = () => {
   ];
 
   return (
-    <CalculatorLayout title="Time Zone Converter" description="Convert time between different time zones worldwide." howItWorks="Enter a time and select source and destination time zones." formula="New Time = Original Time + (Destination UTC Offset - Source UTC Offset)" faqs={faqs}>
+    <CalculatorLayout title="Time Zone Converter" description="Convert time between different time zones worldwide." category="conversion" calculatorId="timezone" howItWorks="Enter a time and select source and destination time zones." formula="New Time = Original Time + (Destination UTC Offset - Source UTC Offset)" faqs={faqs}>
       <div className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div><Label>Time</Label><Input type="time" value={time} onChange={(e) => setTime(e.target.value)} /></div>

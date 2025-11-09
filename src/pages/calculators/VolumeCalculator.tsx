@@ -54,6 +54,8 @@ const VolumeCalculator = () => {
     <CalculatorLayout
       title="Volume Calculator"
       description="Calculate the volume of 3D shapes including cubes, spheres, cylinders, and cones."
+      category="math"
+      calculatorId="volume"
       howItWorks="Select a 3D shape and enter the required dimensions (side length, radius, height). The calculator computes the volume."
       formula="Cube: V = s³ | Sphere: V = (4/3)πr³ | Cylinder: V = πr²h | Cone: V = (1/3)πr²h"
       faqs={faqs}

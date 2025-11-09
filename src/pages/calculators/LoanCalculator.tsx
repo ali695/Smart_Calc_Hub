@@ -79,6 +79,7 @@ const LoanCalculator = () => {
       keywords="loan calculator, monthly payment calculator, loan payment, interest calculator, amortization calculator, personal loan calculator"
       canonicalUrl="https://smartcalchub.com/calculator/loan"
       category="finance"
+      calculatorId="loan"
       howItWorks="The loan calculator determines your monthly payment based on the loan amount (principal), annual interest rate, and loan term in years. It uses the standard amortization formula to calculate fixed monthly payments that will fully repay the loan by the end of the term. The calculator also shows you the total amount you'll pay and how much of that is interest."
       formula="M = P × [r(1 + r)^n] / [(1 + r)^n - 1], where M = monthly payment, P = principal, r = monthly interest rate, n = number of payments"
       faqs={faqs}

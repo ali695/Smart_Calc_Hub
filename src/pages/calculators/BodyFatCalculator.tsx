@@ -73,6 +73,8 @@ const BodyFatCalculator = () => {
     <CalculatorLayout
       title="Body Fat Calculator"
       description="Calculate your body fat percentage using U.S. Navy method"
+      category="health"
+      calculatorId="body-fat"
       howItWorks="This calculator uses the U.S. Navy body fat formula which requires body measurements. For men: height, neck, and waist. For women: height, neck, waist, and hip measurements are needed."
       formula="Uses logarithmic formulas based on body circumferences relative to height (U.S. Navy method)"
       faqs={faqs}

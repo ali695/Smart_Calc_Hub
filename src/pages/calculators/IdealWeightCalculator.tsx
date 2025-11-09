@@ -64,6 +64,8 @@ const IdealWeightCalculator = () => {
     <CalculatorLayout
       title="Ideal Weight Calculator"
       description="Calculate your ideal body weight using multiple formulas"
+      category="health"
+      calculatorId="ideal-weight"
       howItWorks="This calculator uses four well-known formulas (Robinson, Miller, Devine, and Hamwi) to estimate your ideal body weight based on height and gender. It provides an average and healthy weight range."
       formula="Robinson: Male: 52kg + 1.9kg/inch over 5ft | Female: 49kg + 1.7kg/inch over 5ft (similar variations for other formulas)"
       faqs={faqs}

@@ -59,6 +59,8 @@ const PrimeNumberCalculator = () => {
     <CalculatorLayout
       title="Prime Number Checker"
       description="Check if a number is prime and see all its factors if it's composite."
+      category="math"
+      calculatorId="prime"
       howItWorks="Enter any positive integer. The calculator will determine if it's prime (only divisible by 1 and itself) or composite (has other factors)."
       formula="A number n is prime if it has no divisors from 2 to √n"
       faqs={faqs}
