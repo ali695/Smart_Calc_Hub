@@ -9,11 +9,21 @@ const Terms = () => {
         description="Read the terms of service for using SmartCalc Hub calculators and services."
         canonicalUrl="https://smartcalchub.com/terms"
       />
+      {/* Page Header */}
+      <div className="bg-gradient-to-br from-primary/10 via-background to-accent/10 border-b">
+        <div className="container mx-auto px-4 py-16">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary via-primary-glow to-accent bg-clip-text text-transparent">
+              Terms of Service
+            </h1>
+            <p className="text-muted-foreground text-lg">Last updated: November 9, 2025</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Content */}
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-4xl mx-auto prose prose-slate dark:prose-invert">
-          <h1>Terms of Service</h1>
-          <p className="text-muted-foreground">Last updated: November 9, 2025</p>
-
           <h2>Acceptance of Terms</h2>
           <p>
             By accessing and using SmartCalc Hub, you accept and agree to be bound by the terms and 
