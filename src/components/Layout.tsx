@@ -9,18 +9,59 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
+  // Global Organization Schema - appears on all pages
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "SmartCalc Hub",
+    "url": "https://smartcalchub.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://smartcalchub.com/logo.png",
+      "width": "512",
+      "height": "512"
+    },
+    "description": "Free, accurate, and modern online calculators for everyday life. Finance, health, math, and conversion tools.",
+    "sameAs": [
+      "https://www.facebook.com/AliHadi768",
+      "https://www.instagram.com/ali_haiderseo/",
+      "https://www.linkedin.com/in/ali-haider-seo-consultant/"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "ma7122671@gmail.com",
+      "contactType": "Customer Support"
+    },
+    "founder": {
+      "@type": "Person",
+      "name": "Ali Haider",
+      "url": "https://www.linkedin.com/in/ali-haider-seo-consultant/",
+      "sameAs": [
+        "https://www.linkedin.com/in/ali-haider-seo-consultant/",
+        "https://www.instagram.com/ali_haiderseo/",
+        "https://www.facebook.com/AliHadi768"
+      ]
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
+      {/* Global Organization Schema */}
+      <script type="application/ld+json">
+        {JSON.stringify(organizationSchema)}
+      </script>
+
       {/* Sticky Header with blur effect */}
       <header className="sticky top-0 z-50 w-full border-b border-border backdrop-blur-xl bg-background/90 dark:bg-background/80 supports-[backdrop-filter]:bg-background/60 transition-all duration-300">
         <div className="container mx-auto px-4">
           <div className="flex h-16 items-center justify-between">
-            {/* Logo */}
-            <Link to="/" className="flex items-center gap-2 font-bold text-xl">
+            {/* Logo with Schema Markup */}
+            <Link to="/" className="flex items-center gap-2 font-bold text-xl" itemScope itemType="https://schema.org/Organization">
               <Calculator className="h-6 w-6 text-primary" />
-              <span className="bg-gradient-primary bg-clip-text text-transparent">
+              <span className="bg-gradient-primary bg-clip-text text-transparent" itemProp="name">
                 SmartCalc Hub
               </span>
+              <meta itemProp="url" content="https://smartcalchub.com" />
             </Link>
 
             {/* Desktop Navigation */}
@@ -267,9 +308,9 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
           {/* Bottom Section */}
           <div className="border-t border-border/50 mt-12 pt-8">
             <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-              {/* Copyright */}
+              {/* Copyright with dynamic year */}
               <div className="text-sm text-muted-foreground text-center md:text-left">
-                <p>© 2025 SmartCalc Hub. All rights reserved.</p>
+                <p>© {new Date().getFullYear()} SmartCalc Hub. All rights reserved.</p>
               </div>
 
               {/* Credits */}

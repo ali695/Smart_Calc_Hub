@@ -2,8 +2,10 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { Layout } from "@/components/Layout";
+import { useEffect } from "react";
+import { trackPageView } from "@/utils/analytics";
 import Index from "./pages/Index";
 import Categories from "./pages/Categories";
 import About from "./pages/About";
@@ -88,12 +90,27 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
+// Analytics tracker component
+const AnalyticsTracker = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    // Track page view on route change in production
+    if (import.meta.env.PROD) {
+      trackPageView(location.pathname + location.search);
+    }
+  }, [location]);
+
+  return null;
+};
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <AnalyticsTracker />
         <Layout>
           <Routes>
             <Route path="/" element={<Index />} />
