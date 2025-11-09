@@ -93,17 +93,26 @@ export const SEOHead = ({
     }
 
     // Hreflang tags for international SEO
-    updateLinkTag('alternate', 'https://smartcalchub.com' + (canonicalUrl ? new URL(canonicalUrl).pathname : window.location.pathname));
+    const currentPath = canonicalUrl ? new URL(canonicalUrl).pathname : window.location.pathname;
     
-    // Add hreflang for default language
-    const hreflangDefault = document.querySelector('link[hreflang="x-default"]');
-    if (!hreflangDefault) {
+    // Remove existing hreflang tags
+    document.querySelectorAll('link[hreflang]').forEach(el => el.remove());
+    
+    // Add hreflang tags
+    const hreflangs = [
+      { lang: 'en', url: `https://smartcalchub.com${currentPath}` },
+      { lang: 'de', url: `https://smartcalchub.de${currentPath}` },
+      { lang: 'tr', url: `https://smartcalchub.com/tr${currentPath}` },
+      { lang: 'x-default', url: `https://smartcalchub.com${currentPath}` }
+    ];
+    
+    hreflangs.forEach(({ lang, url }) => {
       const link = document.createElement('link');
       link.setAttribute('rel', 'alternate');
-      link.setAttribute('hreflang', 'x-default');
-      link.setAttribute('href', 'https://smartcalchub.com' + (canonicalUrl ? new URL(canonicalUrl).pathname : window.location.pathname));
+      link.setAttribute('hreflang', lang);
+      link.setAttribute('href', url);
       document.head.appendChild(link);
-    }
+    });
 
   }, [title, description, keywords, ogType, ogImage, canonicalUrl, author, publishedTime, modifiedTime]);
 

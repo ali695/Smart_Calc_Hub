@@ -55,14 +55,24 @@ All colors MUST be HSL.
     --radius: 0.75rem;
 
     /* Category accent colors */
-    --finance-accent: 142 71% 45%;
-    --health-accent: 0 84% 60%;
-    --math-accent: 221 83% 53%;
-    --conversion-accent: 262 83% 58%;
-    --tech-accent: 189 94% 43%;
-    --engineering-accent: 25 95% 53%;
-    --business-accent: 239 84% 67%;
-    --science-accent: 330 81% 60%;
+    --finance-accent: 210 100% 50%;
+    --health-accent: 330 100% 50%;
+    --math-accent: 270 100% 50%;
+    --conversion-accent: 180 100% 50%;
+    --tech-accent: 200 100% 40%;
+    --engineering-accent: 30 100% 50%;
+    --business-accent: 150 100% 35%;
+    --science-accent: 270 100% 60%;
+
+    /* Category-specific gradients */
+    --gradient-finance: linear-gradient(120deg, hsl(210, 100%, 40%), hsl(210, 100%, 50%), hsl(190, 100%, 50%));
+    --gradient-health: linear-gradient(120deg, hsl(330, 100%, 50%), hsl(330, 100%, 65%), hsl(330, 100%, 80%));
+    --gradient-math: linear-gradient(120deg, hsl(270, 64%, 31%), hsl(270, 67%, 47%), hsl(270, 90%, 68%));
+    --gradient-conversion: linear-gradient(120deg, hsl(270, 100%, 48%), hsl(190, 100%, 50%), hsl(150, 100%, 50%));
+    --gradient-tech: linear-gradient(120deg, hsl(200, 100%, 20%), hsl(190, 100%, 40%), hsl(170, 100%, 50%));
+    --gradient-engineering: linear-gradient(120deg, hsl(30, 100%, 50%), hsl(40, 100%, 50%), hsl(50, 100%, 70%));
+    --gradient-business: linear-gradient(120deg, hsl(150, 100%, 15%), hsl(150, 100%, 35%), hsl(150, 100%, 60%));
+    --gradient-science: linear-gradient(120deg, hsl(270, 100%, 40%), hsl(270, 100%, 60%), hsl(270, 100%, 75%));
 
     /* Premium Design Tokens */
     --gradient-primary: linear-gradient(135deg, hsl(211 100% 50%), hsl(195 100% 50%));
@@ -128,14 +138,14 @@ All colors MUST be HSL.
     --ring: 195 100% 50%;
 
     /* Category accent colors with glow */
-    --finance-accent: 142 71% 45%;   /* Green #22C55E */
-    --health-accent: 0 84% 60%;      /* Red #EF4444 */
-    --math-accent: 217 91% 60%;      /* Blue #3B82F6 */
-    --conversion-accent: 262 83% 58%; /* Purple #8B5CF6 */
-    --tech-accent: 189 94% 43%;      /* Cyan #06B6D4 */
-    --engineering-accent: 25 95% 53%; /* Orange #F97316 */
-    --business-accent: 239 84% 67%;  /* Indigo #818CF8 */
-    --science-accent: 330 81% 60%;   /* Pink #EC4899 */
+    --finance-accent: 210 100% 50%;
+    --health-accent: 330 100% 50%;
+    --math-accent: 270 100% 50%;
+    --conversion-accent: 180 100% 50%;
+    --tech-accent: 200 100% 40%;
+    --engineering-accent: 30 100% 50%;
+    --business-accent: 150 100% 35%;
+    --science-accent: 270 100% 60%;
 
     /* Premium gradients - vivid & glowing */
     --gradient-primary: linear-gradient(90deg, hsl(211 100% 50%), hsl(195 100% 50%));
@@ -154,14 +164,14 @@ All colors MUST be HSL.
     --shadow-glow-cyan: 0 0 20px hsl(195 100% 50% / 0.6);
     
     /* Category glows */
-    --glow-finance: 0 0 12px hsl(142 71% 45% / 0.5);
-    --glow-health: 0 0 12px hsl(0 84% 60% / 0.5);
-    --glow-math: 0 0 12px hsl(217 91% 60% / 0.5);
-    --glow-conversion: 0 0 12px hsl(262 83% 58% / 0.5);
-    --glow-tech: 0 0 12px hsl(189 94% 43% / 0.5);
-    --glow-engineering: 0 0 12px hsl(25 95% 53% / 0.5);
-    --glow-business: 0 0 12px hsl(239 84% 67% / 0.5);
-    --glow-science: 0 0 12px hsl(330 81% 60% / 0.5);
+    --glow-finance: 0 0 12px hsl(210 100% 50% / 0.5);
+    --glow-health: 0 0 12px hsl(330 100% 50% / 0.5);
+    --glow-math: 0 0 12px hsl(270 100% 50% / 0.5);
+    --glow-conversion: 0 0 12px hsl(180 100% 50% / 0.5);
+    --glow-tech: 0 0 12px hsl(200 100% 40% / 0.5);
+    --glow-engineering: 0 0 12px hsl(30 100% 50% / 0.5);
+    --glow-business: 0 0 12px hsl(150 100% 35% / 0.5);
+    --glow-science: 0 0 12px hsl(270 100% 60% / 0.5);
   }
 }
 

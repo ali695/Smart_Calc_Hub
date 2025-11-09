@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { Layout } from "@/components/Layout";
 import { useEffect } from "react";
 import { trackPageView } from "@/utils/analytics";
+import { ThemeProvider } from "./components/ThemeProvider";
 import Index from "./pages/Index";
 import Categories from "./pages/Categories";
 import About from "./pages/About";
@@ -13,6 +14,9 @@ import Contact from "./pages/Contact";
 import FAQ from "./pages/FAQ";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
+import NotFound from "./pages/NotFound";
 import BMICalculator from "./pages/calculators/BMICalculator";
 import LoanCalculator from "./pages/calculators/LoanCalculator";
 import PercentageCalculator from "./pages/calculators/PercentageCalculator";
@@ -87,7 +91,6 @@ import SalaryAfterTaxCalculator from "./pages/calculators/SalaryAfterTaxCalculat
 import WaistToHeightCalculator from "./pages/calculators/WaistToHeightCalculator";
 import BodySurfaceAreaCalculator from "./pages/calculators/BodySurfaceAreaCalculator";
 import EnergyConverter from "./pages/calculators/EnergyConverter";
-import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
@@ -107,100 +110,103 @@ const AnalyticsTracker = () => {
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <AnalyticsTracker />
-        <Layout>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/categories" element={<Categories />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/faq" element={<FAQ />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:id" element={<Blog />} />
-            <Route path="/calculator/bmi" element={<BMICalculator />} />
-            <Route path="/calculator/loan" element={<LoanCalculator />} />
-            <Route path="/calculator/percentage" element={<PercentageCalculator />} />
-            <Route path="/calculator/length" element={<LengthConverter />} />
-        <Route path="/calculator/mortgage" element={<MortgageCalculator />} />
-        <Route path="/calculator/compound-interest" element={<CompoundInterestCalculator />} />
-        <Route path="/calculator/bmr" element={<BMRCalculator />} />
-        <Route path="/calculator/weight" element={<WeightConverter />} />
-        <Route path="/calculator/tax" element={<TaxCalculator />} />
-        <Route path="/calculator/savings-goal" element={<SavingsGoalCalculator />} />
-        <Route path="/calculator/investment-return" element={<InvestmentReturnCalculator />} />
-        <Route path="/calculator/currency" element={<CurrencyConverter />} />
-        <Route path="/calculator/credit-card" element={<CreditCardPayoffCalculator />} />
-        <Route path="/calculator/car-loan" element={<CarLoanCalculator />} />
-        <Route path="/calculator/calorie" element={<CalorieCalculator />} />
-        <Route path="/calculator/ideal-weight" element={<IdealWeightCalculator />} />
-        <Route path="/calculator/body-fat" element={<BodyFatCalculator />} />
-        <Route path="/calculator/water" element={<WaterIntakeCalculator />} />
-        <Route path="/calculator/pregnancy" element={<PregnancyCalculator />} />
-        <Route path="/calculator/heart-rate" element={<HeartRateCalculator />} />
-        <Route path="/calculator/macro" element={<MacroCalculator />} />
-        <Route path="/calculator/protein" element={<ProteinCalculator />} />
-        <Route path="/calculator/average" element={<AverageCalculator />} />
-        <Route path="/calculator/ratio" element={<RatioCalculator />} />
-        <Route path="/calculator/fraction" element={<FractionCalculator />} />
-            <Route path="/calculator/age" element={<AgeCalculator />} />
-            <Route path="/calculator/temperature" element={<TemperatureConverter />} />
-            <Route path="/calculator/retirement" element={<RetirementCalculator />} />
-            <Route path="/calculator/inflation" element={<InflationCalculator />} />
-            <Route path="/calculator/ltv" element={<LTVCalculator />} />
-            <Route path="/calculator/break-even" element={<BreakEvenCalculator />} />
-            <Route path="/calculator/debt-to-income" element={<DebtToIncomeCalculator />} />
-            <Route path="/calculator/blood-pressure" element={<BloodPressureCalculator />} />
-            <Route path="/calculator/sleep" element={<SleepCalculator />} />
-            <Route path="/calculator/steps" element={<StepsCalculator />} />
-            <Route path="/calculator/basal-temp" element={<BasalTempCalculator />} />
-            <Route path="/calculator/menstrual" element={<MenstrualCalculator />} />
-            <Route path="/calculator/quadratic" element={<QuadraticCalculator />} />
-            <Route path="/calculator/percentage-change" element={<PercentageChangeCalculator />} />
-            <Route path="/calculator/area-perimeter" element={<AreaPerimeterCalculator />} />
-            <Route path="/calculator/volume" element={<VolumeCalculator />} />
-            <Route path="/calculator/prime" element={<PrimeNumberCalculator />} />
-            <Route path="/calculator/profit-margin" element={<ProfitMarginCalculator />} />
-            <Route path="/calculator/timezone" element={<TimezoneConverter />} />
-            <Route path="/calculator/simple-interest" element={<SimpleInterestCalculator />} />
-            <Route path="/calculator/emi" element={<EMICalculator />} />
-            <Route path="/calculator/discount" element={<DiscountCalculator />} />
-            <Route path="/calculator/tdee" element={<TDEECalculator />} />
-            <Route path="/calculator/square-root" element={<SquareRootCalculator />} />
-            <Route path="/calculator/sine" element={<SineCalculator />} />
-            <Route path="/calculator/cosine" element={<CosineCalculator />} />
-            <Route path="/calculator/factorial" element={<FactorialCalculator />} />
-            <Route path="/calculator/area-converter" element={<AreaConverter />} />
-            <Route path="/calculator/speed-converter" element={<SpeedConverter />} />
-            <Route path="/calculator/tangent" element={<TangentCalculator />} />
-            <Route path="/calculator/logarithm" element={<LogarithmCalculator />} />
-            <Route path="/calculator/exponent" element={<ExponentCalculator />} />
-            <Route path="/calculator/triangle-area" element={<TriangleAreaCalculator />} />
-            <Route path="/calculator/circle" element={<CircleCalculator />} />
-            <Route path="/calculator/pythagoras" element={<PythagorasCalculator />} />
-            <Route path="/calculator/permutation-combination" element={<PermutationCombinationCalculator />} />
-            <Route path="/calculator/calorie-deficit" element={<CalorieDeficitCalculator />} />
-            <Route path="/calculator/pressure-converter" element={<PressureConverter />} />
-            <Route path="/calculator/net-worth" element={<NetWorthCalculator />} />
-            <Route path="/calculator/arcsin" element={<ArcsinCalculator />} />
-            <Route path="/calculator/arccos" element={<ArccosCalculator />} />
-            <Route path="/calculator/arctan" element={<ArctanCalculator />} />
-            <Route path="/calculator/radian-degree" element={<RadianDegreeConverter />} />
-            <Route path="/calculator/scientific-notation" element={<ScientificNotationCalculator />} />
-            <Route path="/calculator/budget-planner" element={<BudgetPlannerCalculator />} />
-            <Route path="/calculator/salary-after-tax" element={<SalaryAfterTaxCalculator />} />
-            <Route path="/calculator/waist-to-height" element={<WaistToHeightCalculator />} />
-            <Route path="/calculator/body-surface-area" element={<BodySurfaceAreaCalculator />} />
-            <Route path="/calculator/energy-converter" element={<EnergyConverter />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Layout>
-      </BrowserRouter>
-    </TooltipProvider>
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <AnalyticsTracker />
+          <Layout>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/categories" element={<Categories />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/faq" element={<FAQ />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<BlogPost />} />
+              <Route path="/calculator/bmi" element={<BMICalculator />} />
+              <Route path="/calculator/loan" element={<LoanCalculator />} />
+              <Route path="/calculator/percentage" element={<PercentageCalculator />} />
+              <Route path="/calculator/length" element={<LengthConverter />} />
+              <Route path="/calculator/mortgage" element={<MortgageCalculator />} />
+              <Route path="/calculator/compound-interest" element={<CompoundInterestCalculator />} />
+              <Route path="/calculator/bmr" element={<BMRCalculator />} />
+              <Route path="/calculator/weight" element={<WeightConverter />} />
+              <Route path="/calculator/tax" element={<TaxCalculator />} />
+              <Route path="/calculator/savings-goal" element={<SavingsGoalCalculator />} />
+              <Route path="/calculator/investment-return" element={<InvestmentReturnCalculator />} />
+              <Route path="/calculator/currency" element={<CurrencyConverter />} />
+              <Route path="/calculator/credit-card" element={<CreditCardPayoffCalculator />} />
+              <Route path="/calculator/car-loan" element={<CarLoanCalculator />} />
+              <Route path="/calculator/calorie" element={<CalorieCalculator />} />
+              <Route path="/calculator/ideal-weight" element={<IdealWeightCalculator />} />
+              <Route path="/calculator/body-fat" element={<BodyFatCalculator />} />
+              <Route path="/calculator/water" element={<WaterIntakeCalculator />} />
+              <Route path="/calculator/pregnancy" element={<PregnancyCalculator />} />
+              <Route path="/calculator/heart-rate" element={<HeartRateCalculator />} />
+              <Route path="/calculator/macro" element={<MacroCalculator />} />
+              <Route path="/calculator/protein" element={<ProteinCalculator />} />
+              <Route path="/calculator/average" element={<AverageCalculator />} />
+              <Route path="/calculator/ratio" element={<RatioCalculator />} />
+              <Route path="/calculator/fraction" element={<FractionCalculator />} />
+              <Route path="/calculator/age" element={<AgeCalculator />} />
+              <Route path="/calculator/temperature" element={<TemperatureConverter />} />
+              <Route path="/calculator/retirement" element={<RetirementCalculator />} />
+              <Route path="/calculator/inflation" element={<InflationCalculator />} />
+              <Route path="/calculator/ltv" element={<LTVCalculator />} />
+              <Route path="/calculator/break-even" element={<BreakEvenCalculator />} />
+              <Route path="/calculator/debt-to-income" element={<DebtToIncomeCalculator />} />
+              <Route path="/calculator/blood-pressure" element={<BloodPressureCalculator />} />
+              <Route path="/calculator/sleep" element={<SleepCalculator />} />
+              <Route path="/calculator/steps" element={<StepsCalculator />} />
+              <Route path="/calculator/basal-temp" element={<BasalTempCalculator />} />
+              <Route path="/calculator/menstrual" element={<MenstrualCalculator />} />
+              <Route path="/calculator/quadratic" element={<QuadraticCalculator />} />
+              <Route path="/calculator/percentage-change" element={<PercentageChangeCalculator />} />
+              <Route path="/calculator/area-perimeter" element={<AreaPerimeterCalculator />} />
+              <Route path="/calculator/volume" element={<VolumeCalculator />} />
+              <Route path="/calculator/prime" element={<PrimeNumberCalculator />} />
+              <Route path="/calculator/profit-margin" element={<ProfitMarginCalculator />} />
+              <Route path="/calculator/timezone" element={<TimezoneConverter />} />
+              <Route path="/calculator/simple-interest" element={<SimpleInterestCalculator />} />
+              <Route path="/calculator/emi" element={<EMICalculator />} />
+              <Route path="/calculator/discount" element={<DiscountCalculator />} />
+              <Route path="/calculator/tdee" element={<TDEECalculator />} />
+              <Route path="/calculator/square-root" element={<SquareRootCalculator />} />
+              <Route path="/calculator/sine" element={<SineCalculator />} />
+              <Route path="/calculator/cosine" element={<CosineCalculator />} />
+              <Route path="/calculator/factorial" element={<FactorialCalculator />} />
+              <Route path="/calculator/area-converter" element={<AreaConverter />} />
+              <Route path="/calculator/speed-converter" element={<SpeedConverter />} />
+              <Route path="/calculator/tangent" element={<TangentCalculator />} />
+              <Route path="/calculator/logarithm" element={<LogarithmCalculator />} />
+              <Route path="/calculator/exponent" element={<ExponentCalculator />} />
+              <Route path="/calculator/triangle-area" element={<TriangleAreaCalculator />} />
+              <Route path="/calculator/circle" element={<CircleCalculator />} />
+              <Route path="/calculator/pythagoras" element={<PythagorasCalculator />} />
+              <Route path="/calculator/permutation-combination" element={<PermutationCombinationCalculator />} />
+              <Route path="/calculator/calorie-deficit" element={<CalorieDeficitCalculator />} />
+              <Route path="/calculator/pressure-converter" element={<PressureConverter />} />
+              <Route path="/calculator/net-worth" element={<NetWorthCalculator />} />
+              <Route path="/calculator/arcsin" element={<ArcsinCalculator />} />
+              <Route path="/calculator/arccos" element={<ArccosCalculator />} />
+              <Route path="/calculator/arctan" element={<ArctanCalculator />} />
+              <Route path="/calculator/radian-degree" element={<RadianDegreeConverter />} />
+              <Route path="/calculator/scientific-notation" element={<ScientificNotationCalculator />} />
+              <Route path="/calculator/budget-planner" element={<BudgetPlannerCalculator />} />
+              <Route path="/calculator/salary-after-tax" element={<SalaryAfterTaxCalculator />} />
+              <Route path="/calculator/waist-to-height" element={<WaistToHeightCalculator />} />
+              <Route path="/calculator/body-surface-area" element={<BodySurfaceAreaCalculator />} />
+              <Route path="/calculator/energy-converter" element={<EnergyConverter />} />
+              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/terms" element={<Terms />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Layout>
+        </BrowserRouter>
+      </TooltipProvider>
+    </ThemeProvider>
   </QueryClientProvider>
 );
 
