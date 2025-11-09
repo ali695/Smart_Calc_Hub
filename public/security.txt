@@ -1,0 +1,17 @@
+Contact: mailto:ma7122671@gmail.com
+Expires: 2026-12-31T23:59:59.000Z
+Preferred-Languages: en
+Canonical: https://smartcalchub.com/.well-known/security.txt
+
+# Security Policy for SmartCalc Hub
+# 
+# If you discover a security vulnerability, please email us at:
+# ma7122671@gmail.com
+#
+# Please include:
+# - Description of the vulnerability
+# - Steps to reproduce
+# - Potential impact
+# - Suggested fix (if any)
+#
+# We appreciate responsible disclosure and will respond within 48 hours.

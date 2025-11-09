@@ -1,6 +1,37 @@
+import { sanitizeString, sanitizeUrl } from "./InputSanitizer";
+
+interface WebApplicationData {
+  name: string;
+  description: string;
+  url: string;
+}
+
+interface BlogPostingData {
+  headline: string;
+  description: string;
+  datePublished: string;
+  dateModified?: string;
+  image: string;
+  url: string;
+}
+
+interface FAQData {
+  faqs: Array<{ question: string; answer: string }>;
+}
+
+interface OrganizationData {
+  // No additional fields needed, uses defaults
+}
+
+interface BreadcrumbData {
+  items: Array<{ name: string; url: string }>;
+}
+
+type SchemaData = WebApplicationData | BlogPostingData | FAQData | OrganizationData | BreadcrumbData;
+
 interface SchemaMarkupProps {
   type: 'WebApplication' | 'BlogPosting' | 'FAQPage' | 'Organization' | 'BreadcrumbList';
-  data: any;
+  data: SchemaData;
 }
 
 export const SchemaMarkup = ({ type, data }: SchemaMarkupProps) => {
@@ -9,12 +40,13 @@ export const SchemaMarkup = ({ type, data }: SchemaMarkupProps) => {
     
     switch (type) {
       case 'WebApplication':
+        const webAppData = data as WebApplicationData;
         return {
           ...baseContext,
           "@type": "WebApplication",
-          "name": data.name,
-          "description": data.description,
-          "url": data.url,
+          "name": sanitizeString(webAppData.name, 100),
+          "description": sanitizeString(webAppData.description, 500),
+          "url": sanitizeUrl(webAppData.url) || "https://smartcalchub.com",
           "applicationCategory": "UtilityApplication",
           "offers": {
             "@type": "Offer",
@@ -29,11 +61,12 @@ export const SchemaMarkup = ({ type, data }: SchemaMarkupProps) => {
         };
       
       case 'BlogPosting':
+        const blogData = data as BlogPostingData;
         return {
           ...baseContext,
           "@type": "BlogPosting",
-          "headline": data.headline,
-          "description": data.description,
+          "headline": sanitizeString(blogData.headline, 200),
+          "description": sanitizeString(blogData.description, 500),
           "author": {
             "@type": "Person",
             "name": "Ali Haider",
@@ -47,22 +80,23 @@ export const SchemaMarkup = ({ type, data }: SchemaMarkupProps) => {
               "url": "https://smartcalchub.com/logo.png"
             }
           },
-          "datePublished": data.datePublished,
-          "dateModified": data.dateModified || data.datePublished,
-          "image": data.image,
-          "url": data.url
+          "datePublished": blogData.datePublished,
+          "dateModified": blogData.dateModified || blogData.datePublished,
+          "image": sanitizeUrl(blogData.image) || "https://smartcalchub.com/og-image.png",
+          "url": sanitizeUrl(blogData.url) || "https://smartcalchub.com"
         };
       
       case 'FAQPage':
+        const faqData = data as FAQData;
         return {
           ...baseContext,
           "@type": "FAQPage",
-          "mainEntity": data.faqs.map((faq: any) => ({
+          "mainEntity": faqData.faqs.map((faq) => ({
             "@type": "Question",
-            "name": faq.question,
+            "name": sanitizeString(faq.question, 200),
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": faq.answer
+              "text": sanitizeString(faq.answer, 2000)
             }
           }))
         };
@@ -86,14 +120,15 @@ export const SchemaMarkup = ({ type, data }: SchemaMarkupProps) => {
         };
       
       case 'BreadcrumbList':
+        const breadcrumbData = data as BreadcrumbData;
         return {
           ...baseContext,
           "@type": "BreadcrumbList",
-          "itemListElement": data.items.map((item: any, index: number) => ({
+          "itemListElement": breadcrumbData.items.map((item, index) => ({
             "@type": "ListItem",
             "position": index + 1,
-            "name": item.name,
-            "item": item.url
+            "name": sanitizeString(item.name, 100),
+            "item": sanitizeUrl(item.url) || "https://smartcalchub.com"
           }))
         };
       

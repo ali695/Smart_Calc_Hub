@@ -62,6 +62,23 @@ export const schemas = {
     time: numberInputSchema({ min: 0.1, max: 100, fieldName: "Time period" }),
     frequency: numberInputSchema({ min: 1, max: 365, fieldName: "Compound frequency" }),
   }),
+  
+  // Text input validation
+  textInput: z.string().max(10000, "Input too long (max 10,000 characters)"),
+  
+  // Trigonometric functions
+  arcsin: z.object({
+    value: numberInputSchema({ min: -1, max: 1, fieldName: "Value" }),
+  }),
+  
+  arccos: z.object({
+    value: numberInputSchema({ min: -1, max: 1, fieldName: "Value" }),
+  }),
+  
+  // Temperature bounds
+  temperature: z.object({
+    celsius: numberInputSchema({ min: -273.15, max: 1000000, fieldName: "Celsius" }),
+  }),
 };
 
 // Validation helper - throws on error for simpler usage
