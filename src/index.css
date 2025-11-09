@@ -70,52 +70,70 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 222 47% 5%;
-    --foreground: 210 40% 98%;
+    /* Main layered backgrounds - Linear/Vercel inspired */
+    --background: 218 23% 7%;        /* #0D1117 */
+    --foreground: 210 17% 98%;       /* #F9FAFB */
 
-    --card: 222 47% 8%;
-    --card-foreground: 210 40% 98%;
+    /* Glass-effect card surfaces */
+    --card: 217 19% 11%;             /* #161B22 - rgba(22, 27, 34, 0.85) */
+    --card-foreground: 214 15% 92%;  /* #E5E7EB */
 
-    --popover: 222 47% 8%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 217 19% 11%;
+    --popover-foreground: 214 15% 92%;
 
-    --primary: 217 91% 60%;
-    --primary-foreground: 222 47% 11%;
-    --primary-glow: 230 91% 65%;
-    --primary-accent: 230 91% 65%;
+    /* Vivid gradient primary (#007BFF → #00C4FF) */
+    --primary: 211 100% 50%;         /* #007BFF */
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 195 100% 50%;    /* #00C4FF */
+    --primary-accent: 217 91% 60%;   /* #3B82F6 */
 
-    --secondary: 217 33% 17%;
-    --secondary-foreground: 210 40% 98%;
+    /* Secondary glass surfaces */
+    --secondary: 215 14% 15%;        /* rgba(255,255,255,0.06) */
+    --secondary-foreground: 214 15% 92%;
 
-    --muted: 217 33% 17%;
-    --muted-foreground: 215 20% 65%;
+    /* Muted backgrounds */
+    --muted: 215 14% 15%;
+    --muted-foreground: 220 9% 59%;  /* #94A3B8 */
 
-    --accent: 217 33% 17%;
-    --accent-foreground: 210 40% 98%;
+    /* Accent input states */
+    --accent: 218 18% 16%;           /* #1F2937 */
+    --accent-foreground: 214 15% 92%;
 
-    --destructive: 0 63% 31%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 73% 60%;        /* #EF4444 */
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 217 33% 17%;
-    --input: 217 33% 17%;
-    --ring: 224 76% 48%;
+    /* Borders with transparency */
+    --border: 0 0% 100% / 0.08;      /* rgba(255,255,255,0.08) */
+    --input: 218 18% 16%;
+    --ring: 195 100% 50%;
 
-    /* Category accent colors - brighter for dark mode */
-    --finance-accent: 142 71% 50%;
-    --health-accent: 0 84% 65%;
-    --math-accent: 221 83% 58%;
-    --conversion-accent: 262 83% 63%;
+    /* Category accent colors with glow */
+    --finance-accent: 142 71% 45%;   /* Green #22C55E */
+    --health-accent: 0 84% 60%;      /* Red #EF4444 */
+    --math-accent: 217 91% 60%;      /* Blue #3B82F6 */
+    --conversion-accent: 262 83% 58%; /* Purple #8B5CF6 */
 
-    /* Dark mode custom tokens */
-    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%), hsl(230 91% 65%));
-    --gradient-hero: linear-gradient(180deg, hsl(222 47% 5%), hsl(222 47% 8%));
-    --gradient-card: linear-gradient(180deg, hsl(222 47% 8%), hsl(222 47% 11%));
-    --gradient-hover: linear-gradient(135deg, hsl(217 91% 65%), hsl(230 91% 70%));
+    /* Premium gradients - vivid & glowing */
+    --gradient-primary: linear-gradient(90deg, hsl(211 100% 50%), hsl(195 100% 50%));
+    --gradient-hero: radial-gradient(circle at top right, hsl(211 100% 50% / 0.25), transparent 70%), 
+                     radial-gradient(circle at bottom left, hsl(262 83% 58% / 0.25), transparent 60%), 
+                     hsl(218 23% 7%);
+    --gradient-card: linear-gradient(180deg, hsl(217 19% 11% / 0.85), hsl(217 19% 13% / 0.85));
+    --gradient-hover: linear-gradient(90deg, hsl(211 100% 45%), hsl(195 100% 47%));
+    --gradient-button: linear-gradient(90deg, hsl(211 100% 50%), hsl(195 100% 50%));
     
-    --shadow-soft: 0 1px 3px 0 hsl(0 0% 0% / 0.3), 0 1px 2px -1px hsl(0 0% 0% / 0.3);
-    --shadow-medium: 0 4px 6px -1px hsl(0 0% 0% / 0.3), 0 2px 4px -2px hsl(0 0% 0% / 0.3);
-    --shadow-large: 0 10px 15px -3px hsl(0 0% 0% / 0.3), 0 4px 6px -4px hsl(0 0% 0% / 0.3);
-    --shadow-glow: 0 0 40px hsl(217 91% 60% / 0.4);
+    /* Enhanced shadows with depth */
+    --shadow-soft: 0 4px 16px hsl(0 0% 0% / 0.4);
+    --shadow-medium: 0 8px 24px hsl(211 100% 50% / 0.25);
+    --shadow-large: 0 12px 32px hsl(0 0% 0% / 0.5);
+    --shadow-glow: 0 0 20px hsl(211 100% 50% / 0.4);
+    --shadow-glow-cyan: 0 0 20px hsl(195 100% 50% / 0.6);
+    
+    /* Category glows */
+    --glow-finance: 0 0 12px hsl(142 71% 45% / 0.5);
+    --glow-health: 0 0 12px hsl(0 84% 60% / 0.5);
+    --glow-math: 0 0 12px hsl(217 91% 60% / 0.5);
+    --glow-conversion: 0 0 12px hsl(262 83% 58% / 0.5);
   }
 }
 
@@ -127,6 +145,11 @@ All colors MUST be HSL.
   body {
     @apply bg-background text-foreground font-sans antialiased;
     transition: background-color 0.4s ease, color 0.4s ease;
+    font-weight: 450; /* Slightly higher weight for clarity */
+  }
+
+  .dark body {
+    background: var(--gradient-hero);
   }
 
   /* Smooth scrolling */
@@ -136,14 +159,74 @@ All colors MUST be HSL.
 }
 
 @layer utilities {
-  /* Hover lift effect */
-  .hover-lift {
-    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-large;
+  /* Glass card effect - Linear/Vercel style */
+  .glass-card {
+    @apply bg-card/85 backdrop-blur-xl border border-border rounded-2xl;
+    box-shadow: var(--shadow-soft);
+    transition: all 0.3s ease;
   }
 
-  /* Gradient text */
+  .glass-card:hover {
+    @apply -translate-y-1;
+    box-shadow: var(--shadow-medium);
+  }
+
+  /* Hover lift with glow */
+  .hover-lift {
+    @apply transition-all duration-300 hover:-translate-y-1;
+  }
+
+  .hover-lift:hover {
+    box-shadow: var(--shadow-medium);
+  }
+
+  /* Gradient text with subtle glow */
   .text-gradient {
-    @apply bg-gradient-primary bg-clip-text text-transparent;
+    background: linear-gradient(90deg, hsl(217 91% 78%), hsl(217 91% 60%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .dark .text-gradient {
+    background: linear-gradient(90deg, hsl(217 91% 78%), hsl(211 100% 50%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 10px hsl(217 91% 60% / 0.3);
+  }
+
+  /* Button gradient glow */
+  .btn-gradient {
+    background: var(--gradient-button);
+    box-shadow: 0 0 15px hsl(211 100% 50% / 0.4);
+    transition: all 0.3s ease;
+  }
+
+  .btn-gradient:hover {
+    background: var(--gradient-hover);
+    box-shadow: 0 0 20px hsl(195 100% 50% / 0.6);
+  }
+
+  /* Category glows */
+  .glow-finance:hover {
+    box-shadow: var(--glow-finance);
+    transform: scale(1.03);
+  }
+
+  .glow-health:hover {
+    box-shadow: var(--glow-health);
+    transform: scale(1.03);
+  }
+
+  .glow-math:hover {
+    box-shadow: var(--glow-math);
+    transform: scale(1.03);
+  }
+
+  .glow-conversion:hover {
+    box-shadow: var(--glow-conversion);
+    transform: scale(1.03);
   }
 
   /* Smooth fade in animation */
@@ -162,6 +245,36 @@ All colors MUST be HSL.
     }
   }
 
+  /* Page fade */
+  .page-fade {
+    animation: page-fade 0.3s ease-out;
+  }
+
+  @keyframes page-fade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* Gradient shimmer animation */
+  .gradient-shimmer {
+    background: linear-gradient(120deg, hsl(211 100% 50%), hsl(195 100% 50%), hsl(262 83% 58%));
+    background-size: 400% 400%;
+    animation: gradientMove 8s ease infinite;
+  }
+
+  @keyframes gradientMove {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
   /* Scale on hover */
   .hover-scale {
     @apply transition-transform duration-300 hover:scale-105;
@@ -170,5 +283,24 @@ All colors MUST be HSL.
   /* Glow effect */
   .glow {
     box-shadow: var(--shadow-glow);
+  }
+
+  /* Neon ring on hover */
+  .neon-ring:hover {
+    box-shadow: 0 0 0 3px hsl(195 100% 50% / 0.3);
+  }
+
+  /* Floating animation */
+  .floating {
+    animation: floating 3s ease-in-out infinite;
+  }
+
+  @keyframes floating {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
   }
 }

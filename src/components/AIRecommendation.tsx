@@ -33,11 +33,11 @@ export const AIRecommendation = ({ calculatorType, result, category }: AIRecomme
 
   return (
     <Collapsible open={isOpen} onOpenChange={setIsOpen} className="mt-6">
-      <Card className="overflow-hidden bg-gradient-to-br from-primary/5 via-primary-accent/5 to-transparent border-primary/20">
+      <Card className="glass-card overflow-hidden bg-gradient-to-br from-primary/5 via-primary-accent/5 to-transparent border-primary/20">
         <CollapsibleTrigger asChild>
           <Button
             variant="ghost"
-            className="w-full p-4 hover:bg-primary/5 transition-colors justify-between"
+            className="w-full p-4 hover:bg-primary/10 dark:hover:bg-primary/5 transition-all justify-between"
             onClick={() => {
               if (!isOpen && !recommendation) {
                 generateRecommendation();
@@ -45,8 +45,8 @@ export const AIRecommendation = ({ calculatorType, result, category }: AIRecomme
             }}
           >
             <div className="flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-primary animate-pulse" />
-              <span className="font-semibold">Need AI Recommendations?</span>
+              <Sparkles className="w-5 h-5 text-primary-glow animate-pulse" />
+              <span className="font-semibold dark:text-foreground">Need AI Recommendations?</span>
             </div>
             {isOpen ? (
               <ChevronUp className="w-5 h-5 text-muted-foreground" />
@@ -60,15 +60,15 @@ export const AIRecommendation = ({ calculatorType, result, category }: AIRecomme
           <div className="pt-2 space-y-3">
             {loading ? (
               <div className="flex items-center gap-2 text-muted-foreground">
-                <div className="animate-spin rounded-full h-4 w-4 border-2 border-primary border-t-transparent"></div>
-                <span className="text-sm">Generating personalized recommendations...</span>
+                <div className="animate-spin rounded-full h-4 w-4 border-2 border-primary-glow border-t-transparent"></div>
+                <span className="text-sm animate-pulse">Analyzing your results...</span>
               </div>
             ) : recommendation ? (
-              <div className="space-y-3">
-                <p className="text-sm leading-relaxed text-foreground/90">
+              <div className="space-y-3 page-fade">
+                <p className="text-sm leading-relaxed dark:text-card-foreground/90 text-foreground/90">
                   {recommendation}
                 </p>
-                <div className="pt-2 border-t border-border/50">
+                <div className="pt-2 border-t border-border/30 dark:border-border">
                   <p className="text-xs text-muted-foreground italic">
                     💡 Tip: Save this calculator to your bookmarks for quick access
                   </p>

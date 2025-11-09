@@ -47,14 +47,14 @@ const Categories = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Gradient Header Banner */}
-      <div className="bg-gradient-to-r from-primary via-accent to-primary-glow text-primary-foreground py-8">
+      {/* Gradient Header Banner with Dark Mode Enhancement */}
+      <div className="gradient-shimmer dark:bg-gradient-hero bg-gradient-to-r from-primary via-accent to-primary-glow text-primary-foreground py-8">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-3xl md:text-4xl font-bold mb-3">
+            <h1 className="text-3xl md:text-4xl font-bold mb-3 dark:text-gradient">
               All Calculators
             </h1>
-            <p className="text-lg opacity-95">
+            <p className="text-lg opacity-95 dark:text-card-foreground">
               Explore our full suite of free, accurate online calculators
             </p>
           </div>
@@ -63,29 +63,33 @@ const Categories = () => {
 
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-6xl mx-auto">
-          {/* Search Bar */}
+          {/* Enhanced Search Bar with Glass Effect */}
           <div className="mb-12">
             <div className="relative max-w-2xl mx-auto">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-primary-glow dark:text-primary" />
               <Input
                 type="text"
                 placeholder="Search calculators... (e.g., Loan, BMI, Tax, Age)"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-12 h-14 text-lg rounded-xl shadow-lg border-2 focus:border-primary transition-all"
+                className="glass-card pl-12 h-14 text-lg rounded-2xl shadow-lg border-2 dark:border-border border-border focus:border-primary-glow dark:focus:ring-2 dark:focus:ring-primary/20 transition-all"
               />
             </div>
           </div>
 
-          {/* Category Filter Chips */}
+          {/* Category Filter Chips with Glow */}
           <div className="flex flex-wrap justify-center gap-3 mb-12">
             {categories.map((category) => {
               const Icon = category.icon;
+              const glowClass = category.id === 'finance' ? 'glow-finance' : 
+                              category.id === 'health' ? 'glow-health' : 
+                              category.id === 'math' ? 'glow-math' : 
+                              category.id === 'conversion' ? 'glow-conversion' : '';
               return (
                 <a
                   key={category.id}
                   href={`#${category.id}`}
-                  className="group flex items-center gap-2 px-6 py-3 rounded-full bg-card border-2 border-border hover:border-primary hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                  className={`group glass-card flex items-center gap-2 px-6 py-3 rounded-full border-2 border-border hover:border-primary transition-all duration-300 hover:-translate-y-1 ${glowClass}`}
                 >
                   <Icon className={`h-5 w-5 ${category.color}`} />
                   <span className="font-semibold">{category.name}</span>

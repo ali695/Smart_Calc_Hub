@@ -12,7 +12,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="min-h-screen bg-background">
       {/* Sticky Header with blur effect */}
-      <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-lg supports-[backdrop-filter]:bg-background/60 transition-all duration-300">
+      <header className="sticky top-0 z-50 w-full border-b border-border backdrop-blur-xl bg-background/90 dark:bg-background/80 supports-[backdrop-filter]:bg-background/60 transition-all duration-300">
         <div className="container mx-auto px-4">
           <div className="flex h-16 items-center justify-between">
             {/* Logo */}
@@ -25,25 +25,27 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center gap-6">
-              <Link to="/" className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors">
+              <Link to="/" className="relative text-sm font-medium text-foreground/80 hover:text-foreground transition-colors after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary after:to-primary-glow hover:after:w-full after:transition-all after:duration-300">
                 Home
               </Link>
-              <Link to="/categories" className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors">
+              <Link to="/categories" className="relative text-sm font-medium text-foreground/80 hover:text-foreground transition-colors after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary after:to-primary-glow hover:after:w-full after:transition-all after:duration-300">
                 Categories
               </Link>
-              <Link to="/about" className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors">
+              <Link to="/about" className="relative text-sm font-medium text-foreground/80 hover:text-foreground transition-colors after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary after:to-primary-glow hover:after:w-full after:transition-all after:duration-300">
                 About
               </Link>
-              <Link to="/contact" className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors">
+              <Link to="/contact" className="relative text-sm font-medium text-foreground/80 hover:text-foreground transition-colors after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary after:to-primary-glow hover:after:w-full after:transition-all after:duration-300">
                 Contact
               </Link>
-              <Link to="/faq" className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors">
+              <Link to="/faq" className="relative text-sm font-medium text-foreground/80 hover:text-foreground transition-colors after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary after:to-primary-glow hover:after:w-full after:transition-all after:duration-300">
                 FAQ
               </Link>
-              <Link to="/blog" className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors">
+              <Link to="/blog" className="relative text-sm font-medium text-foreground/80 hover:text-foreground transition-colors after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary after:to-primary-glow hover:after:w-full after:transition-all after:duration-300">
                 Blog
               </Link>
-              <ThemeToggle />
+              <div className="neon-ring rounded-lg transition-all">
+                <ThemeToggle />
+              </div>
             </nav>
 
             {/* Mobile Menu Button */}
