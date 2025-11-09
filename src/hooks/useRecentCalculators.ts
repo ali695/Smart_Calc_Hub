@@ -19,7 +19,12 @@ export const useRecentCalculators = () => {
       try {
         setRecentCalculators(JSON.parse(stored));
       } catch (error) {
-        console.error("Failed to parse recent calculators:", error);
+        if (import.meta.env.DEV) {
+          console.error("Failed to parse recent calculators:", error);
+        }
+        // Clear corrupted data silently in production
+        localStorage.removeItem(STORAGE_KEY);
+        setRecentCalculators([]);
       }
     }
   }, []);
