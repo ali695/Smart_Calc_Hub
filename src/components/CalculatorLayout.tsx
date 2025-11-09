@@ -2,6 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { ReactNode } from "react";
 import { SEOHead } from "@/components/SEOHead";
+import { RelatedCalculators } from "@/components/RelatedCalculators";
 import { 
   Breadcrumb, 
   BreadcrumbItem, 
@@ -29,6 +30,7 @@ interface CalculatorLayoutProps {
   keywords?: string;
   canonicalUrl?: string;
   category?: string;
+  calculatorId?: string;
 }
 
 export const CalculatorLayout = ({
@@ -42,7 +44,8 @@ export const CalculatorLayout = ({
   seoDescription,
   keywords,
   canonicalUrl,
-  category = "Utility"
+  category = "Utility",
+  calculatorId
 }: CalculatorLayoutProps) => {
   // Map category IDs to display names
   const categoryNames: Record<string, string> = {
@@ -236,6 +239,15 @@ export const CalculatorLayout = ({
               ))}
             </Accordion>
           </Card>
+
+          {/* Related Calculators Section */}
+          {category && (
+            <RelatedCalculators 
+              category={category.toLowerCase()} 
+              currentCalculatorId={calculatorId}
+              maxItems={4}
+            />
+          )}
         </div>
       </div>
     </div>
