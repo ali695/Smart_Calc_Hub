@@ -158,12 +158,12 @@ const CompoundInterestCalculator = () => {
           </div>
         </div>
 
-        <Card className="p-6 bg-primary/5 border-primary/20">
+        <Card className="p-6 bg-gradient-to-br from-primary/10 to-primary-accent/10 border-primary hover:scale-[1.02] transition-all duration-300 animate-fade-in">
           <h3 className="text-xl font-semibold mb-4">Investment Growth Summary</h3>
           <div className="space-y-4">
             <div className="flex justify-between items-center text-lg pb-3 border-b">
               <span className="font-bold">Future Value:</span>
-              <span className="font-bold text-primary text-2xl">${result.futureValue.toFixed(2)}</span>
+              <span className="font-bold bg-gradient-to-r from-primary to-primary-accent bg-clip-text text-transparent text-2xl">${result.futureValue.toFixed(2)}</span>
             </div>
 
             <div className="space-y-3 pt-2">

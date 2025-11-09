@@ -73,13 +73,13 @@ const RatioCalculator = () => {
           </div>
         </div>
 
-        <Button onClick={calculate} className="w-full" size="lg">Calculate Ratio</Button>
+        <Button onClick={calculate} className="w-full bg-gradient-to-r from-primary to-primary-accent hover:shadow-glow transition-all duration-300" size="lg">Calculate Ratio</Button>
 
         {result && (
           <div className="space-y-4 animate-fade-in">
-            <div className="p-6 bg-primary/10 rounded-lg text-center">
+            <div className="p-6 bg-gradient-to-br from-primary/10 to-primary-accent/10 rounded-lg border border-primary text-center hover:scale-[1.02] transition-all duration-300">
               <p className="text-sm font-medium text-muted-foreground">Simplified Ratio</p>
-              <p className="text-5xl font-bold text-primary">{result.simplified}</p>
+              <p className="text-5xl font-bold bg-gradient-to-r from-primary to-primary-accent bg-clip-text text-transparent">{result.simplified}</p>
             </div>
             
             <div className="grid grid-cols-2 gap-4">

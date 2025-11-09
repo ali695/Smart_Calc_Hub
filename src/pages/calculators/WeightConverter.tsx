@@ -131,9 +131,9 @@ const WeightConverter = () => {
         </div>
 
         {result !== null && value && (
-          <div className="p-6 bg-primary/10 rounded-lg text-center animate-fade-in">
+          <div className="p-6 bg-gradient-to-br from-primary/10 to-primary-accent/10 rounded-lg border border-primary text-center hover:scale-[1.02] transition-all duration-300 animate-fade-in">
             <p className="text-sm font-medium text-muted-foreground">Result</p>
-            <p className="text-4xl font-bold text-primary">{result}</p>
+            <p className="text-4xl font-bold bg-gradient-to-r from-primary to-primary-accent bg-clip-text text-transparent">{result}</p>
             <p className="text-sm text-muted-foreground mt-2">
               {value} {units.find(u => u.value === fromUnit)?.label} = {result} {units.find(u => u.value === toUnit)?.label}
             </p>

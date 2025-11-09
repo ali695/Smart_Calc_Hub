@@ -37,8 +37,8 @@ const TimezoneConverter = () => {
           <div><Label>From Timezone</Label><Select value={fromZone} onValueChange={setFromZone}><SelectTrigger><SelectValue /></SelectTrigger><SelectContent><SelectItem value="0">UTC (GMT)</SelectItem><SelectItem value="-5">EST (UTC-5)</SelectItem><SelectItem value="-8">PST (UTC-8)</SelectItem><SelectItem value="1">CET (UTC+1)</SelectItem></SelectContent></Select></div>
           <div><Label>To Timezone</Label><Select value={toZone} onValueChange={setToZone}><SelectTrigger><SelectValue /></SelectTrigger><SelectContent><SelectItem value="0">UTC (GMT)</SelectItem><SelectItem value="-5">EST (UTC-5)</SelectItem><SelectItem value="-8">PST (UTC-8)</SelectItem><SelectItem value="1">CET (UTC+1)</SelectItem></SelectContent></Select></div>
         </div>
-        <Button onClick={calculate} className="w-full" size="lg">Convert</Button>
-        {result && <Card className="bg-primary/5 border-primary"><CardContent className="pt-6"><p className="text-3xl font-bold text-primary">{result}</p></CardContent></Card>}
+        <Button onClick={calculate} className="w-full bg-gradient-to-r from-primary to-primary-accent hover:shadow-glow transition-all duration-300" size="lg">Convert</Button>
+        {result && <Card className="bg-gradient-to-br from-primary/10 to-primary-accent/10 border-primary hover:scale-[1.02] transition-all duration-300 animate-fade-in"><CardContent className="pt-6"><p className="text-3xl font-bold bg-gradient-to-r from-primary to-primary-accent bg-clip-text text-transparent">{result}</p></CardContent></Card>}
       </div>
     </CalculatorLayout>
   );

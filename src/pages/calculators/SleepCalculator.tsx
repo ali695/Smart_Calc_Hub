@@ -75,17 +75,17 @@ const SleepCalculator = () => {
           </div>
         </div>
 
-        <Button onClick={calculate} className="w-full" size="lg">
+        <Button onClick={calculate} className="w-full bg-gradient-to-r from-primary to-primary-accent hover:shadow-glow transition-all duration-300" size="lg">
           Calculate Bedtimes
         </Button>
 
         {result.length > 0 && (
-          <Card className="bg-primary/5 border-primary">
+          <Card className="bg-gradient-to-br from-primary/10 to-primary-accent/10 border-primary hover:scale-[1.02] transition-all duration-300 animate-fade-in">
             <CardContent className="pt-6">
               <div className="space-y-3">
                 <p className="text-sm text-muted-foreground">Recommended Bedtimes</p>
                 {result.map((time, idx) => (
-                  <div key={idx} className="text-lg font-semibold">
+                  <div key={idx} className="text-lg font-semibold bg-gradient-to-r from-primary to-primary-accent bg-clip-text text-transparent">
                     {time}
                   </div>
                 ))}

@@ -84,13 +84,13 @@ const WaterIntakeCalculator = () => {
           </div>
         </div>
 
-        <Button onClick={calculate} className="w-full" size="lg">Calculate Water Intake</Button>
+        <Button onClick={calculate} className="w-full bg-gradient-to-r from-primary to-primary-accent hover:shadow-glow transition-all duration-300" size="lg">Calculate Water Intake</Button>
 
         {waterIntake !== null && (
           <div className="space-y-4 animate-fade-in">
-            <div className="p-6 bg-primary/10 rounded-lg text-center">
+            <div className="p-6 bg-gradient-to-br from-primary/10 to-primary-accent/10 rounded-lg border border-primary text-center hover:scale-[1.02] transition-all duration-300">
               <p className="text-sm font-medium text-muted-foreground">Daily Water Intake</p>
-              <p className="text-5xl font-bold text-primary">{waterIntake}L</p>
+              <p className="text-5xl font-bold bg-gradient-to-r from-primary to-primary-accent bg-clip-text text-transparent">{waterIntake}L</p>
               <p className="text-lg mt-2">{Math.round(waterIntake * 1000)}ml or {Math.round(waterIntake * 33.814)}oz</p>
             </div>
             

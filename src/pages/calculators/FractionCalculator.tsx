@@ -119,13 +119,13 @@ const FractionCalculator = () => {
           </Select>
         </div>
 
-        <Button onClick={calculate} className="w-full" size="lg">Calculate</Button>
+        <Button onClick={calculate} className="w-full bg-gradient-to-r from-primary to-primary-accent hover:shadow-glow transition-all duration-300" size="lg">Calculate</Button>
 
         {result && (
           <div className="space-y-4 animate-fade-in">
-            <div className="p-6 bg-primary/10 rounded-lg text-center">
+            <div className="p-6 bg-gradient-to-br from-primary/10 to-primary-accent/10 rounded-lg border border-primary text-center hover:scale-[1.02] transition-all duration-300">
               <p className="text-sm font-medium text-muted-foreground">Result (Simplified)</p>
-              <p className="text-5xl font-bold text-primary">{result.fraction}</p>
+              <p className="text-5xl font-bold bg-gradient-to-r from-primary to-primary-accent bg-clip-text text-transparent">{result.fraction}</p>
             </div>
             
             <div className="p-4 bg-muted/50 rounded-lg text-center">

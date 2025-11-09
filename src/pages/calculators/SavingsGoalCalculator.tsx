@@ -122,15 +122,15 @@ const SavingsGoalCalculator = () => {
           </div>
         </div>
 
-        <Button onClick={calculateSavingsGoal} className="w-full" size="lg">
+        <Button onClick={calculateSavingsGoal} className="w-full bg-gradient-to-r from-primary to-primary-accent hover:shadow-glow transition-all duration-300" size="lg">
           Calculate Timeline
         </Button>
 
         {monthsNeeded !== null && (
           <div className="mt-6 space-y-4 animate-fade-in">
-            <div className="p-6 bg-primary/10 rounded-lg text-center">
+            <div className="p-6 bg-gradient-to-br from-primary/10 to-primary-accent/10 rounded-lg border border-primary text-center hover:scale-[1.02] transition-all duration-300">
               <p className="text-sm font-medium text-muted-foreground">Time to Reach Goal</p>
-              <p className="text-4xl font-bold text-primary">
+              <p className="text-4xl font-bold bg-gradient-to-r from-primary to-primary-accent bg-clip-text text-transparent">
                 {Math.floor(monthsNeeded / 12)} years {monthsNeeded % 12} months
               </p>
               <p className="text-lg mt-2">({monthsNeeded} months total)</p>

@@ -80,13 +80,13 @@ const HeartRateCalculator = () => {
           </div>
         </div>
 
-        <Button onClick={calculate} className="w-full" size="lg">Calculate Zones</Button>
+        <Button onClick={calculate} className="w-full bg-gradient-to-r from-primary to-primary-accent hover:shadow-glow transition-all duration-300" size="lg">Calculate Zones</Button>
 
         {zones && (
           <div className="space-y-4 animate-fade-in">
-            <div className="p-6 bg-primary/10 rounded-lg text-center">
+            <div className="p-6 bg-gradient-to-br from-primary/10 to-primary-accent/10 rounded-lg border border-primary text-center hover:scale-[1.02] transition-all duration-300">
               <p className="text-sm font-medium text-muted-foreground">Maximum Heart Rate</p>
-              <p className="text-5xl font-bold text-primary">{zones.max} bpm</p>
+              <p className="text-5xl font-bold bg-gradient-to-r from-primary to-primary-accent bg-clip-text text-transparent">{zones.max} bpm</p>
             </div>
             
             <div className="space-y-3">

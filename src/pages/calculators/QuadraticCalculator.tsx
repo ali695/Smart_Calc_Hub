@@ -118,17 +118,17 @@ const QuadraticCalculator = () => {
           </div>
         </div>
 
-        <Button onClick={calculate} className="w-full" size="lg">
+        <Button onClick={calculate} className="w-full bg-gradient-to-r from-primary to-primary-accent hover:shadow-glow transition-all duration-300" size="lg">
           Solve Equation
         </Button>
 
         {result && (
-          <Card className="bg-primary/5 border-primary">
+          <Card className="bg-gradient-to-br from-primary/10 to-primary-accent/10 border-primary hover:scale-[1.02] transition-all duration-300 animate-fade-in">
             <CardContent className="pt-6">
               <div className="space-y-4">
                 <div>
                   <p className="text-sm text-muted-foreground">Solution Type</p>
-                  <p className="text-xl font-bold text-primary">{result.type}</p>
+                  <p className="text-xl font-bold bg-gradient-to-r from-primary to-primary-accent bg-clip-text text-transparent">{result.type}</p>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">

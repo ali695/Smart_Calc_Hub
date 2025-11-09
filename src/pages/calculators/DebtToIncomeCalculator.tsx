@@ -78,17 +78,17 @@ const DebtToIncomeCalculator = () => {
           </div>
         </div>
 
-        <Button onClick={calculate} className="w-full" size="lg">
+        <Button onClick={calculate} className="w-full bg-gradient-to-r from-primary to-primary-accent hover:shadow-glow transition-all duration-300" size="lg">
           Calculate DTI
         </Button>
 
         {result && (
-          <Card className="bg-primary/5 border-primary">
+          <Card className="bg-gradient-to-br from-primary/10 to-primary-accent/10 border-primary hover:scale-[1.02] transition-all duration-300 animate-fade-in">
             <CardContent className="pt-6">
               <div className="space-y-4">
                 <div>
                   <p className="text-sm text-muted-foreground">Debt-to-Income Ratio</p>
-                  <p className="text-3xl font-bold text-primary">{result.dti.toFixed(2)}%</p>
+                  <p className="text-3xl font-bold bg-gradient-to-r from-primary to-primary-accent bg-clip-text text-transparent">{result.dti.toFixed(2)}%</p>
                 </div>
 
                 <div>
