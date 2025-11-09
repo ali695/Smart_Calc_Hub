@@ -54,6 +54,16 @@ import VolumeCalculator from "./pages/calculators/VolumeCalculator";
 import PrimeNumberCalculator from "./pages/calculators/PrimeNumberCalculator";
 import ProfitMarginCalculator from "./pages/calculators/ProfitMarginCalculator";
 import TimezoneConverter from "./pages/calculators/TimezoneConverter";
+import SimpleInterestCalculator from "./pages/calculators/SimpleInterestCalculator";
+import EMICalculator from "./pages/calculators/EMICalculator";
+import DiscountCalculator from "./pages/calculators/DiscountCalculator";
+import TDEECalculator from "./pages/calculators/TDEECalculator";
+import SquareRootCalculator from "./pages/calculators/SquareRootCalculator";
+import SineCalculator from "./pages/calculators/SineCalculator";
+import CosineCalculator from "./pages/calculators/CosineCalculator";
+import FactorialCalculator from "./pages/calculators/FactorialCalculator";
+import AreaConverter from "./pages/calculators/AreaConverter";
+import SpeedConverter from "./pages/calculators/SpeedConverter";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -117,6 +127,16 @@ const App = () => (
             <Route path="/calculator/prime" element={<PrimeNumberCalculator />} />
             <Route path="/calculator/profit-margin" element={<ProfitMarginCalculator />} />
             <Route path="/calculator/timezone" element={<TimezoneConverter />} />
+            <Route path="/calculator/simple-interest" element={<SimpleInterestCalculator />} />
+            <Route path="/calculator/emi" element={<EMICalculator />} />
+            <Route path="/calculator/discount" element={<DiscountCalculator />} />
+            <Route path="/calculator/tdee" element={<TDEECalculator />} />
+            <Route path="/calculator/square-root" element={<SquareRootCalculator />} />
+            <Route path="/calculator/sine" element={<SineCalculator />} />
+            <Route path="/calculator/cosine" element={<CosineCalculator />} />
+            <Route path="/calculator/factorial" element={<FactorialCalculator />} />
+            <Route path="/calculator/area-converter" element={<AreaConverter />} />
+            <Route path="/calculator/speed-converter" element={<SpeedConverter />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

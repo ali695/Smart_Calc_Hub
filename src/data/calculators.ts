@@ -1,4 +1,4 @@
-import { Calculator, Heart, Percent, Ruler, DollarSign, Activity, TrendingUp, Scale, Receipt, Target, TrendingDown, Banknote, CreditCard, Car, Utensils, Weight, Droplet, Baby, HeartPulse, Apple, Beef, BarChart3, Divide, Calendar, ThermometerSun, PiggyBank, TrendingDown as Inflation, Globe, Home, BarChart, Calculator as CalcIcon, Wallet, Heart as BloodPressure, Moon, Footprints, ThermometerIcon, CalendarHeart, TrendingUp as PercentChange, Sigma, Shapes, Cylinder, Hash, ReceiptText, Timer, Fuel, Zap, Map, Wifi, Gauge } from "lucide-react";
+import { Calculator, Heart, Percent, Ruler, DollarSign, Activity, TrendingUp, Scale, Receipt, Target, TrendingDown, Banknote, CreditCard, Car, Utensils, Weight, Droplet, Baby, HeartPulse, Apple, Beef, BarChart3, Divide, Calendar, ThermometerSun, PiggyBank, TrendingDown as Inflation, Globe, Home, BarChart, Calculator as CalcIcon, Wallet, Heart as BloodPressure, Moon, Footprints, ThermometerIcon, CalendarHeart, TrendingUp as PercentChange, Sigma, Shapes, Cylinder, Hash, ReceiptText, Timer, Fuel, Zap, Map, Wifi, Gauge, DollarSign as SimpleInterest, CreditCard as EMI, Tag, Flame, SquareRadical, TrendingUp as TrigIcon, Asterisk, MapPin, Navigation } from "lucide-react";
 import { LucideIcon } from "lucide-react";
 
 export interface CalculatorData {
@@ -517,6 +517,110 @@ export const calculators: CalculatorData[] = [
     path: "/calculator/pressure",
     seoTitle: "Pressure Converter | SmartCalc Hub",
     seoDescription: "Convert between bar, psi, kPa, and other pressure units."
+  },
+  // New Finance Calculators
+  {
+    id: "simple-interest",
+    title: "Simple Interest Calculator",
+    description: "Calculate simple interest on loans and investments",
+    category: "finance",
+    icon: SimpleInterest,
+    path: "/calculator/simple-interest",
+    seoTitle: "Simple Interest Calculator – Calculate Interest Online | SmartCalc Hub",
+    seoDescription: "Free simple interest calculator to compute interest on loans and investments. Enter principal, rate, and time for instant accurate results."
+  },
+  {
+    id: "emi",
+    title: "EMI Calculator",
+    description: "Calculate Equated Monthly Installment for loans",
+    category: "finance",
+    icon: EMI,
+    path: "/calculator/emi",
+    seoTitle: "EMI Calculator – Calculate Monthly Loan Payments | SmartCalc Hub",
+    seoDescription: "Free EMI calculator to compute equated monthly installments for home loans, car loans, and personal loans."
+  },
+  {
+    id: "discount",
+    title: "Discount Calculator",
+    description: "Calculate final price and savings with discount percentage",
+    category: "finance",
+    icon: Tag,
+    path: "/calculator/discount",
+    seoTitle: "Discount Calculator – Calculate Sale Prices & Savings | SmartCalc Hub",
+    seoDescription: "Free discount calculator to find final prices and savings instantly. Perfect for shopping, sales, and budgeting."
+  },
+  // New Health Calculators
+  {
+    id: "tdee",
+    title: "TDEE Calculator",
+    description: "Calculate Total Daily Energy Expenditure for weight management",
+    category: "health",
+    icon: Flame,
+    path: "/calculator/tdee",
+    seoTitle: "TDEE Calculator – Calculate Total Daily Energy Expenditure | SmartCalc Hub",
+    seoDescription: "Free TDEE calculator to determine your daily calorie needs based on activity level for weight loss or gain."
+  },
+  // New Math Calculators
+  {
+    id: "square-root",
+    title: "Square Root Calculator",
+    description: "Calculate square roots of any positive number",
+    category: "math",
+    icon: SquareRadical,
+    path: "/calculator/square-root",
+    seoTitle: "Square Root Calculator – Calculate √x Instantly | SmartCalc Hub",
+    seoDescription: "Free online square root calculator. Find square roots of any positive number with accurate decimal results."
+  },
+  {
+    id: "sine",
+    title: "Sine Calculator (sin θ)",
+    description: "Calculate sine values for angles in degrees or radians",
+    category: "math",
+    icon: TrigIcon,
+    path: "/calculator/sine",
+    seoTitle: "Sine Calculator – Calculate sin(θ) Online | SmartCalc Hub",
+    seoDescription: "Free online sine calculator for angles in degrees or radians. Get accurate sin(θ) values instantly."
+  },
+  {
+    id: "cosine",
+    title: "Cosine Calculator (cos θ)",
+    description: "Calculate cosine values for angles in degrees or radians",
+    category: "math",
+    icon: TrigIcon,
+    path: "/calculator/cosine",
+    seoTitle: "Cosine Calculator – Calculate cos(θ) Online | SmartCalc Hub",
+    seoDescription: "Free online cosine calculator for angles in degrees or radians. Get accurate cos(θ) values instantly."
+  },
+  {
+    id: "factorial",
+    title: "Factorial Calculator",
+    description: "Calculate factorial (n!) of any non-negative integer",
+    category: "math",
+    icon: Asterisk,
+    path: "/calculator/factorial",
+    seoTitle: "Factorial Calculator – Calculate n! Online | SmartCalc Hub",
+    seoDescription: "Free factorial calculator to compute n! for any non-negative integer. Get instant results with steps."
+  },
+  // New Conversion Calculators
+  {
+    id: "area-converter",
+    title: "Area Converter",
+    description: "Convert between different area units instantly",
+    category: "conversion",
+    icon: MapPin,
+    path: "/calculator/area-converter",
+    seoTitle: "Area Converter – Convert Square Meters, Feet, Acres | SmartCalc Hub",
+    seoDescription: "Free area converter for square meters, square feet, acres, hectares and more. Instant accurate conversions."
+  },
+  {
+    id: "speed-converter",
+    title: "Speed Converter",
+    description: "Convert between km/h, mph, m/s, and more",
+    category: "conversion",
+    icon: Navigation,
+    path: "/calculator/speed-converter",
+    seoTitle: "Speed Converter – Convert km/h, mph, m/s, Knots | SmartCalc Hub",
+    seoDescription: "Free speed converter for kilometers per hour, miles per hour, meters per second, knots and Mach."
   }
 ];
 
