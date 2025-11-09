@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { MessageCircle, X, Send, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -20,6 +20,14 @@ export const AIChatbot = () => {
   ]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll to bottom when messages change
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages]);
 
   const handleSend = async () => {
     if (!input.trim() || isLoading) return;
@@ -101,47 +109,60 @@ export const AIChatbot = () => {
             </Button>
           </CardHeader>
 
-          <CardContent className="flex-1 flex flex-col p-0">
+          <CardContent className="flex-1 flex flex-col p-0 overflow-hidden">
             <ScrollArea className="flex-1 p-4">
-              <div className="space-y-4">
+              <div className="space-y-4 pb-4">
                 {messages.map((message, index) => (
                   <div
                     key={index}
                     className={`flex ${
                       message.role === "user" ? "justify-end" : "justify-start"
-                    }`}
+                    } animate-in fade-in slide-in-from-bottom-2 duration-300`}
                   >
                     <div
-                      className={`max-w-[80%] rounded-2xl px-4 py-2 ${
+                      className={`max-w-[85%] rounded-2xl px-4 py-3 ${
                         message.role === "user"
-                          ? "bg-primary text-primary-foreground"
-                          : "bg-muted text-foreground"
+                          ? "bg-primary text-primary-foreground shadow-md"
+                          : "bg-muted/80 text-foreground border border-border/50"
                       }`}
                     >
-                      <p className="text-sm whitespace-pre-line">{message.content}</p>
+                      <p className="text-sm leading-relaxed whitespace-pre-line">{message.content}</p>
                     </div>
                   </div>
                 ))}
                 {isLoading && (
-                  <div className="flex justify-start">
-                    <div className="bg-muted rounded-2xl px-4 py-2">
-                      <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
+                  <div className="flex justify-start animate-in fade-in slide-in-from-bottom-2 duration-300">
+                    <div className="bg-muted/80 border border-border/50 rounded-2xl px-4 py-3 flex items-center gap-2">
+                      <Loader2 className="h-4 w-4 animate-spin text-primary" />
+                      <span className="text-sm text-muted-foreground">Thinking...</span>
                     </div>
                   </div>
                 )}
+                <div ref={scrollRef} />
               </div>
             </ScrollArea>
 
-            <div className="p-4 border-t">
+            <div className="p-4 border-t bg-background/95 backdrop-blur-sm">
               <div className="flex gap-2">
                 <Input
-                  placeholder="Ask about calculators…"
+                  placeholder="Ask about calculators or what to calculate..."
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  onKeyDown={(e) => e.key === "Enter" && handleSend()}
-                  className="flex-1"
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && !e.shiftKey) {
+                      e.preventDefault();
+                      handleSend();
+                    }
+                  }}
+                  className="flex-1 bg-background border-border/50 focus:border-primary transition-colors"
+                  disabled={isLoading}
                 />
-                <Button onClick={handleSend} size="icon" disabled={isLoading}>
+                <Button 
+                  onClick={handleSend} 
+                  size="icon" 
+                  disabled={isLoading || !input.trim()}
+                  className="shadow-md hover:shadow-lg transition-all"
+                >
                   <Send className="h-4 w-4" />
                 </Button>
               </div>
