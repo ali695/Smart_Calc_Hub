@@ -87,6 +87,8 @@ const CurrencyConverter = () => {
     <CalculatorLayout
       title="Currency Converter"
       description="Convert between major world currencies with live rates"
+      category="conversion"
+      calculatorId="currency"
       howItWorks="This currency converter allows you to convert between major world currencies. Select your source currency and target currency, enter the amount, and get instant conversion results. Note: This calculator uses sample exchange rates for demonstration. For actual transactions, always use current rates from reliable financial sources."
       formula="Converted Amount = (Input Amount / Source Rate) × Target Rate (all rates relative to USD)"
       faqs={faqs}

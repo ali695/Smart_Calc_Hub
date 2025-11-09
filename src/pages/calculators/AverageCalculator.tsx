@@ -54,6 +54,7 @@ const AverageCalculator = () => {
       title="Average Calculator"
       description="Calculate mean, median, and mode of a set of numbers"
       category="math"
+      calculatorId="average"
       howItWorks="This calculator computes three types of averages: Mean (arithmetic average), Median (middle value), and Mode (most frequent value). Enter your numbers separated by commas to get all three measures instantly."
       formula="Mean = Sum ÷ Count | Median = Middle value(s) | Mode = Most frequent value(s)"
       faqs={faqs}

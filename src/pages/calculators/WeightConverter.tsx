@@ -81,6 +81,7 @@ const WeightConverter = () => {
       title="Weight Converter"
       description="Convert between kilograms, pounds, ounces, and more"
       category="conversion"
+      calculatorId="weight"
       howItWorks="The weight converter allows you to easily convert between different units of weight and mass. Select your input unit and desired output unit, enter your value, and get instant results. The converter supports both metric units (kilograms, grams, milligrams, tons) and imperial units (pounds, ounces, stones)."
       formula="All conversions are calculated through kilograms as the base unit. For example: pounds to ounces = pounds → kilograms → ounces"
       faqs={faqs}

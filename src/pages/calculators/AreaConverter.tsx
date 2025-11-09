@@ -67,6 +67,7 @@ const AreaConverter = () => {
       title="Area Converter"
       description="Convert between different area units instantly and accurately"
       category="conversion"
+      calculatorId="area"
       howItWorks="This calculator converts area measurements between various units including square meters, square feet, acres, hectares, and more. All conversions are based on standard international definitions."
       formula="Target Unit = (Value × Conversion Rate of From Unit) / Conversion Rate of To Unit"
       faqs={faqs}

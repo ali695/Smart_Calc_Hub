@@ -74,6 +74,7 @@ const AgeCalculator = () => {
       title="Age Calculator"
       description="Calculate your exact age in years, months, days, and more"
       category="math"
+      calculatorId="age"
       howItWorks="This calculator determines your precise age from your birth date to today. It shows your age in multiple formats: years/months/days, total days, total weeks, total months, and days until your next birthday."
       formula="Age = Today's Date - Birth Date (accounting for leap years and month lengths)"
       faqs={faqs}

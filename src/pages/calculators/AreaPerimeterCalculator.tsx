@@ -62,6 +62,8 @@ const AreaPerimeterCalculator = () => {
     <CalculatorLayout
       title="Area & Perimeter Calculator"
       description="Calculate the area and perimeter of common shapes including circles, squares, rectangles, and triangles."
+      category="math"
+      calculatorId="area-perimeter"
       howItWorks="Select a shape and enter the required dimensions. The calculator computes both area and perimeter (or circumference for circles)."
       formula="Circle: A = πr², P = 2πr | Square: A = s², P = 4s | Rectangle: A = l×w, P = 2(l+w)"
       faqs={faqs}

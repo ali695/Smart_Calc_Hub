@@ -63,6 +63,7 @@ const SpeedConverter = () => {
       title="Speed Converter"
       description="Convert between different speed units including km/h, mph, m/s, and more"
       category="conversion"
+      calculatorId="speed"
       howItWorks="This calculator converts speed measurements between various units including kilometers per hour, miles per hour, meters per second, feet per second, knots, and Mach. All conversions use standard international definitions."
       formula="Target Speed = (Value × Conversion Rate of From Unit) / Conversion Rate of To Unit"
       faqs={faqs}

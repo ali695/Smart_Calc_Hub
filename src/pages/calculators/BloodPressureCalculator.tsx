@@ -61,6 +61,8 @@ const BloodPressureCalculator = () => {
     <CalculatorLayout
       title="Blood Pressure Checker"
       description="Check if your blood pressure reading is within a healthy range and get personalized recommendations."
+      category="health"
+      calculatorId="blood-pressure"
       howItWorks="Enter your systolic (top number) and diastolic (bottom number) blood pressure readings. The calculator will categorize your blood pressure and provide health recommendations."
       formula="Blood pressure is measured as systolic/diastolic in mmHg"
       faqs={faqs}

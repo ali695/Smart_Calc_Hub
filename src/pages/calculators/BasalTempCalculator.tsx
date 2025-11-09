@@ -56,6 +56,7 @@ const BasalTempCalculator = () => {
       title="Basal Body Temperature Tracker"
       description="Track your basal body temperature to identify ovulation patterns and optimize fertility awareness."
       category="health"
+      calculatorId="basal-temp"
       howItWorks="Enter your morning basal body temperature (measured upon waking). The calculator indicates which phase of your cycle you're likely in."
       formula="Temperature ranges: Follicular (36.4-36.7°C), Ovulation (~36.7-37°C), Luteal (>37°C)"
       faqs={faqs}
