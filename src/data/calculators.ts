@@ -1,11 +1,11 @@
-import { Calculator, Heart, Percent, Ruler, DollarSign, Activity, TrendingUp, Scale, Receipt, Target, TrendingDown, Banknote, CreditCard, Car, Utensils, Weight, Droplet, Baby, HeartPulse, Apple, Beef, BarChart3, Divide, Calendar, ThermometerSun, PiggyBank, TrendingDown as Inflation, Globe, Home, BarChart, Calculator as CalcIcon, Wallet, Heart as BloodPressure, Moon, Footprints, ThermometerIcon, CalendarHeart, TrendingUp as PercentChange, Sigma, Shapes, Cylinder, Hash, ReceiptText, Timer, Fuel, Zap, Map, Wifi, Gauge, DollarSign as SimpleInterest, CreditCard as EMI, Tag, Flame, SquareRadical, TrendingUp as TrigIcon, Asterisk, MapPin, Navigation, Circle, Triangle, Coins, Minus, Binary, Activity as PressureIcon, RotateCcw, Repeat, Move, Globe2, Waves, UserCheck, Layers } from "lucide-react";
+import { Calculator, Heart, Percent, Ruler, DollarSign, Activity, TrendingUp, Scale, Receipt, Target, TrendingDown, Banknote, CreditCard, Car, Utensils, Weight, Droplet, Baby, HeartPulse, Apple, Beef, BarChart3, Divide, Calendar, ThermometerSun, PiggyBank, TrendingDown as Inflation, Globe, Home, BarChart, Calculator as CalcIcon, Wallet, Heart as BloodPressure, Moon, Footprints, ThermometerIcon, CalendarHeart, TrendingUp as PercentChange, Sigma, Shapes, Cylinder, Hash, ReceiptText, Timer, Fuel, Zap, Map, Wifi, Gauge, DollarSign as SimpleInterest, CreditCard as EMI, Tag, Flame, SquareRadical, TrendingUp as TrigIcon, Asterisk, MapPin, Navigation, Circle, Triangle, Coins, Minus, Binary, Activity as PressureIcon, RotateCcw, Repeat, Move, Globe2, Waves, UserCheck, Layers, Code2, Server, Shield, Lock, Database, Cpu, Cog, Wrench, Atom, TestTube, Wind } from "lucide-react";
 import { LucideIcon } from "lucide-react";
 
 export interface CalculatorData {
   id: string;
   title: string;
   description: string;
-  category: "finance" | "health" | "math" | "conversion";
+  category: "finance" | "health" | "math" | "conversion" | "tech" | "engineering" | "business" | "science";
   icon: LucideIcon;
   path: string;
   seoTitle: string;
@@ -829,6 +829,210 @@ export const calculators: CalculatorData[] = [
     path: "/calculator/energy-converter",
     seoTitle: "Energy Converter – Joules, Calories, kWh Conversion | SmartCalc Hub",
     seoDescription: "Free energy unit converter. Convert between joules, calories, watt-hours, BTU."
+  },
+  // Tech Tools Category
+  {
+    id: "hash-generator",
+    title: "Hash Generator",
+    description: "Generate MD5, SHA-1, SHA-256 hashes for text and files",
+    category: "tech",
+    icon: Shield,
+    path: "/calculator/hash-generator",
+    seoTitle: "Hash Generator – MD5, SHA-1, SHA-256 Hashing Tool | SmartCalc Hub",
+    seoDescription: "Free hash generator for MD5, SHA-1, SHA-256. Secure hash calculation for text and files."
+  },
+  {
+    id: "base64-encoder",
+    title: "Base64 Encoder/Decoder",
+    description: "Encode and decode text to/from Base64 format",
+    category: "tech",
+    icon: Code2,
+    path: "/calculator/base64-encoder",
+    seoTitle: "Base64 Encoder/Decoder – Convert Text to Base64 | SmartCalc Hub",
+    seoDescription: "Free Base64 encoder and decoder. Convert text to Base64 and decode Base64 strings instantly."
+  },
+  {
+    id: "json-formatter",
+    title: "JSON Formatter",
+    description: "Format, validate, and beautify JSON data",
+    category: "tech",
+    icon: Database,
+    path: "/calculator/json-formatter",
+    seoTitle: "JSON Formatter – Validate & Beautify JSON | SmartCalc Hub",
+    seoDescription: "Free JSON formatter and validator. Format, validate, and beautify JSON data instantly."
+  },
+  {
+    id: "password-generator",
+    title: "Password Generator",
+    description: "Generate strong, secure random passwords",
+    category: "tech",
+    icon: Lock,
+    path: "/calculator/password-generator",
+    seoTitle: "Password Generator – Create Strong Secure Passwords | SmartCalc Hub",
+    seoDescription: "Free password generator. Create strong, random, secure passwords with custom length and characters."
+  },
+  {
+    id: "color-converter",
+    title: "Color Converter",
+    description: "Convert colors between HEX, RGB, HSL, and CMYK",
+    category: "tech",
+    icon: Cpu,
+    path: "/calculator/color-converter",
+    seoTitle: "Color Converter – HEX, RGB, HSL, CMYK Conversion | SmartCalc Hub",
+    seoDescription: "Free color converter. Convert between HEX, RGB, HSL, and CMYK color formats instantly."
+  },
+  // Engineering Category
+  {
+    id: "ohms-law",
+    title: "Ohm's Law Calculator",
+    description: "Calculate voltage, current, resistance, and power",
+    category: "engineering",
+    icon: Zap,
+    path: "/calculator/ohms-law",
+    seoTitle: "Ohm's Law Calculator – Voltage, Current, Resistance | SmartCalc Hub",
+    seoDescription: "Free Ohm's law calculator. Calculate voltage, current, resistance, and power using V=IR."
+  },
+  {
+    id: "force-calculator",
+    title: "Force Calculator",
+    description: "Calculate force, mass, and acceleration using F=ma",
+    category: "engineering",
+    icon: Wrench,
+    path: "/calculator/force-calculator",
+    seoTitle: "Force Calculator – Calculate Force, Mass, Acceleration | SmartCalc Hub",
+    seoDescription: "Free force calculator using Newton's second law F=ma. Calculate force, mass, or acceleration."
+  },
+  {
+    id: "torque-calculator",
+    title: "Torque Calculator",
+    description: "Calculate torque from force and distance",
+    category: "engineering",
+    icon: Cog,
+    path: "/calculator/torque-calculator",
+    seoTitle: "Torque Calculator – Calculate Rotational Force | SmartCalc Hub",
+    seoDescription: "Free torque calculator. Calculate torque from force and lever arm distance."
+  },
+  {
+    id: "power-calculator",
+    title: "Power Calculator",
+    description: "Calculate electrical and mechanical power",
+    category: "engineering",
+    icon: Cpu,
+    path: "/calculator/power-calculator",
+    seoTitle: "Power Calculator – Electrical & Mechanical Power | SmartCalc Hub",
+    seoDescription: "Free power calculator for electrical (P=VI) and mechanical (P=Fv) power calculations."
+  },
+  {
+    id: "stress-strain",
+    title: "Stress-Strain Calculator",
+    description: "Calculate stress, strain, and Young's modulus",
+    category: "engineering",
+    icon: Activity,
+    path: "/calculator/stress-strain",
+    seoTitle: "Stress-Strain Calculator – Material Mechanics | SmartCalc Hub",
+    seoDescription: "Free stress-strain calculator. Calculate stress, strain, and Young's modulus for materials."
+  },
+  // Business Category
+  {
+    id: "growth-rate",
+    title: "Growth Rate Calculator",
+    description: "Calculate CAGR and year-over-year growth",
+    category: "business",
+    icon: TrendingUp,
+    path: "/calculator/growth-rate",
+    seoTitle: "Growth Rate Calculator – CAGR & YoY Growth | SmartCalc Hub",
+    seoDescription: "Free growth rate calculator. Calculate compound annual growth rate (CAGR) and year-over-year growth."
+  },
+  {
+    id: "customer-lifetime-value",
+    title: "Customer Lifetime Value",
+    description: "Calculate CLV for business analytics",
+    category: "business",
+    icon: UserCheck,
+    path: "/calculator/customer-lifetime-value",
+    seoTitle: "Customer Lifetime Value Calculator – CLV Analysis | SmartCalc Hub",
+    seoDescription: "Free CLV calculator. Calculate customer lifetime value for better business decisions."
+  },
+  {
+    id: "inventory-turnover",
+    title: "Inventory Turnover",
+    description: "Calculate inventory turnover ratio and days",
+    category: "business",
+    icon: Layers,
+    path: "/calculator/inventory-turnover",
+    seoTitle: "Inventory Turnover Calculator – Stock Efficiency | SmartCalc Hub",
+    seoDescription: "Free inventory turnover calculator. Calculate turnover ratio and days inventory outstanding."
+  },
+  {
+    id: "conversion-rate",
+    title: "Conversion Rate Calculator",
+    description: "Calculate conversion rates and optimization metrics",
+    category: "business",
+    icon: Target,
+    path: "/calculator/conversion-rate",
+    seoTitle: "Conversion Rate Calculator – Optimize Marketing ROI | SmartCalc Hub",
+    seoDescription: "Free conversion rate calculator. Calculate and optimize your marketing conversion metrics."
+  },
+  {
+    id: "payback-period",
+    title: "Payback Period",
+    description: "Calculate investment payback time",
+    category: "business",
+    icon: Timer,
+    path: "/calculator/payback-period",
+    seoTitle: "Payback Period Calculator – Investment Recovery Time | SmartCalc Hub",
+    seoDescription: "Free payback period calculator. Determine how long it takes to recover your investment."
+  },
+  // Science Category
+  {
+    id: "ph-calculator",
+    title: "pH Calculator",
+    description: "Calculate pH, pOH, and hydrogen ion concentration",
+    category: "science",
+    icon: TestTube,
+    path: "/calculator/ph-calculator",
+    seoTitle: "pH Calculator – Calculate pH, pOH, H+ Concentration | SmartCalc Hub",
+    seoDescription: "Free pH calculator. Calculate pH, pOH, and hydrogen ion concentration for chemistry."
+  },
+  {
+    id: "molarity-calculator",
+    title: "Molarity Calculator",
+    description: "Calculate solution molarity and dilutions",
+    category: "science",
+    icon: TestTube,
+    path: "/calculator/molarity-calculator",
+    seoTitle: "Molarity Calculator – Solution Concentration | SmartCalc Hub",
+    seoDescription: "Free molarity calculator. Calculate molar concentration and solution dilutions."
+  },
+  {
+    id: "half-life",
+    title: "Half-Life Calculator",
+    description: "Calculate radioactive decay and half-life",
+    category: "science",
+    icon: Atom,
+    path: "/calculator/half-life",
+    seoTitle: "Half-Life Calculator – Radioactive Decay | SmartCalc Hub",
+    seoDescription: "Free half-life calculator. Calculate radioactive decay time and remaining substance."
+  },
+  {
+    id: "density-calculator",
+    title: "Density Calculator",
+    description: "Calculate density from mass and volume",
+    category: "science",
+    icon: Waves,
+    path: "/calculator/density-calculator",
+    seoTitle: "Density Calculator – Mass, Volume, Density | SmartCalc Hub",
+    seoDescription: "Free density calculator. Calculate density using mass and volume (ρ = m/V)."
+  },
+  {
+    id: "kinetic-energy",
+    title: "Kinetic Energy Calculator",
+    description: "Calculate kinetic energy from mass and velocity",
+    category: "science",
+    icon: Wind,
+    path: "/calculator/kinetic-energy",
+    seoTitle: "Kinetic Energy Calculator – KE = ½mv² | SmartCalc Hub",
+    seoDescription: "Free kinetic energy calculator. Calculate KE using mass and velocity (KE = ½mv²)."
   }
 ];
 
@@ -844,5 +1048,9 @@ export const categories = [
   { id: "finance", name: "Finance", icon: DollarSign, color: "text-green-600 dark:text-green-400" },
   { id: "health", name: "Health", icon: Heart, color: "text-red-600 dark:text-red-400" },
   { id: "math", name: "Math", icon: Calculator, color: "text-blue-600 dark:text-blue-400" },
-  { id: "conversion", name: "Conversion", icon: Ruler, color: "text-purple-600 dark:text-purple-400" }
+  { id: "conversion", name: "Conversion", icon: Ruler, color: "text-purple-600 dark:text-purple-400" },
+  { id: "tech", name: "Tech Tools", icon: Code2, color: "text-cyan-600 dark:text-cyan-400" },
+  { id: "engineering", name: "Engineering", icon: Cog, color: "text-orange-600 dark:text-orange-400" },
+  { id: "business", name: "Business", icon: BarChart, color: "text-indigo-600 dark:text-indigo-400" },
+  { id: "science", name: "Science", icon: TestTube, color: "text-pink-600 dark:text-pink-400" }
 ];

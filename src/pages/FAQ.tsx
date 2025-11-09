@@ -13,20 +13,36 @@ const FAQ = () => {
       category: "General",
       questions: [
         {
+          q: "What makes SmartCalc Hub different from other calculator websites?",
+          a: "SmartCalc Hub offers a comprehensive suite of professional-grade calculators with AI-powered recommendations, beautiful modern UI, and 100% free access. We focus on accuracy, user experience, and privacy - all calculations happen in your browser with no data storage."
+        },
+        {
           q: "Are all calculators free to use?",
           a: "Yes! SmartCalc Hub provides 100% free calculators with no hidden fees, subscriptions, or sign-ups required. All tools are instantly accessible."
         },
         {
-          q: "How are results calculated?",
-          a: "Our calculators use industry-standard formulas that are verified and tested for accuracy. Each calculator page shows the formula used so you can understand how results are derived."
+          q: "How accurate are your calculators?",
+          a: "Our calculators use industry-standard, verified formulas that are tested for accuracy. Each calculator page displays the exact formula used, so you can see how results are calculated. We regularly update our algorithms to ensure precision."
+        },
+        {
+          q: "Can I use SmartCalc Hub offline?",
+          a: "Our calculators require an internet connection to load initially, but once loaded, calculations are processed locally in your browser. We're working on a progressive web app (PWA) version for offline access."
+        },
+        {
+          q: "How do you ensure data privacy?",
+          a: "We take privacy seriously. All calculations are processed locally in your browser - we never store, track, or transmit your calculation data. No accounts, no tracking, complete privacy."
         },
         {
           q: "Do I need to create an account?",
           a: "No account needed! All our calculators are instantly accessible without any registration, login, or personal information."
         },
         {
-          q: "Can I request a new calculator?",
+          q: "Can I request a custom calculator?",
           a: "Absolutely! We're always looking to add more useful tools. Please use our contact form to suggest new calculators you'd like to see."
+        },
+        {
+          q: "How does the AI recommendation system work?",
+          a: "Our AI analyzes your calculation results and provides contextual insights, suggestions, and related calculators that might be helpful. It uses pattern recognition to offer personalized recommendations based on your inputs."
         }
       ]
     },
@@ -51,16 +67,32 @@ const FAQ = () => {
       category: "Finance Calculators",
       questions: [
         {
-          q: "Are results medically or financially certified?",
-          a: "Our calculators provide estimates for informational and educational purposes only. They are not a substitute for professional medical, financial, or legal advice. Always consult qualified professionals for important decisions."
+          q: "What formulas does your compound interest calculator use?",
+          a: "We use the standard compound interest formula: A = P(1 + r/n)^(nt), where A is the final amount, P is the principal, r is the annual rate, n is compounding frequency, and t is time in years."
+        },
+        {
+          q: "How is ROI different from profit margin?",
+          a: "ROI (Return on Investment) measures the gain or loss on an investment relative to its cost, expressed as a percentage. Profit margin measures the percentage of revenue that becomes profit after expenses. ROI = (Gain - Cost)/Cost × 100, while Profit Margin = (Revenue - Cost)/Revenue × 100."
+        },
+        {
+          q: "Can I calculate my monthly loan EMI manually?",
+          a: "Yes! The EMI formula is: EMI = [P × r × (1+r)^n] / [(1+r)^n - 1], where P is principal, r is monthly interest rate, and n is number of months. Our calculator automates this for accuracy and speed."
         },
         {
           q: "How accurate are financial calculators?",
-          a: "Our financial calculators use standard industry formulas and are very accurate for estimation purposes. However, actual loan terms, interest rates, and fees may vary by lender."
+          a: "Our financial calculators use standard industry formulas and are very accurate for estimation purposes. However, actual loan terms, interest rates, and fees may vary by lender. Always verify with your financial institution."
         },
         {
           q: "Can I use these for tax filing?",
           a: "Our tax calculators provide estimates to help you plan. For actual tax filing, please consult a certified tax professional or use official tax software."
+        },
+        {
+          q: "What's the difference between simple and compound interest?",
+          a: "Simple interest is calculated only on the principal amount: I = P × r × t. Compound interest is calculated on principal plus accumulated interest, resulting in faster growth over time."
+        },
+        {
+          q: "Are results medically or financially certified?",
+          a: "Our calculators provide estimates for informational and educational purposes only. They are not a substitute for professional medical, financial, or legal advice. Always consult qualified professionals for important decisions."
         }
       ]
     },
@@ -68,8 +100,16 @@ const FAQ = () => {
       category: "Health Calculators",
       questions: [
         {
+          q: "What is BMR and why does it matter?",
+          a: "BMR (Basal Metabolic Rate) is the number of calories your body burns at rest. It's crucial for weight management, as it represents 60-75% of your daily calorie expenditure. Understanding your BMR helps you set accurate calorie targets for weight loss, maintenance, or gain."
+        },
+        {
+          q: "Understanding BMR vs BMI: What's the difference?",
+          a: "BMI (Body Mass Index) is a measure of body fat based on height and weight, while BMR (Basal Metabolic Rate) measures calories burned at rest. BMI assesses if you're at a healthy weight; BMR helps plan your diet and exercise. Both are useful but serve different purposes."
+        },
+        {
           q: "Are health calculator results accurate?",
-          a: "Our health calculators use widely accepted formulas (like BMI, BMR) that provide good general estimates. However, they cannot replace personalized medical advice."
+          a: "Our health calculators use widely accepted formulas (like BMI, BMR, TDEE) that provide good general estimates. However, they cannot replace personalized medical advice from healthcare professionals."
         },
         {
           q: "Should I make health decisions based on these results?",
@@ -77,7 +117,15 @@ const FAQ = () => {
         },
         {
           q: "Why do different calculators give different results?",
-          a: "Different formulas and methods exist for calculating things like ideal weight or body fat. We clearly show which formula each calculator uses."
+          a: "Different formulas and methods exist for calculating things like ideal weight or body fat. We clearly show which formula each calculator uses so you can choose the most appropriate one for your needs."
+        },
+        {
+          q: "How do I calculate my daily calorie needs?",
+          a: "First calculate your BMR using our BMR calculator, then multiply by your activity level to get TDEE (Total Daily Energy Expenditure). This gives you maintenance calories. Subtract 500 for weight loss or add 500 for weight gain."
+        },
+        {
+          q: "What's the best BMI range for adults?",
+          a: "For most adults, a BMI between 18.5 and 24.9 is considered healthy. However, BMI doesn't account for muscle mass, so athletes may have higher BMI despite being healthy. Always consider other factors like body composition."
         }
       ]
     },
