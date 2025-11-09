@@ -12,56 +12,113 @@ serve(async (req) => {
 
   try {
     const { messages } = await req.json();
-    const DEEPSEEK_API_KEY = Deno.env.get('DEEPSEEK_API_KEY');
+    const LOVABLE_API_KEY = Deno.env.get('LOVABLE_API_KEY');
 
-    if (!DEEPSEEK_API_KEY) {
-      throw new Error('DEEPSEEK_API_KEY is not configured');
+    if (!LOVABLE_API_KEY) {
+      throw new Error('LOVABLE_API_KEY is not configured');
     }
 
-    console.log('Calling DeepSeek API with messages:', messages.length);
+    console.log('Calling Lovable AI with messages:', messages.length);
 
-    const response = await fetch('https://api.deepseek.com/v1/chat/completions', {
+    const response = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${DEEPSEEK_API_KEY}`,
+        'Authorization': `Bearer ${LOVABLE_API_KEY}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'deepseek-chat',
+        model: 'google/gemini-2.5-flash',
         messages: [
           {
             role: 'system',
             content: `You are a helpful calculator assistant for SmartCalc Hub. Your role is to:
+
 1. Help users find the right calculator for their needs
 2. Explain how to use calculators and interpret results
-3. Provide context about calculations (e.g., BMI ranges, loan terms, etc.)
+3. Provide context about calculations (e.g., BMI ranges, loan terms, financial planning)
 4. Guide users to specific calculators based on their questions
+5. Be conversational, friendly, and provide detailed explanations when needed
 
-Available calculator categories:
-- Finance: Loan, Mortgage, EMI, Investment, Retirement, Tax, Budget, etc.
-- Health: BMI, BMR, Calorie, TDEE, Macro, Body Fat, Protein, Water Intake, etc.
-- Math: Percentage, Fraction, Average, Quadratic, Pythagoras, Geometry, etc.
-- Conversions: Length, Weight, Temperature, Currency, Pressure, Energy, etc.
-- Science: Force, Power, Torque, Ohm's Law, pH Calculator, etc.
+Available calculator categories on SmartCalc Hub:
 
-Be concise, friendly, and helpful. Direct users to specific calculators when appropriate.`
+**Finance (20+ calculators):**
+- Loans: Loan Calculator, Mortgage Calculator, EMI Calculator, Car Loan
+- Investments: Compound Interest, Simple Interest, Investment Return, Retirement Calculator
+- Budgeting: Budget Planner, Savings Goal, Tax Calculator, Salary After Tax
+- Analysis: Break-Even, Profit Margin, Discount, Inflation, Credit Card Payoff, Net Worth, Debt-to-Income, LTV
+
+**Health & Fitness (18+ calculators):**
+- Body Metrics: BMI, Body Fat, Ideal Weight, Waist-to-Height Ratio, Body Surface Area
+- Nutrition: BMR, TDEE, Calorie Calculator, Macro Calculator, Protein Calculator, Calorie Deficit, Water Intake
+- Fitness: Heart Rate Calculator, Blood Pressure, Steps Calculator, Sleep Calculator
+- Women's Health: Pregnancy Calculator, Menstrual Calculator, Basal Temperature
+
+**Math (18+ calculators):**
+- Basic: Percentage, Percentage Change, Fraction, Average, Ratio
+- Algebra: Quadratic, Exponent, Logarithm, Scientific Notation, Square Root
+- Geometry: Pythagoras, Triangle Area, Circle, Area-Perimeter, Volume
+- Advanced: Factorial, Permutation-Combination, Prime Number
+
+**Trigonometry (7 calculators):**
+- Sine, Cosine, Tangent, Arcsin, Arccos, Arctan, Radian-Degree Converter
+
+**Conversions (9 calculators):**
+- Length, Weight, Temperature, Currency, Area, Speed, Pressure, Energy, Timezone
+
+**Science & Physics (5 calculators):**
+- Force, Power, Torque, Ohm's Law, pH Calculator
+
+**Utilities (4 calculators):**
+- Age Calculator, Base64 Encoder/Decoder, Hash Generator, JSON Formatter
+
+When helping users:
+- Ask clarifying questions if needed
+- Provide specific calculator recommendations with brief explanations
+- Explain what inputs they'll need
+- Share relevant tips or context about the calculation
+- Keep responses clear, concise, and helpful (2-4 sentences typically)
+- Use emojis sparingly for friendliness
+
+Be knowledgeable, accurate, and guide users confidently to the right tools.`
           },
           ...messages
         ],
         temperature: 0.7,
-        max_tokens: 500,
-        stream: false
+        max_tokens: 600,
       }),
     });
 
     if (!response.ok) {
+      if (response.status === 429) {
+        return new Response(
+          JSON.stringify({ 
+            message: "I'm getting a lot of requests right now. Please try again in a moment! In the meantime, feel free to browse our 90+ calculators for Finance, Health, Math, and more." 
+          }),
+          {
+            status: 429,
+            headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          }
+        );
+      }
+      if (response.status === 402) {
+        return new Response(
+          JSON.stringify({ 
+            message: "The AI service needs more credits. But don't worry - you can still browse all our calculators! What would you like to calculate? Finance, Health, Math, or Conversions?" 
+          }),
+          {
+            status: 402,
+            headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          }
+        );
+      }
+      
       const errorText = await response.text();
-      console.error('DeepSeek API error:', response.status, errorText);
-      throw new Error(`DeepSeek API error: ${response.status}`);
+      console.error('Lovable AI error:', response.status, errorText);
+      throw new Error(`AI service error: ${response.status}`);
     }
 
     const data = await response.json();
-    console.log('DeepSeek response received');
+    console.log('Lovable AI response received successfully');
 
     const assistantMessage = data.choices[0].message.content;
 
@@ -72,16 +129,16 @@ Be concise, friendly, and helpful. Direct users to specific calculators when app
       }
     );
   } catch (error) {
-    console.error('Error in deepseek-chat function:', error);
+    console.error('Error in chat function:', error);
     return new Response(
       JSON.stringify({ 
-        error: error instanceof Error ? error.message : 'Unknown error occurred',
-        message: "I'm having trouble connecting right now. Please try asking about our calculators - I can help you find the right tool for finance, health, math, or unit conversions!"
+        message: "I can help you find the right calculator! We have 90+ tools:\n\n📊 Finance - Loans, investments, budgeting\n❤️ Health - BMI, calories, fitness tracking\n🔢 Math - Percentages, algebra, geometry\n🔄 Conversions - Length, weight, temperature\n\nWhat would you like to calculate?"
       }),
       {
-        status: 500,
+        status: 200,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       }
     );
   }
 });
+

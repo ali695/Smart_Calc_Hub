@@ -38,7 +38,7 @@ export const AIChatbot = () => {
     setIsLoading(true);
 
     try {
-      // Call DeepSeek AI through edge function
+      // Call Lovable AI (Google Gemini 2.5 Flash) through edge function
       const response = await fetch(
         'https://lbcpqynztwwvatcviatc.supabase.co/functions/v1/deepseek-chat',
         {
@@ -56,17 +56,13 @@ export const AIChatbot = () => {
       );
 
       const data = await response.json();
-      
-      if (data.error) {
-        console.error('DeepSeek API error:', data.error);
-      }
 
       setMessages((prev) => [
         ...prev,
         { role: "assistant", content: data.message }
       ]);
     } catch (error) {
-      console.error('Error calling DeepSeek:', error);
+      console.error('Error calling AI:', error);
       setMessages((prev) => [
         ...prev,
         { 
