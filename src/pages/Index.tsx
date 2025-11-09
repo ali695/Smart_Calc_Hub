@@ -1,10 +1,11 @@
-import { Search, Calculator as CalcIcon, TrendingUp, Users, CheckCircle, DollarSign, Activity, Percent, Clock } from "lucide-react";
+import { Search, Calculator as CalcIcon, TrendingUp, CheckCircle, DollarSign, Activity, Percent, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { calculators, categories } from "@/data/calculators";
 import { useState, useEffect } from "react";
+import { RecentlyUsedCalculators } from "@/components/RecentlyUsedCalculators";
 
 const Index = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -35,7 +36,7 @@ const Index = () => {
       {/* Hero Section */}
       <section className="relative bg-gradient-hero py-20 md:py-32 overflow-hidden">
         {/* Geometric Grid Background */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(214_32%_91%_/_0.3)_1px,transparent_1px),linear-gradient(to_bottom,hsl(214_32%_91%_/_0.3)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(214_32%_91%_/_0.3)_1px,transparent_1px),linear-gradient(to_bottom,hsl(214_32%_91%_/_0.3)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)] dark:bg-[linear-gradient(to_right,hsl(217_33%_17%_/_0.3)_1px,transparent_1px),linear-gradient(to_bottom,hsl(217_33%_17%_/_0.3)_1px,transparent_1px)]" />
         
         <div className="container mx-auto px-4 relative">
           <div className={`max-w-4xl mx-auto text-center space-y-8 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
@@ -114,6 +115,9 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Recently Used Calculators */}
+      <RecentlyUsedCalculators />
+
       {/* Featured Calculators */}
       <section className="py-12 bg-background border-b">
         <div className="container mx-auto px-4">
@@ -154,7 +158,7 @@ const Index = () => {
                 <div className="inline-flex p-4 rounded-full bg-gradient-to-br from-emerald-500/10 to-emerald-500/5 mb-2">
                   <CalcIcon className="h-10 w-10 text-emerald-500" />
                 </div>
-                <h3 className="text-3xl font-bold bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">40+</h3>
+                <h3 className="text-3xl font-bold bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">90+</h3>
                 <p className="text-muted-foreground font-medium">Calculators Available</p>
               </div>
               

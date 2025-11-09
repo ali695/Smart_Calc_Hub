@@ -1,0 +1,38 @@
+import { useEffect, useState } from "react";
+
+export interface RecentCalculator {
+  name: string;
+  url: string;
+  category: string;
+  icon?: string;
+}
+
+const STORAGE_KEY = "recentCalculators";
+const MAX_RECENT = 5;
+
+export const useRecentCalculators = () => {
+  const [recentCalculators, setRecentCalculators] = useState<RecentCalculator[]>([]);
+
+  useEffect(() => {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) {
+      try {
+        setRecentCalculators(JSON.parse(stored));
+      } catch (error) {
+        console.error("Failed to parse recent calculators:", error);
+      }
+    }
+  }, []);
+
+  const addRecentCalculator = (calculator: RecentCalculator) => {
+    const filtered = recentCalculators.filter((c) => c.url !== calculator.url);
+    const updated = [calculator, ...filtered].slice(0, MAX_RECENT);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+    setRecentCalculators(updated);
+  };
+
+  return {
+    recentCalculators,
+    addRecentCalculator,
+  };
+};

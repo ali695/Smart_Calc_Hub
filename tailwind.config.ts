@@ -23,6 +23,7 @@ export default {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
           glow: "hsl(var(--primary-glow))",
+          accent: "hsl(var(--primary-accent))",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
@@ -48,6 +49,10 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        finance: "hsl(var(--finance-accent))",
+        health: "hsl(var(--health-accent))",
+        math: "hsl(var(--math-accent))",
+        conversion: "hsl(var(--conversion-accent))",
       },
       backgroundImage: {
         'gradient-primary': 'var(--gradient-primary)',

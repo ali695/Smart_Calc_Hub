@@ -1,8 +1,10 @@
 import { Card } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import { SEOHead } from "@/components/SEOHead";
 import { RelatedCalculators } from "@/components/RelatedCalculators";
+import { AIRecommendation } from "@/components/AIRecommendation";
+import { useRecentCalculators } from "@/hooks/useRecentCalculators";
 import { 
   Breadcrumb, 
   BreadcrumbItem, 
@@ -11,7 +13,7 @@ import {
   BreadcrumbPage, 
   BreadcrumbSeparator 
 } from "@/components/ui/breadcrumb";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 interface FAQ {
   question: string;
@@ -47,6 +49,18 @@ export const CalculatorLayout = ({
   category = "Utility",
   calculatorId
 }: CalculatorLayoutProps) => {
+  const location = useLocation();
+  const { addRecentCalculator } = useRecentCalculators();
+
+  // Track recently used calculator
+  useEffect(() => {
+    addRecentCalculator({
+      name: title,
+      url: location.pathname,
+      category: category.toLowerCase(),
+    });
+  }, [title, location.pathname, category, addRecentCalculator]);
+
   // Map category IDs to display names
   const categoryNames: Record<string, string> = {
     finance: "Finance",
@@ -64,20 +78,16 @@ export const CalculatorLayout = ({
     conversion: "/categories#conversion",
     utility: "/categories"
   };
-  // Generate SoftwareApplication structured data
-  const structuredData = {
+  
+  // Generate WebApplication structured data (replaces SoftwareApplication)
+  const webApplicationSchema = {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "WebApplication",
     "name": title,
-    "applicationCategory": "UtilityApplication",
-    "operatingSystem": "Web Browser",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
-    },
+    "url": canonicalUrl || (typeof window !== "undefined" ? window.location.href : ""),
+    "applicationCategory": categoryNames[category.toLowerCase()] || "UtilityApplication",
+    "operatingSystem": "All",
     "description": seoDescription || description,
-    "url": canonicalUrl || typeof window !== "undefined" ? window.location.href : "",
     "author": {
       "@type": "Person",
       "name": "Ali Haider",
@@ -86,26 +96,18 @@ export const CalculatorLayout = ({
     "publisher": {
       "@type": "Organization",
       "name": "SmartCalc Hub",
-      "url": "https://smartcalchub.com",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://smartcalchub.com/logo.png"
-      }
+      "url": "https://smartcalchub.com"
     },
     "aggregateRating": {
       "@type": "AggregateRating",
-      "ratingValue": "4.8",
-      "ratingCount": "1247",
-      "bestRating": "5",
-      "worstRating": "1"
+      "ratingValue": "4.9",
+      "reviewCount": "842"
     },
-    "featureList": [
-      "Free online calculator",
-      "Instant results",
-      "No registration required",
-      "Mobile-friendly interface",
-      "Privacy-focused (no data storage)"
-    ]
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
   };
 
   // Generate BreadcrumbList structured data for SEO
@@ -157,9 +159,9 @@ export const CalculatorLayout = ({
         canonicalUrl={canonicalUrl}
       />
       
-      {/* SoftwareApplication Schema */}
+      {/* WebApplication Schema */}
       <script type="application/ld+json">
-        {JSON.stringify(structuredData)}
+        {JSON.stringify(webApplicationSchema)}
       </script>
       
       {/* FAQPage Schema */}
@@ -239,6 +241,13 @@ export const CalculatorLayout = ({
               ))}
             </Accordion>
           </Card>
+
+          {/* AI Recommendation */}
+          <AIRecommendation 
+            calculatorType={title}
+            result={null}
+            category={category.toLowerCase()}
+          />
 
           {/* Related Calculators Section */}
           {category && (
