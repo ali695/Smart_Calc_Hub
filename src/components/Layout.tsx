@@ -4,6 +4,7 @@ import { Calculator, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "./ThemeToggle";
 import { Footer } from "./Footer";
+import { AIChatbot } from "./AIChatbot";
 
 interface LayoutProps {
   children: ReactNode;
@@ -160,6 +161,9 @@ export const Layout = ({ children }: LayoutProps) => {
 
       {/* Main Content */}
       <main>{children}</main>
+
+      {/* AI Chatbot */}
+      <AIChatbot />
 
       <Footer />
     </div>
