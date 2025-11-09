@@ -2,6 +2,15 @@ import { Card } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { ReactNode } from "react";
 import { SEOHead } from "@/components/SEOHead";
+import { 
+  Breadcrumb, 
+  BreadcrumbItem, 
+  BreadcrumbLink, 
+  BreadcrumbList, 
+  BreadcrumbPage, 
+  BreadcrumbSeparator 
+} from "@/components/ui/breadcrumb";
+import { Link } from "react-router-dom";
 
 interface FAQ {
   question: string;
@@ -35,6 +44,23 @@ export const CalculatorLayout = ({
   canonicalUrl,
   category = "Utility"
 }: CalculatorLayoutProps) => {
+  // Map category IDs to display names
+  const categoryNames: Record<string, string> = {
+    finance: "Finance",
+    health: "Health",
+    math: "Math",
+    conversion: "Conversion",
+    utility: "Utility"
+  };
+
+  // Map category IDs to paths
+  const categoryPaths: Record<string, string> = {
+    finance: "/categories#finance",
+    health: "/categories#health",
+    math: "/categories#math",
+    conversion: "/categories#conversion",
+    utility: "/categories"
+  };
   // Generate SoftwareApplication structured data
   const structuredData = {
     "@context": "https://schema.org",
@@ -79,6 +105,32 @@ export const CalculatorLayout = ({
     ]
   };
 
+  // Generate BreadcrumbList structured data for SEO
+  const breadcrumbStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://smartcalchub.com"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": categoryNames[category.toLowerCase()] || "Calculators",
+        "item": `https://smartcalchub.com${categoryPaths[category.toLowerCase()] || "/categories"}`
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": title,
+        "item": canonicalUrl || (typeof window !== "undefined" ? window.location.href : "")
+      }
+    ]
+  };
+
   // Generate FAQPage structured data
   const faqStructuredData = {
     "@context": "https://schema.org",
@@ -111,10 +163,42 @@ export const CalculatorLayout = ({
       <script type="application/ld+json">
         {JSON.stringify(faqStructuredData)}
       </script>
+
+      {/* BreadcrumbList Schema */}
+      <script type="application/ld+json">
+        {JSON.stringify(breadcrumbStructuredData)}
+      </script>
       
       <div className="min-h-screen py-12">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto space-y-8">
+          {/* Breadcrumb Navigation */}
+          <Breadcrumb className="mb-4">
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink asChild>
+                  <Link to="/" className="text-muted-foreground hover:text-primary transition-colors">
+                    Home
+                  </Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbLink asChild>
+                  <Link 
+                    to={categoryPaths[category.toLowerCase()] || "/categories"} 
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    {categoryNames[category.toLowerCase()] || "Calculators"}
+                  </Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbPage className="font-semibold">{title}</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
           {/* Header */}
           <div className="text-center space-y-3">
             <h1 className="text-4xl md:text-5xl font-bold">{title}</h1>

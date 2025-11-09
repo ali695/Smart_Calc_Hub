@@ -58,6 +58,7 @@ const BMRCalculator = () => {
     <CalculatorLayout
       title="BMR Calculator"
       description="Calculate your Basal Metabolic Rate and daily calorie needs"
+      category="health"
       howItWorks="The BMR calculator uses the Mifflin-St Jeor equation, which is considered one of the most accurate formulas for calculating basal metabolic rate. It takes into account your age, gender, weight, and height. The calculator then multiplies your BMR by your activity level to determine your Total Daily Energy Expenditure (TDEE)."
       formula="Men: BMR = 10W + 6.25H - 5A + 5 | Women: BMR = 10W + 6.25H - 5A - 161 (W=weight in kg, H=height in cm, A=age)"
       faqs={faqs}

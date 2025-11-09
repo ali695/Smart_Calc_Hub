@@ -82,6 +82,7 @@ const LengthConverter = () => {
     <CalculatorLayout
       title="Length Converter"
       description="Convert between meters, feet, inches, kilometers, miles, and more"
+      category="conversion"
       howItWorks="The length converter allows you to easily convert between different units of length. Select your input unit and desired output unit, enter your value, and get instant results. The converter supports both metric units (meters, kilometers, centimeters, millimeters) and imperial units (miles, yards, feet, inches)."
       formula="All conversions are calculated through meters as the base unit. For example: feet to inches = feet → meters → inches"
       faqs={faqs}

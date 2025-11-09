@@ -79,6 +79,7 @@ const CalorieCalculator = () => {
     <CalculatorLayout
       title="Calorie Calculator"
       description="Calculate your daily calorie needs for weight loss, maintenance, or gain"
+      category="health"
       howItWorks="This calculator estimates your daily calorie needs using the Mifflin-St Jeor equation to calculate BMR, then multiplies by your activity level to get Total Daily Energy Expenditure (TDEE). Based on your goal, it recommends calorie targets."
       formula="BMR = 10 × weight(kg) + 6.25 × height(cm) - 5 × age + s (s=+5 for male, -161 for female) | TDEE = BMR × Activity Level"
       faqs={faqs}

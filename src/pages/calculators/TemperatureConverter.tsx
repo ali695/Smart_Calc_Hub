@@ -61,6 +61,7 @@ const TemperatureConverter = () => {
     <CalculatorLayout
       title="Temperature Converter"
       description="Convert between Celsius, Fahrenheit, and Kelvin"
+      category="conversion"
       howItWorks="This converter transforms temperatures between Celsius, Fahrenheit, and Kelvin scales. Enter a value in any unit to see instant conversions to all other units."
       formula="°F = (°C × 9/5) + 32 | K = °C + 273.15 | °C = (°F - 32) × 5/9"
       faqs={faqs}

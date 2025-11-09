@@ -87,6 +87,7 @@ const PercentageCalculator = () => {
       seoDescription="Free percentage calculator for all your percentage calculations. Find percentages, percentage changes, and percentage of numbers instantly. Simple, fast, and accurate."
       keywords="percentage calculator, percent calculator, calculate percentage, percentage change, percentage increase, percentage decrease"
       canonicalUrl="https://smartcalchub.com/calculator/percentage"
+      category="math"
       howItWorks="This percentage calculator offers three main functions: finding what a percentage of a number is, determining what percentage one number is of another, and calculating percentage change between two values. Simply select the type of calculation you need and enter your values for instant results."
       formula="Basic: (Percentage / 100) × Number | Reverse: (Part / Total) × 100 | Change: ((New - Old) / Old) × 100"
       faqs={faqs}
