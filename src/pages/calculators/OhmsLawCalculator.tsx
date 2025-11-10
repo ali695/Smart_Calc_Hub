@@ -141,7 +141,7 @@ const OhmsLawCalculator = () => {
           </div>
         )}
 
-        <Button onClick={calculateValues} className="w-full" size="lg">
+        <Button type="button" onClick={calculateValues} className="w-full" size="lg">
           Calculate
         </Button>
 

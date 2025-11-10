@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export interface RecentCalculator {
   name: string;
@@ -29,12 +29,19 @@ export const useRecentCalculators = () => {
     }
   }, []);
 
-  const addRecentCalculator = (calculator: RecentCalculator) => {
-    const filtered = recentCalculators.filter((c) => c.url !== calculator.url);
-    const updated = [calculator, ...filtered].slice(0, MAX_RECENT);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-    setRecentCalculators(updated);
-  };
+  const addRecentCalculator = useCallback((calculator: RecentCalculator) => {
+    setRecentCalculators((prev) => {
+      // Check if this calculator is already the most recent
+      if (prev.length > 0 && prev[0].url === calculator.url) {
+        return prev; // Don't update if it's already the most recent
+      }
+      
+      const filtered = prev.filter((c) => c.url !== calculator.url);
+      const updated = [calculator, ...filtered].slice(0, MAX_RECENT);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+      return updated;
+    });
+  }, []);
 
   return {
     recentCalculators,
