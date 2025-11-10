@@ -86,7 +86,7 @@ const BreakEvenCalculator = () => {
           </div>
         </div>
 
-        <Button onClick={calculate} className="w-full" size="lg">
+        <Button type="button" onClick={calculate} className="w-full" size="lg">
           Calculate Break-Even
         </Button>
 

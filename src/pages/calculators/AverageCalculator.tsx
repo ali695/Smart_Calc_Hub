@@ -69,7 +69,7 @@ const AverageCalculator = () => {
           />
         </div>
 
-        <Button onClick={calculate} className="w-full" size="lg">Calculate Average</Button>
+        <Button type="button" onClick={calculate} className="w-full" size="lg">Calculate Average</Button>
 
         {mean !== null && (
           <div className="space-y-4 animate-fade-in">

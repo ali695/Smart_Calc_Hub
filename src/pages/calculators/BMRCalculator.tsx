@@ -129,7 +129,7 @@ const BMRCalculator = () => {
           </div>
         </div>
 
-        <Button onClick={calculateBMR} className="w-full" size="lg">
+        <Button type="button" onClick={calculateBMR} className="w-full" size="lg">
           Calculate BMR
         </Button>
 

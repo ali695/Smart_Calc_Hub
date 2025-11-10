@@ -86,7 +86,7 @@ const WaterIntakeCalculator = () => {
           </div>
         </div>
 
-        <Button onClick={calculate} className="w-full bg-gradient-to-r from-primary to-primary-accent hover:shadow-glow transition-all duration-300" size="lg">Calculate Water Intake</Button>
+        <Button type="button" onClick={calculate} className="w-full bg-gradient-to-r from-primary to-primary-accent hover:shadow-glow transition-all duration-300" size="lg">Calculate Water Intake</Button>
 
         {waterIntake !== null && (
           <div className="space-y-4 animate-fade-in">

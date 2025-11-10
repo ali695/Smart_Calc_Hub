@@ -71,7 +71,7 @@ const Base64Calculator = () => {
             />
           </div>
 
-          <Button onClick={encode} className="w-full" size="lg">
+          <Button type="button" onClick={encode} className="w-full" size="lg">
             Encode to Base64
           </Button>
         </TabsContent>
@@ -88,7 +88,7 @@ const Base64Calculator = () => {
             />
           </div>
 
-          <Button onClick={decode} className="w-full" size="lg">
+          <Button type="button" onClick={decode} className="w-full" size="lg">
             Decode from Base64
           </Button>
         </TabsContent>

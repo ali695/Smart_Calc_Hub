@@ -115,6 +115,7 @@ const SpeedConverter = () => {
         </div>
 
         <Button 
+          type="button"
           onClick={calculate} 
           className="w-full bg-gradient-to-r from-primary to-primary-accent hover:shadow-glow transition-all duration-300"
           size="lg"

@@ -85,7 +85,7 @@ const AgeCalculator = () => {
           <Input type="date" value={birthDate} onChange={(e) => setBirthDate(e.target.value)} />
         </div>
 
-        <Button onClick={calculate} className="w-full" size="lg">Calculate Age</Button>
+        <Button type="button" onClick={calculate} className="w-full" size="lg">Calculate Age</Button>
 
         {ageData && (
           <div className="space-y-4 animate-fade-in">

@@ -146,7 +146,7 @@ const CalorieCalculator = () => {
           </div>
         </div>
 
-        <Button onClick={calculate} className="w-full" size="lg">Calculate Calories</Button>
+        <Button type="button" onClick={calculate} className="w-full" size="lg">Calculate Calories</Button>
 
         {calories !== null && (
           <div className="space-y-4 animate-fade-in">

@@ -76,7 +76,7 @@ const BasalTempCalculator = () => {
           </div>
         </div>
 
-        <Button onClick={calculate} className="w-full bg-gradient-to-r from-primary to-primary-glow hover:shadow-glow transition-all duration-300" size="lg">
+        <Button type="button" onClick={calculate} className="w-full bg-gradient-to-r from-primary to-primary-glow hover:shadow-glow transition-all duration-300" size="lg">
           Analyze Temperature
         </Button>
 

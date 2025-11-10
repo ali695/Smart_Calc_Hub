@@ -1,9 +1,8 @@
-import { Layout } from "@/components/Layout";
 import { SEOHead } from "@/components/SEOHead";
 
 const Terms = () => {
   return (
-    <Layout>
+    <>
       <SEOHead
         title="Terms of Service | SmartCalc Hub"
         description="Read the terms of service for using SmartCalc Hub calculators and services."
@@ -82,7 +81,7 @@ const Terms = () => {
           </p>
         </div>
       </div>
-    </Layout>
+    </>
   );
 };
 

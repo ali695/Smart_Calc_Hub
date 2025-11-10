@@ -1,9 +1,8 @@
-import { Layout } from "@/components/Layout";
 import { SEOHead } from "@/components/SEOHead";
 
 const Privacy = () => {
   return (
-    <Layout>
+    <>
       <SEOHead
         title="Privacy Policy | SmartCalc Hub"
         description="Learn how SmartCalc Hub protects your privacy. We don't store your calculation data and respect your privacy."
@@ -77,7 +76,7 @@ const Privacy = () => {
           </p>
         </div>
       </div>
-    </Layout>
+    </>
   );
 };
 

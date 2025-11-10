@@ -125,7 +125,7 @@ const BodyFatCalculator = () => {
           )}
         </div>
 
-        <Button onClick={calculate} className="w-full" size="lg">Calculate Body Fat</Button>
+        <Button type="button" onClick={calculate} className="w-full" size="lg">Calculate Body Fat</Button>
 
         {bodyFat !== null && (
           <div className="space-y-4 animate-fade-in">

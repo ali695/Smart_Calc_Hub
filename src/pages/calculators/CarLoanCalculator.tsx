@@ -136,7 +136,7 @@ const CarLoanCalculator = () => {
           </div>
         </div>
 
-        <Button onClick={calculateCarLoan} className="w-full" size="lg">
+        <Button type="button" onClick={calculateCarLoan} className="w-full" size="lg">
           Calculate Car Loan
         </Button>
 
