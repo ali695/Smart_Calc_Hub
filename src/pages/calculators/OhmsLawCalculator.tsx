@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CalculatorLayout } from "@/components/CalculatorLayout";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
+import { Copy, Loader2 } from "lucide-react";
 
 const OhmsLawCalculator = () => {
   const [calculate, setCalculate] = useState("voltage");
@@ -13,6 +15,7 @@ const OhmsLawCalculator = () => {
   const [resistance, setResistance] = useState("");
   const [power, setPower] = useState("");
   const [result, setResult] = useState<string>("");
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
 
   const calculateValues = () => {
     const V = parseFloat(voltage);
@@ -111,6 +114,7 @@ const OhmsLawCalculator = () => {
               placeholder="Volts"
               value={voltage}
               onChange={(e) => setVoltage(e.target.value)}
+              onKeyPress={(e) => handleKeyPress(e, calculateValues)}
             />
           </div>
         )}
@@ -124,6 +128,7 @@ const OhmsLawCalculator = () => {
               placeholder="Amperes"
               value={current}
               onChange={(e) => setCurrent(e.target.value)}
+              onKeyPress={(e) => handleKeyPress(e, calculateValues)}
             />
           </div>
         )}
@@ -137,18 +142,42 @@ const OhmsLawCalculator = () => {
               placeholder="Ohms"
               value={resistance}
               onChange={(e) => setResistance(e.target.value)}
+              onKeyPress={(e) => handleKeyPress(e, calculateValues)}
             />
           </div>
         )}
 
-        <Button type="button" onClick={calculateValues} className="w-full" size="lg">
-          Calculate
+        <Button 
+          type="button" 
+          onClick={() => handleCalculation(calculateValues)} 
+          className="w-full" 
+          size="lg"
+          disabled={isCalculating}
+        >
+          {isCalculating ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Calculating...
+            </>
+          ) : (
+            "Calculate"
+          )}
         </Button>
 
         {result && (
           <Card>
             <CardContent className="pt-6">
-              <p className="text-2xl font-bold">{result}</p>
+              <div className="flex items-center justify-between">
+                <p className="text-2xl font-bold flex-1">{result}</p>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={() => copyToClipboard(result, "Result")}
+                  className="ml-2"
+                >
+                  <Copy className="h-4 w-4" />
+                </Button>
+              </div>
             </CardContent>
           </Card>
         )}

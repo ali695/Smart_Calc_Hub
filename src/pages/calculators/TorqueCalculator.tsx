@@ -4,11 +4,14 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CalculatorLayout } from "@/components/CalculatorLayout";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
+import { Copy, Loader2 } from "lucide-react";
 
 const TorqueCalculator = () => {
   const [force, setForce] = useState("");
   const [distance, setDistance] = useState("");
   const [result, setResult] = useState<number | null>(null);
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
 
   const calculate = () => {
     const F = parseFloat(force);
@@ -52,6 +55,7 @@ const TorqueCalculator = () => {
             placeholder="e.g., 50"
             value={force}
             onChange={(e) => setForce(e.target.value)}
+            onKeyPress={(e) => handleKeyPress(e, calculate)}
           />
         </div>
 
@@ -63,19 +67,43 @@ const TorqueCalculator = () => {
             placeholder="e.g., 2"
             value={distance}
             onChange={(e) => setDistance(e.target.value)}
+            onKeyPress={(e) => handleKeyPress(e, calculate)}
           />
         </div>
 
-        <Button type="button" onClick={calculate} className="w-full" size="lg">
-          Calculate Torque
+        <Button 
+          type="button" 
+          onClick={() => handleCalculation(calculate)} 
+          className="w-full" 
+          size="lg"
+          disabled={isCalculating}
+        >
+          {isCalculating ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Calculating...
+            </>
+          ) : (
+            "Calculate Torque"
+          )}
         </Button>
 
         {result !== null && (
           <Card>
             <CardContent className="pt-6">
-              <div>
-                <p className="text-sm text-muted-foreground">Torque</p>
-                <p className="text-3xl font-bold">{result.toFixed(2)} Nm</p>
+              <div className="flex items-start justify-between">
+                <div className="flex-1">
+                  <p className="text-sm text-muted-foreground">Torque</p>
+                  <p className="text-3xl font-bold">{result.toFixed(2)} Nm</p>
+                </div>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={() => copyToClipboard(`${result.toFixed(2)} Nm`, "Torque")}
+                  className="ml-2"
+                >
+                  <Copy className="h-4 w-4" />
+                </Button>
               </div>
             </CardContent>
           </Card>

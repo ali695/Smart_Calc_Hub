@@ -6,12 +6,15 @@ import { Button } from "@/components/ui/button";
 import { schemas, validateInput, safeParseFloat } from "@/lib/validation";
 import { toast } from "sonner";
 import { z } from "zod";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
+import { Copy, Loader2 } from "lucide-react";
 
 const BMICalculator = () => {
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
   const [bmi, setBMI] = useState<number | null>(null);
   const [category, setCategory] = useState("");
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
 
   const calculateBMI = () => {
     const heightValue = safeParseFloat(height);
@@ -77,9 +80,10 @@ const BMICalculator = () => {
               id="height"
               type="number"
               placeholder="170"
-              value={height}
-              onChange={(e) => setHeight(e.target.value)}
-            />
+            value={height}
+            onChange={(e) => setHeight(e.target.value)}
+            onKeyPress={(e) => handleKeyPress(e, calculateBMI)}
+          />
           </div>
           
           <div className="space-y-2">
@@ -88,21 +92,46 @@ const BMICalculator = () => {
               id="weight"
               type="number"
               placeholder="70"
-              value={weight}
-              onChange={(e) => setWeight(e.target.value)}
-            />
+            value={weight}
+            onChange={(e) => setWeight(e.target.value)}
+            onKeyPress={(e) => handleKeyPress(e, calculateBMI)}
+          />
           </div>
         </div>
 
-        <Button type="button" onClick={calculateBMI} className="w-full" size="lg">
-          Calculate BMI
+        <Button 
+          type="button" 
+          onClick={() => handleCalculation(calculateBMI)} 
+          className="w-full" 
+          size="lg"
+          disabled={isCalculating}
+        >
+          {isCalculating ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Calculating...
+            </>
+          ) : (
+            "Calculate BMI"
+          )}
         </Button>
 
         {bmi !== null && (
-          <div className="mt-6 p-6 bg-primary/10 rounded-lg text-center space-y-2 animate-fade-in">
-            <p className="text-sm font-medium text-muted-foreground">Your BMI</p>
-            <p className="text-5xl font-bold text-primary">{bmi}</p>
-            <p className="text-lg font-semibold">{category}</p>
+          <div className="mt-6 p-6 bg-primary/10 rounded-lg space-y-4 animate-fade-in">
+            <div className="flex items-start justify-between">
+              <div className="flex-1">
+                <p className="text-sm font-medium text-muted-foreground">Your BMI</p>
+                <p className="text-5xl font-bold text-primary">{bmi}</p>
+                <p className="text-lg font-semibold mt-2">{category}</p>
+              </div>
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={() => copyToClipboard(`${bmi} - ${category}`, "BMI")}
+              >
+                <Copy className="h-4 w-4" />
+              </Button>
+            </div>
             
             <div className="mt-4 text-sm text-muted-foreground">
               <p>BMI Categories:</p>

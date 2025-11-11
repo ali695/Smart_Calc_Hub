@@ -4,6 +4,8 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
+import { Copy, Loader2 } from "lucide-react";
 
 const BMRCalculator = () => {
   const [age, setAge] = useState("");
@@ -13,6 +15,7 @@ const BMRCalculator = () => {
   const [activityLevel, setActivityLevel] = useState("1.2");
   const [bmr, setBMR] = useState<number | null>(null);
   const [dailyCalories, setDailyCalories] = useState<number | null>(null);
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
 
   const calculateBMR = () => {
     const w = parseFloat(weight);
@@ -72,9 +75,10 @@ const BMRCalculator = () => {
               id="age"
               type="number"
               placeholder="30"
-              value={age}
-              onChange={(e) => setAge(e.target.value)}
-            />
+            value={age}
+            onChange={(e) => setAge(e.target.value)}
+            onKeyPress={(e) => handleKeyPress(e, calculateBMR)}
+          />
           </div>
           
           <div className="space-y-2">
@@ -96,9 +100,10 @@ const BMRCalculator = () => {
               id="height"
               type="number"
               placeholder="175"
-              value={height}
-              onChange={(e) => setHeight(e.target.value)}
-            />
+            value={height}
+            onChange={(e) => setHeight(e.target.value)}
+            onKeyPress={(e) => handleKeyPress(e, calculateBMR)}
+          />
           </div>
           
           <div className="space-y-2">
@@ -107,9 +112,10 @@ const BMRCalculator = () => {
               id="weight"
               type="number"
               placeholder="70"
-              value={weight}
-              onChange={(e) => setWeight(e.target.value)}
-            />
+            value={weight}
+            onChange={(e) => setWeight(e.target.value)}
+            onKeyPress={(e) => handleKeyPress(e, calculateBMR)}
+          />
           </div>
           
           <div className="space-y-2 md:col-span-2">
@@ -129,23 +135,58 @@ const BMRCalculator = () => {
           </div>
         </div>
 
-        <Button type="button" onClick={calculateBMR} className="w-full" size="lg">
-          Calculate BMR
+        <Button 
+          type="button" 
+          onClick={() => handleCalculation(calculateBMR)} 
+          className="w-full" 
+          size="lg"
+          disabled={isCalculating}
+        >
+          {isCalculating ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Calculating...
+            </>
+          ) : (
+            "Calculate BMR"
+          )}
         </Button>
 
         {bmr !== null && (
           <div className="mt-6 space-y-4 animate-fade-in">
-            <div className="p-6 bg-primary/10 rounded-lg text-center">
-              <p className="text-sm font-medium text-muted-foreground">Your BMR</p>
-              <p className="text-4xl font-bold text-primary">{bmr} calories/day</p>
+            <div className="p-6 bg-primary/10 rounded-lg">
+              <div className="flex items-start justify-between">
+                <div className="flex-1">
+                  <p className="text-sm font-medium text-muted-foreground">Your BMR</p>
+                  <p className="text-4xl font-bold text-primary">{bmr} calories/day</p>
+                </div>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={() => copyToClipboard(`${bmr} calories/day`, "BMR")}
+                >
+                  <Copy className="h-4 w-4" />
+                </Button>
+              </div>
             </div>
             
-            <div className="p-6 bg-muted/50 rounded-lg text-center">
-              <p className="text-sm font-medium text-muted-foreground">Daily Calorie Needs (TDEE)</p>
-              <p className="text-3xl font-bold">{dailyCalories} calories/day</p>
-              <p className="text-sm text-muted-foreground mt-2">
-                Based on your activity level
-              </p>
+            <div className="p-6 bg-muted/50 rounded-lg">
+              <div className="flex items-start justify-between">
+                <div className="flex-1">
+                  <p className="text-sm font-medium text-muted-foreground">Daily Calorie Needs (TDEE)</p>
+                  <p className="text-3xl font-bold">{dailyCalories} calories/day</p>
+                  <p className="text-sm text-muted-foreground mt-2">
+                    Based on your activity level
+                  </p>
+                </div>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={() => copyToClipboard(`${dailyCalories} calories/day`, "TDEE")}
+                >
+                  <Copy className="h-4 w-4" />
+                </Button>
+              </div>
             </div>
             
             <div className="grid grid-cols-3 gap-4 mt-4">

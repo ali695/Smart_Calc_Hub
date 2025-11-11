@@ -24,7 +24,7 @@ const Blog = () => {
         <div className="max-w-6xl mx-auto">
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogPosts.slice(0, 10).map((post) => (
+            {blogPosts.map((post) => (
               <Card key={post.id} className="group hover:shadow-large transition-all duration-300 hover:-translate-y-2 cursor-pointer flex flex-col border-2 border-border hover:border-primary overflow-hidden">
                 <div className="aspect-video bg-gradient-to-br from-primary/20 via-primary-glow/20 to-accent/20 overflow-hidden relative">
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
