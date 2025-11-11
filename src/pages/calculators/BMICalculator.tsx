@@ -7,7 +7,8 @@ import { schemas, validateInput, safeParseFloat } from "@/lib/validation";
 import { toast } from "sonner";
 import { z } from "zod";
 import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
-import { Copy, Loader2 } from "lucide-react";
+import { usePrintCalculator } from "@/hooks/usePrintCalculator";
+import { Copy, Loader2, Printer } from "lucide-react";
 
 const BMICalculator = () => {
   const [height, setHeight] = useState("");
@@ -15,6 +16,7 @@ const BMICalculator = () => {
   const [bmi, setBMI] = useState<number | null>(null);
   const [category, setCategory] = useState("");
   const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { printCalculation } = usePrintCalculator();
 
   const calculateBMI = () => {
     const heightValue = safeParseFloat(height);
@@ -41,6 +43,23 @@ const BMICalculator = () => {
         toast.error(error.errors[0].message);
       }
     }
+  };
+
+  const handlePrint = () => {
+    if (bmi === null) return;
+    
+    printCalculation({
+      title: "BMI Calculator Results",
+      inputs: [
+        { label: "Height", value: `${height} cm` },
+        { label: "Weight", value: `${weight} kg` }
+      ],
+      results: [
+        { label: "Body Mass Index (BMI)", value: bmi.toFixed(1) },
+        { label: "Category", value: category }
+      ],
+      formula: "BMI = weight (kg) / [height (m)]²"
+    });
   };
 
   const faqs = [
@@ -124,13 +143,24 @@ const BMICalculator = () => {
                 <p className="text-5xl font-bold text-primary">{bmi}</p>
                 <p className="text-lg font-semibold mt-2">{category}</p>
               </div>
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={() => copyToClipboard(`${bmi} - ${category}`, "BMI")}
-              >
-                <Copy className="h-4 w-4" />
-              </Button>
+              <div className="flex gap-2">
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={() => copyToClipboard(`${bmi} - ${category}`, "BMI")}
+                  title="Copy to clipboard"
+                >
+                  <Copy className="h-4 w-4" />
+                </Button>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={handlePrint}
+                  title="Print results"
+                >
+                  <Printer className="h-4 w-4" />
+                </Button>
+              </div>
             </div>
             
             <div className="mt-4 text-sm text-muted-foreground">

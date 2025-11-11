@@ -5,8 +5,8 @@ import { getBlogPost } from "@/data/blogPosts";
 import { SEOHead } from "@/components/SEOHead";
 
 const BlogPost = () => {
-  const { id } = useParams<{ id: string }>();
-  const post = id ? getBlogPost(id) : undefined;
+  const { slug } = useParams<{ slug: string }>();
+  const post = slug ? getBlogPost(slug) : undefined;
 
   if (!post) {
     return (

@@ -71,6 +71,30 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://smartcalchub.com/blog/real-world-applications-trigonometry</loc>
+    <lastmod>2025-01-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalchub.com/blog/best-conversion-tools-engineers</loc>
+    <lastmod>2025-01-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalchub.com/blog/compound-interest-wealth-building</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalchub.com/blog/mortgage-vs-rent-calculator</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 
   <!-- Finance Calculators -->
   <url>
@@ -244,7 +268,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalchub.com/calculator/water-intake</loc>
+    <loc>https://smartcalchub.com/calculator/water</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -490,13 +514,13 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://smartcalchub.com/calculator/area</loc>
+    <loc>https://smartcalchub.com/calculator/area-converter</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalchub.com/calculator/speed</loc>
+    <loc>https://smartcalchub.com/calculator/speed-converter</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
