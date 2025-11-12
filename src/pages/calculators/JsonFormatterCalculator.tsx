@@ -4,11 +4,14 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CalculatorLayout } from "@/components/CalculatorLayout";
 import { Textarea } from "@/components/ui/textarea";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
+import { Copy, Loader2 } from "lucide-react";
 
 const JsonFormatterCalculator = () => {
   const [input, setInput] = useState("");
   const [result, setResult] = useState("");
   const [error, setError] = useState("");
+  const { isCalculating, handleCalculation, copyToClipboard } = useCalculatorEnhancements();
 
   const formatJson = () => {
     try {
@@ -73,10 +76,30 @@ const JsonFormatterCalculator = () => {
         </div>
 
         <div className="flex gap-4">
-          <Button onClick={formatJson} className="flex-1" size="lg">
-            Format & Validate
+          <Button 
+            type="button"
+            onClick={() => handleCalculation(formatJson)} 
+            className="flex-1" 
+            size="lg"
+            disabled={isCalculating}
+          >
+            {isCalculating ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Formatting...
+              </>
+            ) : (
+              "Format & Validate"
+            )}
           </Button>
-          <Button onClick={minifyJson} variant="outline" className="flex-1" size="lg">
+          <Button 
+            type="button"
+            onClick={() => handleCalculation(minifyJson)} 
+            variant="outline" 
+            className="flex-1" 
+            size="lg"
+            disabled={isCalculating}
+          >
             Minify
           </Button>
         </div>
@@ -92,12 +115,19 @@ const JsonFormatterCalculator = () => {
         {result && (
           <Card>
             <CardContent className="pt-6">
-              <div>
-                <p className="text-sm text-muted-foreground mb-2">Formatted JSON</p>
-                <pre className="font-mono text-sm bg-muted p-3 rounded max-h-96 overflow-auto">
-                  {result}
-                </pre>
+              <div className="flex items-start justify-between mb-2">
+                <p className="text-sm text-muted-foreground">Formatted JSON</p>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={() => copyToClipboard(result, "JSON")}
+                >
+                  <Copy className="h-4 w-4" />
+                </Button>
               </div>
+              <pre className="font-mono text-sm bg-muted p-3 rounded max-h-96 overflow-auto">
+                {result}
+              </pre>
             </CardContent>
           </Card>
         )}

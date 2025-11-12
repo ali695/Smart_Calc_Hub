@@ -6,11 +6,14 @@ import { Card, CardContent } from "@/components/ui/card";
 import { CalculatorLayout } from "@/components/CalculatorLayout";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
+import { Copy, Loader2 } from "lucide-react";
 
 const HashGeneratorCalculator = () => {
   const [input, setInput] = useState("");
   const [algorithm, setAlgorithm] = useState("md5");
   const [result, setResult] = useState("");
+  const { isCalculating, handleCalculation, copyToClipboard } = useCalculatorEnhancements();
 
   const generateHash = async () => {
     const encoder = new TextEncoder();
@@ -95,19 +98,39 @@ const HashGeneratorCalculator = () => {
           </Select>
         </div>
 
-        <Button onClick={generateHash} className="w-full" size="lg">
-          Generate Hash
+        <Button 
+          type="button"
+          onClick={() => handleCalculation(generateHash)} 
+          className="w-full" 
+          size="lg"
+          disabled={isCalculating}
+        >
+          {isCalculating ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Generating...
+            </>
+          ) : (
+            "Generate Hash"
+          )}
         </Button>
 
         {result && (
           <Card>
             <CardContent className="pt-6">
-              <div>
-                <p className="text-sm text-muted-foreground mb-2">Hash Result</p>
-                <p className="font-mono text-sm break-all bg-muted p-3 rounded">
-                  {result}
-                </p>
+              <div className="flex items-start justify-between mb-2">
+                <p className="text-sm text-muted-foreground">Hash Result</p>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={() => copyToClipboard(result, "Hash")}
+                >
+                  <Copy className="h-4 w-4" />
+                </Button>
               </div>
+              <p className="font-mono text-sm break-all bg-muted p-3 rounded">
+                {result}
+              </p>
             </CardContent>
           </Card>
         )}

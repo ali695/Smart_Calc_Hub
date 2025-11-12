@@ -4,6 +4,9 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CalculatorLayout } from "@/components/CalculatorLayout";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
+import { usePrintCalculator } from "@/hooks/usePrintCalculator";
+import { Copy, Loader2, Printer } from "lucide-react";
 
 const InflationCalculator = () => {
   const [amount, setAmount] = useState("");
@@ -13,6 +16,8 @@ const InflationCalculator = () => {
     futureValue: number;
     purchasingPowerLoss: number;
   } | null>(null);
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
     const amt = parseFloat(amount);
@@ -90,22 +95,64 @@ const InflationCalculator = () => {
           </div>
         </div>
 
-        <Button onClick={calculate} className="w-full bg-gradient-to-r from-primary to-primary-accent hover:shadow-glow transition-all duration-300" size="lg">
-          Calculate Impact
+        <Button 
+          type="button"
+          onClick={() => handleCalculation(calculate)} 
+          className="w-full bg-gradient-to-r from-primary to-primary-accent hover:shadow-glow transition-all duration-300" 
+          size="lg"
+          disabled={isCalculating}
+        >
+          {isCalculating ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Calculating...
+            </>
+          ) : (
+            "Calculate Impact"
+          )}
         </Button>
 
         {result && (
           <Card className="bg-gradient-to-br from-primary/10 to-primary-accent/10 border-primary hover:scale-[1.02] transition-all duration-300 animate-fade-in">
             <CardContent className="pt-6">
               <div className="space-y-4">
-                <div>
-                  <p className="text-sm text-muted-foreground">Future Purchasing Power</p>
-                  <p className="text-3xl font-bold bg-gradient-to-r from-primary to-primary-accent bg-clip-text text-transparent">
-                    ${result.futureValue.toLocaleString(undefined, { maximumFractionDigits: 2 })}
-                  </p>
+                <div className="flex items-start justify-between">
+                  <div className="flex-1">
+                    <p className="text-sm text-muted-foreground">Future Purchasing Power</p>
+                    <p className="text-3xl font-bold bg-gradient-to-r from-primary to-primary-accent bg-clip-text text-transparent">
+                      ${result.futureValue.toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                    </p>
+                  </div>
+                  <div className="flex gap-2">
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={() => copyToClipboard(`$${result.futureValue.toLocaleString(undefined, { maximumFractionDigits: 2 })}`, "Future Value")}
+                    >
+                      <Copy className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={() => printCalculation({
+                        title: "Inflation Calculator",
+                        inputs: [
+                          { label: "Current Amount", value: `$${amount}` },
+                          { label: "Years", value: years },
+                          { label: "Inflation Rate", value: `${inflationRate}%` }
+                        ],
+                        results: [
+                          { label: "Future Value", value: `$${result.futureValue.toLocaleString(undefined, { maximumFractionDigits: 2 })}` },
+                          { label: "Purchasing Power Lost", value: `$${result.purchasingPowerLoss.toLocaleString(undefined, { maximumFractionDigits: 2 })}` }
+                        ]
+                      })}
+                    >
+                      <Printer className="h-4 w-4" />
+                    </Button>
+                  </div>
                 </div>
 
-                <div>
+                <div className="pt-4 border-t">
                   <p className="text-sm text-muted-foreground">Purchasing Power Lost</p>
                   <p className="text-xl font-semibold text-red-600">
                     ${result.purchasingPowerLoss.toLocaleString(undefined, { maximumFractionDigits: 2 })}

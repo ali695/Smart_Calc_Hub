@@ -6,6 +6,9 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { safeParseFloat } from "@/lib/validation";
 import { toast } from "sonner";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
+import { usePrintCalculator } from "@/hooks/usePrintCalculator";
+import { Copy, Printer } from "lucide-react";
 
 const MortgageCalculator = () => {
   const [homePrice, setHomePrice] = useState("300000");
@@ -15,6 +18,8 @@ const MortgageCalculator = () => {
   const [propertyTax, setPropertyTax] = useState("3000");
   const [homeInsurance, setHomeInsurance] = useState("1200");
   const [pmi, setPmi] = useState("0");
+  const { handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { printCalculation } = usePrintCalculator();
 
   const calculateMortgage = () => {
     const priceValue = safeParseFloat(homePrice);
@@ -104,6 +109,7 @@ const MortgageCalculator = () => {
               type="number"
               value={homePrice}
               onChange={(e) => setHomePrice(e.target.value)}
+              onKeyPress={(e) => handleKeyPress(e, calculateMortgage)}
               placeholder="300000"
             />
           </div>
@@ -177,7 +183,38 @@ const MortgageCalculator = () => {
         </div>
 
         <Card className="p-6 bg-primary/5 border-primary/20">
-          <h3 className="text-xl font-semibold mb-4">Monthly Payment Breakdown</h3>
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-xl font-semibold">Monthly Payment Breakdown</h3>
+            <div className="flex gap-2">
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={() => copyToClipboard(`$${result.monthlyPayment.toFixed(2)}`, "Total Monthly Payment")}
+              >
+                <Copy className="h-4 w-4" />
+              </Button>
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={() => printCalculation({
+                  title: "Mortgage Calculator",
+                  inputs: [
+                    { label: "Home Price", value: `$${homePrice}` },
+                    { label: "Down Payment", value: `$${downPayment}` },
+                    { label: "Loan Term", value: `${loanTerm} years` },
+                    { label: "Interest Rate", value: `${interestRate}%` }
+                  ],
+                  results: [
+                    { label: "Monthly Payment", value: `$${result.monthlyPayment.toFixed(2)}` },
+                    { label: "Total Paid", value: `$${result.totalPayment.toFixed(2)}` },
+                    { label: "Total Interest", value: `$${result.totalInterest.toFixed(2)}` }
+                  ]
+                })}
+              >
+                <Printer className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
           <div className="space-y-3">
             <div className="flex justify-between items-center pb-2 border-b">
               <span className="text-muted-foreground">Principal & Interest:</span>
