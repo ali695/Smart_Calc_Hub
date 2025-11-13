@@ -898,7 +898,7 @@ export const calculators: CalculatorData[] = [
     description: "Calculate force, mass, and acceleration using F=ma",
     category: "engineering",
     icon: Wrench,
-    path: "/calculator/force-calculator",
+    path: "/calculator/force",
     seoTitle: "Force Calculator – Calculate Force, Mass, Acceleration | SmartCalc Hub",
     seoDescription: "Free force calculator using Newton's second law F=ma. Calculate force, mass, or acceleration."
   },
@@ -908,7 +908,7 @@ export const calculators: CalculatorData[] = [
     description: "Calculate torque from force and distance",
     category: "engineering",
     icon: Cog,
-    path: "/calculator/torque-calculator",
+    path: "/calculator/torque",
     seoTitle: "Torque Calculator – Calculate Rotational Force | SmartCalc Hub",
     seoDescription: "Free torque calculator. Calculate torque from force and lever arm distance."
   },
@@ -918,7 +918,7 @@ export const calculators: CalculatorData[] = [
     description: "Calculate electrical and mechanical power",
     category: "engineering",
     icon: Cpu,
-    path: "/calculator/power-calculator",
+    path: "/calculator/power",
     seoTitle: "Power Calculator – Electrical & Mechanical Power | SmartCalc Hub",
     seoDescription: "Free power calculator for electrical (P=VI) and mechanical (P=Fv) power calculations."
   },
@@ -990,7 +990,7 @@ export const calculators: CalculatorData[] = [
     description: "Calculate pH, pOH, and hydrogen ion concentration",
     category: "science",
     icon: TestTube,
-    path: "/calculator/ph-calculator",
+    path: "/calculator/ph",
     seoTitle: "pH Calculator – Calculate pH, pOH, H+ Concentration | SmartCalc Hub",
     seoDescription: "Free pH calculator. Calculate pH, pOH, and hydrogen ion concentration for chemistry."
   },

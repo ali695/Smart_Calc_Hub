@@ -211,10 +211,10 @@ const App = () => (
               <Route path="/calculator/base64-encoder" element={<Base64Calculator />} />
               <Route path="/calculator/json-formatter" element={<JsonFormatterCalculator />} />
               <Route path="/calculator/ohms-law" element={<OhmsLawCalculator />} />
-              <Route path="/calculator/force-calculator" element={<ForceCalculator />} />
-              <Route path="/calculator/torque-calculator" element={<TorqueCalculator />} />
-              <Route path="/calculator/power-calculator" element={<PowerCalculator />} />
-              <Route path="/calculator/ph-calculator" element={<PhCalculator />} />
+              <Route path="/calculator/force" element={<ForceCalculator />} />
+              <Route path="/calculator/torque" element={<TorqueCalculator />} />
+              <Route path="/calculator/power" element={<PowerCalculator />} />
+              <Route path="/calculator/ph" element={<PhCalculator />} />
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/terms" element={<Terms />} />
               <Route path="*" element={<NotFound />} />
