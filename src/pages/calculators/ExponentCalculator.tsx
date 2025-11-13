@@ -4,8 +4,13 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
+import { usePrintCalculator } from "@/hooks/usePrintCalculator";
+import { Copy, Loader2, Printer } from "lucide-react";
 
 const ExponentCalculator = () => {
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { printCalculation } = usePrintCalculator();
   const [base, setBase] = useState("");
   const [exponent, setExponent] = useState("");
   const [result, setResult] = useState<number | null>(null);
@@ -59,6 +64,7 @@ const ExponentCalculator = () => {
               type="number"
               value={base}
               onChange={(e) => setBase(e.target.value)}
+              onKeyPress={(e) => handleKeyPress(e, calculate)}
               placeholder="e.g., 2"
               step="any"
             />
@@ -70,6 +76,7 @@ const ExponentCalculator = () => {
               type="number"
               value={exponent}
               onChange={(e) => setExponent(e.target.value)}
+              onKeyPress={(e) => handleKeyPress(e, calculate)}
               placeholder="e.g., 3"
               step="any"
             />
@@ -77,17 +84,32 @@ const ExponentCalculator = () => {
         </div>
 
         <Button 
-          onClick={calculate} 
+          type="button"
+          onClick={() => handleCalculation(calculate)} 
           className="w-full bg-gradient-to-r from-primary to-primary-accent hover:shadow-glow transition-all duration-300"
           size="lg"
+          disabled={isCalculating}
         >
-          Calculate Power
+          {isCalculating ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Calculating...</> : "Calculate Power"}
         </Button>
 
         {result !== null && (
           <Card className="p-6 bg-gradient-to-br from-primary/10 to-primary-accent/10 border-primary hover:scale-[1.02] transition-all duration-300 animate-fade-in">
             <div className="text-center space-y-2">
-              <p className="text-sm font-medium text-muted-foreground">Exponent Result</p>
+              <div className="flex items-center justify-center gap-2">
+                <p className="text-sm font-medium text-muted-foreground">Exponent Result</p>
+                <Button variant="ghost" size="icon" onClick={() => copyToClipboard(result.toString(), "Result")}>
+                  <Copy className="h-4 w-4" />
+                </Button>
+                <Button variant="ghost" size="icon" onClick={() => printCalculation({
+                  title: "Exponent Calculator Result",
+                  inputs: [{ label: "Base", value: base }, { label: "Exponent", value: exponent }],
+                  results: [{ label: "Result", value: result.toString() }],
+                  formula: "base^exponent"
+                })}>
+                  <Printer className="h-4 w-4" />
+                </Button>
+              </div>
               <p className="text-4xl font-bold bg-gradient-to-r from-primary to-primary-accent bg-clip-text text-transparent">
                 {base}<sup>{exponent}</sup> = {result.toExponential(6)}
               </p>

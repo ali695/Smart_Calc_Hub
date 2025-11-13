@@ -4,8 +4,13 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
+import { usePrintCalculator } from "@/hooks/usePrintCalculator";
+import { Copy, Loader2, Printer } from "lucide-react";
 
 const FactorialCalculator = () => {
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { printCalculation } = usePrintCalculator();
   const [number, setNumber] = useState("");
   const [result, setResult] = useState<{ factorial: string; steps: string } | null>(null);
 
@@ -68,6 +73,7 @@ const FactorialCalculator = () => {
             type="number"
             value={number}
             onChange={(e) => setNumber(e.target.value)}
+            onKeyPress={(e) => handleKeyPress(e, calculate)}
             placeholder="e.g., 5"
             min="0"
             max="170"
@@ -75,18 +81,33 @@ const FactorialCalculator = () => {
         </div>
 
         <Button 
-          onClick={calculate} 
+          type="button"
+          onClick={() => handleCalculation(calculate)} 
           className="w-full bg-gradient-to-r from-primary to-primary-accent hover:shadow-glow transition-all duration-300"
           size="lg"
+          disabled={isCalculating}
         >
-          Calculate Factorial
+          {isCalculating ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Calculating...</> : "Calculate Factorial"}
         </Button>
 
         {result && (
           <Card className="p-6 bg-gradient-to-br from-primary/10 to-primary-accent/10 border-primary hover:scale-[1.02] transition-all duration-300 animate-fade-in">
             <div className="space-y-4">
               <div className="text-center">
-                <p className="text-sm font-medium text-muted-foreground mb-2">Factorial Result</p>
+                <div className="flex items-center justify-center gap-2 mb-2">
+                  <p className="text-sm font-medium text-muted-foreground">Factorial Result</p>
+                  <Button variant="ghost" size="icon" onClick={() => copyToClipboard(result.factorial, "Factorial Result")}>
+                    <Copy className="h-4 w-4" />
+                  </Button>
+                  <Button variant="ghost" size="icon" onClick={() => printCalculation({
+                    title: "Factorial Calculator Result",
+                    inputs: [{ label: "Number", value: number }],
+                    results: [{ label: `${number}!`, value: result.factorial }],
+                    formula: "n! = n × (n−1) × (n−2) × ... × 2 × 1"
+                  })}>
+                    <Printer className="h-4 w-4" />
+                  </Button>
+                </div>
                 <p className="text-4xl font-bold bg-gradient-to-r from-primary to-primary-accent bg-clip-text text-transparent break-all">
                   {number}! = {result.factorial}
                 </p>

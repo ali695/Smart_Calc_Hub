@@ -4,8 +4,13 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
+import { usePrintCalculator } from "@/hooks/usePrintCalculator";
+import { Copy, Loader2, Printer } from "lucide-react";
 
 const DiscountCalculator = () => {
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { printCalculation } = usePrintCalculator();
   const [originalPrice, setOriginalPrice] = useState("");
   const [discountPercent, setDiscountPercent] = useState("");
   const [result, setResult] = useState<{ finalPrice: number; savings: number } | null>(null);
@@ -62,6 +67,7 @@ const DiscountCalculator = () => {
               value={originalPrice}
               onChange={(e) => setOriginalPrice(e.target.value)}
               placeholder="e.g., 100"
+              onKeyPress={(e) => handleKeyPress(e, calculate)}
             />
           </div>
 
@@ -71,6 +77,7 @@ const DiscountCalculator = () => {
               type="number"
               value={discountPercent}
               onChange={(e) => setDiscountPercent(e.target.value)}
+              onKeyPress={(e) => handleKeyPress(e, calculate)}
               placeholder="e.g., 20"
               min="0"
               max="100"
@@ -80,18 +87,33 @@ const DiscountCalculator = () => {
         </div>
 
         <Button 
-          onClick={calculate} 
+          type="button"
+          onClick={() => handleCalculation(calculate)} 
           className="w-full bg-gradient-to-r from-primary to-primary-accent hover:shadow-glow transition-all duration-300"
           size="lg"
+          disabled={isCalculating}
         >
-          Calculate Discount
+          {isCalculating ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Calculating...</> : "Calculate Discount"}
         </Button>
 
         {result && (
           <Card className="p-6 bg-gradient-to-br from-primary/10 to-primary-accent/10 border-primary hover:scale-[1.02] transition-all duration-300 animate-fade-in">
             <div className="space-y-4">
               <div className="text-center">
-                <p className="text-sm font-medium text-muted-foreground mb-2">Final Price</p>
+                <div className="flex items-center justify-center gap-2 mb-2">
+                  <p className="text-sm font-medium text-muted-foreground">Final Price</p>
+                  <Button variant="ghost" size="icon" onClick={() => copyToClipboard(`$${result.finalPrice.toFixed(2)}`, "Final Price")}>
+                    <Copy className="h-4 w-4" />
+                  </Button>
+                  <Button variant="ghost" size="icon" onClick={() => printCalculation({
+                    title: "Discount Calculator Result",
+                    inputs: [{ label: "Original Price", value: `$${originalPrice}` }, { label: "Discount", value: `${discountPercent}%` }],
+                    results: [{ label: "Final Price", value: `$${result.finalPrice.toFixed(2)}` }, { label: "Savings", value: `$${result.savings.toFixed(2)}` }],
+                    formula: "Final Price = Original Price − (Original Price × Discount % / 100)"
+                  })}>
+                    <Printer className="h-4 w-4" />
+                  </Button>
+                </div>
                 <p className="text-4xl font-bold bg-gradient-to-r from-primary to-primary-accent bg-clip-text text-transparent">
                   ${result.finalPrice.toFixed(2)}
                 </p>

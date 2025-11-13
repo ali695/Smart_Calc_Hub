@@ -7,8 +7,14 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { schemas, validateInput, safeParseFloat } from "@/lib/validation";
 import { toast } from "sonner";
 import { z } from "zod";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
+import { usePrintCalculator } from "@/hooks/usePrintCalculator";
+import { Copy, Loader2, Printer } from "lucide-react";
 
 const PercentageCalculator = () => {
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { printCalculation } = usePrintCalculator();
+
   // What is X% of Y
   const [percent1, setPercent1] = useState("");
   const [number1, setNumber1] = useState("");
@@ -123,12 +129,25 @@ const PercentageCalculator = () => {
               />
             </div>
           </div>
-          <Button onClick={calculate1} className="w-full" size="lg">
-            Calculate
+          <Button type="button" onClick={() => handleCalculation(calculate1)} className="w-full" size="lg" disabled={isCalculating}>
+            {isCalculating ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Calculating...</> : "Calculate"}
           </Button>
           {result1 !== null && (
             <div className="p-6 bg-primary/10 rounded-lg text-center animate-fade-in">
-              <p className="text-sm font-medium text-muted-foreground">Result</p>
+              <div className="flex items-center justify-center gap-2 mb-2">
+                <p className="text-sm font-medium text-muted-foreground">Result</p>
+                <Button variant="ghost" size="icon" onClick={() => copyToClipboard(result1.toString(), "Result")}>
+                  <Copy className="h-4 w-4" />
+                </Button>
+                <Button variant="ghost" size="icon" onClick={() => printCalculation({
+                  title: "Percentage Calculator Result",
+                  inputs: [{ label: "Percentage", value: `${percent1}%` }, { label: "Number", value: number1 }],
+                  results: [{ label: "Result", value: result1.toString() }],
+                  formula: "(Percentage / 100) × Number"
+                })}>
+                  <Printer className="h-4 w-4" />
+                </Button>
+              </div>
               <p className="text-4xl font-bold text-primary">{result1}</p>
               <p className="text-sm text-muted-foreground mt-2">
                 {percent1}% of {number1} is {result1}
