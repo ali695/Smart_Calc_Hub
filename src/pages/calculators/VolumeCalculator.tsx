@@ -5,12 +5,17 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { CalculatorLayout } from "@/components/CalculatorLayout";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
+import { usePrintCalculator } from "@/hooks/usePrintCalculator";
+import { Copy, Loader2, Printer } from "lucide-react";
 
 const VolumeCalculator = () => {
   const [shape, setShape] = useState("cube");
   const [value1, setValue1] = useState("");
   const [value2, setValue2] = useState("");
   const [result, setResult] = useState<number | null>(null);
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
     const v1 = parseFloat(value1);
@@ -106,18 +111,59 @@ const VolumeCalculator = () => {
           )}
         </div>
 
-        <Button onClick={calculate} className="w-full bg-gradient-to-r from-primary to-primary-accent hover:shadow-glow transition-all duration-300" size="lg">
-          Calculate Volume
+        <Button 
+          onClick={() => handleCalculation(calculate)} 
+          className="w-full bg-gradient-to-r from-primary to-primary-accent hover:shadow-glow transition-all duration-300" 
+          size="lg"
+          disabled={isCalculating}
+        >
+          {isCalculating ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Calculating...
+            </>
+          ) : (
+            "Calculate Volume"
+          )}
         </Button>
 
         {result !== null && (
           <Card className="bg-gradient-to-br from-primary/10 to-primary-accent/10 border-primary hover:scale-[1.02] transition-all duration-300 animate-fade-in">
             <CardContent className="pt-6">
-              <div className="space-y-2">
-                <p className="text-sm text-muted-foreground">Volume</p>
-                <p className="text-3xl font-bold bg-gradient-to-r from-primary to-primary-accent bg-clip-text text-transparent">
-                  {result.toFixed(2)} units³
-                </p>
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex-1 space-y-2">
+                  <p className="text-sm text-muted-foreground">Volume</p>
+                  <p className="text-3xl font-bold bg-gradient-to-r from-primary to-primary-accent bg-clip-text text-transparent">
+                    {result.toFixed(2)} units³
+                  </p>
+                </div>
+                <div className="flex gap-2">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => copyToClipboard(`${result.toFixed(2)} units³`, "Volume")}
+                  >
+                    <Copy className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => printCalculation({
+                      title: "Volume Calculator",
+                      inputs: [
+                        { label: "Shape", value: shape },
+                        { label: shape === "cube" ? "Side Length" : "Radius", value: value1 },
+                        ...(shape === "cylinder" || shape === "cone" ? [{ label: "Height", value: value2 }] : [])
+                      ],
+                      results: [
+                        { label: "Volume", value: `${result.toFixed(2)} units³` }
+                      ],
+                      formula: "Cube: V = s³ | Sphere: V = (4/3)πr³ | Cylinder: V = πr²h | Cone: V = (1/3)πr²h"
+                    })}
+                  >
+                    <Printer className="h-4 w-4" />
+                  </Button>
+                </div>
               </div>
             </CardContent>
           </Card>

@@ -4,11 +4,16 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
+import { usePrintCalculator } from "@/hooks/usePrintCalculator";
+import { Copy, Loader2, Printer } from "lucide-react";
 
 const TriangleAreaCalculator = () => {
   const [base, setBase] = useState("");
   const [height, setHeight] = useState("");
   const [result, setResult] = useState<number | null>(null);
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
     const b = parseFloat(base);
@@ -79,24 +84,63 @@ const TriangleAreaCalculator = () => {
         </div>
 
         <Button 
-          onClick={calculate} 
+          onClick={() => handleCalculation(calculate)} 
           className="w-full bg-gradient-to-r from-primary to-primary-accent hover:shadow-glow transition-all duration-300"
           size="lg"
+          disabled={isCalculating}
         >
-          Calculate Area
+          {isCalculating ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Calculating...
+            </>
+          ) : (
+            "Calculate Area"
+          )}
         </Button>
 
         {result !== null && (
           <Card className="p-6 bg-gradient-to-br from-primary/10 to-primary-accent/10 border-primary hover:scale-[1.02] transition-all duration-300 animate-fade-in">
-            <div className="text-center space-y-2">
-              <p className="text-sm font-medium text-muted-foreground">Triangle Area</p>
-              <p className="text-4xl font-bold bg-gradient-to-r from-primary to-primary-accent bg-clip-text text-transparent">
-                {result.toFixed(2)} units²
-              </p>
-              <div className="pt-4 border-t border-border/50 mt-4 space-y-1">
-                <p className="text-xs text-muted-foreground">Base: {base} units</p>
-                <p className="text-xs text-muted-foreground">Height: {height} units</p>
-                <p className="text-xs text-muted-foreground">Calculation: ({base} × {height}) / 2 = {result.toFixed(2)}</p>
+            <div className="space-y-4">
+              <div className="text-center space-y-2">
+                <p className="text-sm font-medium text-muted-foreground">Triangle Area</p>
+                <p className="text-4xl font-bold bg-gradient-to-r from-primary to-primary-accent bg-clip-text text-transparent">
+                  {result.toFixed(2)} units²
+                </p>
+                <div className="pt-4 border-t border-border/50 mt-4 space-y-1">
+                  <p className="text-xs text-muted-foreground">Base: {base} units</p>
+                  <p className="text-xs text-muted-foreground">Height: {height} units</p>
+                  <p className="text-xs text-muted-foreground">Calculation: ({base} × {height}) / 2 = {result.toFixed(2)}</p>
+                </div>
+              </div>
+              <div className="flex justify-center gap-2 pt-4 border-t border-border/50">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => copyToClipboard(`${result.toFixed(2)} units²`, "Triangle Area")}
+                >
+                  <Copy className="h-4 w-4 mr-2" />
+                  Copy Result
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => printCalculation({
+                    title: "Triangle Area Calculator",
+                    inputs: [
+                      { label: "Base", value: `${base} units` },
+                      { label: "Height", value: `${height} units` }
+                    ],
+                    results: [
+                      { label: "Area", value: `${result.toFixed(2)} units²` },
+                      { label: "Calculation", value: `(${base} × ${height}) / 2 = ${result.toFixed(2)}` }
+                    ],
+                    formula: "Area = (base × height) / 2"
+                  })}
+                >
+                  <Printer className="h-4 w-4 mr-2" />
+                  Print
+                </Button>
               </div>
             </div>
           </Card>

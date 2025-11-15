@@ -5,6 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CalculatorLayout } from "@/components/CalculatorLayout";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
+import { usePrintCalculator } from "@/hooks/usePrintCalculator";
+import { Copy, Loader2, Printer } from "lucide-react";
 
 const PowerCalculator = () => {
   const [type, setType] = useState("electrical");
@@ -13,6 +16,8 @@ const PowerCalculator = () => {
   const [force, setForce] = useState("");
   const [velocity, setVelocity] = useState("");
   const [result, setResult] = useState<number | null>(null);
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
     if (type === "electrical") {
@@ -119,16 +124,62 @@ const PowerCalculator = () => {
           </>
         )}
 
-        <Button onClick={calculate} className="w-full" size="lg">
-          Calculate Power
+        <Button 
+          onClick={() => handleCalculation(calculate)} 
+          className="w-full" 
+          size="lg"
+          disabled={isCalculating}
+        >
+          {isCalculating ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Calculating...
+            </>
+          ) : (
+            "Calculate Power"
+          )}
         </Button>
 
         {result !== null && (
           <Card>
             <CardContent className="pt-6">
-              <div>
-                <p className="text-sm text-muted-foreground">Power</p>
-                <p className="text-3xl font-bold">{result.toFixed(2)} W</p>
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex-1">
+                  <p className="text-sm text-muted-foreground">Power</p>
+                  <p className="text-3xl font-bold">{result.toFixed(2)} W</p>
+                </div>
+                <div className="flex gap-2">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => copyToClipboard(`${result.toFixed(2)} W`, "Power")}
+                  >
+                    <Copy className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => printCalculation({
+                      title: "Power Calculator",
+                      inputs: [
+                        { label: "Type", value: type === "electrical" ? "Electrical" : "Mechanical" },
+                        ...(type === "electrical" ? [
+                          { label: "Voltage", value: `${voltage} V` },
+                          { label: "Current", value: `${current} A` }
+                        ] : [
+                          { label: "Force", value: `${force} N` },
+                          { label: "Velocity", value: `${velocity} m/s` }
+                        ])
+                      ],
+                      results: [
+                        { label: "Power", value: `${result.toFixed(2)} W` }
+                      ],
+                      formula: type === "electrical" ? "P = V × I" : "P = F × v"
+                    })}
+                  >
+                    <Printer className="h-4 w-4" />
+                  </Button>
+                </div>
               </div>
             </CardContent>
           </Card>

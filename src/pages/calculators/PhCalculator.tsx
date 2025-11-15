@@ -5,6 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CalculatorLayout } from "@/components/CalculatorLayout";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
+import { usePrintCalculator } from "@/hooks/usePrintCalculator";
+import { Copy, Loader2, Printer } from "lucide-react";
 
 const PhCalculator = () => {
   const [calculateFor, setCalculateFor] = useState("ph");
@@ -19,6 +22,8 @@ const PhCalculator = () => {
     ohConcentration: string;
     type: string;
   } | null>(null);
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
     let calcPh = 0;
@@ -153,33 +158,82 @@ const PhCalculator = () => {
           </div>
         )}
 
-        <Button onClick={calculate} className="w-full" size="lg">
-          Calculate
+        <Button 
+          onClick={() => handleCalculation(calculate)} 
+          className="w-full" 
+          size="lg"
+          disabled={isCalculating}
+        >
+          {isCalculating ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Calculating...
+            </>
+          ) : (
+            "Calculate pH"
+          )}
         </Button>
 
         {result && (
           <Card>
             <CardContent className="pt-6">
-              <div className="space-y-3">
-                <div>
-                  <p className="text-sm text-muted-foreground">pH</p>
-                  <p className="text-2xl font-bold">{result.ph.toFixed(2)}</p>
+              <div className="space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <p className="text-sm text-muted-foreground">pH</p>
+                    <p className="text-2xl font-bold">{result.ph.toFixed(2)}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground">pOH</p>
+                    <p className="text-2xl font-bold">{result.poh.toFixed(2)}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground">[H+] Concentration</p>
+                    <p className="text-lg font-semibold">{result.hConcentration} M</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground">[OH-] Concentration</p>
+                    <p className="text-lg font-semibold">{result.ohConcentration} M</p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">pOH</p>
-                  <p className="text-2xl font-bold">{result.poh.toFixed(2)}</p>
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">[H+] Concentration</p>
-                  <p className="text-lg font-semibold">{result.hConcentration} M</p>
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">[OH-] Concentration</p>
-                  <p className="text-lg font-semibold">{result.ohConcentration} M</p>
-                </div>
-                <div>
+                <div className="pt-3 border-t">
                   <p className="text-sm text-muted-foreground">Solution Type</p>
                   <p className="text-lg font-semibold">{result.type}</p>
+                </div>
+                <div className="flex justify-center gap-2 pt-4 border-t">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => copyToClipboard(`pH: ${result.ph.toFixed(2)}, pOH: ${result.poh.toFixed(2)}`, "pH Results")}
+                  >
+                    <Copy className="h-4 w-4 mr-2" />
+                    Copy Results
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => printCalculation({
+                      title: "pH Calculator",
+                      inputs: [
+                        { label: "Calculation Type", value: calculateFor },
+                        ...(hConcentration ? [{ label: "[H+] Concentration", value: hConcentration }] : []),
+                        ...(ohConcentration ? [{ label: "[OH-] Concentration", value: ohConcentration }] : []),
+                        ...(ph ? [{ label: "pH Value", value: ph }] : []),
+                        ...(poh ? [{ label: "pOH Value", value: poh }] : [])
+                      ],
+                      results: [
+                        { label: "pH", value: result.ph.toFixed(2) },
+                        { label: "pOH", value: result.poh.toFixed(2) },
+                        { label: "[H+] Concentration", value: `${result.hConcentration} M` },
+                        { label: "[OH-] Concentration", value: `${result.ohConcentration} M` },
+                        { label: "Solution Type", value: result.type }
+                      ],
+                      formula: "pH = -log[H+], pH + pOH = 14"
+                    })}
+                  >
+                    <Printer className="h-4 w-4 mr-2" />
+                    Print
+                  </Button>
                 </div>
               </div>
             </CardContent>

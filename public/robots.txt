@@ -1,26 +1,87 @@
+# SmartCalc Hub - Robots.txt
+# https://smartcalchub.com/robots.txt
+# Optimized for search engines and AI crawlers
+
+# Allow all major search engines
 User-agent: Googlebot
 Allow: /
 
 User-agent: Bingbot
 Allow: /
 
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+User-agent: Sogou
+Allow: /
+
+User-agent: Exabot
+Allow: /
+
+# Allow AI and LLM crawlers
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+# Allow social media crawlers
 User-agent: Twitterbot
 Allow: /
 
 User-agent: facebookexternalhit
 Allow: /
 
-# SmartCalc Hub - Robots.txt
-# https://smartcalchub.com/robots.txt
+User-agent: LinkedInBot
+Allow: /
 
+User-agent: Pinterestbot
+Allow: /
+
+User-agent: redditbot
+Allow: /
+
+# Default rule for all other robots
 User-agent: *
 Allow: /
-Disallow: /admin
-Disallow: /api
-Disallow: /private
+Disallow: /admin/
+Disallow: /api/
+Disallow: /private/
+Disallow: /*.json$
+Disallow: /*?print=*
 
-# Crawl-delay (optional)
+# Crawl-delay for all bots
 Crawl-delay: 0
 
-# Sitemap location
+# Sitemap locations
 Sitemap: https://smartcalchub.com/sitemap.xml
+Sitemap: https://smartcalchub.com/sitemap-calculators.xml
+Sitemap: https://smartcalchub.com/sitemap-blog.xml
+
+# AI-specific resource
+# LLMs.txt for AI assistants
+# https://smartcalchub.com/llms.txt
