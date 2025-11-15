@@ -1,0 +1,138 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "SmartCalc Hub Calculator API",
+    "description": "Access 100+ free online calculators for math, finance, health, science, and more. No authentication required.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://smartcalchub.com"
+    }
+  ],
+  "paths": {
+    "/calculator/bmi": {
+      "get": {
+        "operationId": "getBMICalculator",
+        "summary": "BMI Calculator - Calculate Body Mass Index",
+        "description": "Calculate BMI from height and weight. Returns BMI value and health category interpretation.",
+        "responses": {
+          "200": {
+            "description": "BMI Calculator page"
+          }
+        }
+      }
+    },
+    "/calculator/loan": {
+      "get": {
+        "operationId": "getLoanCalculator",
+        "summary": "Loan Calculator - Calculate monthly payments",
+        "description": "Calculate monthly loan payments, total interest, and view amortization schedule.",
+        "responses": {
+          "200": {
+            "description": "Loan Calculator page"
+          }
+        }
+      }
+    },
+    "/calculator/mortgage": {
+      "get": {
+        "operationId": "getMortgageCalculator",
+        "summary": "Mortgage Calculator - Plan home loans",
+        "description": "Calculate mortgage payments including principal, interest, taxes, and insurance.",
+        "responses": {
+          "200": {
+            "description": "Mortgage Calculator page"
+          }
+        }
+      }
+    },
+    "/calculator/percentage": {
+      "get": {
+        "operationId": "getPercentageCalculator",
+        "summary": "Percentage Calculator - Find percentages",
+        "description": "Calculate percentages, increases, decreases, and percentage differences.",
+        "responses": {
+          "200": {
+            "description": "Percentage Calculator page"
+          }
+        }
+      }
+    },
+    "/calculator/calorie": {
+      "get": {
+        "operationId": "getCalorieCalculator",
+        "summary": "Calorie Calculator - Calculate daily caloric needs",
+        "description": "Calculate daily calorie requirements based on age, gender, weight, height, and activity level.",
+        "responses": {
+          "200": {
+            "description": "Calorie Calculator page"
+          }
+        }
+      }
+    },
+    "/calculator/compound-interest": {
+      "get": {
+        "operationId": "getCompoundInterestCalculator",
+        "summary": "Compound Interest Calculator",
+        "description": "Calculate compound interest growth on investments over time.",
+        "responses": {
+          "200": {
+            "description": "Compound Interest Calculator page"
+          }
+        }
+      }
+    },
+    "/calculator/square-root": {
+      "get": {
+        "operationId": "getSquareRootCalculator",
+        "summary": "Square Root Calculator",
+        "description": "Calculate square roots of any positive number with precision.",
+        "responses": {
+          "200": {
+            "description": "Square Root Calculator page"
+          }
+        }
+      }
+    },
+    "/calculator/temperature": {
+      "get": {
+        "operationId": "getTemperatureConverter",
+        "summary": "Temperature Converter",
+        "description": "Convert between Celsius, Fahrenheit, and Kelvin temperature scales.",
+        "responses": {
+          "200": {
+            "description": "Temperature Converter page"
+          }
+        }
+      }
+    },
+    "/calculator/ph": {
+      "get": {
+        "operationId": "getPhCalculator",
+        "summary": "pH Calculator",
+        "description": "Calculate pH, pOH, and hydrogen ion concentration for chemistry.",
+        "responses": {
+          "200": {
+            "description": "pH Calculator page"
+          }
+        }
+      }
+    },
+    "/categories": {
+      "get": {
+        "operationId": "getCategories",
+        "summary": "Browse all calculator categories",
+        "description": "View all available calculators organized by category: Math, Finance, Health, Science, Engineering, Conversion.",
+        "responses": {
+          "200": {
+            "description": "Categories page with all calculators"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
