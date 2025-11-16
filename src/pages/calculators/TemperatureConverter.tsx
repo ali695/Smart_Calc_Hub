@@ -3,11 +3,18 @@ import { CalculatorLayout } from "@/components/CalculatorLayout";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
+import { usePrintCalculator } from "@/hooks/usePrintCalculator";
+import { Copy, Printer } from "lucide-react";
 
 const TemperatureConverter = () => {
   const [value, setValue] = useState("");
   const [fromUnit, setFromUnit] = useState("celsius");
   const [result, setResult] = useState<any>(null);
+
+  const { copyToClipboard } = useCalculatorEnhancements();
+  const { printCalculation } = usePrintCalculator();
 
   const convert = (val: string, from: string) => {
     const num = parseFloat(val);
@@ -36,6 +43,23 @@ const TemperatureConverter = () => {
   const handleUnitChange = (unit: string) => {
     setFromUnit(unit);
     if (value) convert(value, unit);
+  };
+
+  const handlePrint = () => {
+    if (result) {
+      printCalculation({
+        title: "Temperature Conversion",
+        inputs: [
+          { label: "Input", value: `${value} ${fromUnit}` }
+        ],
+        results: [
+          { label: "Celsius", value: `${result.celsius}°C` },
+          { label: "Fahrenheit", value: `${result.fahrenheit}°F` },
+          { label: "Kelvin", value: `${result.kelvin}K` }
+        ],
+        formula: "°F = (°C × 9/5) + 32 | K = °C + 273.15"
+      });
+    }
   };
 
   const faqs = [
@@ -76,6 +100,7 @@ const TemperatureConverter = () => {
               placeholder="25"
               value={value}
               onChange={handleValueChange}
+              step="any"
             />
           </div>
           
@@ -109,6 +134,25 @@ const TemperatureConverter = () => {
                 <p className="text-sm font-medium text-purple-900 dark:text-purple-100 mb-2">Kelvin</p>
                 <p className="text-3xl font-bold text-purple-600 dark:text-purple-400">{result.kelvin}K</p>
               </div>
+            </div>
+
+            <div className="flex gap-2 justify-center pt-4">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => copyToClipboard(`${result.celsius}°C / ${result.fahrenheit}°F / ${result.kelvin}K`, "Temperature")}
+              >
+                <Copy className="w-4 h-4 mr-2" />
+                Copy All
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handlePrint}
+              >
+                <Printer className="w-4 h-4 mr-2" />
+                Print
+              </Button>
             </div>
           </div>
         )}
