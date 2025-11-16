@@ -99,6 +99,10 @@ import ForceCalculator from "./pages/calculators/ForceCalculator";
 import TorqueCalculator from "./pages/calculators/TorqueCalculator";
 import PowerCalculator from "./pages/calculators/PowerCalculator";
 import PhCalculator from "./pages/calculators/PhCalculator";
+import MolarityCalculator from "./pages/calculators/MolarityCalculator";
+import HalfLifeCalculator from "./pages/calculators/HalfLifeCalculator";
+import DensityCalculator from "./pages/calculators/DensityCalculator";
+import KineticEnergyCalculator from "./pages/calculators/KineticEnergyCalculator";
 
 const queryClient = new QueryClient();
 
@@ -211,10 +215,14 @@ const App = () => (
               <Route path="/calculator/base64-encoder" element={<Base64Calculator />} />
               <Route path="/calculator/json-formatter" element={<JsonFormatterCalculator />} />
               <Route path="/calculator/ohms-law" element={<OhmsLawCalculator />} />
-              <Route path="/calculator/force" element={<ForceCalculator />} />
-              <Route path="/calculator/torque" element={<TorqueCalculator />} />
-              <Route path="/calculator/power" element={<PowerCalculator />} />
-              <Route path="/calculator/ph" element={<PhCalculator />} />
+          <Route path="/calculator/force" element={<ForceCalculator />} />
+          <Route path="/calculator/torque" element={<TorqueCalculator />} />
+          <Route path="/calculator/power" element={<PowerCalculator />} />
+          <Route path="/calculator/ph" element={<PhCalculator />} />
+          <Route path="/calculator/molarity-calculator" element={<MolarityCalculator />} />
+          <Route path="/calculator/half-life" element={<HalfLifeCalculator />} />
+          <Route path="/calculator/density-calculator" element={<DensityCalculator />} />
+          <Route path="/calculator/kinetic-energy" element={<KineticEnergyCalculator />} />
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/terms" element={<Terms />} />
               <Route path="*" element={<NotFound />} />

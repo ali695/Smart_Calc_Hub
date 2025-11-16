@@ -5,17 +5,38 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
+import { usePrintCalculator } from "@/hooks/usePrintCalculator";
+import { Copy, Printer } from "lucide-react";
 
 const TangentCalculator = () => {
   const [angle, setAngle] = useState("");
   const [unit, setUnit] = useState("degrees");
   const [result, setResult] = useState<number | null>(null);
 
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { printCalculation } = usePrintCalculator();
+
   const calculate = () => {
     const a = parseFloat(angle);
     if (!isNaN(a)) {
       const radians = unit === "degrees" ? (a * Math.PI) / 180 : a;
       setResult(Math.tan(radians));
+    }
+  };
+
+  const handlePrint = () => {
+    if (result !== null) {
+      printCalculation({
+        title: "Tangent Calculation",
+        inputs: [
+          { label: "Angle", value: `${angle} ${unit === "degrees" ? "°" : "rad"}` }
+        ],
+        results: [
+          { label: "tan(θ)", value: result.toFixed(6) }
+        ],
+        formula: "tan(θ) = opposite / adjacent = sin(θ) / cos(θ)"
+      });
     }
   };
 
@@ -60,6 +81,7 @@ const TangentCalculator = () => {
               type="number"
               value={angle}
               onChange={(e) => setAngle(e.target.value)}
+              onKeyPress={(e) => handleKeyPress(e, calculate)}
               placeholder="e.g., 45"
               step="any"
             />
@@ -80,11 +102,12 @@ const TangentCalculator = () => {
         </div>
 
         <Button 
-          onClick={calculate} 
+          onClick={() => handleCalculation(calculate)}
+          disabled={isCalculating}
           className="w-full bg-gradient-to-r from-primary to-primary-accent hover:shadow-glow transition-all duration-300"
           size="lg"
         >
-          Calculate tan(θ)
+          {isCalculating ? "Calculating..." : "Calculate tan(θ)"}
         </Button>
 
         {result !== null && (
@@ -101,6 +124,25 @@ const TangentCalculator = () => {
                     : `In degrees: ${((parseFloat(angle) * 180) / Math.PI).toFixed(4)}°`
                   }
                 </p>
+              </div>
+
+              <div className="flex gap-2 justify-center pt-4">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => copyToClipboard(result.toFixed(6), "Tangent")}
+                >
+                  <Copy className="w-4 h-4 mr-2" />
+                  Copy Result
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handlePrint}
+                >
+                  <Printer className="w-4 h-4 mr-2" />
+                  Print
+                </Button>
               </div>
             </div>
           </Card>

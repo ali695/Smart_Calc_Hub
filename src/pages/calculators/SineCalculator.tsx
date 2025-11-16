@@ -5,17 +5,38 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
+import { usePrintCalculator } from "@/hooks/usePrintCalculator";
+import { Copy, Printer } from "lucide-react";
 
 const SineCalculator = () => {
   const [angle, setAngle] = useState("");
   const [unit, setUnit] = useState("degrees");
   const [result, setResult] = useState<number | null>(null);
 
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { printCalculation } = usePrintCalculator();
+
   const calculate = () => {
     const a = parseFloat(angle);
     if (!isNaN(a)) {
       const radians = unit === "degrees" ? (a * Math.PI) / 180 : a;
       setResult(Math.sin(radians));
+    }
+  };
+
+  const handlePrint = () => {
+    if (result !== null) {
+      printCalculation({
+        title: "Sine Calculation",
+        inputs: [
+          { label: "Angle", value: `${angle} ${unit === "degrees" ? "°" : "rad"}` }
+        ],
+        results: [
+          { label: "sin(θ)", value: result.toFixed(6) }
+        ],
+        formula: "sin(θ) = opposite / hypotenuse"
+      });
     }
   };
 
@@ -59,6 +80,7 @@ const SineCalculator = () => {
               type="number"
               value={angle}
               onChange={(e) => setAngle(e.target.value)}
+              onKeyPress={(e) => handleKeyPress(e, calculate)}
               placeholder="e.g., 45"
               step="any"
             />
@@ -79,11 +101,12 @@ const SineCalculator = () => {
         </div>
 
         <Button 
-          onClick={calculate} 
+          onClick={() => handleCalculation(calculate)}
+          disabled={isCalculating}
           className="w-full bg-gradient-to-r from-primary to-primary-accent hover:shadow-glow transition-all duration-300"
           size="lg"
         >
-          Calculate sin(θ)
+          {isCalculating ? "Calculating..." : "Calculate sin(θ)"}
         </Button>
 
         {result !== null && (
@@ -100,6 +123,25 @@ const SineCalculator = () => {
                     : `In degrees: ${((parseFloat(angle) * 180) / Math.PI).toFixed(4)}°`
                   }
                 </p>
+              </div>
+
+              <div className="flex gap-2 justify-center pt-4">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => copyToClipboard(result.toFixed(6), "Sine")}
+                >
+                  <Copy className="w-4 h-4 mr-2" />
+                  Copy Result
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handlePrint}
+                >
+                  <Printer className="w-4 h-4 mr-2" />
+                  Print
+                </Button>
               </div>
             </div>
           </Card>

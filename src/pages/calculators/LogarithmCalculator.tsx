@@ -4,11 +4,17 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
+import { usePrintCalculator } from "@/hooks/usePrintCalculator";
+import { Copy, Printer } from "lucide-react";
 
 const LogarithmCalculator = () => {
   const [number, setNumber] = useState("");
   const [base, setBase] = useState("10");
   const [result, setResult] = useState<number | null>(null);
+
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
     const n = parseFloat(number);
@@ -16,6 +22,22 @@ const LogarithmCalculator = () => {
     if (n > 0 && b > 0 && b !== 1) {
       const logResult = Math.log(n) / Math.log(b);
       setResult(logResult);
+    }
+  };
+
+  const handlePrint = () => {
+    if (result !== null) {
+      printCalculation({
+        title: "Logarithm Calculation",
+        inputs: [
+          { label: "Number (x)", value: number },
+          { label: "Base (b)", value: base }
+        ],
+        results: [
+          { label: "Logarithm Result", value: `log₍${base}₎(${number}) = ${result.toFixed(6)}` }
+        ],
+        formula: "log_b(x) = y means b^y = x"
+      });
     }
   };
 
@@ -60,6 +82,7 @@ const LogarithmCalculator = () => {
               type="number"
               value={number}
               onChange={(e) => setNumber(e.target.value)}
+              onKeyPress={(e) => handleKeyPress(e, calculate)}
               placeholder="e.g., 100"
               min="0.000001"
               step="any"
@@ -72,6 +95,7 @@ const LogarithmCalculator = () => {
               type="number"
               value={base}
               onChange={(e) => setBase(e.target.value)}
+              onKeyPress={(e) => handleKeyPress(e, calculate)}
               placeholder="e.g., 10"
               min="0.000001"
               step="any"
@@ -81,11 +105,12 @@ const LogarithmCalculator = () => {
         </div>
 
         <Button 
-          onClick={calculate} 
+          onClick={() => handleCalculation(calculate)}
+          disabled={isCalculating}
           className="w-full bg-gradient-to-r from-primary to-primary-accent hover:shadow-glow transition-all duration-300"
           size="lg"
         >
-          Calculate Logarithm
+          {isCalculating ? "Calculating..." : "Calculate Logarithm"}
         </Button>
 
         {result !== null && (
@@ -99,6 +124,25 @@ const LogarithmCalculator = () => {
                 <p className="text-xs text-muted-foreground">
                   Verification: {base}^{result.toFixed(6)} ≈ {Math.pow(parseFloat(base), result).toFixed(6)}
                 </p>
+              </div>
+
+              <div className="flex gap-2 justify-center pt-4">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => copyToClipboard(result.toFixed(6), "Logarithm")}
+                >
+                  <Copy className="w-4 h-4 mr-2" />
+                  Copy Result
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handlePrint}
+                >
+                  <Printer className="w-4 h-4 mr-2" />
+                  Print
+                </Button>
               </div>
             </div>
           </Card>
