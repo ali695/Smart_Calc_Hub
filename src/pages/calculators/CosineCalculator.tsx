@@ -3,13 +3,18 @@ import { CalculatorLayout } from "@/components/CalculatorLayout";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
+import { usePrintCalculator } from "@/hooks/usePrintCalculator";
+import { Copy, Loader2, Printer } from "lucide-react";
 
 const CosineCalculator = () => {
   const [angle, setAngle] = useState("");
   const [unit, setUnit] = useState("degrees");
   const [result, setResult] = useState<number | null>(null);
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
     const a = parseFloat(angle);
@@ -59,6 +64,7 @@ const CosineCalculator = () => {
               type="number"
               value={angle}
               onChange={(e) => setAngle(e.target.value)}
+              onKeyPress={(e) => handleKeyPress(e, calculate)}
               placeholder="e.g., 60"
               step="any"
             />
@@ -79,17 +85,27 @@ const CosineCalculator = () => {
         </div>
 
         <Button 
-          onClick={calculate} 
+          onClick={() => handleCalculation(calculate)} 
           className="w-full bg-gradient-to-r from-primary to-primary-accent hover:shadow-glow transition-all duration-300"
           size="lg"
+          disabled={isCalculating}
         >
-          Calculate cos(θ)
+          {isCalculating ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Calculating...
+            </>
+          ) : (
+            "Calculate cos(θ)"
+          )}
         </Button>
 
         {result !== null && (
-          <Card className="p-6 bg-gradient-to-br from-primary/10 to-primary-accent/10 border-primary hover:scale-[1.02] transition-all duration-300 animate-fade-in">
-            <div className="text-center space-y-2">
-              <p className="text-sm font-medium text-muted-foreground">Cosine Result</p>
+          <Card className="bg-gradient-to-br from-primary/10 to-primary-accent/10 border-primary hover:scale-[1.02] transition-all duration-300 animate-fade-in">
+            <CardContent className="pt-6">
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex-1">
+                  <p className="text-sm font-medium text-muted-foreground mb-2">Cosine Result</p>
               <p className="text-4xl font-bold bg-gradient-to-r from-primary to-primary-accent bg-clip-text text-transparent">
                 cos({angle}{unit === "degrees" ? "°" : " rad"}) = {result.toFixed(6)}
               </p>
