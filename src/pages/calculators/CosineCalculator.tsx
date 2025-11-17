@@ -106,18 +106,47 @@ const CosineCalculator = () => {
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-1">
                   <p className="text-sm font-medium text-muted-foreground mb-2">Cosine Result</p>
-              <p className="text-4xl font-bold bg-gradient-to-r from-primary to-primary-accent bg-clip-text text-transparent">
-                cos({angle}{unit === "degrees" ? "°" : " rad"}) = {result.toFixed(6)}
-              </p>
-              <div className="pt-4 border-t border-border/50 mt-4">
-                <p className="text-xs text-muted-foreground">
-                  {unit === "degrees" 
-                    ? `In radians: ${((parseFloat(angle) * Math.PI) / 180).toFixed(4)} rad`
-                    : `In degrees: ${((parseFloat(angle) * 180) / Math.PI).toFixed(4)}°`
-                  }
-                </p>
+                  <p className="text-4xl font-bold bg-gradient-to-r from-primary to-primary-accent bg-clip-text text-transparent">
+                    cos({angle}{unit === "degrees" ? "°" : " rad"}) = {result.toFixed(6)}
+                  </p>
+                  <div className="pt-4 border-t border-border/50 mt-4">
+                    <p className="text-xs text-muted-foreground">
+                      {unit === "degrees" 
+                        ? `In radians: ${((parseFloat(angle) * Math.PI) / 180).toFixed(4)} rad`
+                        : `In degrees: ${((parseFloat(angle) * 180) / Math.PI).toFixed(4)}°`
+                      }
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-8 w-8"
+                    onClick={() => copyToClipboard(result.toFixed(6), "Cosine result")}
+                  >
+                    <Copy className="h-3 w-3" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => printCalculation({
+                      title: "Cosine Calculator",
+                      inputs: [
+                        { label: "Angle", value: `${angle}${unit === "degrees" ? "°" : " rad"}` }
+                      ],
+                      results: [
+                        { label: "cos(θ)", value: result.toFixed(6) }
+                      ],
+                      formula: "cos(θ) = adjacent / hypotenuse"
+                    })}
+                  >
+                    <Printer className="mr-2 h-4 w-4" />
+                    Print
+                  </Button>
+                </div>
               </div>
-            </div>
+            </CardContent>
           </Card>
         )}
       </div>
