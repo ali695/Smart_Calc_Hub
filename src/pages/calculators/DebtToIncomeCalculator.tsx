@@ -4,6 +4,9 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CalculatorLayout } from "@/components/CalculatorLayout";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
+import { usePrintCalculator } from "@/hooks/usePrintCalculator";
+import { Copy, Loader2, Printer } from "lucide-react";
 
 const DebtToIncomeCalculator = () => {
   const [monthlyIncome, setMonthlyIncome] = useState("");
@@ -12,6 +15,8 @@ const DebtToIncomeCalculator = () => {
     dti: number;
     category: string;
   } | null>(null);
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
     const income = parseFloat(monthlyIncome);
@@ -63,6 +68,7 @@ const DebtToIncomeCalculator = () => {
               placeholder="e.g., 5000"
               value={monthlyIncome}
               onChange={(e) => setMonthlyIncome(e.target.value)}
+              onKeyPress={(e) => handleKeyPress(e, calculate)}
             />
           </div>
 
@@ -74,26 +80,69 @@ const DebtToIncomeCalculator = () => {
               placeholder="e.g., 1500"
               value={monthlyDebts}
               onChange={(e) => setMonthlyDebts(e.target.value)}
+              onKeyPress={(e) => handleKeyPress(e, calculate)}
             />
           </div>
         </div>
 
-        <Button type="button" onClick={calculate} className="w-full bg-gradient-to-r from-primary to-primary-accent hover:shadow-glow transition-all duration-300" size="lg">
-          Calculate DTI
+        <Button 
+          type="button" 
+          onClick={() => handleCalculation(calculate)} 
+          className="w-full bg-gradient-to-r from-primary to-primary-accent hover:shadow-glow transition-all duration-300" 
+          size="lg"
+          disabled={isCalculating}
+        >
+          {isCalculating ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Calculating...
+            </>
+          ) : (
+            "Calculate DTI"
+          )}
         </Button>
 
         {result && (
           <Card className="bg-gradient-to-br from-primary/10 to-primary-accent/10 border-primary hover:scale-[1.02] transition-all duration-300 animate-fade-in">
             <CardContent className="pt-6">
-              <div className="space-y-4">
-                <div>
-                  <p className="text-sm text-muted-foreground">Debt-to-Income Ratio</p>
-                  <p className="text-3xl font-bold bg-gradient-to-r from-primary to-primary-accent bg-clip-text text-transparent">{result.dti.toFixed(2)}%</p>
-                </div>
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex-1 space-y-4">
+                  <div>
+                    <p className="text-sm text-muted-foreground">Debt-to-Income Ratio</p>
+                    <p className="text-3xl font-bold bg-gradient-to-r from-primary to-primary-accent bg-clip-text text-transparent">{result.dti.toFixed(2)}%</p>
+                  </div>
 
-                <div>
-                  <p className="text-sm text-muted-foreground">Assessment</p>
-                  <p className="text-xl font-semibold">{result.category}</p>
+                  <div>
+                    <p className="text-sm text-muted-foreground">Assessment</p>
+                    <p className="text-xl font-semibold">{result.category}</p>
+                  </div>
+                </div>
+                <div className="flex gap-2">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => copyToClipboard(`${result.dti.toFixed(2)}%`, "DTI Ratio")}
+                  >
+                    <Copy className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => printCalculation({
+                      title: "Debt-to-Income Calculator",
+                      inputs: [
+                        { label: "Monthly Income", value: `$${monthlyIncome}` },
+                        { label: "Monthly Debts", value: `$${monthlyDebts}` }
+                      ],
+                      results: [
+                        { label: "DTI Ratio", value: `${result.dti.toFixed(2)}%` },
+                        { label: "Assessment", value: result.category }
+                      ],
+                      formula: "DTI = (Total Monthly Debt Payments / Gross Monthly Income) × 100"
+                    })}
+                  >
+                    <Printer className="h-4 w-4" />
+                  </Button>
                 </div>
               </div>
             </CardContent>

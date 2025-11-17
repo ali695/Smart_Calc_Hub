@@ -3,11 +3,16 @@ import { CalculatorLayout } from "@/components/CalculatorLayout";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
+import { usePrintCalculator } from "@/hooks/usePrintCalculator";
+import { Copy, Loader2, Printer } from "lucide-react";
 
 const CircleCalculator = () => {
   const [radius, setRadius] = useState("");
   const [result, setResult] = useState<{ area: number; circumference: number; diameter: number } | null>(null);
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
     const r = parseFloat(radius);
@@ -59,6 +64,7 @@ const CircleCalculator = () => {
             type="number"
             value={radius}
             onChange={(e) => setRadius(e.target.value)}
+            onKeyPress={(e) => handleKeyPress(e, calculate)}
             placeholder="e.g., 5"
             min="0"
             step="any"
@@ -66,37 +72,97 @@ const CircleCalculator = () => {
         </div>
 
         <Button 
-          onClick={calculate} 
+          onClick={() => handleCalculation(calculate)} 
           className="w-full bg-gradient-to-r from-primary to-primary-accent hover:shadow-glow transition-all duration-300"
           size="lg"
+          disabled={isCalculating}
         >
-          Calculate Circle Properties
+          {isCalculating ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Calculating...
+            </>
+          ) : (
+            "Calculate Circle Properties"
+          )}
         </Button>
 
         {result && (
-          <Card className="p-6 bg-gradient-to-br from-primary/10 to-primary-accent/10 border-primary hover:scale-[1.02] transition-all duration-300 animate-fade-in">
-            <div className="space-y-4">
-              <div className="text-center">
-                <p className="text-sm font-medium text-muted-foreground mb-2">Circle Properties</p>
-                <p className="text-4xl font-bold bg-gradient-to-r from-primary to-primary-accent bg-clip-text text-transparent">
-                  r = {radius} units
-                </p>
+          <Card className="bg-gradient-to-br from-primary/10 to-primary-accent/10 border-primary hover:scale-[1.02] transition-all duration-300 animate-fade-in">
+            <CardContent className="pt-6">
+              <div className="space-y-4">
+                <div className="text-center">
+                  <p className="text-sm font-medium text-muted-foreground mb-2">Circle Properties</p>
+                  <p className="text-4xl font-bold bg-gradient-to-r from-primary to-primary-accent bg-clip-text text-transparent">
+                    r = {radius} units
+                  </p>
+                </div>
+                <div className="pt-4 border-t border-border/50 space-y-3">
+                  <div className="flex justify-between items-center p-3 bg-muted/50 rounded-lg">
+                    <span className="text-sm font-medium text-muted-foreground">Area:</span>
+                    <div className="flex items-center gap-2">
+                      <span className="text-xl font-bold">{result.area.toFixed(2)} sq units</span>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-8 w-8"
+                        onClick={() => copyToClipboard(result.area.toFixed(2), "Area")}
+                      >
+                        <Copy className="h-3 w-3" />
+                      </Button>
+                    </div>
+                  </div>
+                  <div className="flex justify-between items-center p-3 bg-muted/50 rounded-lg">
+                    <span className="text-sm font-medium text-muted-foreground">Circumference:</span>
+                    <div className="flex items-center gap-2">
+                      <span className="text-xl font-bold">{result.circumference.toFixed(2)} units</span>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-8 w-8"
+                        onClick={() => copyToClipboard(result.circumference.toFixed(2), "Circumference")}
+                      >
+                        <Copy className="h-3 w-3" />
+                      </Button>
+                    </div>
+                  </div>
+                  <div className="flex justify-between items-center p-3 bg-muted/50 rounded-lg">
+                    <span className="text-sm font-medium text-muted-foreground">Diameter:</span>
+                    <div className="flex items-center gap-2">
+                      <span className="text-xl font-bold">{result.diameter.toFixed(2)} units</span>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-8 w-8"
+                        onClick={() => copyToClipboard(result.diameter.toFixed(2), "Diameter")}
+                      >
+                        <Copy className="h-3 w-3" />
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+                <div className="pt-4 flex justify-center">
+                  <Button
+                    variant="outline"
+                    onClick={() => printCalculation({
+                      title: "Circle Calculator",
+                      inputs: [
+                        { label: "Radius", value: `${radius} units` }
+                      ],
+                      results: [
+                        { label: "Area", value: `${result.area.toFixed(2)} sq units` },
+                        { label: "Circumference", value: `${result.circumference.toFixed(2)} units` },
+                        { label: "Diameter", value: `${result.diameter.toFixed(2)} units` }
+                      ],
+                      formula: "Area = πr² | Circumference = 2πr | Diameter = 2r"
+                    })}
+                  >
+                    <Printer className="mr-2 h-4 w-4" />
+                    Print Results
+                  </Button>
+                </div>
               </div>
-              <div className="pt-4 border-t border-border/50 space-y-3">
-                <div className="flex justify-between items-center p-3 bg-muted/50 rounded-lg">
-                  <span className="text-sm font-medium text-muted-foreground">Area:</span>
-                  <span className="font-bold text-lg">{result.area.toFixed(4)} units²</span>
-                </div>
-                <div className="flex justify-between items-center p-3 bg-muted/50 rounded-lg">
-                  <span className="text-sm font-medium text-muted-foreground">Circumference:</span>
-                  <span className="font-bold text-lg">{result.circumference.toFixed(4)} units</span>
-                </div>
-                <div className="flex justify-between items-center p-3 bg-muted/50 rounded-lg">
-                  <span className="text-sm font-medium text-muted-foreground">Diameter:</span>
-                  <span className="font-bold text-lg">{result.diameter.toFixed(4)} units</span>
-                </div>
-              </div>
-            </div>
+            </CardContent>
           </Card>
         )}
       </div>
