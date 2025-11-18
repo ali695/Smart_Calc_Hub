@@ -103,6 +103,12 @@ import MolarityCalculator from "./pages/calculators/MolarityCalculator";
 import HalfLifeCalculator from "./pages/calculators/HalfLifeCalculator";
 import DensityCalculator from "./pages/calculators/DensityCalculator";
 import KineticEnergyCalculator from "./pages/calculators/KineticEnergyCalculator";
+import ColorConverterCalculator from "./pages/calculators/ColorConverterCalculator";
+import PasswordGeneratorCalculator from "./pages/calculators/PasswordGeneratorCalculator";
+import GrowthRateCalculator from "./pages/calculators/GrowthRateCalculator";
+import CustomerLifetimeValueCalculator from "./pages/calculators/CustomerLifetimeValueCalculator";
+import ConversionRateCalculator from "./pages/calculators/ConversionRateCalculator";
+import PaybackPeriodCalculator from "./pages/calculators/PaybackPeriodCalculator";
 
 const queryClient = new QueryClient();
 
@@ -215,14 +221,20 @@ const App = () => (
               <Route path="/calculator/base64-encoder" element={<Base64Calculator />} />
               <Route path="/calculator/json-formatter" element={<JsonFormatterCalculator />} />
               <Route path="/calculator/ohms-law" element={<OhmsLawCalculator />} />
-          <Route path="/calculator/force" element={<ForceCalculator />} />
-          <Route path="/calculator/torque" element={<TorqueCalculator />} />
-          <Route path="/calculator/power" element={<PowerCalculator />} />
-          <Route path="/calculator/ph" element={<PhCalculator />} />
-          <Route path="/calculator/molarity-calculator" element={<MolarityCalculator />} />
-          <Route path="/calculator/half-life" element={<HalfLifeCalculator />} />
-          <Route path="/calculator/density-calculator" element={<DensityCalculator />} />
-          <Route path="/calculator/kinetic-energy" element={<KineticEnergyCalculator />} />
+              <Route path="/calculator/force" element={<ForceCalculator />} />
+              <Route path="/calculator/torque" element={<TorqueCalculator />} />
+              <Route path="/calculator/power" element={<PowerCalculator />} />
+              <Route path="/calculator/ph" element={<PhCalculator />} />
+              <Route path="/calculator/molarity" element={<MolarityCalculator />} />
+              <Route path="/calculator/half-life" element={<HalfLifeCalculator />} />
+              <Route path="/calculator/density" element={<DensityCalculator />} />
+              <Route path="/calculator/kinetic-energy" element={<KineticEnergyCalculator />} />
+              <Route path="/calculator/color-converter" element={<ColorConverterCalculator />} />
+              <Route path="/calculator/password-generator" element={<PasswordGeneratorCalculator />} />
+              <Route path="/calculator/growth-rate" element={<GrowthRateCalculator />} />
+              <Route path="/calculator/customer-lifetime-value" element={<CustomerLifetimeValueCalculator />} />
+              <Route path="/calculator/conversion-rate" element={<ConversionRateCalculator />} />
+              <Route path="/calculator/payback-period" element={<PaybackPeriodCalculator />} />
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/terms" element={<Terms />} />
               <Route path="*" element={<NotFound />} />
