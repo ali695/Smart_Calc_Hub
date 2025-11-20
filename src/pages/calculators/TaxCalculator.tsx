@@ -3,6 +3,7 @@ import { CalculatorLayout } from "@/components/CalculatorLayout";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { SchemaMarkup } from "@/components/SchemaMarkup";
 
 const TaxCalculator = () => {
   const [income, setIncome] = useState("");
@@ -48,7 +49,23 @@ const TaxCalculator = () => {
   ];
 
   return (
-    <CalculatorLayout
+    <>
+      <SchemaMarkup
+        type="WebApplication"
+        data={{
+          name: "Tax Calculator",
+          description: "Calculate your income tax based on earnings and deductions",
+          url: "https://smartcalchub.com/calculator/tax",
+          applicationCategory: "FinanceApplication",
+          operatingSystem: "Any",
+          offers: {
+            "@type": "Offer",
+            price: "0",
+            priceCurrency: "USD"
+          }
+        }}
+      />
+      <CalculatorLayout
       title="Tax Calculator"
       description="Calculate your income tax based on earnings and deductions"
       howItWorks="This tax calculator helps you estimate your income tax liability. Enter your gross income, applicable tax rate, and any deductions you qualify for. The calculator will show your taxable income (after deductions), the total tax amount, and your net income after tax. This is a simplified calculator; actual tax calculations may involve multiple brackets and additional factors."
@@ -123,6 +140,7 @@ const TaxCalculator = () => {
         )}
       </div>
     </CalculatorLayout>
+    </>
   );
 };
 

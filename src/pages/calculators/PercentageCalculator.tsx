@@ -10,6 +10,7 @@ import { z } from "zod";
 import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
 import { usePrintCalculator } from "@/hooks/usePrintCalculator";
 import { Copy, Loader2, Printer } from "lucide-react";
+import { SchemaMarkup } from "@/components/SchemaMarkup";
 
 const PercentageCalculator = () => {
   const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
@@ -86,7 +87,23 @@ const PercentageCalculator = () => {
   ];
 
   return (
-    <CalculatorLayout
+    <>
+      <SchemaMarkup
+        type="WebApplication"
+        data={{
+          name: "Percentage Calculator",
+          description: "Calculate percentages, percentage change, and reverse percentages with ease",
+          url: "https://smartcalchub.com/calculator/percentage",
+          applicationCategory: "UtilityApplication",
+          operatingSystem: "Any",
+          offers: {
+            "@type": "Offer",
+            price: "0",
+            priceCurrency: "USD"
+          }
+        }}
+      />
+      <CalculatorLayout
       title="Percentage Calculator"
       description="Calculate percentages, percentage increase/decrease, and percentage of a number"
       seoTitle="Percentage Calculator - Calculate Percentages Easily | SmartCalc Hub"
@@ -233,6 +250,7 @@ const PercentageCalculator = () => {
         </TabsContent>
       </Tabs>
     </CalculatorLayout>
+    </>
   );
 };
 

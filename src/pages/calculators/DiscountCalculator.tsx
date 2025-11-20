@@ -7,6 +7,7 @@ import { Card } from "@/components/ui/card";
 import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
 import { usePrintCalculator } from "@/hooks/usePrintCalculator";
 import { Copy, Loader2, Printer } from "lucide-react";
+import { SchemaMarkup } from "@/components/SchemaMarkup";
 
 const DiscountCalculator = () => {
   const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
@@ -46,7 +47,23 @@ const DiscountCalculator = () => {
   ];
 
   return (
-    <CalculatorLayout
+    <>
+      <SchemaMarkup
+        type="WebApplication"
+        data={{
+          name: "Discount Calculator",
+          description: "Calculate final price and savings with discount percentage instantly",
+          url: "https://smartcalchub.com/finance/discount-calculator",
+          applicationCategory: "FinanceApplication",
+          operatingSystem: "Any",
+          offers: {
+            "@type": "Offer",
+            price: "0",
+            priceCurrency: "USD"
+          }
+        }}
+      />
+      <CalculatorLayout
       title="Discount Calculator"
       description="Calculate final price and savings with discount percentage instantly"
       category="finance"
@@ -139,6 +156,7 @@ const DiscountCalculator = () => {
         )}
       </div>
     </CalculatorLayout>
+    </>
   );
 };
 

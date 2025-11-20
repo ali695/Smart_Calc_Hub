@@ -4,6 +4,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CalculatorLayout } from "@/components/CalculatorLayout";
+import { SchemaMarkup } from "@/components/SchemaMarkup";
 
 const PercentageChangeCalculator = () => {
   const [oldValue, setOldValue] = useState("");
@@ -43,7 +44,23 @@ const PercentageChangeCalculator = () => {
   ];
 
   return (
-    <CalculatorLayout
+    <>
+      <SchemaMarkup
+        type="WebApplication"
+        data={{
+          name: "Percentage Change Calculator",
+          description: "Calculate the percentage increase or decrease between two values quickly and accurately",
+          url: "https://smartcalchub.com/calculator/percentage-change",
+          applicationCategory: "UtilityApplication",
+          operatingSystem: "Any",
+          offers: {
+            "@type": "Offer",
+            price: "0",
+            priceCurrency: "USD"
+          }
+        }}
+      />
+      <CalculatorLayout
       title="Percentage Change Calculator"
       description="Calculate the percentage increase or decrease between two values quickly and accurately."
       howItWorks="Enter the original (old) value and the new value. The calculator shows the percentage change, whether it's an increase or decrease."
@@ -104,6 +121,7 @@ const PercentageChangeCalculator = () => {
         )}
       </div>
     </CalculatorLayout>
+    </>
   );
 };
 

@@ -4,6 +4,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CalculatorLayout } from "@/components/CalculatorLayout";
+import { SchemaMarkup } from "@/components/SchemaMarkup";
 
 const BreakEvenCalculator = () => {
   const [fixedCosts, setFixedCosts] = useState("");
@@ -43,7 +44,23 @@ const BreakEvenCalculator = () => {
   ];
 
   return (
-    <CalculatorLayout
+    <>
+      <SchemaMarkup
+        type="WebApplication"
+        data={{
+          name: "Break-Even Calculator",
+          description: "Calculate the break-even point for your business to understand when you'll start making profit",
+          url: "https://smartcalchub.com/calculator/break-even",
+          applicationCategory: "FinanceApplication",
+          operatingSystem: "Any",
+          offers: {
+            "@type": "Offer",
+            price: "0",
+            priceCurrency: "USD"
+          }
+        }}
+      />
+      <CalculatorLayout
       title="Break-Even Calculator"
       description="Calculate the break-even point for your business to understand when you'll start making profit."
       howItWorks="Enter your fixed costs, variable cost per unit, and selling price. The calculator shows how many units you need to sell to break even."
@@ -113,6 +130,7 @@ const BreakEvenCalculator = () => {
         )}
       </div>
     </CalculatorLayout>
+    </>
   );
 };
 
