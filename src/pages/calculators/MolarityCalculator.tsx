@@ -7,6 +7,7 @@ import { Card } from "@/components/ui/card";
 import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
 import { usePrintCalculator } from "@/hooks/usePrintCalculator";
 import { Copy, Printer } from "lucide-react";
+import { SchemaMarkup } from "@/components/SchemaMarkup";
 
 const MolarityCalculator = () => {
   const [moles, setMoles] = useState("");
@@ -61,7 +62,17 @@ const MolarityCalculator = () => {
   ];
 
   return (
-    <CalculatorLayout
+    <>
+      <SchemaMarkup
+        type="WebApplication"
+        data={{
+          name: "Molarity Calculator",
+          description: "Calculate solution molarity and dilutions for chemistry applications",
+          url: "https://smartcalchub.com/science/molarity-calculator",
+          applicationCategory: "ScienceApplication"
+        }}
+      />
+      <CalculatorLayout
       title="Molarity Calculator"
       description="Calculate solution molarity and dilutions for chemistry applications"
       category="science"
@@ -151,6 +162,7 @@ const MolarityCalculator = () => {
         )}
       </div>
     </CalculatorLayout>
+    </>
   );
 };
 
