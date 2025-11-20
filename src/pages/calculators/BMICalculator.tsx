@@ -9,6 +9,7 @@ import { z } from "zod";
 import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
 import { usePrintCalculator } from "@/hooks/usePrintCalculator";
 import { Copy, Loader2, Printer } from "lucide-react";
+import { SchemaMarkup } from "@/components/SchemaMarkup";
 
 const BMICalculator = () => {
   const [height, setHeight] = useState("");
@@ -82,7 +83,23 @@ const BMICalculator = () => {
   ];
 
   return (
-    <CalculatorLayout
+    <>
+      <SchemaMarkup
+        type="WebApplication"
+        data={{
+          name: "BMI Calculator",
+          description: "Calculate your Body Mass Index and check if you're in a healthy weight range",
+          url: "https://smartcalchub.com/calculator/bmi",
+          applicationCategory: "HealthApplication",
+          operatingSystem: "Any",
+          offers: {
+            "@type": "Offer",
+            price: "0",
+            priceCurrency: "USD"
+          }
+        }}
+      />
+      <CalculatorLayout
       title="BMI Calculator"
       description="Calculate your Body Mass Index and check if you're in a healthy weight range"
       category="health"
@@ -174,6 +191,7 @@ const BMICalculator = () => {
         )}
       </div>
     </CalculatorLayout>
+    </>
   );
 };
 

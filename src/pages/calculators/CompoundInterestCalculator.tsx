@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { safeParseFloat } from "@/lib/validation";
 import { toast } from "sonner";
+import { SchemaMarkup } from "@/components/SchemaMarkup";
 
 const CompoundInterestCalculator = () => {
   const [principal, setPrincipal] = useState("10000");
@@ -84,7 +85,23 @@ const CompoundInterestCalculator = () => {
   ];
 
   return (
-    <CalculatorLayout
+    <>
+      <SchemaMarkup
+        type="WebApplication"
+        data={{
+          name: "Compound Interest Calculator",
+          description: "Calculate how your investments grow over time with compound interest",
+          url: "https://smartcalchub.com/calculator/compound-interest",
+          applicationCategory: "FinanceApplication",
+          operatingSystem: "Any",
+          offers: {
+            "@type": "Offer",
+            price: "0",
+            priceCurrency: "USD"
+          }
+        }}
+      />
+      <CalculatorLayout
       title="Compound Interest Calculator"
       description="Calculate how your investments grow over time with compound interest"
       seoTitle="Compound Interest Calculator - Investment Growth Calculator | SmartCalc Hub"
@@ -210,6 +227,7 @@ const CompoundInterestCalculator = () => {
         </Card>
       </div>
     </CalculatorLayout>
+    </>
   );
 };
 

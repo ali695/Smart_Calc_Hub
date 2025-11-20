@@ -3,6 +3,7 @@ import { CalculatorLayout } from "@/components/CalculatorLayout";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { SchemaMarkup } from "@/components/SchemaMarkup";
 
 const AgeCalculator = () => {
   const [birthDate, setBirthDate] = useState("");
@@ -70,7 +71,23 @@ const AgeCalculator = () => {
   ];
 
   return (
-    <CalculatorLayout
+    <>
+      <SchemaMarkup
+        type="WebApplication"
+        data={{
+          name: "Age Calculator",
+          description: "Calculate your exact age in years, months, days, and more",
+          url: "https://smartcalchub.com/calculator/age",
+          applicationCategory: "UtilityApplication",
+          operatingSystem: "Any",
+          offers: {
+            "@type": "Offer",
+            price: "0",
+            priceCurrency: "USD"
+          }
+        }}
+      />
+      <CalculatorLayout
       title="Age Calculator"
       description="Calculate your exact age in years, months, days, and more"
       category="math"
@@ -120,6 +137,7 @@ const AgeCalculator = () => {
         )}
       </div>
     </CalculatorLayout>
+    </>
   );
 };
 

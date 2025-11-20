@@ -4,6 +4,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CalculatorLayout } from "@/components/CalculatorLayout";
+import { SchemaMarkup } from "@/components/SchemaMarkup";
 
 const PrimeNumberCalculator = () => {
   const [number, setNumber] = useState("");
@@ -56,7 +57,23 @@ const PrimeNumberCalculator = () => {
   ];
 
   return (
-    <CalculatorLayout
+    <>
+      <SchemaMarkup
+        type="WebApplication"
+        data={{
+          name: "Prime Number Checker",
+          description: "Check if a number is prime and see all its factors if it's composite",
+          url: "https://smartcalchub.com/calculator/prime",
+          applicationCategory: "UtilityApplication",
+          operatingSystem: "Any",
+          offers: {
+            "@type": "Offer",
+            price: "0",
+            priceCurrency: "USD"
+          }
+        }}
+      />
+      <CalculatorLayout
       title="Prime Number Checker"
       description="Check if a number is prime and see all its factors if it's composite."
       category="math"
@@ -106,6 +123,7 @@ const PrimeNumberCalculator = () => {
         )}
       </div>
     </CalculatorLayout>
+    </>
   );
 };
 

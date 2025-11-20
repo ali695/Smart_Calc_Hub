@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
 import { usePrintCalculator } from "@/hooks/usePrintCalculator";
 import { Copy, Printer } from "lucide-react";
+import { SchemaMarkup } from "@/components/SchemaMarkup";
 
 const MortgageCalculator = () => {
   const [homePrice, setHomePrice] = useState("300000");
@@ -87,7 +88,23 @@ const MortgageCalculator = () => {
   ];
 
   return (
-    <CalculatorLayout
+    <>
+      <SchemaMarkup
+        type="WebApplication"
+        data={{
+          name: "Mortgage Calculator",
+          description: "Calculate your monthly mortgage payment including principal, interest, taxes, and insurance",
+          url: "https://smartcalchub.com/calculator/mortgage",
+          applicationCategory: "FinanceApplication",
+          operatingSystem: "Any",
+          offers: {
+            "@type": "Offer",
+            price: "0",
+            priceCurrency: "USD"
+          }
+        }}
+      />
+      <CalculatorLayout
       title="Mortgage Calculator"
       description="Calculate your monthly mortgage payment including principal, interest, taxes, and insurance"
       seoTitle="Mortgage Calculator - Calculate Home Loan Payments | SmartCalc Hub"
@@ -255,6 +272,7 @@ const MortgageCalculator = () => {
         </Card>
       </div>
     </CalculatorLayout>
+    </>
   );
 };
 
