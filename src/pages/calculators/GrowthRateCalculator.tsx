@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
 import { usePrintCalculator } from "@/hooks/usePrintCalculator";
 import { Copy, Loader2, Printer } from "lucide-react";
+import { SchemaMarkup } from "@/components/SchemaMarkup";
 
 const GrowthRateCalculator = () => {
   const [startingValue, setStartingValue] = useState("");
@@ -50,7 +51,17 @@ const GrowthRateCalculator = () => {
   ];
 
   return (
-    <CalculatorLayout
+    <>
+      <SchemaMarkup
+        type="WebApplication"
+        data={{
+          name: "Growth Rate Calculator",
+          description: "Calculate CAGR and year-over-year growth rates for business analytics",
+          url: "https://smartcalchub.com/calculator/growth-rate",
+          applicationCategory: "BusinessApplication"
+        }}
+      />
+      <CalculatorLayout
       title="Growth Rate Calculator"
       description="Calculate CAGR and year-over-year growth rates"
       category="business"
@@ -175,6 +186,7 @@ const GrowthRateCalculator = () => {
         )}
       </div>
     </CalculatorLayout>
+    </>
   );
 };
 

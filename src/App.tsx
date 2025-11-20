@@ -109,6 +109,8 @@ import GrowthRateCalculator from "./pages/calculators/GrowthRateCalculator";
 import CustomerLifetimeValueCalculator from "./pages/calculators/CustomerLifetimeValueCalculator";
 import ConversionRateCalculator from "./pages/calculators/ConversionRateCalculator";
 import PaybackPeriodCalculator from "./pages/calculators/PaybackPeriodCalculator";
+import StressStrainCalculator from "./pages/calculators/StressStrainCalculator";
+import InventoryTurnoverCalculator from "./pages/calculators/InventoryTurnoverCalculator";
 
 const queryClient = new QueryClient();
 
@@ -235,6 +237,8 @@ const App = () => (
               <Route path="/calculator/customer-lifetime-value" element={<CustomerLifetimeValueCalculator />} />
               <Route path="/calculator/conversion-rate" element={<ConversionRateCalculator />} />
               <Route path="/calculator/payback-period" element={<PaybackPeriodCalculator />} />
+              <Route path="/calculator/stress-strain" element={<StressStrainCalculator />} />
+              <Route path="/calculator/inventory-turnover" element={<InventoryTurnoverCalculator />} />
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/terms" element={<Terms />} />
               <Route path="*" element={<NotFound />} />
