@@ -111,6 +111,8 @@ import ConversionRateCalculator from "./pages/calculators/ConversionRateCalculat
 import PaybackPeriodCalculator from "./pages/calculators/PaybackPeriodCalculator";
 import StressStrainCalculator from "./pages/calculators/StressStrainCalculator";
 import InventoryTurnoverCalculator from "./pages/calculators/InventoryTurnoverCalculator";
+import FuelEfficiencyCalculator from "./pages/calculators/FuelEfficiencyCalculator";
+import DataTransferCalculator from "./pages/calculators/DataTransferCalculator";
 
 const queryClient = new QueryClient();
 
@@ -189,6 +191,8 @@ const App = () => (
               <Route path="/calculator/prime" element={<PrimeNumberCalculator />} />
               <Route path="/calculator/profit-margin" element={<ProfitMarginCalculator />} />
               <Route path="/calculator/timezone" element={<TimezoneConverter />} />
+              <Route path="/calculator/fuel" element={<FuelEfficiencyCalculator />} />
+              <Route path="/calculator/data-transfer" element={<DataTransferCalculator />} />
               <Route path="/calculator/simple-interest" element={<SimpleInterestCalculator />} />
               <Route path="/calculator/emi" element={<EMICalculator />} />
               <Route path="/calculator/discount" element={<DiscountCalculator />} />
@@ -228,8 +232,10 @@ const App = () => (
               <Route path="/calculator/power" element={<PowerCalculator />} />
               <Route path="/calculator/ph" element={<PhCalculator />} />
               <Route path="/calculator/molarity" element={<MolarityCalculator />} />
+              <Route path="/calculator/molarity-calculator" element={<MolarityCalculator />} />
               <Route path="/calculator/half-life" element={<HalfLifeCalculator />} />
               <Route path="/calculator/density" element={<DensityCalculator />} />
+              <Route path="/calculator/density-calculator" element={<DensityCalculator />} />
               <Route path="/calculator/kinetic-energy" element={<KineticEnergyCalculator />} />
               <Route path="/calculator/color-converter" element={<ColorConverterCalculator />} />
               <Route path="/calculator/password-generator" element={<PasswordGeneratorCalculator />} />
