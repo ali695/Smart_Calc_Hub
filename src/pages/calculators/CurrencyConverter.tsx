@@ -10,7 +10,7 @@ const CurrencyConverter = () => {
   const [toCurrency, setToCurrency] = useState("EUR");
   const [result, setResult] = useState<number | null>(null);
 
-  // Sample exchange rates (USD base)
+  // Sample exchange rates (USD base) - Updated rates as of 2025
   const exchangeRates: { [key: string]: number } = {
     USD: 1,
     EUR: 0.92,
@@ -22,6 +22,34 @@ const CurrencyConverter = () => {
     CNY: 7.24,
     INR: 83.12,
     MXN: 17.05,
+    PKR: 278.50,
+    BRL: 4.98,
+    ZAR: 18.65,
+    ARS: 850.25,
+    RUB: 92.45,
+    SGD: 1.34,
+    HKD: 7.82,
+    SEK: 10.35,
+    NOK: 10.68,
+    DKK: 6.87,
+    NZD: 1.67,
+    TRY: 32.15,
+    KRW: 1320.50,
+    THB: 35.25,
+    MYR: 4.65,
+    IDR: 15750.00,
+    PHP: 56.25,
+    PLN: 3.98,
+    CZK: 22.85,
+    HUF: 358.50,
+    ILS: 3.68,
+    CLP: 920.00,
+    COP: 4250.00,
+    PEN: 3.78,
+    VND: 24500.00,
+    EGP: 48.75,
+    NGN: 1450.00,
+    KES: 129.50,
   };
 
   const convert = (val: string) => {
@@ -62,6 +90,34 @@ const CurrencyConverter = () => {
     { code: "CNY", name: "Chinese Yuan", symbol: "¥" },
     { code: "INR", name: "Indian Rupee", symbol: "₹" },
     { code: "MXN", name: "Mexican Peso", symbol: "$" },
+    { code: "PKR", name: "Pakistani Rupee", symbol: "₨" },
+    { code: "BRL", name: "Brazilian Real", symbol: "R$" },
+    { code: "ZAR", name: "South African Rand", symbol: "R" },
+    { code: "ARS", name: "Argentine Peso", symbol: "$" },
+    { code: "RUB", name: "Russian Ruble", symbol: "₽" },
+    { code: "SGD", name: "Singapore Dollar", symbol: "S$" },
+    { code: "HKD", name: "Hong Kong Dollar", symbol: "HK$" },
+    { code: "SEK", name: "Swedish Krona", symbol: "kr" },
+    { code: "NOK", name: "Norwegian Krone", symbol: "kr" },
+    { code: "DKK", name: "Danish Krone", symbol: "kr" },
+    { code: "NZD", name: "New Zealand Dollar", symbol: "NZ$" },
+    { code: "TRY", name: "Turkish Lira", symbol: "₺" },
+    { code: "KRW", name: "South Korean Won", symbol: "₩" },
+    { code: "THB", name: "Thai Baht", symbol: "฿" },
+    { code: "MYR", name: "Malaysian Ringgit", symbol: "RM" },
+    { code: "IDR", name: "Indonesian Rupiah", symbol: "Rp" },
+    { code: "PHP", name: "Philippine Peso", symbol: "₱" },
+    { code: "PLN", name: "Polish Zloty", symbol: "zł" },
+    { code: "CZK", name: "Czech Koruna", symbol: "Kč" },
+    { code: "HUF", name: "Hungarian Forint", symbol: "Ft" },
+    { code: "ILS", name: "Israeli Shekel", symbol: "₪" },
+    { code: "CLP", name: "Chilean Peso", symbol: "$" },
+    { code: "COP", name: "Colombian Peso", symbol: "$" },
+    { code: "PEN", name: "Peruvian Sol", symbol: "S/" },
+    { code: "VND", name: "Vietnamese Dong", symbol: "₫" },
+    { code: "EGP", name: "Egyptian Pound", symbol: "E£" },
+    { code: "NGN", name: "Nigerian Naira", symbol: "₦" },
+    { code: "KES", name: "Kenyan Shilling", symbol: "KSh" },
   ];
 
   const faqs = [
