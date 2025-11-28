@@ -14,6 +14,7 @@ import Contact from "./pages/Contact";
 import FAQ from "./pages/FAQ";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
+import BlogGenerator from "./pages/BlogGenerator";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import NotFound from "./pages/NotFound";
@@ -147,6 +148,7 @@ const App = () => (
               <Route path="/faq" element={<FAQ />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:slug" element={<BlogPost />} />
+              <Route path="/blog-generator" element={<BlogGenerator />} />
               <Route path="/calculator/bmi" element={<BMICalculator />} />
               <Route path="/calculator/loan" element={<LoanCalculator />} />
               <Route path="/calculator/percentage" element={<PercentageCalculator />} />

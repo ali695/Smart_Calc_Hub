@@ -153,6 +153,48 @@ export const CalculatorLayout = ({
     }))
   };
 
+  // Generate HowTo structured data for step-by-step instructions
+  const howToStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": `How to Use ${title}`,
+    "description": description,
+    "image": getCategoryOGImage(category),
+    "totalTime": "PT2M",
+    "estimatedCost": {
+      "@type": "MonetaryAmount",
+      "currency": "USD",
+      "value": "0"
+    },
+    "tool": {
+      "@type": "HowToTool",
+      "name": title
+    },
+    "step": [
+      {
+        "@type": "HowToStep",
+        "position": 1,
+        "name": "Enter Your Values",
+        "text": "Input the required values into the calculator fields. Make sure all values are accurate for the best results.",
+        "image": getCategoryOGImage(category)
+      },
+      {
+        "@type": "HowToStep",
+        "position": 2,
+        "name": "Click Calculate",
+        "text": "Press the calculate button to process your inputs and generate results based on the formula.",
+        "image": getCategoryOGImage(category)
+      },
+      {
+        "@type": "HowToStep",
+        "position": 3,
+        "name": "Review Results",
+        "text": "Analyze the calculated results displayed. You can copy the results or print them for your records.",
+        "image": getCategoryOGImage(category)
+      }
+    ]
+  };
+
   return (
     <>
       <SEOHead
@@ -178,6 +220,11 @@ export const CalculatorLayout = ({
       {/* BreadcrumbList Schema */}
       <script type="application/ld+json">
         {JSON.stringify(breadcrumbStructuredData)}
+      </script>
+
+      {/* HowTo Schema */}
+      <script type="application/ld+json">
+        {JSON.stringify(howToStructuredData)}
       </script>
       
       <div className="min-h-screen py-12">

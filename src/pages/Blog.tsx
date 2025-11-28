@@ -1,5 +1,6 @@
-import { Calendar, User, ArrowRight } from "lucide-react";
+import { Calendar, User, ArrowRight, Sparkles } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
 import { blogPosts } from "@/data/blogPosts";
@@ -13,9 +14,15 @@ const Blog = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-5xl md:text-6xl font-bold mb-4">Blog & Insights</h1>
-            <p className="text-xl opacity-95 max-w-2xl mx-auto">
+            <p className="text-xl opacity-95 max-w-2xl mx-auto mb-6">
               Insights, tips, and guides to help you get the most out of our calculator tools
             </p>
+            <Link to="/blog-generator">
+              <Button variant="secondary" size="lg" className="gap-2 shadow-lg">
+                <Sparkles className="h-5 w-5" />
+                AI Blog Generator
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
