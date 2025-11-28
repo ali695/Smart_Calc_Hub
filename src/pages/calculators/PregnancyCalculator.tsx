@@ -1,10 +1,16 @@
 import { useState } from "react";
 import { CalculatorLayout } from "@/components/CalculatorLayout";
+import { SchemaMarkup } from "@/components/SchemaMarkup";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
+import { usePrintCalculator } from "@/hooks/usePrintCalculator";
+import { Copy, Printer, Loader2 } from "lucide-react";
 
 const PregnancyCalculator = () => {
+  const { isCalculating, handleCalculation, copyToClipboard } = useCalculatorEnhancements();
+  const { printCalculation } = usePrintCalculator();
   const [lastPeriod, setLastPeriod] = useState("");
   const [dueDate, setDueDate] = useState<string | null>(null);
   const [weeksPregnant, setWeeksPregnant] = useState<number | null>(null);
@@ -44,7 +50,16 @@ const PregnancyCalculator = () => {
   ];
 
   return (
-    <CalculatorLayout
+    <>
+      <SchemaMarkup
+        type="WebApplication"
+        data={{
+          name: "Pregnancy Due Date Calculator",
+          description: "Calculate your expected due date based on last menstrual period",
+          url: "https://smartcalchub.com/health/pregnancy-calculator"
+        }}
+      />
+      <CalculatorLayout
       title="Pregnancy Due Date Calculator"
       description="Calculate your expected due date based on last menstrual period"
       category="health"
@@ -59,12 +74,34 @@ const PregnancyCalculator = () => {
           <Input type="date" value={lastPeriod} onChange={(e) => setLastPeriod(e.target.value)} />
         </div>
 
-        <Button onClick={calculate} className="w-full" size="lg">Calculate Due Date</Button>
+        <Button 
+          onClick={() => handleCalculation(calculate)} 
+          className="w-full" 
+          size="lg"
+          disabled={isCalculating}
+        >
+          {isCalculating ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Calculating...</> : "Calculate Due Date"}
+        </Button>
 
         {dueDate && (
           <div className="space-y-4 animate-fade-in">
             <div className="p-6 bg-primary/10 rounded-lg text-center">
-              <p className="text-sm font-medium text-muted-foreground">Estimated Due Date</p>
+              <div className="flex items-center justify-center gap-2 mb-2">
+                <p className="text-sm font-medium text-muted-foreground">Estimated Due Date</p>
+                <Button variant="ghost" size="icon" onClick={() => copyToClipboard(dueDate, "Due Date")}>
+                  <Copy className="h-4 w-4" />
+                </Button>
+                <Button variant="ghost" size="icon" onClick={() => printCalculation({
+                  title: "Pregnancy Due Date Calculator",
+                  inputs: [{ label: "Last Period Date", value: lastPeriod }],
+                  results: [
+                    { label: "Due Date", value: dueDate },
+                    { label: "Weeks Pregnant", value: `${weeksPregnant} weeks` }
+                  ]
+                })}>
+                  <Printer className="h-4 w-4" />
+                </Button>
+              </div>
               <p className="text-3xl font-bold text-primary">{dueDate}</p>
             </div>
             
@@ -83,6 +120,7 @@ const PregnancyCalculator = () => {
         )}
       </div>
     </CalculatorLayout>
+    </>
   );
 };
 

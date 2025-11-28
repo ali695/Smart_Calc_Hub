@@ -5,8 +5,14 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { CalculatorLayout } from "@/components/CalculatorLayout";
+import { SchemaMarkup } from "@/components/SchemaMarkup";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
+import { usePrintCalculator } from "@/hooks/usePrintCalculator";
+import { Copy, Printer, Loader2 } from "lucide-react";
 
 const AreaPerimeterCalculator = () => {
+  const { isCalculating, handleCalculation, copyToClipboard } = useCalculatorEnhancements();
+  const { printCalculation } = usePrintCalculator();
   const [shape, setShape] = useState("circle");
   const [value1, setValue1] = useState("");
   const [value2, setValue2] = useState("");
@@ -59,7 +65,16 @@ const AreaPerimeterCalculator = () => {
   ];
 
   return (
-    <CalculatorLayout
+    <>
+      <SchemaMarkup
+        type="WebApplication"
+        data={{
+          name: "Area & Perimeter Calculator",
+          description: "Calculate the area and perimeter of common shapes including circles, squares, rectangles, and triangles",
+          url: "https://smartcalchub.com/math/area-perimeter-calculator"
+        }}
+      />
+      <CalculatorLayout
       title="Area & Perimeter Calculator"
       description="Calculate the area and perimeter of common shapes including circles, squares, rectangles, and triangles."
       category="math"
@@ -116,8 +131,14 @@ const AreaPerimeterCalculator = () => {
           )}
         </div>
 
-        <Button type="button" onClick={calculate} className="w-full" size="lg">
-          Calculate
+        <Button 
+          type="button" 
+          onClick={() => handleCalculation(calculate)} 
+          className="w-full" 
+          size="lg"
+          disabled={isCalculating}
+        >
+          {isCalculating ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Calculating...</> : "Calculate"}
         </Button>
 
         {result && (
@@ -125,7 +146,26 @@ const AreaPerimeterCalculator = () => {
             <CardContent className="pt-6">
               <div className="space-y-4">
                 <div>
-                  <p className="text-sm text-muted-foreground">Area</p>
+                  <div className="flex items-center justify-center gap-2 mb-2">
+                    <p className="text-sm text-muted-foreground">Area</p>
+                    <Button variant="ghost" size="icon" onClick={() => copyToClipboard(`${result.area.toFixed(2)} units²`, "Area")}>
+                      <Copy className="h-4 w-4" />
+                    </Button>
+                    <Button variant="ghost" size="icon" onClick={() => printCalculation({
+                      title: "Area & Perimeter Calculator",
+                      inputs: [
+                        { label: "Shape", value: shape },
+                        { label: "Dimension 1", value: value1 },
+                        ...(value2 ? [{ label: "Dimension 2", value: value2 }] : [])
+                      ],
+                      results: [
+                        { label: "Area", value: `${result.area.toFixed(2)} units²` },
+                        ...(result.perimeter > 0 ? [{ label: "Perimeter", value: `${result.perimeter.toFixed(2)} units` }] : [])
+                      ]
+                    })}>
+                      <Printer className="h-4 w-4" />
+                    </Button>
+                  </div>
                   <p className="text-3xl font-bold text-primary">
                     {result.area.toFixed(2)} units²
                   </p>
@@ -147,6 +187,7 @@ const AreaPerimeterCalculator = () => {
         )}
       </div>
     </CalculatorLayout>
+    </>
   );
 };
 

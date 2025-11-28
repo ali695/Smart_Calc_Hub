@@ -1,10 +1,16 @@
 import { useState } from "react";
 import { CalculatorLayout } from "@/components/CalculatorLayout";
+import { SchemaMarkup } from "@/components/SchemaMarkup";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
+import { usePrintCalculator } from "@/hooks/usePrintCalculator";
+import { Copy, Printer, Loader2 } from "lucide-react";
 
 const AverageCalculator = () => {
+  const { isCalculating, handleCalculation, copyToClipboard } = useCalculatorEnhancements();
+  const { printCalculation } = usePrintCalculator();
   const [numbers, setNumbers] = useState("");
   const [mean, setMean] = useState<number | null>(null);
   const [median, setMedian] = useState<number | null>(null);
@@ -50,7 +56,16 @@ const AverageCalculator = () => {
   ];
 
   return (
-    <CalculatorLayout
+    <>
+      <SchemaMarkup
+        type="WebApplication"
+        data={{
+          name: "Average Calculator",
+          description: "Calculate mean, median, and mode of a set of numbers",
+          url: "https://smartcalchub.com/math/average-calculator"
+        }}
+      />
+      <CalculatorLayout
       title="Average Calculator"
       description="Calculate mean, median, and mode of a set of numbers"
       category="math"
@@ -69,10 +84,36 @@ const AverageCalculator = () => {
           />
         </div>
 
-        <Button type="button" onClick={calculate} className="w-full" size="lg">Calculate Average</Button>
+        <Button 
+          type="button" 
+          onClick={() => handleCalculation(calculate)} 
+          className="w-full" 
+          size="lg"
+          disabled={isCalculating}
+        >
+          {isCalculating ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Calculating...</> : "Calculate Average"}
+        </Button>
 
         {mean !== null && (
           <div className="space-y-4 animate-fade-in">
+            <div className="flex items-center justify-end gap-2 mb-2">
+              <Button variant="outline" size="sm" onClick={() => copyToClipboard(`Mean: ${mean}, Median: ${median}, Mode: ${mode}`, "Results")}>
+                <Copy className="h-4 w-4 mr-2" />
+                Copy All
+              </Button>
+              <Button variant="outline" size="sm" onClick={() => printCalculation({
+                title: "Average Calculator",
+                inputs: [{ label: "Numbers", value: numbers }],
+                results: [
+                  { label: "Mean", value: mean.toString() },
+                  { label: "Median", value: median?.toString() || "" },
+                  { label: "Mode", value: mode || "" }
+                ]
+              })}>
+                <Printer className="h-4 w-4 mr-2" />
+                Print
+              </Button>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="p-6 bg-primary/10 rounded-lg text-center">
                 <p className="text-sm font-medium text-muted-foreground mb-2">Mean</p>
@@ -93,6 +134,7 @@ const AverageCalculator = () => {
         )}
       </div>
     </CalculatorLayout>
+    </>
   );
 };
 
