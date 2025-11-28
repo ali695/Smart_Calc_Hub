@@ -4,6 +4,9 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CalculatorLayout } from "@/components/CalculatorLayout";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
+import { usePrintCalculator } from "@/hooks/usePrintCalculator";
+import { Copy, Loader2, Printer } from "lucide-react";
 
 const MenstrualCalculator = () => {
   const [lastPeriod, setLastPeriod] = useState("");
@@ -13,6 +16,8 @@ const MenstrualCalculator = () => {
     ovulation: string;
     fertileWindow: string;
   } | null>(null);
+  const { isCalculating, handleCalculation, copyToClipboard } = useCalculatorEnhancements();
+  const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
     if (!lastPeriod) return;
@@ -57,6 +62,8 @@ const MenstrualCalculator = () => {
     <CalculatorLayout
       title="Menstrual Cycle Calculator"
       description="Track and predict your menstrual cycle, ovulation date, and fertile window for family planning."
+      category="health"
+      calculatorId="menstrual-calculator"
       howItWorks="Enter the first day of your last period and your average cycle length. The calculator predicts your next period, ovulation date, and fertile window."
       formula="Ovulation Day ≈ (Cycle Length - 14); Fertile Window = Ovulation ± 5-6 days"
       faqs={faqs}
@@ -85,17 +92,63 @@ const MenstrualCalculator = () => {
           </div>
         </div>
 
-        <Button onClick={calculate} className="w-full" size="lg">
-          Calculate Cycle
+        <Button 
+          type="button"
+          onClick={() => handleCalculation(calculate)} 
+          className="w-full" 
+          size="lg"
+          disabled={isCalculating}
+        >
+          {isCalculating ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Calculating...
+            </>
+          ) : (
+            "Calculate Cycle"
+          )}
         </Button>
 
         {result && (
           <Card className="bg-primary/5 border-primary">
             <CardContent className="pt-6">
               <div className="space-y-4">
-                <div>
-                  <p className="text-sm text-muted-foreground">Next Period Expected</p>
-                  <p className="text-2xl font-bold text-primary">{result.nextPeriod}</p>
+                <div className="flex items-start justify-between mb-4">
+                  <div className="flex-1">
+                    <p className="text-sm text-muted-foreground">Next Period Expected</p>
+                    <p className="text-2xl font-bold text-primary">{result.nextPeriod}</p>
+                  </div>
+                  <div className="flex gap-2">
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={() => copyToClipboard(
+                        `Next Period: ${result.nextPeriod}\nOvulation: ${result.ovulation}\nFertile Window: ${result.fertileWindow}`,
+                        "Cycle Information"
+                      )}
+                    >
+                      <Copy className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={() => printCalculation({
+                        title: "Menstrual Cycle Calculator",
+                        inputs: [
+                          { label: "Last Period Date", value: lastPeriod },
+                          { label: "Cycle Length", value: `${cycleLength} days` }
+                        ],
+                        results: [
+                          { label: "Next Period Expected", value: result.nextPeriod },
+                          { label: "Estimated Ovulation", value: result.ovulation },
+                          { label: "Fertile Window", value: result.fertileWindow }
+                        ],
+                        formula: "Ovulation Day ≈ (Cycle Length - 14)"
+                      })}
+                    >
+                      <Printer className="h-4 w-4" />
+                    </Button>
+                  </div>
                 </div>
 
                 <div>

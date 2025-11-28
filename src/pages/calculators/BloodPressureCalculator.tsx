@@ -4,6 +4,9 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CalculatorLayout } from "@/components/CalculatorLayout";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
+import { usePrintCalculator } from "@/hooks/usePrintCalculator";
+import { Copy, Loader2, Printer } from "lucide-react";
 
 const BloodPressureCalculator = () => {
   const [systolic, setSystolic] = useState("");
@@ -12,6 +15,8 @@ const BloodPressureCalculator = () => {
     category: string;
     recommendation: string;
   } | null>(null);
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
     const sys = parseFloat(systolic);
@@ -77,6 +82,7 @@ const BloodPressureCalculator = () => {
               placeholder="e.g., 120"
               value={systolic}
               onChange={(e) => setSystolic(e.target.value)}
+              onKeyPress={(e) => handleKeyPress(e, calculate)}
             />
           </div>
 
@@ -88,21 +94,67 @@ const BloodPressureCalculator = () => {
               placeholder="e.g., 80"
               value={diastolic}
               onChange={(e) => setDiastolic(e.target.value)}
+              onKeyPress={(e) => handleKeyPress(e, calculate)}
             />
           </div>
         </div>
 
-        <Button type="button" onClick={calculate} className="w-full" size="lg">
-          Check Blood Pressure
+        <Button 
+          type="button" 
+          onClick={() => handleCalculation(calculate)} 
+          className="w-full" 
+          size="lg"
+          disabled={isCalculating}
+        >
+          {isCalculating ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Checking...
+            </>
+          ) : (
+            "Check Blood Pressure"
+          )}
         </Button>
 
         {result && (
           <Card className="bg-primary/5 border-primary">
             <CardContent className="pt-6">
               <div className="space-y-4">
-                <div>
-                  <p className="text-sm text-muted-foreground">Category</p>
-                  <p className="text-3xl font-bold text-primary">{result.category}</p>
+                <div className="flex items-start justify-between mb-4">
+                  <div className="flex-1">
+                    <p className="text-sm text-muted-foreground">Category</p>
+                    <p className="text-3xl font-bold text-primary">{result.category}</p>
+                  </div>
+                  <div className="flex gap-2">
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={() => copyToClipboard(
+                        `Blood Pressure: ${systolic}/${diastolic} mmHg\nCategory: ${result.category}\n${result.recommendation}`,
+                        "Blood Pressure Results"
+                      )}
+                    >
+                      <Copy className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={() => printCalculation({
+                        title: "Blood Pressure Checker",
+                        inputs: [
+                          { label: "Systolic", value: `${systolic} mmHg` },
+                          { label: "Diastolic", value: `${diastolic} mmHg` }
+                        ],
+                        results: [
+                          { label: "Category", value: result.category },
+                          { label: "Recommendation", value: result.recommendation }
+                        ],
+                        formula: "Blood pressure measured as systolic/diastolic in mmHg"
+                      })}
+                    >
+                      <Printer className="h-4 w-4" />
+                    </Button>
+                  </div>
                 </div>
 
                 <div>
