@@ -4,8 +4,14 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CalculatorLayout } from "@/components/CalculatorLayout";
+import { SchemaMarkup } from "@/components/SchemaMarkup";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
+import { usePrintCalculator } from "@/hooks/usePrintCalculator";
+import { Copy, Printer, Loader2 } from "lucide-react";
 
 const ProfitMarginCalculator = () => {
+  const { isCalculating, handleCalculation, copyToClipboard } = useCalculatorEnhancements();
+  const { printCalculation } = usePrintCalculator();
   const [revenue, setRevenue] = useState("");
   const [cost, setCost] = useState("");
   const [result, setResult] = useState<{
@@ -43,7 +49,16 @@ const ProfitMarginCalculator = () => {
   ];
 
   return (
-    <CalculatorLayout
+    <>
+      <SchemaMarkup
+        type="WebApplication"
+        data={{
+          name: "Profit Margin & Markup Calculator",
+          description: "Calculate profit, profit margin, and markup percentage for business and pricing decisions",
+          url: "https://smartcalchub.com/business/profit-margin-calculator"
+        }}
+      />
+      <CalculatorLayout
       title="Profit Margin & Markup Calculator"
       description="Calculate profit, profit margin, and markup percentage for business and pricing decisions."
       howItWorks="Enter your revenue (selling price) and cost. The calculator shows your profit amount, profit margin percentage, and markup percentage."
@@ -77,8 +92,13 @@ const ProfitMarginCalculator = () => {
           </div>
         </div>
 
-        <Button onClick={calculate} className="w-full" size="lg">
-          Calculate
+        <Button 
+          onClick={() => handleCalculation(calculate)} 
+          className="w-full" 
+          size="lg"
+          disabled={isCalculating}
+        >
+          {isCalculating ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Calculating...</> : "Calculate"}
         </Button>
 
         {result && (
@@ -86,7 +106,26 @@ const ProfitMarginCalculator = () => {
             <CardContent className="pt-6">
               <div className="space-y-4">
                 <div>
-                  <p className="text-sm text-muted-foreground">Net Profit</p>
+                  <div className="flex items-center justify-center gap-2 mb-2">
+                    <p className="text-sm text-muted-foreground">Net Profit</p>
+                    <Button variant="ghost" size="icon" onClick={() => copyToClipboard(`$${result.profit.toFixed(2)}`, "Profit")}>
+                      <Copy className="h-4 w-4" />
+                    </Button>
+                    <Button variant="ghost" size="icon" onClick={() => printCalculation({
+                      title: "Profit Margin Calculator",
+                      inputs: [
+                        { label: "Revenue", value: `$${revenue}` },
+                        { label: "Cost", value: `$${cost}` }
+                      ],
+                      results: [
+                        { label: "Net Profit", value: `$${result.profit.toFixed(2)}` },
+                        { label: "Profit Margin", value: `${result.margin.toFixed(2)}%` },
+                        { label: "Markup", value: `${result.markup.toFixed(2)}%` }
+                      ]
+                    })}>
+                      <Printer className="h-4 w-4" />
+                    </Button>
+                  </div>
                   <p className="text-3xl font-bold text-primary">
                     ${result.profit.toFixed(2)}
                   </p>
@@ -112,6 +151,7 @@ const ProfitMarginCalculator = () => {
         )}
       </div>
     </CalculatorLayout>
+    </>
   );
 };
 

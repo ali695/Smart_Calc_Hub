@@ -1,11 +1,17 @@
 import { useState } from "react";
 import { CalculatorLayout } from "@/components/CalculatorLayout";
+import { SchemaMarkup } from "@/components/SchemaMarkup";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
+import { usePrintCalculator } from "@/hooks/usePrintCalculator";
+import { Copy, Printer, Loader2 } from "lucide-react";
 
 const FractionCalculator = () => {
+  const { isCalculating, handleCalculation, copyToClipboard } = useCalculatorEnhancements();
+  const { printCalculation } = usePrintCalculator();
   const [num1, setNum1] = useState("");
   const [den1, setDen1] = useState("");
   const [num2, setNum2] = useState("");
@@ -79,7 +85,16 @@ const FractionCalculator = () => {
   ];
 
   return (
-    <CalculatorLayout
+    <>
+      <SchemaMarkup
+        type="WebApplication"
+        data={{
+          name: "Fraction Calculator",
+          description: "Add, subtract, multiply, and divide fractions",
+          url: "https://smartcalchub.com/math/fraction-calculator"
+        }}
+      />
+      <CalculatorLayout
       title="Fraction Calculator"
       description="Add, subtract, multiply, and divide fractions"
       howItWorks="This calculator performs operations on two fractions and automatically simplifies the result. Enter numerators and denominators for both fractions, choose your operation, and get instant results in both fraction and decimal form."
@@ -119,12 +134,39 @@ const FractionCalculator = () => {
           </Select>
         </div>
 
-        <Button type="button" onClick={calculate} className="w-full bg-gradient-to-r from-primary to-primary-accent hover:shadow-glow transition-all duration-300" size="lg">Calculate</Button>
+        <Button 
+          type="button" 
+          onClick={() => handleCalculation(calculate)} 
+          className="w-full bg-gradient-to-r from-primary to-primary-accent hover:shadow-glow transition-all duration-300" 
+          size="lg"
+          disabled={isCalculating}
+        >
+          {isCalculating ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Calculating...</> : "Calculate"}
+        </Button>
 
         {result && (
           <div className="space-y-4 animate-fade-in">
             <div className="p-6 bg-gradient-to-br from-primary/10 to-primary-accent/10 rounded-lg border border-primary text-center hover:scale-[1.02] transition-all duration-300">
-              <p className="text-sm font-medium text-muted-foreground">Result (Simplified)</p>
+              <div className="flex items-center justify-center gap-2 mb-2">
+                <p className="text-sm font-medium text-muted-foreground">Result (Simplified)</p>
+                <Button variant="ghost" size="icon" onClick={() => copyToClipboard(result.fraction, "Result")}>
+                  <Copy className="h-4 w-4" />
+                </Button>
+                <Button variant="ghost" size="icon" onClick={() => printCalculation({
+                  title: "Fraction Calculator",
+                  inputs: [
+                    { label: "Fraction 1", value: `${num1}/${den1}` },
+                    { label: "Operation", value: operation },
+                    { label: "Fraction 2", value: `${num2}/${den2}` }
+                  ],
+                  results: [
+                    { label: "Result", value: result.fraction },
+                    { label: "Decimal", value: result.decimal }
+                  ]
+                })}>
+                  <Printer className="h-4 w-4" />
+                </Button>
+              </div>
               <p className="text-5xl font-bold bg-gradient-to-r from-primary to-primary-accent bg-clip-text text-transparent">{result.fraction}</p>
             </div>
             
@@ -136,6 +178,7 @@ const FractionCalculator = () => {
         )}
       </div>
     </CalculatorLayout>
+    </>
   );
 };
 

@@ -4,8 +4,14 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CalculatorLayout } from "@/components/CalculatorLayout";
+import { SchemaMarkup } from "@/components/SchemaMarkup";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
+import { usePrintCalculator } from "@/hooks/usePrintCalculator";
+import { Copy, Printer, Loader2 } from "lucide-react";
 
 const BasalTempCalculator = () => {
+  const { isCalculating, handleCalculation, copyToClipboard } = useCalculatorEnhancements();
+  const { printCalculation } = usePrintCalculator();
   const [temperature, setTemperature] = useState("");
   const [result, setResult] = useState<{
     category: string;
@@ -52,7 +58,16 @@ const BasalTempCalculator = () => {
   ];
 
   return (
-    <CalculatorLayout
+    <>
+      <SchemaMarkup
+        type="WebApplication"
+        data={{
+          name: "Basal Body Temperature Tracker",
+          description: "Track your basal body temperature to identify ovulation patterns and optimize fertility awareness",
+          url: "https://smartcalchub.com/health/basal-temp-calculator"
+        }}
+      />
+      <CalculatorLayout
       title="Basal Body Temperature Tracker"
       description="Track your basal body temperature to identify ovulation patterns and optimize fertility awareness."
       category="health"
@@ -76,8 +91,14 @@ const BasalTempCalculator = () => {
           </div>
         </div>
 
-        <Button type="button" onClick={calculate} className="w-full bg-gradient-to-r from-primary to-primary-glow hover:shadow-glow transition-all duration-300" size="lg">
-          Analyze Temperature
+        <Button 
+          type="button" 
+          onClick={() => handleCalculation(calculate)} 
+          className="w-full bg-gradient-to-r from-primary to-primary-glow hover:shadow-glow transition-all duration-300" 
+          size="lg"
+          disabled={isCalculating}
+        >
+          {isCalculating ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Analyzing...</> : "Analyze Temperature"}
         </Button>
 
         {result && (
@@ -85,7 +106,24 @@ const BasalTempCalculator = () => {
             <CardContent className="pt-6">
               <div className="space-y-4">
                 <div>
-                  <p className="text-sm text-muted-foreground">Temperature Category</p>
+                  <div className="flex items-center justify-between mb-2">
+                    <p className="text-sm text-muted-foreground">Temperature Category</p>
+                    <div className="flex gap-2">
+                      <Button variant="outline" size="icon" onClick={() => copyToClipboard(`${result.category} - ${result.phase}`, "Result")}>
+                        <Copy className="h-4 w-4" />
+                      </Button>
+                      <Button variant="outline" size="icon" onClick={() => printCalculation({
+                        title: "Basal Temperature Tracker",
+                        inputs: [{ label: "Temperature", value: `${temperature}°C` }],
+                        results: [
+                          { label: "Category", value: result.category },
+                          { label: "Cycle Phase", value: result.phase }
+                        ]
+                      })}>
+                        <Printer className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
                   <p className="text-3xl font-bold bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
                     {result.category}
                   </p>
@@ -101,6 +139,7 @@ const BasalTempCalculator = () => {
         )}
       </div>
     </CalculatorLayout>
+    </>
   );
 };
 
