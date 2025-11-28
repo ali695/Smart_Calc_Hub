@@ -4,7 +4,9 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CalculatorLayout } from "@/components/CalculatorLayout";
-import { SchemaMarkup } from "@/components/SchemaMarkup";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
+import { usePrintCalculator } from "@/hooks/usePrintCalculator";
+import { Copy, Loader2, Printer } from "lucide-react";
 
 const PercentageChangeCalculator = () => {
   const [oldValue, setOldValue] = useState("");
@@ -14,6 +16,8 @@ const PercentageChangeCalculator = () => {
     change: number;
     type: string;
   } | null>(null);
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
     const old = parseFloat(oldValue);
@@ -44,25 +48,11 @@ const PercentageChangeCalculator = () => {
   ];
 
   return (
-    <>
-      <SchemaMarkup
-        type="WebApplication"
-        data={{
-          name: "Percentage Change Calculator",
-          description: "Calculate the percentage increase or decrease between two values quickly and accurately",
-          url: "https://smartcalchub.com/calculator/percentage-change",
-          applicationCategory: "UtilityApplication",
-          operatingSystem: "Any",
-          offers: {
-            "@type": "Offer",
-            price: "0",
-            priceCurrency: "USD"
-          }
-        }}
-      />
-      <CalculatorLayout
+    <CalculatorLayout
       title="Percentage Change Calculator"
       description="Calculate the percentage increase or decrease between two values quickly and accurately."
+      category="math"
+      calculatorId="percentage-change"
       howItWorks="Enter the original (old) value and the new value. The calculator shows the percentage change, whether it's an increase or decrease."
       formula="Percentage Change = ((New Value - Old Value) / Old Value) × 100"
       faqs={faqs}
@@ -78,6 +68,7 @@ const PercentageChangeCalculator = () => {
               placeholder="e.g., 100"
               value={oldValue}
               onChange={(e) => setOldValue(e.target.value)}
+              onKeyPress={(e) => handleKeyPress(e, calculate)}
             />
           </div>
 
@@ -90,23 +81,66 @@ const PercentageChangeCalculator = () => {
               placeholder="e.g., 150"
               value={newValue}
               onChange={(e) => setNewValue(e.target.value)}
+              onKeyPress={(e) => handleKeyPress(e, calculate)}
             />
           </div>
         </div>
 
-        <Button onClick={calculate} className="w-full" size="lg">
-          Calculate Change
+        <Button 
+          type="button"
+          onClick={() => handleCalculation(calculate)} 
+          className="w-full" 
+          size="lg"
+          disabled={isCalculating}
+        >
+          {isCalculating ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Calculating...
+            </>
+          ) : (
+            "Calculate Change"
+          )}
         </Button>
 
         {result && (
           <Card className="bg-primary/5 border-primary">
             <CardContent className="pt-6">
               <div className="space-y-4">
-                <div>
-                  <p className="text-sm text-muted-foreground">Percentage {result.type}</p>
-                  <p className={`text-3xl font-bold ${result.percentChange > 0 ? 'text-green-600' : result.percentChange < 0 ? 'text-red-600' : 'text-primary'}`}>
-                    {Math.abs(result.percentChange).toFixed(2)}%
-                  </p>
+                <div className="flex items-start justify-between">
+                  <div className="flex-1">
+                    <p className="text-sm text-muted-foreground">Percentage {result.type}</p>
+                    <p className={`text-3xl font-bold ${result.percentChange > 0 ? 'text-green-600' : result.percentChange < 0 ? 'text-red-600' : 'text-primary'}`}>
+                      {Math.abs(result.percentChange).toFixed(2)}%
+                    </p>
+                  </div>
+                  <div className="flex gap-2">
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={() => copyToClipboard(`${Math.abs(result.percentChange).toFixed(2)}%`, "Percentage Change")}
+                    >
+                      <Copy className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={() => printCalculation({
+                        title: "Percentage Change Calculator",
+                        inputs: [
+                          { label: "Original Value", value: oldValue },
+                          { label: "New Value", value: newValue }
+                        ],
+                        results: [
+                          { label: `Percentage ${result.type}`, value: `${Math.abs(result.percentChange).toFixed(2)}%` },
+                          { label: "Absolute Change", value: `${result.change > 0 ? '+' : ''}${result.change.toFixed(2)}` }
+                        ],
+                        formula: "Percentage Change = ((New Value - Old Value) / Old Value) × 100"
+                      })}
+                    >
+                      <Printer className="h-4 w-4" />
+                    </Button>
+                  </div>
                 </div>
 
                 <div>
@@ -121,7 +155,6 @@ const PercentageChangeCalculator = () => {
         )}
       </div>
     </CalculatorLayout>
-    </>
   );
 };
 
