@@ -33,6 +33,7 @@ interface CalculatorLayoutProps {
   canonicalUrl?: string;
   category?: string;
   calculatorId?: string;
+  ogImage?: string;
 }
 
 export const CalculatorLayout = ({
@@ -47,7 +48,8 @@ export const CalculatorLayout = ({
   keywords,
   canonicalUrl,
   category = "Utility",
-  calculatorId
+  calculatorId,
+  ogImage
 }: CalculatorLayoutProps) => {
   const location = useLocation();
   const { addRecentCalculator } = useRecentCalculators();
@@ -157,6 +159,9 @@ export const CalculatorLayout = ({
         description={seoDescription || description}
         keywords={keywords}
         canonicalUrl={canonicalUrl}
+        ogType="website"
+        ogImage={ogImage || `https://smartcalchub.com/og-calculator.png`}
+        author="Ali Haider"
       />
       
       {/* WebApplication Schema */}
