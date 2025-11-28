@@ -21,6 +21,37 @@ const BlogPost = () => {
     );
   }
 
+  // Generate Article structured data for SEO
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": post.title,
+    "description": post.seoDescription,
+    "author": {
+      "@type": "Person",
+      "name": post.author,
+      "url": "https://www.linkedin.com/in/ali-haider-seo-consultant/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "SmartCalc Hub",
+      "url": "https://smartcalchub.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://smartcalchub.com/logo.png"
+      }
+    },
+    "datePublished": new Date(post.date).toISOString(),
+    "dateModified": new Date(post.date).toISOString(),
+    "image": `https://smartcalchub.com/og-blog.png`,
+    "articleSection": post.category,
+    "keywords": post.keywords.join(", "),
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://smartcalchub.com/blog/${slug}`
+    }
+  };
+
   return (
     <>
       <SEOHead
@@ -28,9 +59,16 @@ const BlogPost = () => {
         description={post.seoDescription}
         keywords={post.keywords.join(", ")}
         ogType="article"
+        ogImage={`https://smartcalchub.com/og-blog.png`}
         author={post.author}
         publishedTime={new Date(post.date).toISOString()}
+        canonicalUrl={`https://smartcalchub.com/blog/${slug}`}
       />
+      
+      {/* Article Schema */}
+      <script type="application/ld+json">
+        {JSON.stringify(articleSchema)}
+      </script>
       
       <article className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
         <div className="container mx-auto px-4 py-16">

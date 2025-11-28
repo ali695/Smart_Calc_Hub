@@ -67,6 +67,7 @@ export const SEOHead = ({
     updateMetaTag('og:image', ogImage, true);
     updateMetaTag('og:image:width', '1200', true);
     updateMetaTag('og:image:height', '630', true);
+    updateMetaTag('og:image:alt', `${title} - SmartCalc Hub`, true);
     updateMetaTag('og:site_name', 'SmartCalc Hub', true);
     updateMetaTag('og:locale', 'en_US', true);
 
@@ -77,6 +78,7 @@ export const SEOHead = ({
         updateMetaTag('article:modified_time', modifiedTime, true);
       }
       updateMetaTag('article:author', author, true);
+      updateMetaTag('article:section', 'Calculators & Finance', true);
     }
 
     // Twitter Card tags
@@ -84,8 +86,15 @@ export const SEOHead = ({
     updateMetaTag('twitter:title', title);
     updateMetaTag('twitter:description', description);
     updateMetaTag('twitter:image', ogImage);
+    updateMetaTag('twitter:image:alt', `${title} - SmartCalc Hub`);
     updateMetaTag('twitter:site', '@SmartCalcHub');
     updateMetaTag('twitter:creator', '@ali_haiderseo');
+
+    // Additional SEO meta tags
+    updateMetaTag('theme-color', '#3b82f6');
+    updateMetaTag('apple-mobile-web-app-capable', 'yes');
+    updateMetaTag('apple-mobile-web-app-status-bar-style', 'default');
+    updateMetaTag('format-detection', 'telephone=no');
 
     // Canonical URL
     if (canonicalUrl) {
