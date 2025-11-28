@@ -3,6 +3,7 @@ import { ArrowLeft, Calendar, User, Clock } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { getBlogPost } from "@/data/blogPosts";
 import { SEOHead } from "@/components/SEOHead";
+import { getBlogOGImage } from "@/utils/ogImageMapping";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -43,7 +44,7 @@ const BlogPost = () => {
     },
     "datePublished": new Date(post.date).toISOString(),
     "dateModified": new Date(post.date).toISOString(),
-    "image": `https://smartcalchub.com/og-blog.png`,
+    "image": getBlogOGImage(),
     "articleSection": post.category,
     "keywords": post.keywords.join(", "),
     "mainEntityOfPage": {
@@ -59,7 +60,7 @@ const BlogPost = () => {
         description={post.seoDescription}
         keywords={post.keywords.join(", ")}
         ogType="article"
-        ogImage={`https://smartcalchub.com/og-blog.png`}
+        ogImage={getBlogOGImage()}
         author={post.author}
         publishedTime={new Date(post.date).toISOString()}
         canonicalUrl={`https://smartcalchub.com/blog/${slug}`}

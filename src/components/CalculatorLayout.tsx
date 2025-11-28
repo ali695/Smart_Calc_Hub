@@ -5,6 +5,7 @@ import { SEOHead } from "@/components/SEOHead";
 import { RelatedCalculators } from "@/components/RelatedCalculators";
 import { AIRecommendation } from "@/components/AIRecommendation";
 import { useRecentCalculators } from "@/hooks/useRecentCalculators";
+import { getCategoryOGImage } from "@/utils/ogImageMapping";
 import { 
   Breadcrumb, 
   BreadcrumbItem, 
@@ -160,7 +161,7 @@ export const CalculatorLayout = ({
         keywords={keywords}
         canonicalUrl={canonicalUrl}
         ogType="website"
-        ogImage={ogImage || `https://smartcalchub.com/og-calculator.png`}
+        ogImage={ogImage || getCategoryOGImage(category)}
         author="Ali Haider"
       />
       
