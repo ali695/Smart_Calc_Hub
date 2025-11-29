@@ -32,10 +32,15 @@ const Blog = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {blogPosts.map((post) => (
-              <Card key={post.id} className="group hover:shadow-large transition-all duration-300 hover:-translate-y-2 cursor-pointer flex flex-col border-2 border-border hover:border-primary overflow-hidden">
-                <div className="aspect-video bg-gradient-to-br from-primary/20 via-primary-glow/20 to-accent/20 overflow-hidden relative">
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                  <div className="relative w-full h-full flex items-center justify-center">
+              <Card key={post.id} className="group card-shine card-flip card-glow-hover hover:shadow-large transition-all duration-300 cursor-pointer flex flex-col border-2 border-border hover:border-primary overflow-hidden">
+                <div className="aspect-video overflow-hidden relative">
+                  {post.image ? (
+                    <img src={post.image} alt={post.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                  ) : (
+                    <div className="w-full h-full bg-gradient-to-br from-primary/20 via-primary-glow/20 to-accent/20" />
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <div className="absolute bottom-4 left-4">
                     <span className="px-4 py-2 bg-primary text-primary-foreground rounded-full text-sm font-semibold shadow-lg">
                       {post.category}
                     </span>

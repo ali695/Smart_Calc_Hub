@@ -175,23 +175,24 @@ const Categories = () => {
                     const CalcIcon = calc.icon;
                     return (
                       <Link key={calc.id} to={calc.path}>
-                        <Card className="h-full hover:shadow-xl transition-all duration-300 hover:-translate-y-2 cursor-pointer group border hover:border-primary">
-                          <CardHeader>
+                        <Card className="h-full card-shine card-flip card-glow-hover hover:shadow-xl transition-all duration-300 cursor-pointer group border-2 hover:border-primary overflow-hidden">
+                          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                          <CardHeader className="relative">
                             <div className="flex items-center gap-3 mb-2">
-                              <div className={`p-3 rounded-lg bg-gradient-to-br ${
+                              <div className={`p-3 rounded-lg bg-gradient-to-br icon-bounce ${
                                 category.id === 'finance' ? 'from-green-500/10 to-green-600/10 group-hover:from-green-500/20 group-hover:to-green-600/20' :
                                 category.id === 'health' ? 'from-red-500/10 to-red-600/10 group-hover:from-red-500/20 group-hover:to-red-600/20' :
                                 category.id === 'math' ? 'from-blue-500/10 to-blue-600/10 group-hover:from-blue-500/20 group-hover:to-blue-600/20' :
                                 'from-purple-500/10 to-purple-600/10 group-hover:from-purple-500/20 group-hover:to-purple-600/20'
-                              } transition-all`}>
-                                <CalcIcon className={`h-6 w-6 ${category.color} group-hover:scale-110 transition-transform`} />
+                              } transition-all shadow-soft group-hover:shadow-medium`}>
+                                <CalcIcon className={`h-6 w-6 ${category.color} transition-transform`} />
                               </div>
                             </div>
                             <CardTitle className="group-hover:text-primary transition-colors">
                               {calc.title}
                             </CardTitle>
                           </CardHeader>
-                          <CardContent>
+                          <CardContent className="relative">
                             <CardDescription className="text-base">
                               {calc.description}
                             </CardDescription>
