@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { calculators, categories } from "@/data/calculators";
 import { useState, useEffect } from "react";
 import { RecentlyUsedCalculators } from "@/components/RecentlyUsedCalculators";
+import { FeaturedPosts } from "@/components/FeaturedPosts";
 
 const Index = () => {
   const [searchQuery, setSearchQuery] = useState("");
