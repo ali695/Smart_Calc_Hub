@@ -193,6 +193,9 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Featured Blog Posts */}
+      <FeaturedPosts />
+
       {/* Calculator Grid */}
       <section id="calculators" className="py-16 md:py-24 scroll-mt-20">
         <div className="container mx-auto px-4">

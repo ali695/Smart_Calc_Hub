@@ -5,6 +5,7 @@ import { getBlogPost, blogPosts } from "@/data/blogPosts";
 import { SEOHead } from "@/components/SEOHead";
 import { getBlogOGImage } from "@/utils/ogImageMapping";
 import { RelatedBlogPosts } from "@/components/RelatedBlogPosts";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -73,6 +74,7 @@ const BlogPost = () => {
       </script>
       
       <article className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
+        <Breadcrumbs />
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-4xl mx-auto">
             <Link 
