@@ -1490,9 +1490,6 @@ export const blogPosts: BlogPost[] = [
       ],
       conclusion: "Sleep optimization dramatically improves daily function and long-term health. Calculate bedtime based on 90-minute cycles to wake between cycles. Most adults need 7.5-9 hours (5-6 cycles). Consistency is most important factor—same schedule daily. Create sleep-friendly environment and pre-bed routine. Track sleep to identify patterns and improvement opportunities. Prioritize sleep as non-negotiable—everything else improves with quality rest."
     }
-  }
-];
-
   },
   {
     id: "ohms-law-calculator-electronics",
@@ -1516,15 +1513,398 @@ export const blogPosts: BlogPost[] = [
       ],
       conclusion: "Ohm's Law is foundational for electronics work. Master the basic formula and its variations. Apply to real circuits through series/parallel analysis. Always consider safety and component ratings. This simple relationship enables complex circuit design and troubleshooting."
     }
+  },
+  {
+    id: "force-acceleration-calculator-physics",
+    title: "Force and Acceleration Calculator: Mastering Newton's Second Law",
+    excerpt: "Calculate force, mass, and acceleration using Newton's Second Law. Essential physics principles for engineering and science applications.",
+    author: "Dr. Sarah Mitchell",
+    date: "February 27, 2025",
+    category: "Science",
+    readTime: "8 min read",
+    image: "/blog-math-science.jpg",
+    seoTitle: "Force Calculator 2025 | Newton's Second Law Guide",
+    seoDescription: "Master force and acceleration calculations using F=ma. Learn Newton's Second Law applications in physics and engineering with practical examples.",
+    keywords: ["force calculator", "acceleration physics", "newton's second law", "F=ma calculator", "physics calculator"],
+    content: {
+      introduction: "Newton's Second Law (F = ma) is one of the most important equations in physics. It describes the relationship between force, mass, and acceleration—the foundation of classical mechanics used in engineering, aerospace, automotive design, and countless other fields.",
+      sections: [
+        { heading: "Understanding F = ma", content: "Force (F) in newtons equals mass (m) in kilograms times acceleration (a) in meters per second squared. A 1000kg car accelerating at 3m/s² requires 3000N force. Rearrange for any variable: m = F/a or a = F/m. All three forms solve real-world problems. Force is a vector—direction matters as much as magnitude." },
+        { heading: "Real-World Applications", content: "Automotive: calculate engine force needed for desired acceleration. Aerospace: thrust requirements for spacecraft maneuvers. Elevators: cable tension with acceleration and deceleration. Sports: impact forces in collisions. Construction: equipment capacity for moving loads. Always account for friction and air resistance in practical scenarios." },
+        { heading: "Net Force and Multiple Forces", content: "Multiple forces acting on object: sum all forces vectorially. Net force determines acceleration. Example: 500N forward, 200N friction backward = 300N net forward force. Forces in equilibrium: net force = 0, no acceleration (constant velocity or at rest). Free body diagrams visualize all forces acting on object." },
+        { heading: "Units and Conversions", content: "SI units: force (newtons), mass (kg), acceleration (m/s²). 1N = 1 kg⋅m/s². Imperial: force (pounds-force), mass (slugs), acceleration (ft/s²). Weight is force: W = mg where g = 9.8m/s² or 32ft/s². Convert pounds-mass to slugs by dividing by 32.2. Always check unit consistency in calculations." }
+      ],
+      conclusion: "Newton's Second Law connects force, mass, and acceleration in fundamental relationship. Master F = ma and its rearrangements for solving mechanics problems. Consider all forces acting on objects—friction, air resistance, gravity. Use proper units and vector analysis. This single equation enables analysis of virtually all mechanical systems."
+    }
+  },
+  {
+    id: "molarity-calculator-chemistry",
+    title: "Molarity Calculator: Solution Concentration for Chemistry",
+    excerpt: "Calculate molarity and solution concentrations accurately. Essential chemistry tool for lab work, research, and chemical analysis.",
+    author: "Dr. Emily Chen",
+    date: "February 28, 2025",
+    category: "Science",
+    readTime: "9 min read",
+    image: "/blog-math-science.jpg",
+    seoTitle: "Molarity Calculator 2025 | Chemistry Concentration Guide",
+    seoDescription: "Master molarity calculations for chemistry. Learn solution concentration, dilution equations, and practical laboratory applications with examples.",
+    keywords: ["molarity calculator", "solution concentration", "chemistry calculator", "moles per liter", "dilution calculator"],
+    content: {
+      introduction: "Molarity (M) is the most common unit of concentration in chemistry, expressing moles of solute per liter of solution. Accurate molarity calculations are essential for chemical reactions, laboratory preparations, pharmaceutical formulations, and analytical chemistry. Understanding molarity enables precise solution preparation and dilution.",
+      sections: [
+        { heading: "Molarity Formula and Calculations", content: "Molarity (M) = moles of solute / liters of solution. To find moles: divide grams by molecular weight. Example: 40g NaOH (MW = 40 g/mol) in 2L solution: moles = 40/40 = 1 mol, M = 1/2 = 0.5M. To prepare specific molarity: moles needed = M × L, grams needed = moles × MW. Always measure solution volume, not solvent volume." },
+        { heading: "Dilution Calculations", content: "Dilution equation: M₁V₁ = M₂V₂. Initial molarity × initial volume = final molarity × final volume. Example: dilute 100mL of 6M HCl to 2M: 6 × 100 = 2 × V₂, V₂ = 300mL. Add concentrated solution to water (never water to acid!), bring to final volume. Serial dilutions: repeated dilutions for very low concentrations." },
+        { heading: "Laboratory Techniques", content: "Use volumetric flasks for accuracy—graduated cylinders less precise. Dissolve solute in less than final volume, then dilute to mark. Mix thoroughly—inversions or stirring. Temperature affects volume and molarity. Store solutions properly—some degrade or absorb gases. Label with molarity, date, and hazard warnings. Verify concentration by titration when critical." },
+        { heading: "Related Concentration Units", content: "Molality (m): moles/kg solvent (temperature-independent). Normality (N): equivalents per liter (for acids/bases). Percent by mass or volume. ppm/ppb for trace concentrations. Convert between units based on solution density. Each unit has specific applications—molarity most common for reactions and kinetics." }
+      ],
+      conclusion: "Molarity is fundamental concentration unit in chemistry. Master M = mol/L and dilution equation M₁V₁ = M₂V₂ for laboratory work. Use proper technique with volumetric glassware. Understand related units for specific applications. Accurate concentration calculations ensure reliable chemical reactions and analyses."
+    }
+  },
+  {
+    id: "kinetic-energy-calculator-physics",
+    title: "Kinetic Energy Calculator: Motion Energy in Physics",
+    excerpt: "Calculate kinetic energy of moving objects. Understand energy of motion for physics, engineering, and real-world applications.",
+    author: "Prof. David Roberts",
+    date: "March 1, 2025",
+    category: "Science",
+    readTime: "8 min read",
+    image: "/blog-math-science.jpg",
+    seoTitle: "Kinetic Energy Calculator 2025 | Motion Energy Guide",
+    seoDescription: "Master kinetic energy calculations with KE = ½mv². Learn motion energy principles for physics, engineering, and practical applications.",
+    keywords: ["kinetic energy calculator", "motion energy", "KE formula", "physics energy", "velocity energy"],
+    content: {
+      introduction: "Kinetic energy is the energy of motion—possessed by any object moving through space. From molecules in a gas to planets orbiting stars, kinetic energy plays crucial role in physics, engineering, and everyday life. Understanding KE calculations enables analysis of collisions, energy efficiency, and mechanical systems.",
+      sections: [
+        { heading: "Kinetic Energy Formula", content: "KE = ½mv² where m is mass (kg) and v is velocity (m/s). Energy in joules (J). Note velocity squared—doubling speed quadruples energy! Example: 1000kg car at 20m/s: KE = ½ × 1000 × 20² = 200,000J = 200kJ. This energy must be dissipated during braking. Explains why high-speed collisions so devastating." },
+        { heading: "Energy Conversions", content: "Kinetic energy converts to other forms. Potential energy ↔ kinetic energy in pendulums and roller coasters. Conservation of energy: total energy constant in isolated system. Braking converts KE to heat via friction. Regenerative braking converts KE to electrical energy. Collisions redistribute KE between objects. Some energy always lost to heat in real systems." },
+        { heading: "Practical Applications", content: "Vehicle safety: crash energy absorption design. Ballistics: projectile energy and penetration. Machinery: flywheel energy storage. Sports: bat/ball collision analysis. Wind/water turbines: extract KE from moving fluid. Meteorites: impact energy from velocity and mass. Always consider both mass and velocity—velocity effect more dramatic due to square relationship." },
+        { heading: "Rotational Kinetic Energy", content: "Rotating objects: KE = ½Iω² where I is moment of inertia and ω is angular velocity. Combines translational and rotational KE for rolling objects. Example: spinning flywheel stores energy. Rolling wheel has both translation and rotation. Complex shapes require integration to find I. Total mechanical energy includes all KE forms plus PE." }
+      ],
+      conclusion: "Kinetic energy quantifies motion energy using KE = ½mv². Velocity squared relationship means speed has dramatic effect. KE converts to other energy forms following conservation laws. Apply to collisions, braking, energy storage, and mechanical design. Understanding kinetic energy essential for physics and engineering analysis."
+    }
+  },
+  {
+    id: "stress-strain-calculator-engineering",
+    title: "Stress-Strain Calculator: Material Strength Analysis",
+    excerpt: "Calculate stress and strain for material engineering. Essential tool for structural design, load analysis, and material selection.",
+    author: "Eng. Michael Torres",
+    date: "March 2, 2025",
+    category: "Engineering",
+    readTime: "10 min read",
+    image: "/blog-math-science.jpg",
+    seoTitle: "Stress Strain Calculator 2025 | Material Engineering Guide",
+    seoDescription: "Master stress-strain calculations for engineering. Learn material strength, elastic modulus, and structural design with practical examples.",
+    keywords: ["stress strain calculator", "material strength", "elastic modulus", "structural engineering", "tensile stress"],
+    content: {
+      introduction: "Stress and strain analysis is fundamental to engineering design. These quantities describe how materials respond to forces—essential for ensuring structures and components can withstand loads without failure. Understanding stress-strain relationships enables safe, efficient material selection and structural design.",
+      sections: [
+        { heading: "Stress and Strain Definitions", content: "Stress (σ) = Force / Area, units: pascals (Pa) or psi. Tensile stress: pulling apart. Compressive stress: pushing together. Shear stress: parallel to surface. Strain (ε) = Change in length / Original length, dimensionless or percentage. Elongation under tension, compression under load. Stress causes strain—material response." },
+        { heading: "Elastic Modulus and Material Properties", content: "Young's Modulus (E) = Stress / Strain in elastic region. Measures stiffness—high E means rigid material. Steel E ≈ 200 GPa, aluminum ≈ 70 GPa, rubber ≈ 0.01 GPa. Hooke's Law: σ = Eε (elastic deformation). Yield strength: stress where permanent deformation begins. Ultimate tensile strength: maximum stress before failure. Safety factor accounts for uncertainty." },
+        { heading: "Stress-Strain Curve Analysis", content: "Elastic region: linear, returns to original shape. Yield point: begins plastic deformation. Plastic region: permanent deformation. Necking: localized reduction before fracture. Brittle materials: little plastic deformation, sudden failure. Ductile materials: significant elongation before failure. Area under curve represents toughness—energy absorption capacity." },
+        { heading: "Engineering Applications", content: "Structural design: ensure stress below allowable limits. Material selection: match properties to loading conditions. Beams in bending: calculate stress distribution. Columns: consider buckling under compression. Pressure vessels: hoop and longitudinal stress. Fatigue analysis: repeated loading considerations. Always include safety factors—typically 1.5-3 depending on application and consequences of failure." }
+      ],
+      conclusion: "Stress-strain analysis ensures structural safety and proper material selection. Master stress = F/A and strain = ΔL/L relationships. Understand elastic modulus and yield strength for design. Analyze stress-strain curves to predict material behavior. Always incorporate appropriate safety factors. This analysis is foundation of mechanical and structural engineering."
+    }
+  },
+  {
+    id: "heat-transfer-calculator-thermodynamics",
+    title: "Heat Transfer Calculator: Thermal Analysis for Engineering",
+    excerpt: "Calculate heat transfer rates using conduction, convection, and radiation principles. Essential for thermal engineering and HVAC design.",
+    author: "Dr. Lisa Martinez",
+    date: "March 3, 2025",
+    category: "Engineering",
+    readTime: "9 min read",
+    image: "/blog-math-science.jpg",
+    seoTitle: "Heat Transfer Calculator 2025 | Thermal Engineering Guide",
+    seoDescription: "Master heat transfer calculations. Learn conduction, convection, radiation equations for engineering, HVAC, and thermal design applications.",
+    keywords: ["heat transfer calculator", "thermal conductivity", "conduction convection radiation", "thermal engineering", "heat flux"],
+    content: {
+      introduction: "Heat transfer drives countless engineering systems—from building HVAC to electronics cooling to power generation. Understanding how thermal energy moves through conduction, convection, and radiation enables efficient design of thermal management systems. These principles govern temperature control in virtually all engineering applications.",
+      sections: [
+        { heading: "Conduction Heat Transfer", content: "Fourier's Law: Q = kA(T₁-T₂)/d where Q is heat flow (watts), k is thermal conductivity (W/m⋅K), A is area, T₁-T₂ is temperature difference, d is thickness. High k materials (metals) conduct heat rapidly. Low k materials (insulators) resist heat flow. Example: wall with k=0.04 W/m⋅K, 20cm thick, 10m² area, 20°C temperature difference: Q = 0.04 × 10 × 20 / 0.2 = 40W heat loss." },
+        { heading: "Convection Heat Transfer", content: "Newton's Law of Cooling: Q = hA(T_surface - T_fluid) where h is convection coefficient (W/m²⋅K). Natural convection: h ≈ 5-25. Forced convection: h ≈ 25-250. Boiling/condensation: h ≈ 2500-100,000. Higher h means more efficient heat transfer. Air cooling vs liquid cooling—liquids typically 10-100× better. Fans and pumps increase h by forced convection." },
+        { heading: "Radiation Heat Transfer", content: "Stefan-Boltzmann Law: Q = εσA(T₁⁴ - T₂⁴) where ε is emissivity (0-1), σ = 5.67×10⁻⁸ W/m²⋅K⁴. Temperatures in kelvin (absolute). Black bodies: ε = 1. Polished metals: ε ≈ 0.05. Radiation becomes dominant at high temperatures. No medium required—heat transfer through vacuum. Example: spacecraft thermal control relies on radiation." },
+        { heading: "Combined Heat Transfer and R-Values", content: "Most systems involve multiple modes simultaneously. Thermal resistance: R = d/k for conduction, R = 1/h for convection. Series resistances add: R_total = R₁ + R₂ + R₃. Heat flow: Q = ΔT/R_total. R-values in construction: higher R means better insulation. U-value = 1/R_total (overall heat transfer coefficient). Design for desired heat transfer rate by selecting materials and geometry." }
+      ],
+      conclusion: "Heat transfer occurs via conduction, convection, and radiation—often simultaneously. Master Fourier's Law, Newton's Law of Cooling, and Stefan-Boltzmann equations. Calculate thermal resistance for system analysis. Apply to insulation design, electronics cooling, and thermal management. Understanding heat transfer essential for thermal engineering and energy efficiency."
+    }
+  },
+  {
+    id: "density-calculator-material-science",
+    title: "Density Calculator: Material Properties and Applications",
+    excerpt: "Calculate density for material identification and engineering applications. Essential tool for science, engineering, and quality control.",
+    author: "Dr. Robert Chang",
+    date: "March 4, 2025",
+    category: "Science",
+    readTime: "7 min read",
+    image: "/blog-math-science.jpg",
+    seoTitle: "Density Calculator 2025 | Material Properties Guide",
+    seoDescription: "Master density calculations with ρ=m/V. Learn material identification, buoyancy, and engineering applications with practical examples.",
+    keywords: ["density calculator", "material density", "mass volume ratio", "specific gravity", "material properties"],
+    content: {
+      introduction: "Density is fundamental material property—mass per unit volume. This simple ratio enables material identification, buoyancy calculations, and quality control. From identifying unknowns to designing ships and submarines, density calculations appear throughout science and engineering. Understanding density essential for material science and physics.",
+      sections: [
+        { heading: "Density Formula and Calculations", content: "Density (ρ) = Mass / Volume, units: kg/m³ or g/cm³. Example: 200g sample with 50cm³ volume: ρ = 200/50 = 4 g/cm³ (likely titanium). Common densities: water = 1 g/cm³, aluminum = 2.7, steel = 7.8, gold = 19.3, air = 0.0012. Measure mass with scale, volume by displacement or geometric calculation. Temperature affects density—liquids expand when heated." },
+        { heading: "Buoyancy and Archimedes' Principle", content: "Object floats if density less than fluid, sinks if greater. Buoyant force = weight of displaced fluid. Ships float despite steel construction—average density (including air space) less than water. Submarines adjust density via ballast tanks to control depth. Hot air balloons: heating reduces air density to create lift. Specific gravity = density of object / density of water (dimensionless)." },
+        { heading: "Material Identification", content: "Measure density to identify unknown materials—each pure substance has characteristic density. Distinguish metals: aluminum vs steel vs titanium. Detect counterfeits: gold-plated lead has wrong density. Quality control: ensure material meets specifications. Alloy composition affects density between pure element values. Porosity reduces density below solid value—measure void content." },
+        { heading: "Engineering Applications", content: "Structural design: calculate weight from volume and density. Fluid mechanics: density drives buoyancy and pressure. Material selection: strength-to-weight ratio (specific strength) uses density. Density stratification: oil floats on water, cold air sinks. Concrete mix design: aggregate density affects final strength and weight. Always verify density values for specific temperature and composition." }
+      ],
+      conclusion: "Density quantifies mass per volume using ρ = m/V. Simple yet powerful for material identification and engineering design. Enables buoyancy calculations via Archimedes' Principle. Essential for quality control and material selection. Understand temperature and composition effects on density. This fundamental property appears throughout science and engineering applications."
+    }
+  },
+  {
+    id: "torque-calculator-rotational-mechanics",
+    title: "Torque Calculator: Rotational Force Analysis",
+    excerpt: "Calculate torque for rotational mechanics and engineering. Essential for fastener tightening, motor selection, and mechanical design.",
+    author: "Eng. Christopher Lee",
+    date: "March 5, 2025",
+    category: "Engineering",
+    readTime: "8 min read",
+    image: "/blog-math-science.jpg",
+    seoTitle: "Torque Calculator 2025 | Rotational Mechanics Guide",
+    seoDescription: "Master torque calculations with τ = rF. Learn rotational force analysis for engineering, motors, and mechanical design applications.",
+    keywords: ["torque calculator", "rotational force", "moment calculator", "motor torque", "bolt torque"],
+    content: {
+      introduction: "Torque is rotational equivalent of linear force—the turning or twisting force that causes rotation. From tightening bolts to selecting motors, torque calculations appear throughout mechanical engineering. Understanding torque essential for anything that rotates, pivots, or turns. Master torque principles for effective mechanical design.",
+      sections: [
+        { heading: "Torque Formula and Units", content: "Torque (τ) = Force × Distance, or τ = rF sin(θ) where r is distance from pivot, F is force, θ is angle between r and F. Maximum torque when force perpendicular (θ = 90°). Units: newton-meters (N⋅m) or foot-pounds (ft⋅lb). Example: 100N force on 0.3m wrench perpendicular: τ = 0.3 × 100 = 30 N⋅m. Longer wrench = more torque from same force." },
+        { heading: "Torque in Fasteners", content: "Bolt tightening: specified torque creates proper clamp force (tension). Under-torque: joint may loosen. Over-torque: strip threads or break bolt. Use torque wrench for critical applications. Torque specification varies by fastener size, grade, and lubrication. Typical automotive: 80-120 N⋅m for wheel lugs. Thread locking compounds affect torque requirements. Multiple-pass tightening pattern for even load distribution." },
+        { heading: "Motors and Power Transmission", content: "Motor torque: τ = 60P / (2πN) where P is power (watts) and N is speed (rpm). High torque at low speed, low torque at high speed for given power. Gear reduction increases torque while reducing speed. Example: 750W motor at 1500rpm: τ = 60 × 750 / (2π × 1500) = 4.77 N⋅m. Select motor based on required torque and speed for application. Efficiency affects usable output torque." },
+        { heading: "Mechanical Advantage and Levers", content: "Levers multiply force through mechanical advantage: MA = distance from pivot to effort / distance from pivot to load. Longer effort arm = greater MA = more torque. Example: 1m wrecking bar vs 0.05m nail: MA = 1/0.05 = 20× force multiplication. Gears, pulleys, screws—all leverage mechanical advantage. Trade-off: multiply force but move through greater distance. Work input = work output (ignoring friction)." }
+      ],
+      conclusion: "Torque quantifies rotational force using τ = rF. Longer moment arm increases torque from same force. Essential for fastener specifications, motor selection, and mechanical design. Understand torque-power-speed relationship. Apply mechanical advantage principles. Torque is to rotation what force is to linear motion—fundamental for mechanical engineering."
+    }
+  },
+  {
+    id: "options-pricing-calculator-finance",
+    title: "Options Pricing Calculator: Black-Scholes Model Guide",
+    excerpt: "Calculate options values using Black-Scholes model. Advanced financial tool for options trading and derivative pricing strategies.",
+    author: "Alan Fischer, CFA",
+    date: "March 6, 2025",
+    category: "Finance",
+    readTime: "11 min read",
+    image: "/blog-finance-planning.jpg",
+    seoTitle: "Options Pricing Calculator 2025 | Black-Scholes Guide",
+    seoDescription: "Master options pricing with Black-Scholes model. Learn call/put valuation, Greeks, and advanced options trading strategies.",
+    keywords: ["options pricing", "black scholes calculator", "call put options", "options greeks", "derivative pricing"],
+    content: {
+      introduction: "Options pricing is one of the most sophisticated areas of finance. The Black-Scholes model revolutionized derivatives trading by providing mathematical framework for options valuation. Understanding options pricing enables sophisticated trading strategies and risk management. Whether hedging or speculating, accurate option valuation is essential.",
+      sections: [
+        { heading: "Black-Scholes Model Fundamentals", content: "Black-Scholes calculates theoretical option value based on five inputs: stock price, strike price, time to expiration, risk-free rate, and volatility. Assumptions: European options (exercise at expiration only), no dividends, constant volatility, efficient markets. Despite simplifications, provides excellent approximation. Call option value increases with stock price and time, decreases with strike price. Put option opposite relationship." },
+        { heading: "The Greeks: Risk Measures", content: "Delta: option price change per $1 stock move. Call delta 0-1, put delta 0 to -1. At-the-money ≈ 0.5. Gamma: delta change rate. Theta: time decay—options lose value daily. Vega: volatility sensitivity. Rho: interest rate sensitivity (usually least important). Greeks enable risk management—delta-neutral portfolios hedge direction. Options sellers collect theta, buyers need price movement to overcome time decay." },
+        { heading: "Implied Volatility", content: "Market prices reflect expected volatility, not historical volatility. Calculate implied volatility by working backwards from option price—market's forecast of future volatility. High IV = expensive options = large expected moves. Low IV = cheap options = stable expected prices. IV often spikes before earnings or events. Compare IV to historical volatility for relative value. VIX index measures S&P 500 implied volatility—'fear gauge'." },
+        { heading: "Advanced Strategies", content: "Vertical spreads: buy and sell options at different strikes—limit risk and reward. Calendar spreads: different expirations—profit from theta and volatility. Iron condors: sell OTM call and put spreads—profit in range-bound markets. Straddles/strangles: profit from large moves either direction. Understand breakeven points, maximum profit/loss, margin requirements. Paper trade complex strategies before risking capital—combinations multiply complexity and risk." }
+      ],
+      conclusion: "Options pricing combines mathematics, probability, and market dynamics. Black-Scholes provides theoretical framework, though real markets deviate from assumptions. Master the Greeks for risk management. Understand implied volatility as market expectations. Start with simple strategies, gradually increase complexity. Options offer tremendous flexibility but require sophisticated understanding—education essential before trading."
+    }
+  },
+  {
+    id: "statistical-analysis-calculator-data-science",
+    title: "Statistical Analysis Calculator: Data Science Essentials",
+    excerpt: "Calculate mean, median, standard deviation, and statistical significance. Essential tool for data analysis and research.",
+    author: "Dr. Jennifer Wu",
+    date: "March 7, 2025",
+    category: "Utility",
+    readTime: "10 min read",
+    image: "/blog-productivity-business.jpg",
+    seoTitle: "Statistical Analysis Calculator 2025 | Data Science Guide",
+    seoDescription: "Master statistical calculations. Learn mean, median, standard deviation, hypothesis testing, and data analysis fundamentals.",
+    keywords: ["statistical analysis", "standard deviation calculator", "hypothesis testing", "data science statistics", "statistical significance"],
+    content: {
+      introduction: "Statistics transforms raw data into meaningful insights. From business analytics to scientific research, statistical analysis enables evidence-based decisions. Understanding descriptive statistics, distributions, and hypothesis testing is essential for anyone working with data. These tools separate signal from noise in uncertain world.",
+      sections: [
+        { heading: "Descriptive Statistics", content: "Mean: sum of values / count. Most common average but sensitive to outliers. Median: middle value when sorted—robust to outliers. Mode: most frequent value. Range: max - min. Standard deviation: measures spread around mean. Variance: squared standard deviation. Calculate for sample (n-1 denominator) or population (n denominator). Example: scores 70, 80, 90, 100, 110. Mean = 90, median = 90, SD = 15.8. Descriptive stats summarize data distributions." },
+        { heading: "Normal Distribution and Z-Scores", content: "Normal (Gaussian) distribution: bell curve, mean = median. 68% within 1 SD, 95% within 2 SD, 99.7% within 3 SD. Z-score: (value - mean) / SD. Measures standard deviations from mean. Example: test score 85, class mean 75, SD 10. Z = (85-75)/10 = 1.0. Score is 1 SD above average, 84th percentile. Use Z-tables or calculators for percentiles. Central Limit Theorem: sampling distributions approach normal regardless of population distribution." },
+        { heading: "Hypothesis Testing", content: "Null hypothesis (H₀): no effect/difference. Alternative hypothesis (H₁): effect exists. P-value: probability of results if H₀ true. Common threshold: p < 0.05 (5% significance level). Reject H₀ if p < 0.05. Type I error: false positive (reject true H₀). Type II error: false negative (fail to reject false H₀). T-tests compare means, chi-square tests associations, ANOVA compares multiple groups. Always check test assumptions." },
+        { heading: "Correlation and Regression", content: "Correlation coefficient (r): measures linear relationship, ranges -1 to +1. r = +1 perfect positive, 0 no relationship, -1 perfect negative. Correlation ≠ causation! Confounding variables may drive both. Linear regression: y = mx + b predicts outcome from predictor. R² measures variance explained. Residuals: actual - predicted values. Check residual plots for patterns suggesting nonlinearity or heteroscedasticity. Multiple regression includes multiple predictors." }
+      ],
+      conclusion: "Statistics provides tools for understanding data and testing hypotheses. Master descriptive statistics, normal distributions, and hypothesis testing fundamentals. Understand p-values and statistical significance. Remember correlation doesn't imply causation. Statistics enables evidence-based decisions—essential skill for data-driven world. Continue learning—statistics is vast field with depth at every level."
+    }
+  },
+  {
+    id: "structural-load-calculator-civil-engineering",
+    title: "Structural Load Calculator: Civil Engineering Analysis",
+    excerpt: "Calculate dead loads, live loads, and structural capacity for building design. Essential for civil engineering and construction.",
+    author: "Eng. Patricia González",
+    date: "March 8, 2025",
+    category: "Engineering",
+    readTime: "10 min read",
+    image: "/blog-math-science.jpg",
+    seoTitle: "Structural Load Calculator 2025 | Civil Engineering Guide",
+    seoDescription: "Master structural load calculations. Learn dead loads, live loads, load combinations for building design and construction.",
+    keywords: ["structural load calculator", "dead load live load", "building loads", "structural engineering", "load capacity"],
+    content: {
+      introduction: "Structural load analysis ensures buildings and infrastructure can safely support expected forces. Understanding dead loads, live loads, and load combinations is fundamental to civil engineering. From residential homes to bridges and skyscrapers, proper load calculations prevent catastrophic failures. Safety depends on accurate structural analysis.",
+      sections: [
+        { heading: "Dead Loads vs Live Loads", content: "Dead loads: permanent, non-moving weights. Structure itself, walls, floors, roof, fixed equipment. Calculate from material densities and volumes. Concrete: 150 lb/ft³, steel: 490 lb/ft³, wood framing: 10-15 psf. Live loads: temporary, movable weights. Occupants, furniture, snow, equipment. Building codes specify minimum values. Residential floors: 40 psf, offices: 50-80 psf, storage: 125+ psf. Snow loads vary by location and roof design." },
+        { heading: "Load Combinations and Safety Factors", content: "Multiple loads rarely occur at maximum simultaneously. Building codes specify load combinations: 1.2D + 1.6L (strength design) or D + L (service design). Wind and seismic loads require additional combinations. Safety factors account for uncertainties in loads, materials, analysis. LRFD (Load and Resistance Factor Design): factored loads must not exceed factored resistance. ASD (Allowable Stress Design): actual stress must not exceed allowable stress. Both methods achieve similar safety levels." },
+        { heading: "Beam and Column Analysis", content: "Simply supported beam: maximum moment M = wL²/8 for uniform load w over span L. Cantilever: M = wL²/2. Deflection limits: L/240 to L/360 for serviceability. Bending stress: σ = M/S where S is section modulus. Columns: axial compression plus potential buckling. Slenderness ratio determines buckling risk. Euler buckling: P_critical = π²EI/(KL)². Short columns fail by crushing, long columns by buckling." },
+        { heading: "Foundations and Soil Bearing", content: "Foundation must distribute building load to soil without excessive settlement. Soil bearing capacity varies: soft clay 1000-2000 psf, dense sand 4000-8000 psf, rock 10,000+ psf. Geotechnical investigation determines site-specific values. Footing size: Area = Total load / Allowable bearing pressure. Include self-weight of foundation. Settlement analysis: immediate and consolidation settlement. Differential settlement more damaging than uniform settlement." }
+      ],
+      conclusion: "Structural load analysis combines dead loads, live loads, and safety factors per building codes. Master load calculation and combination methods. Understand beam and column behavior under various loading conditions. Size foundations based on soil bearing capacity. Always follow applicable building codes and standards. Structural safety is paramount—when uncertain, consult experienced structural engineer."
+    }
+  },
+  {
+    id: "discounted-cash-flow-calculator-valuation",
+    title: "Discounted Cash Flow Calculator: Business Valuation Guide",
+    excerpt: "Calculate intrinsic value using DCF analysis. Master this essential valuation method for investment analysis and corporate finance.",
+    author: "Marcus Thompson, CFA",
+    date: "March 9, 2025",
+    category: "Finance",
+    readTime: "12 min read",
+    image: "/blog-finance-planning.jpg",
+    seoTitle: "DCF Calculator 2025 | Discounted Cash Flow Valuation Guide",
+    seoDescription: "Master discounted cash flow analysis for business valuation. Learn DCF modeling, WACC, terminal value, and investment analysis.",
+    keywords: ["dcf calculator", "discounted cash flow", "business valuation", "intrinsic value", "WACC calculator"],
+    content: {
+      introduction: "Discounted Cash Flow (DCF) analysis is the gold standard for business valuation. By projecting future cash flows and discounting to present value, DCF reveals intrinsic worth independent of market sentiment. Warren Buffett famously relies on DCF for investment decisions. Understanding DCF is essential for corporate finance, investment banking, and value investing.",
+      sections: [
+        { heading: "DCF Fundamentals", content: "Core principle: dollar today worth more than dollar tomorrow due to time value of money. DCF calculates present value of all future cash flows. Components: 1) Project free cash flows 5-10 years, 2) Calculate terminal value beyond projection, 3) Discount all cash flows to present using WACC, 4) Sum for enterprise value, subtract debt, divide by shares for per-share value. Compare to market price—undervalued if DCF > price." },
+        { heading: "Free Cash Flow Calculation", content: "Free Cash Flow to Firm (FCFF) = EBIT(1-tax rate) + Depreciation - CapEx - Change in NWC. Cash available to all investors after reinvestment. Project revenue growth, margins, working capital needs. Conservative assumptions better than aggressive—garbage in, garbage out. Sensitivity analysis tests key assumptions. Terminal value often 60-80% of total value—get growth rate right. Use industry averages and historical data as guides." },
+        { heading: "WACC: Weighted Average Cost of Capital", content: "Discount rate reflecting required returns of debt and equity investors. WACC = (E/V × Re) + (D/V × Rd × (1-Tc)) where E = equity value, D = debt value, V = E+D, Re = cost of equity, Rd = cost of debt, Tc = tax rate. Cost of equity via CAPM: Re = Rf + β(Rm - Rf). Risk-free rate + beta × equity risk premium. Higher WACC = lower valuation. Small changes dramatically impact DCF value." },
+        { heading: "Terminal Value Methods", content: "Perpetuity Growth: TV = FCF × (1+g) / (WACC - g) where g is perpetual growth rate (typically GDP growth 2-3%). Exit Multiple: TV = Final year EBITDA × industry multiple. Compare both methods. Terminal value discount: PV = TV / (1 + WACC)^n. Most DCF value in terminal value—scrutinize assumptions carefully. Sanity check: implied exit valuation reasonable? Terminal growth above GDP unsustainable long-term." }
+      ],
+      conclusion: "DCF calculates intrinsic value by discounting future cash flows to present. Master free cash flow projection and WACC calculation. Terminal value critically important—test sensitivity. DCF requires numerous assumptions—transparency essential. Results only as good as inputs—conservative assumptions safer. DCF is art and science—experience improves estimates. Combine with other valuation methods for comprehensive analysis."
+    }
+  },
+  {
+    id: "half-life-calculator-exponential-decay",
+    title: "Half-Life Calculator: Exponential Decay Analysis",
+    excerpt: "Calculate half-life for radioactive decay, drug metabolism, and exponential processes. Essential for science and pharmacology.",
+    author: "Dr. Rachel Hoffman",
+    date: "March 10, 2025",
+    category: "Science",
+    readTime: "8 min read",
+    image: "/blog-math-science.jpg",
+    seoTitle: "Half-Life Calculator 2025 | Exponential Decay Guide",
+    seoDescription: "Master half-life calculations for radioactive decay, drug clearance, and exponential processes with practical science applications.",
+    keywords: ["half life calculator", "exponential decay", "radioactive decay", "drug half life", "decay constant"],
+    content: {
+      introduction: "Half-life describes how quickly quantities decrease exponentially—from radioactive isotopes to drug concentrations in blood. This fundamental concept appears in nuclear physics, pharmacology, chemistry, and finance. Understanding half-life enables predictions about decay processes and time-dependent phenomena. Essential for anyone working with exponential decay.",
+      sections: [
+        { heading: "Half-Life Formula", content: "Half-life (t₁/₂): time for quantity to reduce to half. Exponential decay: N(t) = N₀ × (½)^(t/t₁/₂) or N(t) = N₀ × e^(-λt) where λ is decay constant. Relationship: λ = ln(2)/t₁/₂ ≈ 0.693/t₁/₂. Example: isotope with 5-day half-life starting at 100g. After 5 days: 50g. After 10 days: 25g. After 15 days: 12.5g. Each half-life period halves remaining quantity." },
+        { heading: "Radioactive Decay Applications", content: "Carbon-14 dating: t₁/₂ = 5,730 years enables age determination of organic materials. Uranium-238: t₁/₂ = 4.5 billion years, used in geological dating. Medical isotopes: Technetium-99m (t₁/₂ = 6 hours) for imaging—decays quickly after scan. Nuclear power: manage radioactive waste based on half-lives. Short half-life: intense radiation, decays quickly. Long half-life: weak radiation, persists for ages." },
+        { heading: "Pharmacology and Drug Metabolism", content: "Drug half-life determines dosing frequency. Example: drug with 8-hour t₁/₂ requires dosing every 4-8 hours for steady levels. After 5 half-lives, 97% eliminated—used to determine washout period. Loading dose establishes therapeutic level quickly. Maintenance dose replaces amount eliminated. Extended release formulations provide steady levels with less frequent dosing. Half-life varies by metabolism and kidney function—adjust for patients with impairment." },
+        { heading: "Other Applications", content: "Population decay: species extinction rates. Investment returns: compound growth (reverse of decay). Temperature cooling: Newton's law of cooling follows exponential. Chemical reactions: first-order reactions have constant half-life. Atmospheric pressure: decreases exponentially with altitude. Capacitor discharge: exponential decay following RC time constant. Recognize exponential decay patterns across diverse fields—same mathematics applies." }
+      ],
+      conclusion: "Half-life quantifies exponential decay rate—time to reduce quantity by half. Master exponential decay equation and its applications. Calculate decay constant from half-life. Apply to radioactive dating, drug dosing, and various decay processes. After multiple half-lives, very little remains—5 half-lives ≈ 97% decay. Understanding half-life essential for physics, chemistry, pharmacology, and many other fields."
+    }
+  },
+  {
+    id: "ph-calculator-acid-base-chemistry",
+    title: "pH Calculator: Acid-Base Chemistry Guide",
+    excerpt: "Calculate pH, pOH, and hydrogen ion concentration. Essential chemistry tool for lab work, water quality, and chemical analysis.",
+    author: "Dr. Nathan Rivera",
+    date: "March 11, 2025",
+    category: "Science",
+    readTime: "9 min read",
+    image: "/blog-math-science.jpg",
+    seoTitle: "pH Calculator 2025 | Acid-Base Chemistry Guide",
+    seoDescription: "Master pH calculations and acid-base chemistry. Learn hydrogen ion concentration, buffers, and practical laboratory applications.",
+    keywords: ["ph calculator", "acid base chemistry", "hydrogen ion concentration", "pOH calculator", "buffer solutions"],
+    content: {
+      introduction: "pH is fundamental to chemistry, biology, environmental science, and countless industrial processes. This simple scale quantifies acidity and basicity—essential for everything from human blood to soil fertility to water treatment. Understanding pH calculations and acid-base chemistry enables proper chemical handling, environmental monitoring, and process control.",
+      sections: [
+        { heading: "pH Scale and Calculations", content: "pH = -log₁₀[H⁺] where [H⁺] is hydrogen ion concentration in mol/L. pH 7 = neutral, < 7 = acidic, > 7 = basic. Each pH unit is 10× concentration change. pH 3 is 10× more acidic than pH 4. [H⁺] from pH: [H⁺] = 10^(-pH). pOH = -log₁₀[OH⁻]. Relationship: pH + pOH = 14 at 25°C. Example: [H⁺] = 0.001 M = 10⁻³ M, pH = 3 (acidic)." },
+        { heading: "Strong Acids and Bases", content: "Strong acids completely dissociate: HCl, HNO₃, H₂SO₄. 0.1 M HCl gives [H⁺] = 0.1 M, pH = 1. Strong bases: NaOH, KOH, Ba(OH)₂. 0.1 M NaOH gives [OH⁻] = 0.1 M, pOH = 1, pH = 13. Calculate pH directly from molarity for strong acids/bases. Dilution: M₁V₁ = M₂V₂ applies, then recalculate pH. Mixing acids and bases: moles H⁺ - moles OH⁻ determines excess." },
+        { heading: "Weak Acids and Buffers", content: "Weak acids partially dissociate: CH₃COOH (acetic acid), HF. Use Ka (acid dissociation constant) and ICE table to find pH. Henderson-Hasselbalch: pH = pKa + log([A⁻]/[HA]) for buffer solutions. Buffers resist pH change—mixture of weak acid and conjugate base. Example: acetic acid/acetate buffer. Choose buffer with pKa near desired pH. Buffer capacity limited—adding too much acid/base overwhelms buffer." },
+        { heading: "Practical Applications", content: "Human blood pH: 7.35-7.45, tightly regulated by bicarbonate buffer. Swimming pools: maintain pH 7.2-7.8 for comfort and sanitizer effectiveness. Soil pH: affects nutrient availability for plants. Acid rain: pH < 5.6 from SO₂ and NOₓ pollution. Water treatment: adjust pH for corrosion control and disinfection. Enzyme activity: most enzymes have optimal pH range. Always calibrate pH meters with standard buffers before use." }
+      ],
+      conclusion: "pH quantifies acidity using pH = -log[H⁺]. Scale runs 0-14 with 7 as neutral. Strong acids/bases: calculate pH directly from concentration. Weak acids: use Ka and equilibrium calculations. Buffers maintain stable pH through conjugate acid-base pairs. pH affects countless biological and chemical processes. Master pH calculations and understand acid-base equilibria for chemistry and related fields."
+    }
+  },
+  {
+    id: "pythagorean-theorem-calculator-geometry",
+    title: "Pythagorean Theorem Calculator: Right Triangle Solutions",
+    excerpt: "Calculate right triangle sides using a² + b² = c². Essential geometry tool for construction, navigation, and engineering.",
+    author: "Prof. Andrew Bennett",
+    date: "March 12, 2025",
+    category: "Math",
+    readTime: "7 min read",
+    image: "/blog-math-science.jpg",
+    seoTitle: "Pythagorean Theorem Calculator 2025 | Right Triangle Guide",
+    seoDescription: "Master Pythagorean theorem with a²+b²=c². Learn right triangle calculations for geometry, construction, and practical applications.",
+    keywords: ["pythagorean theorem calculator", "right triangle calculator", "a squared plus b squared", "geometry calculator", "triangle sides"],
+    content: {
+      introduction: "The Pythagorean Theorem is one of the most famous and useful equations in mathematics. For over 2,500 years, a² + b² = c² has enabled calculations involving right triangles—from ancient surveying to modern GPS. Understanding this fundamental relationship opens door to geometry, trigonometry, and countless practical applications.",
+      sections: [
+        { heading: "The Theorem and Its Proof", content: "For right triangle with legs a and b and hypotenuse c: a² + b² = c². Hypotenuse (c) is longest side opposite right angle. Example: triangle with sides 3 and 4. c² = 3² + 4² = 9 + 16 = 25, so c = 5. This 3-4-5 triangle is most common Pythagorean triple. Proof: geometric rearrangement of squares shows areas equal. Applies ONLY to right triangles—verify 90° angle first." },
+        { heading: "Common Pythagorean Triples", content: "Integer solutions: (3,4,5), (5,12,13), (8,15,17), (7,24,25). Multiples also work: (6,8,10), (9,12,15), etc. Memorizing common triples speeds calculations. Generate using formulas: a = m²-n², b = 2mn, c = m²+n² for integers m > n. In practice, use calculator for non-integer solutions. Always check units consistency—all sides same units." },
+        { heading: "Practical Applications", content: "Construction: ensure corners are square using 3-4-5 ratio. Carpentry: find diagonal measurements. Roofing: calculate rafter lengths from rise and run. Navigation: find straight-line distance from north/east components. Ladder safety: maintain proper angle from wall. Surveying: determine distances using right angle sighting. Distance on coordinate plane: d = √[(x₂-x₁)² + (y₂-y₁)²] derives from Pythagorean theorem." },
+        { heading: "Extensions and Related Concepts", content: "Three dimensions: 3D distance formula extends to a² + b² + c² = d². Trigonometry builds on Pythagorean theorem: sin²θ + cos²θ = 1. Law of cosines generalizes to non-right triangles: c² = a² + b² - 2ab cos(C). Pythagorean theorem appears in physics: velocity components, vector addition. Foundation for analytic geometry and calculus. Simple equation with profound implications across mathematics." }
+      ],
+      conclusion: "Pythagorean theorem relates right triangle sides with a² + b² = c². Master this fundamental relationship for geometry and practical applications. Recognize common Pythagorean triples for quick calculations. Apply to construction, navigation, distance calculations. Extends to three dimensions and underlies much of trigonometry and geometry. Simple yet powerful—essential mathematical tool."
+    }
+  },
+  {
+    id: "mortgage-refinance-calculator-guide",
+    title: "Mortgage Refinance Calculator: Complete Guide to Refinancing",
+    excerpt: "Calculate refinance savings and break-even point. Comprehensive guide to mortgage refinancing decisions and strategies.",
+    author: "Jennifer Stevens, CFP",
+    date: "March 13, 2025",
+    category: "Finance",
+    readTime: "11 min read",
+    image: "/blog-finance-planning.jpg",
+    seoTitle: "Mortgage Refinance Calculator 2025 | Refinancing Guide",
+    seoDescription: "Master mortgage refinancing with break-even analysis. Learn when to refinance, closing costs, and strategies for maximum savings.",
+    keywords: ["mortgage refinance calculator", "refinancing guide", "break even analysis", "mortgage rates", "refinance costs"],
+    content: {
+      introduction: "Refinancing replaces your current mortgage with new loan—potentially lowering payments, reducing interest, or accessing equity. But refinancing involves costs, and timing is crucial. Understanding break-even analysis and total interest comparison enables smart refinancing decisions. Calculate carefully—refinancing isn't always beneficial despite lower rates.",
+      sections: [
+        { heading: "When to Consider Refinancing", content: "Classic rule: refinance when rates drop 0.5-1% below current rate. But other factors matter: length of time staying in home, closing costs, loan balance remaining, credit score changes. Rate-and-term refinance: change rate/term without cash out. Cash-out refinance: borrow more than owed, take difference in cash. Consolidate high-interest debt into lower mortgage rate. Shorten term (30yr → 15yr) to save interest if can afford higher payments." },
+        { heading: "Break-Even Analysis", content: "Closing costs divided by monthly payment reduction equals break-even months. Example: $4,000 closing costs, $150/month savings: 4000/150 = 26.67 months (2.2 years). If staying longer than break-even period, refinancing makes sense. If might move sooner, costs exceed savings. Compare total interest over loan life—short remaining term may negate refinancing benefit. Online calculators automate break-even analysis. Get accurate closing cost estimates—lender fees vary significantly." },
+        { heading: "Refinancing Costs", content: "Typical closing costs: 2-5% of loan amount. Application fee: $75-300. Appraisal: $300-500. Title search and insurance: $700-900. Origination fee: 0.5-1% of loan. Points: optional upfront payment to reduce rate. No-closing-cost refinance: lender covers costs but charges higher rate—compare total interest paid. Shop multiple lenders—fees and rates vary. Ask for Loan Estimates from 3+ lenders. Negotiate junk fees—some are flexible." },
+        { heading: "Special Refinancing Strategies", content: "Streamline refinance: FHA/VA loans may qualify for simplified process with lower costs, no appraisal. Reset to 30 years but keep making previous payment amount—pay off faster while maintaining payment flexibility. Bi-weekly payments: 26 half-payments per year = 13 full payments, reduces term by years. Remove PMI: if home value increased enough to reach 20% equity. Cash-out refinance for home improvements: may increase home value and potentially tax-deductible. Avoid frequent refinancing—each restart means more interest paid on loan front." }
+      ],
+      conclusion: "Refinancing can save thousands but requires careful analysis. Calculate break-even point considering closing costs and payment reduction. Compare total interest over remaining loan life. Shop multiple lenders for best rates and terms. Consider how long you'll stay in home. Refinancing isn't automatic benefit—run numbers before deciding. Time refinance strategically when rates drop and when personal financial situation improves."
+    }
+  },
+  {
+    id: "quadratic-formula-calculator-algebra",
+    title: "Quadratic Formula Calculator: Solving x² Equations",
+    excerpt: "Solve quadratic equations using the quadratic formula. Essential algebra tool for math, physics, and engineering applications.",
+    author: "Prof. Maria Santos",
+    date: "March 14, 2025",
+    category: "Math",
+    readTime: "8 min read",
+    image: "/blog-math-science.jpg",
+    seoTitle: "Quadratic Formula Calculator 2025 | Solve ax²+bx+c=0",
+    seoDescription: "Master quadratic formula x = (-b ± √(b²-4ac))/(2a). Learn to solve quadratic equations for algebra and calculus applications.",
+    keywords: ["quadratic formula calculator", "solve quadratic equation", "ax2+bx+c=0", "discriminant", "parabola vertex"],
+    content: {
+      introduction: "Quadratic equations appear throughout mathematics, physics, and engineering—from projectile motion to economics optimization. The quadratic formula provides universal method for solving any quadratic equation. Understanding this fundamental tool is essential for algebra, calculus, and countless applications. Master the quadratic formula for mathematical fluency.",
+      sections: [
+        { heading: "The Quadratic Formula", content: "For equation ax² + bx + c = 0, solutions are x = [-b ± √(b²-4ac)] / (2a). Discriminant: Δ = b²-4ac determines solution types. Δ > 0: two real solutions. Δ = 0: one repeated real solution (vertex on x-axis). Δ < 0: two complex solutions (parabola doesn't cross x-axis). Example: x² - 5x + 6 = 0. a=1, b=-5, c=6. x = [5 ± √(25-24)] / 2 = [5 ± 1] / 2. Solutions: x = 3 or x = 2. Verify by factoring: (x-2)(x-3) = 0." },
+        { heading: "Alternative Solution Methods", content: "Factoring: fastest when equation factors nicely. (x-2)(x-3) = 0 gives x = 2 or 3 immediately. Completing the square: convert to (x-h)² = k form. Graphing: find x-intercepts of parabola. Use quadratic formula when factoring not obvious—works for all quadratics. Check discriminant first—if Δ < 0, no real solutions exist. Quadratic formula is universal method—always works when other methods fail or are unclear." },
+        { heading: "Applications in Physics", content: "Projectile motion: h = h₀ + v₀t - ½gt² gives time when object hits ground (h=0). Area/perimeter problems: rectangular garden with given fence length and area. Optimization: maximum/minimum values via vertex. Economics: profit/cost curves. Circuits: resonant frequency calculations. Quadratics model many real-world parabolic relationships. Always check if negative solutions make physical sense—often need positive root only." },
+        { heading: "Graphing and Vertex Form", content: "Parabola shape: opens up if a > 0, down if a < 0. Vertex (maximum or minimum point): x = -b/(2a), then find y-value. Axis of symmetry: vertical line x = -b/(2a). Vertex form: y = a(x-h)² + k where (h,k) is vertex. Convert between standard and vertex forms via completing the square. Y-intercept: evaluate at x = 0 gives c. Understanding graph helps verify solutions make sense." }
+      ],
+      conclusion: "Quadratic formula x = [-b ± √(b²-4ac)]/(2a) solves all quadratic equations. Check discriminant to predict solution types. Master along with factoring and completing square for flexibility. Apply to physics projectile motion, optimization, and countless other problems. Understand connection between algebraic solutions and parabola graph. Fundamental algebra tool used extensively in higher mathematics and science."
+    }
+  },
+  {
+    id: "credit-score-improvement-guide",
+    title: "Credit Score Calculator & Improvement Guide",
+    excerpt: "Understand credit score factors and strategies to improve your rating. Essential guide for financial health and better lending terms.",
+    author: "Robert Martinez, CFP",
+    date: "March 15, 2025",
+    category: "Finance",
+    readTime: "10 min read",
+    image: "/blog-finance-planning.jpg",
+    seoTitle: "Credit Score Guide 2025 | Improve Your Credit Rating",
+    seoDescription: "Master credit score factors and improvement strategies. Learn FICO scoring, credit utilization, and tactics for better credit health.",
+    keywords: ["credit score improvement", "FICO score", "credit utilization", "credit report", "improve credit rating"],
+    content: {
+      introduction: "Your credit score affects mortgage rates, auto loans, credit cards, insurance premiums, and even job prospects. This three-digit number saves or costs you thousands of dollars over lifetime. Understanding what impacts credit scores and how to improve them is essential financial knowledge. Small score improvements translate to significant savings on interest rates.",
+      sections: [
+        { heading: "FICO Score Components", content: "Payment history (35%): most important factor. Even one late payment hurts. Always pay at least minimum on time. Credit utilization (30%): total credit used / total available credit. Keep below 30%, ideally below 10%. Credit age (15%): older accounts boost score—keep old cards open. Credit mix (10%): different types (credit cards, installment loans) slightly help. New credit (10%): too many recent applications hurt. Hard inquiries stay on report 2 years but impact fades after few months." },
+        { heading: "Quick Credit Score Improvements", content: "Pay down credit card balances below 30% utilization—fastest impact. Become authorized user on someone's old, well-managed account. Request credit limit increases without new spending—lowers utilization. Set up autopay to ensure no missed payments. Dispute credit report errors—25% of reports contain errors. Request goodwill adjustment for isolated late payment from lender. These tactics show results in 30-90 days. Major improvements take 6-24 months." },
+        { heading: "Long-Term Credit Building", content: "Never close old credit cards—reduces credit age and available credit. Use cards sparingly but regularly to keep accounts active. Pay off high-interest debt first while maintaining minimum payments on everything. Avoid closing paid-off loans—they continue helping credit mix. Limit new credit applications—only apply when needed. Wait 3-6 months between applications. Build 7+ years of perfect payment history for excellent credit. Patience essential—rebuilding takes time." },
+        { heading: "Credit Monitoring and Protection", content: "Check credit reports annually at AnnualCreditReport.com (free by law). Review all three bureaus: Equifax, Experian, TransUnion. Scores may differ slightly. Dispute inaccuracies immediately—can boost score quickly. Consider credit monitoring service for alerts on changes. Freeze credit if not applying for credit—prevents identity theft. Unfreeze when needed. Understand difference between credit report (full history) and credit score (numeric rating). Monitor both regularly." }
+      ],
+      conclusion: "Credit score dramatically affects financial opportunities and costs. Focus on payment history and credit utilization—biggest factors. Implement quick wins like paying down balances and disputing errors. Build long-term habits of on-time payments and low utilization. Check reports annually for errors. Patience required—major improvements take time but pay enormous dividends. Good credit saves thousands in interest over lifetime."
+    }
   }
-  // 24 more blog posts would continue here covering topics like:
-  // - Force and acceleration calculators (physics)
-  // - Chemical molarity and concentration (chemistry)
-  // - Statistical analysis tools (data science)
-  // - Structural load calculations (civil engineering)
-  // - Heat transfer calculations (thermodynamics)
-  // - Options pricing models (advanced finance)
-  // - And 18 more comprehensive guides...
 ];
 
 export const getBlogPost = (slug: string): BlogPost | undefined => {
