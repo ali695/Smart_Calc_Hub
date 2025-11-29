@@ -1,9 +1,10 @@
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, Calendar, User, Clock } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import { getBlogPost } from "@/data/blogPosts";
+import { getBlogPost, blogPosts } from "@/data/blogPosts";
 import { SEOHead } from "@/components/SEOHead";
 import { getBlogOGImage } from "@/utils/ogImageMapping";
+import { RelatedBlogPosts } from "@/components/RelatedBlogPosts";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -159,6 +160,12 @@ const BlogPost = () => {
                 </CardContent>
               </Card>
             </div>
+
+            <RelatedBlogPosts 
+              currentPostId={post.id}
+              currentCategory={post.category}
+              allPosts={blogPosts}
+            />
           </div>
         </div>
       </article>

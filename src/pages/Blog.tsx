@@ -1,11 +1,33 @@
-import { Calendar, User, ArrowRight, Sparkles } from "lucide-react";
+import { Calendar, User, ArrowRight, Sparkles, Search } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Link } from "react-router-dom";
+import { useState, useMemo } from "react";
 
 import { blogPosts } from "@/data/blogPosts";
 
 const Blog = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+
+  const categories = useMemo(() => {
+    const cats = ["All", ...Array.from(new Set(blogPosts.map(post => post.category)))];
+    return cats;
+  }, []);
+
+  const filteredPosts = useMemo(() => {
+    return blogPosts.filter(post => {
+      const matchesSearch = searchQuery === "" || 
+        post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        post.keywords.some(keyword => keyword.toLowerCase().includes(searchQuery.toLowerCase()));
+      
+      const matchesCategory = selectedCategory === "All" || post.category === selectedCategory;
+      
+      return matchesSearch && matchesCategory;
+    });
+  }, [searchQuery, selectedCategory]);
 
   return (
     <div className="min-h-screen">
@@ -29,9 +51,58 @@ const Blog = () => {
 
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-6xl mx-auto">
+          {/* Search and Filter Section */}
+          <div className="mb-12 animate-fade-in">
+            <div className="flex flex-col md:flex-row gap-4 mb-6">
+              <div className="relative flex-1">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
+                <Input
+                  type="text"
+                  placeholder="Search articles by title, keywords, or content..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-10 h-12 glass-card border-2 border-border focus:border-primary transition-colors"
+                />
+              </div>
+            </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogPosts.map((post) => (
+            {/* Category Filter Pills */}
+            <div className="flex flex-wrap gap-2">
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  onClick={() => setSelectedCategory(category)}
+                  className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${
+                    selectedCategory === category
+                      ? "bg-primary text-primary-foreground shadow-neon"
+                      : "bg-muted hover:bg-muted-foreground/20 text-foreground"
+                  }`}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
+
+            {/* Results count */}
+            <p className="mt-4 text-sm text-muted-foreground">
+              Showing {filteredPosts.length} {filteredPosts.length === 1 ? 'article' : 'articles'}
+              {searchQuery && ` matching "${searchQuery}"`}
+              {selectedCategory !== "All" && ` in ${selectedCategory}`}
+            </p>
+          </div>
+
+          {/* Blog Posts Grid */}
+          {filteredPosts.length === 0 ? (
+            <div className="text-center py-16 animate-fade-in">
+              <p className="text-xl text-muted-foreground mb-4">No articles found</p>
+              <p className="text-sm text-muted-foreground mb-6">Try adjusting your search or filter criteria</p>
+              <Button onClick={() => { setSearchQuery(""); setSelectedCategory("All"); }}>
+                Clear Filters
+              </Button>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredPosts.map((post) => (
               <Card key={post.id} className="group card-shine card-flip card-glow-hover hover:shadow-large transition-all duration-300 cursor-pointer flex flex-col border-2 border-border hover:border-primary overflow-hidden">
                 <div className="aspect-video overflow-hidden relative">
                   {post.image ? (
@@ -76,8 +147,9 @@ const Blog = () => {
                   </div>
                 </CardContent>
               </Card>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
 
           <div className="mt-12 text-center">
             <Card className="inline-block bg-primary/5 border-primary/20">
