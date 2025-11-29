@@ -35,76 +35,85 @@ const Index = () => {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative bg-gradient-hero py-20 md:py-32 overflow-hidden">
-        {/* Geometric Grid Background */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(214_32%_91%_/_0.3)_1px,transparent_1px),linear-gradient(to_bottom,hsl(214_32%_91%_/_0.3)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)] dark:bg-[linear-gradient(to_right,hsl(217_33%_17%_/_0.3)_1px,transparent_1px),linear-gradient(to_bottom,hsl(217_33%_17%_/_0.3)_1px,transparent_1px)]" />
+        {/* Animated Geometric Grid Background */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(214_32%_91%_/_0.3)_1px,transparent_1px),linear-gradient(to_bottom,hsl(214_32%_91%_/_0.3)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)] dark:bg-[linear-gradient(to_right,hsl(217_33%_17%_/_0.3)_1px,transparent_1px),linear-gradient(to_bottom,hsl(217_33%_17%_/_0.3)_1px,transparent_1px)] animate-grid-flow" />
+        
+        {/* Floating Gradient Orbs */}
+        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/20 rounded-full blur-3xl animate-float-slow" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-primary-glow/20 rounded-full blur-3xl animate-float-delayed" />
         
         <div className="container mx-auto px-4 relative">
-          <div className={`max-w-4xl mx-auto text-center space-y-8 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            {/* Tagline */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
-              <CalcIcon className="h-4 w-4 text-primary" />
+          <div className="max-w-4xl mx-auto text-center space-y-8">
+            {/* Tagline - Staggered Animation */}
+            <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+              <CalcIcon className="h-4 w-4 text-primary animate-pulse-glow" />
               <span className="text-sm font-medium text-primary">All-in-One Calculator Hub</span>
             </div>
 
-            {/* Main Headline */}
-            <h1 className="text-5xl md:text-6xl font-bold tracking-tight leading-tight">
-              <span className="block">Fast, Smart & Accurate</span>
-              <span className="block bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent mt-2">
+            {/* Main Headline - Staggered Animation */}
+            <h1 className={`text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+              <span className="block animate-fade-in-up">Fast, Smart & Accurate</span>
+              <span className="block bg-gradient-to-r from-primary via-primary-glow to-primary bg-clip-text text-transparent mt-2 bg-[length:200%_auto] animate-gradient-flow">
                 Calculators for Everyone
               </span>
             </h1>
             
-            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+            {/* Description - Staggered Animation */}
+            <p className={`text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
               Free online calculators for finance, health, math, and conversions. 
               Get instant, accurate results with our easy-to-use tools.
             </p>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            {/* CTA Buttons - Staggered Animation with Enhanced Hover */}
+            <div className={`flex flex-col sm:flex-row gap-4 justify-center items-center transition-all duration-700 delay-400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
               <Button 
                 size="lg" 
                 onClick={scrollToCalculators}
-                className="bg-gradient-to-r from-primary to-primary-glow hover:shadow-glow transition-all duration-300 hover:-translate-y-0.5 text-lg px-8"
+                className="group bg-gradient-to-r from-primary to-primary-glow hover:shadow-glow transition-all duration-300 hover:-translate-y-1 hover:scale-105 text-lg px-8 relative overflow-hidden"
               >
-                Explore All Calculators
+                <span className="relative z-10">Explore All Calculators</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-primary-glow to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </Button>
               <Button 
                 size="lg" 
                 variant="outline"
                 onClick={scrollToCalculators}
-                className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:-translate-y-0.5 text-lg px-8"
+                className="group border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:-translate-y-1 hover:scale-105 text-lg px-8 relative overflow-hidden"
               >
-                See Popular Tools
+                <span className="relative z-10">See Popular Tools</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-primary to-primary-glow opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </Button>
             </div>
 
-            {/* Search Bar */}
-            <div className="max-w-2xl mx-auto">
+            {/* Search Bar - Staggered Animation with Enhanced Interaction */}
+            <div className={`max-w-2xl mx-auto transition-all duration-700 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
               <div className="relative group">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground group-focus-within:text-primary transition-colors duration-300 group-focus-within:scale-110" />
                 <Input
                   type="text"
                   placeholder="Search calculators… e.g., Loan, BMI, Tax, Age"
-                  className="pl-12 h-14 text-base shadow-large hover:shadow-xl focus:shadow-xl transition-all duration-300 rounded-xl border-2 focus:border-primary"
+                  className="pl-12 h-14 text-base shadow-large hover:shadow-xl focus:shadow-xl transition-all duration-300 rounded-xl border-2 focus:border-primary group-focus-within:scale-[1.02]"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
+                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary/20 to-primary-glow/20 opacity-0 group-focus-within:opacity-100 transition-opacity duration-300 pointer-events-none blur-xl" />
               </div>
             </div>
 
-            {/* Category Pills */}
-            <div className="flex flex-wrap justify-center gap-3">
-              {categories.map((category) => {
+            {/* Category Pills - Staggered Animation */}
+            <div className={`flex flex-wrap justify-center gap-3 transition-all duration-700 delay-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+              {categories.map((category, index) => {
                 const Icon = category.icon;
                 return (
                   <Button
                     key={category.id}
                     variant="secondary"
-                    className="gap-2 hover:-translate-y-0.5 transition-all duration-300 shadow-soft hover:shadow-medium"
+                    className="group gap-2 hover:-translate-y-1 hover:scale-105 transition-all duration-300 shadow-soft hover:shadow-large"
+                    style={{ animationDelay: `${index * 50}ms` }}
                     asChild
                   >
                     <Link to={`/categories#${category.id}`}>
-                      <Icon className={`h-4 w-4 ${category.color}`} />
+                      <Icon className={`h-4 w-4 ${category.color} group-hover:scale-110 transition-transform duration-300`} />
                       {category.name}
                     </Link>
                   </Button>
@@ -129,14 +138,16 @@ const Index = () => {
                   <Link 
                     key={calc.path} 
                     to={calc.path}
-                    className={`transition-all duration-500 delay-${index * 100}`}
+                    className="group"
+                    style={{ animationDelay: `${index * 100}ms` }}
                   >
-                    <Card className="h-full hover:shadow-large transition-all duration-300 hover:-translate-y-1 cursor-pointer group text-center">
-                      <CardContent className="pt-6 pb-6">
-                        <div className="inline-flex p-4 rounded-full bg-gradient-to-br from-primary/10 to-primary/5 group-hover:from-primary/20 group-hover:to-primary/10 transition-all duration-300 mb-3">
-                          <Icon className={`h-8 w-8 ${calc.color}`} />
+                    <Card className="h-full hover:shadow-large transition-all duration-300 hover:-translate-y-2 hover:scale-105 cursor-pointer group text-center relative overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      <CardContent className="pt-6 pb-6 relative">
+                        <div className="inline-flex p-4 rounded-full bg-gradient-to-br from-primary/10 to-primary/5 group-hover:from-primary/20 group-hover:to-primary/10 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 mb-3">
+                          <Icon className={`h-8 w-8 ${calc.color} group-hover:scale-110 transition-transform duration-300`} />
                         </div>
-                        <h3 className="font-semibold text-base group-hover:text-primary transition-colors">
+                        <h3 className="font-semibold text-base group-hover:text-primary transition-colors duration-300">
                           {calc.title}
                         </h3>
                       </CardContent>
