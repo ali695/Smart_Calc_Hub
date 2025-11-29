@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { useState, useEffect } from "react";
 import { Search, Linkedin, Instagram, Facebook, Mail, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { PageHeader } from "@/components/PageHeader";
 
 const Categories = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -47,19 +48,10 @@ const Categories = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Gradient Header Banner with Dark Mode Enhancement */}
-      <div className="gradient-shimmer dark:bg-gradient-hero bg-gradient-to-r from-primary via-accent to-primary-glow text-primary-foreground py-8">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-3xl md:text-4xl font-bold mb-3 dark:text-gradient">
-              All Calculators
-            </h1>
-            <p className="text-lg opacity-95 dark:text-card-foreground">
-              Explore our full suite of free, accurate online calculators
-            </p>
-          </div>
-        </div>
-      </div>
+      <PageHeader 
+        title="All Calculators"
+        description="Explore our full suite of free, accurate online calculators"
+      />
 
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-6xl mx-auto">

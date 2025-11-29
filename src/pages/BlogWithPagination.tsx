@@ -7,6 +7,7 @@ import { useState, useMemo } from "react";
 import { blogPosts } from "@/data/blogPosts";
 import { SEOHead } from "@/components/SEOHead";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { PageHeader } from "@/components/PageHeader";
 
 const POSTS_PER_PAGE = 12;
 
@@ -87,21 +88,19 @@ const BlogWithPagination = () => {
       </script>
 
       <div className="min-h-screen">
-        {/* Hero Header */}
-        <div className="bg-gradient-to-r from-primary via-accent to-primary-glow text-primary-foreground py-16">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-5xl md:text-6xl font-bold mb-4">Blog & Insights</h1>
-              <p className="text-xl opacity-95 max-w-2xl mx-auto mb-6">
-                Insights, tips, and guides to help you get the most out of our calculator tools
-              </p>
-              <Link to="/blog-generator">
-                <Button variant="secondary" size="lg" className="gap-2 shadow-lg">
-                  <Sparkles className="h-5 w-5" />
-                  AI Blog Generator
-                </Button>
-              </Link>
-            </div>
+        <PageHeader 
+          title="Blog & Insights"
+          description="Insights, tips, and guides to help you get the most out of our calculator tools"
+        />
+        
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex justify-center mb-8">
+            <Link to="/blog-generator">
+              <Button variant="secondary" size="lg" className="gap-2 shadow-lg hover:scale-105 transition-transform">
+                <Sparkles className="h-5 w-5" />
+                Generate Blog Post with AI
+              </Button>
+            </Link>
           </div>
         </div>
 
