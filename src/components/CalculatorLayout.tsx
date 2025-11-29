@@ -15,6 +15,8 @@ import {
   BreadcrumbSeparator 
 } from "@/components/ui/breadcrumb";
 import { Link, useLocation } from "react-router-dom";
+import { PageHeader } from "@/components/PageHeader";
+import { Calculator } from "lucide-react";
 
 interface FAQ {
   question: string;
@@ -227,8 +229,14 @@ export const CalculatorLayout = ({
         {JSON.stringify(howToStructuredData)}
       </script>
       
-      <div className="min-h-screen py-12">
-      <div className="container mx-auto px-4">
+      <div className="min-h-screen">
+        <PageHeader 
+          title={title}
+          description={description}
+          icon={<Calculator className="h-10 w-10" />}
+        />
+        
+        <div className="container mx-auto px-4 py-12">
         <div className="max-w-4xl mx-auto space-y-8">
           {/* Breadcrumb Navigation */}
           <Breadcrumb className="mb-4">
@@ -257,14 +265,9 @@ export const CalculatorLayout = ({
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
-          {/* Header */}
-          <div className="text-center space-y-3">
-            <h1 className="text-4xl md:text-5xl font-bold">{title}</h1>
-            <p className="text-lg text-muted-foreground">{description}</p>
-          </div>
 
           {/* Calculator Card */}
-          <Card className="p-6 md:p-8 shadow-large">
+          <Card className="p-6 md:p-8 shadow-large animate-fade-in">
             {children}
           </Card>
 

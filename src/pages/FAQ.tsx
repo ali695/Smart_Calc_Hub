@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/accordion";
 import { Card, CardContent } from "@/components/ui/card";
 import { expandedFAQs } from "@/data/expandedFAQs";
+import { PageHeader } from "@/components/PageHeader";
 
 const FAQ = () => {
   const faqCategories = [
@@ -46,20 +47,11 @@ const FAQ = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Header */}
-      <div className="bg-gradient-to-r from-primary via-primary-glow to-accent text-primary-foreground py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex p-5 rounded-full bg-white/10 backdrop-blur-sm mb-4">
-              <HelpCircle className="h-10 w-10" />
-            </div>
-            <h1 className="text-5xl md:text-6xl font-bold mb-4">Frequently Asked Questions</h1>
-            <p className="text-xl opacity-95">
-              Find answers to common questions about SmartCalc Hub calculators
-            </p>
-          </div>
-        </div>
-      </div>
+      <PageHeader 
+        title="Frequently Asked Questions"
+        description="Find answers to common questions about SmartCalc Hub calculators"
+        icon={<HelpCircle className="h-10 w-10" />}
+      />
 
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-4xl mx-auto">

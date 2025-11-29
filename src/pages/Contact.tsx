@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Mail, Send, HelpCircle, Shield, Lightbulb } from "lucide-react";
 import { SEOHead } from "@/components/SEOHead";
 import { useToast } from "@/hooks/use-toast";
+import { PageHeader } from "@/components/PageHeader";
 
 const quickFaqs = [
   {
@@ -44,12 +45,14 @@ const Contact = () => {
         keywords="contact SmartCalc Hub, calculator support, feedback, suggestions"
         canonicalUrl="https://smartcalchub.com/contact"
       />
+      
+      <PageHeader 
+        title="Contact Us"
+        description="Have questions or feedback? We'd love to hear from you."
+      />
+      
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-4xl font-bold mb-4 text-center">Contact Us</h1>
-          <p className="text-muted-foreground text-center mb-12">
-            Have questions or feedback? We'd love to hear from you.
-          </p>
           
           {/* Quick FAQs Section */}
           <div className="mb-12">

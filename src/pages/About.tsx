@@ -1,20 +1,14 @@
 import { Calculator, Heart, Target, Users, Lightbulb, Shield, Zap, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
+import { PageHeader } from "@/components/PageHeader";
 
 const About = () => {
   return (
     <div className="min-h-screen">
-      {/* Hero Header */}
-      <div className="bg-gradient-to-r from-primary via-primary-glow to-accent text-primary-foreground py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-6xl font-bold mb-4">About SmartCalc Hub</h1>
-            <p className="text-xl opacity-95">
-              Your trusted source for fast, accurate, and free online calculators
-            </p>
-          </div>
-        </div>
-      </div>
+      <PageHeader 
+        title="About SmartCalc Hub"
+        description="Your trusted source for fast, accurate, and free online calculators"
+      />
 
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-5xl mx-auto">

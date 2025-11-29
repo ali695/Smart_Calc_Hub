@@ -6,6 +6,9 @@ import { SEOHead } from "@/components/SEOHead";
 import { getBlogOGImage } from "@/utils/ogImageMapping";
 import { RelatedBlogPosts } from "@/components/RelatedBlogPosts";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { ReadingProgress } from "@/components/ReadingProgress";
+import { SocialShareButtons } from "@/components/SocialShareButtons";
+import { NewsletterSignup } from "@/components/NewsletterSignup";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -57,6 +60,8 @@ const BlogPost = () => {
 
   return (
     <>
+      <ReadingProgress />
+      
       <SEOHead
         title={post.seoTitle}
         description={post.seoDescription}
@@ -145,6 +150,20 @@ const BlogPost = () => {
                 </div>
               </CardContent>
             </Card>
+
+            {/* Social Share Buttons */}
+            <div className="mt-8">
+              <SocialShareButtons 
+                url={`/blog/${slug}`}
+                title={post.title}
+                description={post.seoDescription}
+              />
+            </div>
+
+            {/* Newsletter Signup */}
+            <div className="mt-8">
+              <NewsletterSignup />
+            </div>
 
             <div className="mt-12 text-center">
               <Card className="inline-block glass-card">
