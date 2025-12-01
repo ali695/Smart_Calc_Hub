@@ -20,6 +20,24 @@ const testimonials = [
     content: "The math and engineering calculators helped me through my entire degree. The step-by-step results are incredibly helpful for learning.",
     rating: 5,
   },
+  {
+    name: "David Rodriguez",
+    role: "Small Business Owner",
+    content: "The profit margin and break-even calculators helped me understand my business finances better. Incredibly useful for planning.",
+    rating: 5,
+  },
+  {
+    name: "Amanda White",
+    role: "Registered Nurse",
+    content: "I use the body surface area and medication dose calculators daily. Fast, reliable, and exactly what healthcare professionals need.",
+    rating: 5,
+  },
+  {
+    name: "James Thompson",
+    role: "Math Teacher",
+    content: "Perfect for demonstrating calculations to students. The percentage and fraction calculators are now part of my teaching toolkit.",
+    rating: 5,
+  },
 ];
 
 export function Testimonials() {
