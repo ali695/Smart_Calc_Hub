@@ -7,6 +7,7 @@ import { calculators, categories } from "@/data/calculators";
 import { useState, useEffect } from "react";
 import { RecentlyUsedCalculators } from "@/components/RecentlyUsedCalculators";
 import { FeaturedPosts } from "@/components/FeaturedPosts";
+import { Testimonials } from "@/components/Testimonials";
 
 const Index = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -251,6 +252,9 @@ const Index = () => {
 
       {/* Featured Blog Posts */}
       <FeaturedPosts />
+
+      {/* Testimonials */}
+      <Testimonials />
 
       {/* Features Section */}
       <section className="py-16 bg-muted/30">
