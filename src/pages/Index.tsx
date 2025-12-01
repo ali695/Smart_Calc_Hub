@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import { RecentlyUsedCalculators } from "@/components/RecentlyUsedCalculators";
 import { FeaturedPosts } from "@/components/FeaturedPosts";
 import { Testimonials } from "@/components/Testimonials";
+import { NewsletterSignup } from "@/components/NewsletterSignup";
 
 const Index = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -291,6 +292,15 @@ const Index = () => {
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Newsletter Signup */}
+      <section className="py-16 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="max-w-xl mx-auto">
+            <NewsletterSignup />
           </div>
         </div>
       </section>
