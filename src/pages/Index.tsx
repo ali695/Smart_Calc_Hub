@@ -142,11 +142,10 @@ const Index = () => {
                     className="group"
                     style={{ animationDelay: `${index * 100}ms` }}
                   >
-                    <Card className="h-full card-shine card-flip card-glow-hover hover:shadow-large transition-all duration-300 cursor-pointer text-center relative overflow-hidden border-2 hover:border-primary">
-                      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-primary-glow/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <Card className="h-full hover:shadow-medium transition-all duration-300 cursor-pointer text-center relative overflow-hidden border hover:border-primary/50">
                       <CardContent className="pt-6 pb-6 relative">
-                        <div className="inline-flex p-4 rounded-full bg-gradient-to-br from-primary/10 to-primary/5 group-hover:from-primary/20 group-hover:to-primary/10 icon-bounce transition-all duration-300 mb-3 shadow-soft group-hover:shadow-medium">
-                          <Icon className={`h-8 w-8 ${calc.color} transition-transform duration-300`} />
+                        <div className="inline-flex p-4 rounded-full bg-primary/10 group-hover:bg-primary/15 transition-colors duration-300 mb-3">
+                          <Icon className={`h-8 w-8 ${calc.color} group-hover:scale-105 transition-transform duration-300`} />
                         </div>
                         <h3 className="font-semibold text-base group-hover:text-primary transition-colors duration-300">
                           {calc.title}
@@ -207,18 +206,17 @@ const Index = () => {
                 const Icon = calc.icon;
                 return (
                   <Link key={calc.id} to={calc.path}>
-                    <Card className="h-full card-shine card-skew card-pulse-border card-glow-hover hover:shadow-large transition-all duration-300 cursor-pointer group border-2 overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                    <Card className="h-full card-glow-hover hover:shadow-medium transition-all duration-300 cursor-pointer group border hover:border-primary/50 overflow-hidden">
                       <CardHeader className="relative">
                         <div className="flex items-center gap-3 mb-2">
-                          <div className="p-3 rounded-lg bg-primary/10 group-hover:bg-primary/20 icon-bounce transition-colors shadow-soft group-hover:shadow-medium">
-                            <Icon className="h-6 w-6 text-primary" />
+                          <div className="p-3 rounded-lg bg-primary/10 group-hover:bg-primary/15 transition-colors duration-300">
+                            <Icon className="h-6 w-6 text-primary group-hover:scale-105 transition-transform duration-300" />
                           </div>
                           <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
                             {calc.category}
                           </span>
                         </div>
-                        <CardTitle className="group-hover:text-primary transition-colors">
+                        <CardTitle className="group-hover:text-primary transition-colors duration-300">
                           {calc.title}
                         </CardTitle>
                       </CardHeader>
