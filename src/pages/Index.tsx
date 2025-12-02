@@ -297,13 +297,7 @@ const Index = () => {
       </section>
 
       {/* Newsletter Signup */}
-      <section className="py-16 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="max-w-xl mx-auto">
-            <NewsletterSignup />
-          </div>
-        </div>
-      </section>
+      <NewsletterSignup />
 
       {/* Schema Markup */}
       <script type="application/ld+json">
