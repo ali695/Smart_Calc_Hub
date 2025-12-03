@@ -80,11 +80,11 @@ All colors MUST be HSL.
     --gradient-card: linear-gradient(180deg, hsl(0 0% 100%), hsl(210 40% 98%));
     --gradient-hover: linear-gradient(135deg, hsl(211 100% 55%), hsl(195 100% 55%));
     
-    /* Shadows with blue tint */
-    --shadow-soft: 0 1px 3px 0 hsl(211 100% 50% / 0.1), 0 1px 2px -1px hsl(211 100% 50% / 0.05);
-    --shadow-medium: 0 4px 6px -1px hsl(211 100% 50% / 0.15), 0 2px 4px -2px hsl(211 100% 50% / 0.1);
-    --shadow-large: 0 10px 15px -3px hsl(211 100% 50% / 0.2), 0 4px 6px -4px hsl(211 100% 50% / 0.15);
-    --shadow-glow: 0 0 40px hsl(195 100% 50% / 0.3);
+    /* Minimal Shadows */
+    --shadow-soft: 0 1px 2px 0 hsl(211 100% 50% / 0.03);
+    --shadow-medium: 0 2px 4px -1px hsl(211 100% 50% / 0.05);
+    --shadow-large: 0 4px 8px -2px hsl(211 100% 50% / 0.08);
+    --shadow-glow: 0 0 15px hsl(195 100% 50% / 0.15);
     
     /* Smooth transitions - improved timing */
     --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -156,12 +156,12 @@ All colors MUST be HSL.
     --gradient-hover: linear-gradient(90deg, hsl(211 100% 45%), hsl(195 100% 47%));
     --gradient-button: linear-gradient(90deg, hsl(211 100% 50%), hsl(195 100% 50%));
     
-    /* Enhanced shadows with depth */
-    --shadow-soft: 0 4px 16px hsl(0 0% 0% / 0.4);
-    --shadow-medium: 0 8px 24px hsl(211 100% 50% / 0.25);
-    --shadow-large: 0 12px 32px hsl(0 0% 0% / 0.5);
-    --shadow-glow: 0 0 20px hsl(211 100% 50% / 0.4);
-    --shadow-glow-cyan: 0 0 20px hsl(195 100% 50% / 0.6);
+    /* Minimal shadows for dark mode */
+    --shadow-soft: 0 1px 3px hsl(0 0% 0% / 0.15);
+    --shadow-medium: 0 2px 6px hsl(211 100% 50% / 0.1);
+    --shadow-large: 0 4px 10px hsl(0 0% 0% / 0.2);
+    --shadow-glow: 0 0 10px hsl(211 100% 50% / 0.2);
+    --shadow-glow-cyan: 0 0 10px hsl(195 100% 50% / 0.3);
     
     /* Category glows */
     --glow-finance: 0 0 12px hsl(210 100% 50% / 0.5);
@@ -197,19 +197,19 @@ All colors MUST be HSL.
 }
 
 @layer utilities {
-  /* Professional Glass Card - Enhanced */
+  /* Professional Glass Card - Minimal Shadows */
   .glass-card {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(20px);
     border-radius: 16px;
     transition: all 0.3s ease;
   }
 
   .glass-card:hover {
-    transform: translateY(-6px) scale(1.02);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    transform: translateY(-4px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   }
   
   /* Section Background Gradients with Animation */
