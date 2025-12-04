@@ -1033,6 +1033,292 @@ export const calculators: CalculatorData[] = [
     path: "/calculator/kinetic-energy",
     seoTitle: "Kinetic Energy Calculator – KE = ½mv² | SmartCalc Hub",
     seoDescription: "Free kinetic energy calculator. Calculate KE using mass and velocity (KE = ½mv²)."
+  },
+  // Country-specific Tax Calculators
+  {
+    id: "us-income-tax",
+    title: "US Income Tax Calculator",
+    description: "Calculate federal income tax for United States",
+    category: "finance",
+    icon: Receipt,
+    path: "/calculator/us-income-tax",
+    seoTitle: "US Income Tax Calculator – Federal Tax Estimator | SmartCalc Hub",
+    seoDescription: "Free US income tax calculator. Calculate federal taxes using 2024 tax brackets."
+  },
+  {
+    id: "uk-income-tax",
+    title: "UK Income Tax Calculator",
+    description: "Calculate income tax and National Insurance for UK",
+    category: "finance",
+    icon: Receipt,
+    path: "/calculator/uk-income-tax",
+    seoTitle: "UK Income Tax Calculator – PAYE Tax Estimator | SmartCalc Hub",
+    seoDescription: "Free UK income tax calculator. Calculate PAYE tax and National Insurance contributions."
+  },
+  {
+    id: "canada-income-tax",
+    title: "Canada Income Tax Calculator",
+    description: "Calculate federal and provincial income tax for Canada",
+    category: "finance",
+    icon: Receipt,
+    path: "/calculator/canada-income-tax",
+    seoTitle: "Canada Income Tax Calculator – Federal & Provincial Tax | SmartCalc Hub",
+    seoDescription: "Free Canada income tax calculator. Calculate federal and provincial taxes."
+  },
+  {
+    id: "australia-income-tax",
+    title: "Australia Income Tax Calculator",
+    description: "Calculate income tax for Australian residents",
+    category: "finance",
+    icon: Receipt,
+    path: "/calculator/australia-income-tax",
+    seoTitle: "Australia Income Tax Calculator – ATO Tax Estimator | SmartCalc Hub",
+    seoDescription: "Free Australia income tax calculator using ATO tax brackets."
+  },
+  {
+    id: "india-income-tax",
+    title: "India Income Tax Calculator",
+    description: "Calculate income tax under new and old regime for India",
+    category: "finance",
+    icon: Receipt,
+    path: "/calculator/india-income-tax",
+    seoTitle: "India Income Tax Calculator – ITR Tax Estimator | SmartCalc Hub",
+    seoDescription: "Free India income tax calculator. Compare new vs old tax regime."
+  },
+  {
+    id: "paycheck",
+    title: "Paycheck Calculator (US)",
+    description: "Calculate take-home pay after US taxes and deductions",
+    category: "finance",
+    icon: Wallet,
+    path: "/calculator/paycheck",
+    seoTitle: "US Paycheck Calculator – Take Home Pay Estimator | SmartCalc Hub",
+    seoDescription: "Free US paycheck calculator. Calculate net pay after federal, state taxes and deductions."
+  },
+  {
+    id: "mortgage-recast",
+    title: "Mortgage Recast Calculator",
+    description: "Calculate new payments after mortgage recasting",
+    category: "finance",
+    icon: Home,
+    path: "/calculator/mortgage-recast",
+    seoTitle: "Mortgage Recast Calculator – Recalculate Payments | SmartCalc Hub",
+    seoDescription: "Free mortgage recast calculator. See how lump sum payment affects monthly payments."
+  },
+  {
+    id: "refinance",
+    title: "Refinance Calculator",
+    description: "Calculate savings from refinancing your mortgage",
+    category: "finance",
+    icon: Home,
+    path: "/calculator/refinance",
+    seoTitle: "Refinance Calculator – Mortgage Refinance Savings | SmartCalc Hub",
+    seoDescription: "Free refinance calculator. Compare current vs new mortgage payments and savings."
+  },
+  // Math Calculators
+  {
+    id: "percentage-increase",
+    title: "Percentage Increase Calculator",
+    description: "Calculate percentage increase between two values",
+    category: "math",
+    icon: TrendingUp,
+    path: "/calculator/percentage-increase",
+    seoTitle: "Percentage Increase Calculator – Calculate % Growth | SmartCalc Hub",
+    seoDescription: "Free percentage increase calculator. Calculate percent growth between two numbers."
+  },
+  {
+    id: "percentage-decrease",
+    title: "Percentage Decrease Calculator",
+    description: "Calculate percentage decrease between two values",
+    category: "math",
+    icon: TrendingDown,
+    path: "/calculator/percentage-decrease",
+    seoTitle: "Percentage Decrease Calculator – Calculate % Reduction | SmartCalc Hub",
+    seoDescription: "Free percentage decrease calculator. Calculate percent reduction between two numbers."
+  },
+  {
+    id: "fraction-decimal",
+    title: "Fraction ↔ Decimal Converter",
+    description: "Convert between fractions and decimals",
+    category: "math",
+    icon: Divide,
+    path: "/calculator/fraction-decimal",
+    seoTitle: "Fraction to Decimal Converter – Convert Instantly | SmartCalc Hub",
+    seoDescription: "Free fraction to decimal converter. Convert fractions to decimals and decimals to fractions."
+  },
+  {
+    id: "standard-deviation",
+    title: "Standard Deviation Calculator",
+    description: "Calculate standard deviation and variance",
+    category: "math",
+    icon: Sigma,
+    path: "/calculator/standard-deviation",
+    seoTitle: "Standard Deviation Calculator – Statistical Analysis | SmartCalc Hub",
+    seoDescription: "Free standard deviation calculator. Calculate mean, variance, and standard deviation."
+  },
+  {
+    id: "probability",
+    title: "Probability Calculator",
+    description: "Calculate probability of single and multiple events",
+    category: "math",
+    icon: Binary,
+    path: "/calculator/probability",
+    seoTitle: "Probability Calculator – Calculate Event Odds | SmartCalc Hub",
+    seoDescription: "Free probability calculator. Calculate odds of single and combined events."
+  },
+  // Health Calculator
+  {
+    id: "one-rep-max",
+    title: "One Rep Max (1RM) Calculator",
+    description: "Calculate your one rep max for weightlifting",
+    category: "health",
+    icon: Activity,
+    path: "/calculator/one-rep-max",
+    seoTitle: "One Rep Max Calculator – 1RM Strength Estimator | SmartCalc Hub",
+    seoDescription: "Free 1RM calculator. Estimate your one rep max using weight lifted and reps."
+  },
+  // Tech/Conversion Calculators
+  {
+    id: "binary-decimal",
+    title: "Binary ↔ Decimal Converter",
+    description: "Convert between binary and decimal numbers",
+    category: "tech",
+    icon: Binary,
+    path: "/calculator/binary-decimal",
+    seoTitle: "Binary to Decimal Converter – Number Conversion | SmartCalc Hub",
+    seoDescription: "Free binary decimal converter. Convert binary to decimal and decimal to binary."
+  },
+  {
+    id: "hex-decimal",
+    title: "Hex ↔ Decimal Converter",
+    description: "Convert between hexadecimal and decimal numbers",
+    category: "tech",
+    icon: Hash,
+    path: "/calculator/hex-decimal",
+    seoTitle: "Hex to Decimal Converter – Hexadecimal Conversion | SmartCalc Hub",
+    seoDescription: "Free hex decimal converter. Convert hexadecimal to decimal and decimal to hex."
+  },
+  {
+    id: "roman-numeral",
+    title: "Roman Numeral Converter",
+    description: "Convert between Roman numerals and decimal numbers",
+    category: "conversion",
+    icon: Hash,
+    path: "/calculator/roman-numeral",
+    seoTitle: "Roman Numeral Converter – Convert Numbers | SmartCalc Hub",
+    seoDescription: "Free Roman numeral converter. Convert Roman numerals to decimal and back."
+  },
+  {
+    id: "days",
+    title: "Days Calculator",
+    description: "Calculate days between two dates",
+    category: "conversion",
+    icon: Calendar,
+    path: "/calculator/days",
+    seoTitle: "Days Calculator – Count Days Between Dates | SmartCalc Hub",
+    seoDescription: "Free days calculator. Calculate the number of days between two dates."
+  },
+  {
+    id: "countdown",
+    title: "Countdown Calculator",
+    description: "Countdown timer to any date and time",
+    category: "conversion",
+    icon: Timer,
+    path: "/calculator/countdown",
+    seoTitle: "Countdown Calculator – Time Until Date | SmartCalc Hub",
+    seoDescription: "Free countdown calculator. Count down days, hours, minutes to any event."
+  },
+  // Real Estate Calculators
+  {
+    id: "rent-affordability",
+    title: "Rent Affordability Calculator",
+    description: "Calculate how much rent you can afford",
+    category: "finance",
+    icon: Home,
+    path: "/calculator/rent-affordability",
+    seoTitle: "Rent Affordability Calculator – How Much Rent Can I Afford | SmartCalc Hub",
+    seoDescription: "Free rent affordability calculator. Calculate affordable rent based on income."
+  },
+  {
+    id: "buy-vs-rent",
+    title: "Buy vs Rent Calculator",
+    description: "Compare costs of buying vs renting a home",
+    category: "finance",
+    icon: Home,
+    path: "/calculator/buy-vs-rent",
+    seoTitle: "Buy vs Rent Calculator – Should I Buy or Rent | SmartCalc Hub",
+    seoDescription: "Free buy vs rent calculator. Compare total costs of buying vs renting."
+  },
+  {
+    id: "cap-rate",
+    title: "Cap Rate Calculator",
+    description: "Calculate capitalization rate for real estate",
+    category: "finance",
+    icon: BarChart,
+    path: "/calculator/cap-rate",
+    seoTitle: "Cap Rate Calculator – Real Estate ROI | SmartCalc Hub",
+    seoDescription: "Free cap rate calculator. Calculate capitalization rate for investment property."
+  },
+  {
+    id: "property-tax",
+    title: "Property Tax Calculator",
+    description: "Calculate annual property taxes",
+    category: "finance",
+    icon: Receipt,
+    path: "/calculator/property-tax",
+    seoTitle: "Property Tax Calculator – Estimate Property Taxes | SmartCalc Hub",
+    seoDescription: "Free property tax calculator. Estimate annual property tax payments."
+  },
+  {
+    id: "house-flip",
+    title: "House Flip Profit Calculator",
+    description: "Calculate profit from flipping a house",
+    category: "finance",
+    icon: Home,
+    path: "/calculator/house-flip",
+    seoTitle: "House Flip Calculator – Flipping Profit Estimator | SmartCalc Hub",
+    seoDescription: "Free house flip calculator. Calculate potential profit from real estate flipping."
+  },
+  // Crypto/Investing Calculators
+  {
+    id: "crypto-profit",
+    title: "Crypto Profit Calculator",
+    description: "Calculate profit/loss on cryptocurrency trades",
+    category: "finance",
+    icon: Coins,
+    path: "/calculator/crypto-profit",
+    seoTitle: "Crypto Profit Calculator – Calculate Crypto Gains | SmartCalc Hub",
+    seoDescription: "Free crypto profit calculator. Calculate gains/losses on cryptocurrency investments."
+  },
+  {
+    id: "dca",
+    title: "DCA Calculator",
+    description: "Calculate returns using Dollar Cost Averaging",
+    category: "finance",
+    icon: TrendingUp,
+    path: "/calculator/dca",
+    seoTitle: "DCA Calculator – Dollar Cost Averaging Returns | SmartCalc Hub",
+    seoDescription: "Free DCA calculator. Calculate investment returns using dollar cost averaging strategy."
+  },
+  {
+    id: "bitcoin-converter",
+    title: "Bitcoin ↔ USD Converter",
+    description: "Convert between Bitcoin and US Dollars",
+    category: "finance",
+    icon: Coins,
+    path: "/calculator/bitcoin-converter",
+    seoTitle: "Bitcoin to USD Converter – BTC Price Calculator | SmartCalc Hub",
+    seoDescription: "Free Bitcoin USD converter. Convert BTC to USD and USD to BTC instantly."
+  },
+  {
+    id: "mining-profit",
+    title: "Mining Profit Calculator",
+    description: "Calculate cryptocurrency mining profitability",
+    category: "finance",
+    icon: Cpu,
+    path: "/calculator/mining-profit",
+    seoTitle: "Mining Profit Calculator – Crypto Mining Profitability | SmartCalc Hub",
+    seoDescription: "Free mining profit calculator. Calculate crypto mining revenue and costs."
   }
 ];
 

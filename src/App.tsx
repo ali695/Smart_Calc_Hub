@@ -114,6 +114,34 @@ import StressStrainCalculator from "./pages/calculators/StressStrainCalculator";
 import InventoryTurnoverCalculator from "./pages/calculators/InventoryTurnoverCalculator";
 import FuelEfficiencyCalculator from "./pages/calculators/FuelEfficiencyCalculator";
 import DataTransferCalculator from "./pages/calculators/DataTransferCalculator";
+import USIncomeTaxCalculator from "./pages/calculators/USIncomeTaxCalculator";
+import UKIncomeTaxCalculator from "./pages/calculators/UKIncomeTaxCalculator";
+import CanadaIncomeTaxCalculator from "./pages/calculators/CanadaIncomeTaxCalculator";
+import AustraliaIncomeTaxCalculator from "./pages/calculators/AustraliaIncomeTaxCalculator";
+import IndiaIncomeTaxCalculator from "./pages/calculators/IndiaIncomeTaxCalculator";
+import PaycheckCalculator from "./pages/calculators/PaycheckCalculator";
+import MortgageRecastCalculator from "./pages/calculators/MortgageRecastCalculator";
+import RefinanceCalculator from "./pages/calculators/RefinanceCalculator";
+import PercentageIncreaseCalculator from "./pages/calculators/PercentageIncreaseCalculator";
+import PercentageDecreaseCalculator from "./pages/calculators/PercentageDecreaseCalculator";
+import FractionDecimalCalculator from "./pages/calculators/FractionDecimalCalculator";
+import StandardDeviationCalculator from "./pages/calculators/StandardDeviationCalculator";
+import ProbabilityCalculator from "./pages/calculators/ProbabilityCalculator";
+import OneRepMaxCalculator from "./pages/calculators/OneRepMaxCalculator";
+import BinaryDecimalCalculator from "./pages/calculators/BinaryDecimalCalculator";
+import HexDecimalCalculator from "./pages/calculators/HexDecimalCalculator";
+import DaysCalculator from "./pages/calculators/DaysCalculator";
+import RentAffordabilityCalculator from "./pages/calculators/RentAffordabilityCalculator";
+import CryptoProfitCalculator from "./pages/calculators/CryptoProfitCalculator";
+import RomanNumeralCalculator from "./pages/calculators/RomanNumeralCalculator";
+import CountdownCalculator from "./pages/calculators/CountdownCalculator";
+import BuyVsRentCalculator from "./pages/calculators/BuyVsRentCalculator";
+import CapRateCalculator from "./pages/calculators/CapRateCalculator";
+import PropertyTaxCalculator from "./pages/calculators/PropertyTaxCalculator";
+import HouseFlipCalculator from "./pages/calculators/HouseFlipCalculator";
+import DCACalculator from "./pages/calculators/DCACalculator";
+import BitcoinConverter from "./pages/calculators/BitcoinConverter";
+import MiningProfitCalculator from "./pages/calculators/MiningProfitCalculator";
 
 const queryClient = new QueryClient();
 
@@ -247,6 +275,34 @@ const App = () => (
               <Route path="/calculator/payback-period" element={<PaybackPeriodCalculator />} />
               <Route path="/calculator/stress-strain" element={<StressStrainCalculator />} />
               <Route path="/calculator/inventory-turnover" element={<InventoryTurnoverCalculator />} />
+              <Route path="/calculator/us-income-tax" element={<USIncomeTaxCalculator />} />
+              <Route path="/calculator/uk-income-tax" element={<UKIncomeTaxCalculator />} />
+              <Route path="/calculator/canada-income-tax" element={<CanadaIncomeTaxCalculator />} />
+              <Route path="/calculator/australia-income-tax" element={<AustraliaIncomeTaxCalculator />} />
+              <Route path="/calculator/india-income-tax" element={<IndiaIncomeTaxCalculator />} />
+              <Route path="/calculator/paycheck" element={<PaycheckCalculator />} />
+              <Route path="/calculator/mortgage-recast" element={<MortgageRecastCalculator />} />
+              <Route path="/calculator/refinance" element={<RefinanceCalculator />} />
+              <Route path="/calculator/percentage-increase" element={<PercentageIncreaseCalculator />} />
+              <Route path="/calculator/percentage-decrease" element={<PercentageDecreaseCalculator />} />
+              <Route path="/calculator/fraction-decimal" element={<FractionDecimalCalculator />} />
+              <Route path="/calculator/standard-deviation" element={<StandardDeviationCalculator />} />
+              <Route path="/calculator/probability" element={<ProbabilityCalculator />} />
+              <Route path="/calculator/one-rep-max" element={<OneRepMaxCalculator />} />
+              <Route path="/calculator/binary-decimal" element={<BinaryDecimalCalculator />} />
+              <Route path="/calculator/hex-decimal" element={<HexDecimalCalculator />} />
+              <Route path="/calculator/days" element={<DaysCalculator />} />
+              <Route path="/calculator/rent-affordability" element={<RentAffordabilityCalculator />} />
+              <Route path="/calculator/crypto-profit" element={<CryptoProfitCalculator />} />
+              <Route path="/calculator/roman-numeral" element={<RomanNumeralCalculator />} />
+              <Route path="/calculator/countdown" element={<CountdownCalculator />} />
+              <Route path="/calculator/buy-vs-rent" element={<BuyVsRentCalculator />} />
+              <Route path="/calculator/cap-rate" element={<CapRateCalculator />} />
+              <Route path="/calculator/property-tax" element={<PropertyTaxCalculator />} />
+              <Route path="/calculator/house-flip" element={<HouseFlipCalculator />} />
+              <Route path="/calculator/dca" element={<DCACalculator />} />
+              <Route path="/calculator/bitcoin-converter" element={<BitcoinConverter />} />
+              <Route path="/calculator/mining-profit" element={<MiningProfitCalculator />} />
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/terms" element={<Terms />} />
               <Route path="*" element={<NotFound />} />
