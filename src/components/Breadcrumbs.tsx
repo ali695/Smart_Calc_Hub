@@ -14,6 +14,8 @@ export const Breadcrumbs = () => {
     privacy: "Privacy Policy",
     terms: "Terms of Service",
     "blog-generator": "AI Blog Generator",
+    "real-estate": "Real Estate Calculators",
+    crypto: "Crypto Calculators",
   };
 
   if (pathnames.length === 0) return null;
