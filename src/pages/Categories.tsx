@@ -39,11 +39,17 @@ const Categories = () => {
     calc.description.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const categoryTaglines = {
+  const categoryTaglines: { [key: string]: string } = {
     finance: "Plan your finances smarter with instant online tools",
     health: "Track your wellness with science-backed health calculators",
     math: "Solve complex calculations in seconds with powerful tools",
-    conversion: "Convert any unit instantly with precision and ease"
+    conversion: "Convert any unit instantly with precision and ease",
+    tech: "Developer tools for encoding, hashing, and formatting",
+    engineering: "Professional engineering calculation tools",
+    business: "Business metrics and performance calculators",
+    science: "Scientific calculations for chemistry and physics",
+    "real-estate": "Property investment and home buying calculators",
+    crypto: "Cryptocurrency investment and trading tools"
   };
 
   return (
@@ -167,16 +173,17 @@ const Categories = () => {
                     const CalcIcon = calc.icon;
                     return (
                       <Link key={calc.id} to={calc.path}>
-                        <Card className="h-full card-shine card-flip card-glow-hover hover:shadow-xl transition-all duration-300 cursor-pointer group border-2 hover:border-primary overflow-hidden">
-                          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                        <Card className="h-full card-glow-hover transition-all duration-300 cursor-pointer group border hover:border-primary overflow-hidden">
                           <CardHeader className="relative">
                             <div className="flex items-center gap-3 mb-2">
-                              <div className={`p-3 rounded-lg bg-gradient-to-br icon-bounce ${
+                              <div className={`p-3 rounded-lg bg-gradient-to-br ${
                                 category.id === 'finance' ? 'from-green-500/10 to-green-600/10 group-hover:from-green-500/20 group-hover:to-green-600/20' :
                                 category.id === 'health' ? 'from-red-500/10 to-red-600/10 group-hover:from-red-500/20 group-hover:to-red-600/20' :
                                 category.id === 'math' ? 'from-blue-500/10 to-blue-600/10 group-hover:from-blue-500/20 group-hover:to-blue-600/20' :
+                                category.id === 'real-estate' ? 'from-amber-500/10 to-amber-600/10 group-hover:from-amber-500/20 group-hover:to-amber-600/20' :
+                                category.id === 'crypto' ? 'from-yellow-500/10 to-yellow-600/10 group-hover:from-yellow-500/20 group-hover:to-yellow-600/20' :
                                 'from-purple-500/10 to-purple-600/10 group-hover:from-purple-500/20 group-hover:to-purple-600/20'
-                              } transition-all shadow-soft group-hover:shadow-medium`}>
+                              } transition-all`}>
                                 <CalcIcon className={`h-6 w-6 ${category.color} transition-transform`} />
                               </div>
                             </div>

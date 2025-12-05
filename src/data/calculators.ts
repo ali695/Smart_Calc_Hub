@@ -5,7 +5,7 @@ export interface CalculatorData {
   id: string;
   title: string;
   description: string;
-  category: "finance" | "health" | "math" | "conversion" | "tech" | "engineering" | "business" | "science";
+  category: "finance" | "health" | "math" | "conversion" | "tech" | "engineering" | "business" | "science" | "real-estate" | "crypto";
   icon: LucideIcon;
   path: string;
   seoTitle: string;
@@ -1233,7 +1233,7 @@ export const calculators: CalculatorData[] = [
     id: "rent-affordability",
     title: "Rent Affordability Calculator",
     description: "Calculate how much rent you can afford",
-    category: "finance",
+    category: "real-estate",
     icon: Home,
     path: "/calculator/rent-affordability",
     seoTitle: "Rent Affordability Calculator – How Much Rent Can I Afford | SmartCalc Hub",
@@ -1243,7 +1243,7 @@ export const calculators: CalculatorData[] = [
     id: "buy-vs-rent",
     title: "Buy vs Rent Calculator",
     description: "Compare costs of buying vs renting a home",
-    category: "finance",
+    category: "real-estate",
     icon: Home,
     path: "/calculator/buy-vs-rent",
     seoTitle: "Buy vs Rent Calculator – Should I Buy or Rent | SmartCalc Hub",
@@ -1253,8 +1253,8 @@ export const calculators: CalculatorData[] = [
     id: "cap-rate",
     title: "Cap Rate Calculator",
     description: "Calculate capitalization rate for real estate",
-    category: "finance",
-    icon: BarChart,
+    category: "real-estate",
+    icon: Home,
     path: "/calculator/cap-rate",
     seoTitle: "Cap Rate Calculator – Real Estate ROI | SmartCalc Hub",
     seoDescription: "Free cap rate calculator. Calculate capitalization rate for investment property."
@@ -1263,8 +1263,8 @@ export const calculators: CalculatorData[] = [
     id: "property-tax",
     title: "Property Tax Calculator",
     description: "Calculate annual property taxes",
-    category: "finance",
-    icon: Receipt,
+    category: "real-estate",
+    icon: Home,
     path: "/calculator/property-tax",
     seoTitle: "Property Tax Calculator – Estimate Property Taxes | SmartCalc Hub",
     seoDescription: "Free property tax calculator. Estimate annual property tax payments."
@@ -1273,7 +1273,7 @@ export const calculators: CalculatorData[] = [
     id: "house-flip",
     title: "House Flip Profit Calculator",
     description: "Calculate profit from flipping a house",
-    category: "finance",
+    category: "real-estate",
     icon: Home,
     path: "/calculator/house-flip",
     seoTitle: "House Flip Calculator – Flipping Profit Estimator | SmartCalc Hub",
@@ -1284,7 +1284,7 @@ export const calculators: CalculatorData[] = [
     id: "crypto-profit",
     title: "Crypto Profit Calculator",
     description: "Calculate profit/loss on cryptocurrency trades",
-    category: "finance",
+    category: "crypto",
     icon: Coins,
     path: "/calculator/crypto-profit",
     seoTitle: "Crypto Profit Calculator – Calculate Crypto Gains | SmartCalc Hub",
@@ -1294,7 +1294,7 @@ export const calculators: CalculatorData[] = [
     id: "dca",
     title: "DCA Calculator",
     description: "Calculate returns using Dollar Cost Averaging",
-    category: "finance",
+    category: "crypto",
     icon: TrendingUp,
     path: "/calculator/dca",
     seoTitle: "DCA Calculator – Dollar Cost Averaging Returns | SmartCalc Hub",
@@ -1304,7 +1304,7 @@ export const calculators: CalculatorData[] = [
     id: "bitcoin-converter",
     title: "Bitcoin ↔ USD Converter",
     description: "Convert between Bitcoin and US Dollars",
-    category: "finance",
+    category: "crypto",
     icon: Coins,
     path: "/calculator/bitcoin-converter",
     seoTitle: "Bitcoin to USD Converter – BTC Price Calculator | SmartCalc Hub",
@@ -1314,7 +1314,7 @@ export const calculators: CalculatorData[] = [
     id: "mining-profit",
     title: "Mining Profit Calculator",
     description: "Calculate cryptocurrency mining profitability",
-    category: "finance",
+    category: "crypto",
     icon: Cpu,
     path: "/calculator/mining-profit",
     seoTitle: "Mining Profit Calculator – Crypto Mining Profitability | SmartCalc Hub",
@@ -1338,5 +1338,7 @@ export const categories = [
   { id: "tech", name: "Tech Tools", icon: Code2, color: "text-cyan-600 dark:text-cyan-400" },
   { id: "engineering", name: "Engineering", icon: Cog, color: "text-orange-600 dark:text-orange-400" },
   { id: "business", name: "Business", icon: BarChart, color: "text-indigo-600 dark:text-indigo-400" },
-  { id: "science", name: "Science", icon: TestTube, color: "text-pink-600 dark:text-pink-400" }
+  { id: "science", name: "Science", icon: TestTube, color: "text-pink-600 dark:text-pink-400" },
+  { id: "real-estate", name: "Real Estate", icon: Home, color: "text-amber-600 dark:text-amber-400" },
+  { id: "crypto", name: "Crypto", icon: Coins, color: "text-yellow-600 dark:text-yellow-400" }
 ];
