@@ -49,6 +49,8 @@ const Contact = () => {
       <PageHeader 
         title="Contact Us"
         description="Have questions or feedback? We'd love to hear from you."
+        icon={<Mail className="h-10 w-10" />}
+        category="contact"
       />
       
       <div className="container mx-auto px-4 py-12">

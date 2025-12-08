@@ -38,6 +38,8 @@ const RealEstateCalculators = () => {
       <PageHeader 
         title="Real Estate Calculators"
         description="Professional property investment and home buying calculators"
+        icon={<Building className="h-10 w-10" />}
+        category="real-estate"
       />
 
       <div className="container mx-auto px-4 py-12">
