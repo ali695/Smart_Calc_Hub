@@ -57,6 +57,7 @@ const Categories = () => {
       <PageHeader 
         title="All Calculators"
         description="Explore our full suite of free, accurate online calculators"
+        category="home"
       />
 
       <div className="container mx-auto px-4 py-12">

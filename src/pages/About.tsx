@@ -1,4 +1,4 @@
-import { Calculator, Heart, Target, Users, Lightbulb, Shield, Zap, CheckCircle } from "lucide-react";
+import { Calculator, Heart, Target, Users, Lightbulb, Shield, Zap, CheckCircle, Info } from "lucide-react";
 import { Link } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 
@@ -8,6 +8,8 @@ const About = () => {
       <PageHeader 
         title="About SmartCalc Hub"
         description="Your trusted source for fast, accurate, and free online calculators"
+        icon={<Info className="h-10 w-10" />}
+        category="about"
       />
 
       <div className="container mx-auto px-4 py-16">

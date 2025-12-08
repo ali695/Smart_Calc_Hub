@@ -63,8 +63,27 @@ All colors MUST be HSL.
     --engineering-accent: 30 100% 50%;
     --business-accent: 150 100% 35%;
     --science-accent: 270 100% 60%;
+    --real-estate-accent: 38 100% 50%;
+    --crypto-accent: 45 100% 50%;
 
-    /* Category-specific gradients */
+    /* Dynamic Hero Gradients - Light Mode */
+    --hero-gradient-home: linear-gradient(120deg, #0066ff, #00b4ff, #00e5cc);
+    --hero-gradient-finance: linear-gradient(120deg, #00c853, #b2ff59);
+    --hero-gradient-health: linear-gradient(120deg, #ff6b6b, #feca57);
+    --hero-gradient-math: linear-gradient(120deg, #1de9b6, #1dc4e9);
+    --hero-gradient-conversion: linear-gradient(120deg, #a18cd1, #fbc2eb);
+    --hero-gradient-tech: linear-gradient(120deg, #2193b0, #6dd5ed);
+    --hero-gradient-engineering: linear-gradient(120deg, #42a5f5, #478ed1);
+    --hero-gradient-science: linear-gradient(120deg, #64b5f6, #81c784);
+    --hero-gradient-business: linear-gradient(120deg, #396afc, #2948ff);
+    --hero-gradient-real-estate: linear-gradient(120deg, #ffa751, #ffe259);
+    --hero-gradient-crypto: linear-gradient(120deg, #ffb347, #ffcc33);
+    --hero-gradient-blog: linear-gradient(120deg, #667eea, #764ba2);
+    --hero-gradient-faq: linear-gradient(120deg, #11998e, #38ef7d);
+    --hero-gradient-contact: linear-gradient(120deg, #4facfe, #00f2fe);
+    --hero-gradient-about: linear-gradient(120deg, #fa709a, #fee140);
+
+    /* Category-specific gradients (legacy support) */
     --gradient-finance: linear-gradient(120deg, hsl(210, 100%, 40%), hsl(210, 100%, 50%), hsl(190, 100%, 50%));
     --gradient-health: linear-gradient(120deg, hsl(330, 100%, 50%), hsl(330, 100%, 65%), hsl(330, 100%, 80%));
     --gradient-math: linear-gradient(120deg, hsl(270, 64%, 31%), hsl(270, 67%, 47%), hsl(270, 90%, 68%));
@@ -146,6 +165,25 @@ All colors MUST be HSL.
     --engineering-accent: 30 100% 50%;
     --business-accent: 150 100% 35%;
     --science-accent: 270 100% 60%;
+    --real-estate-accent: 38 100% 50%;
+    --crypto-accent: 45 100% 50%;
+
+    /* Dynamic Hero Gradients - Dark Mode */
+    --hero-gradient-home: linear-gradient(120deg, #0044cc, #0088cc, #00aa99);
+    --hero-gradient-finance: linear-gradient(120deg, #00c853, #007e33);
+    --hero-gradient-health: linear-gradient(120deg, #ff416c, #ff4b2b);
+    --hero-gradient-math: linear-gradient(120deg, #00b09b, #96c93d);
+    --hero-gradient-conversion: linear-gradient(120deg, #667eea, #764ba2);
+    --hero-gradient-tech: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
+    --hero-gradient-engineering: linear-gradient(120deg, #1e3c72, #2a5298);
+    --hero-gradient-science: linear-gradient(120deg, #283e51, #485563);
+    --hero-gradient-business: linear-gradient(120deg, #141E30, #243B55);
+    --hero-gradient-real-estate: linear-gradient(120deg, #fc4a1a, #f7b733);
+    --hero-gradient-crypto: linear-gradient(120deg, #ff8c00, #ffb347);
+    --hero-gradient-blog: linear-gradient(120deg, #434343, #000000);
+    --hero-gradient-faq: linear-gradient(120deg, #0f9b0f, #000000);
+    --hero-gradient-contact: linear-gradient(120deg, #2193b0, #6dd5ed);
+    --hero-gradient-about: linear-gradient(120deg, #c31432, #240b36);
 
     /* Premium gradients - vivid & glowing */
     --gradient-primary: linear-gradient(90deg, hsl(211 100% 50%), hsl(195 100% 50%));
@@ -623,5 +661,144 @@ All colors MUST be HSL.
   .card-hover-lift:hover {
     transform: translateY(-4px);
     box-shadow: var(--shadow-medium);
+  }
+
+  /* ============================================
+     DYNAMIC HERO SECTION GRADIENT SYSTEM
+     ============================================ */
+  
+  /* Base hero section styles */
+  .hero-section {
+    min-height: min(280px, 25vh);
+    padding: 4rem 0;
+    background-size: 200% 200%;
+    animation: heroGradientFlow 10s ease infinite;
+    transition: filter 0.6s ease, background 0.6s ease;
+    position: relative;
+  }
+
+  /* Hero gradient flow animation */
+  @keyframes heroGradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Hero pulse animation for calculate events */
+  @keyframes heroPulse {
+    0%, 100% { filter: brightness(1); }
+    50% { filter: brightness(1.08); }
+  }
+
+  /* Hero hovered state - gentle hue shift */
+  @keyframes heroHoverShift {
+    0%, 100% { filter: brightness(1) saturate(1); }
+    50% { filter: brightness(1.03) saturate(1.1); }
+  }
+
+  /* Apply pulse animation */
+  .hero-section.hero-pulse {
+    animation: heroPulse 0.6s ease-out, heroGradientFlow 10s ease infinite;
+  }
+
+  /* Apply hover animation */
+  .hero-section.hero-hovered {
+    animation: heroHoverShift 2s ease-in-out infinite, heroGradientFlow 10s ease infinite;
+  }
+
+  /* At top highlight */
+  .hero-section.hero-at-top {
+    filter: brightness(1);
+  }
+
+  /* Radial lighting overlay for depth */
+  .hero-radial-overlay {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.12), transparent 70%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Hero typography */
+  .hero-section .hero-title {
+    color: #ffffff !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  }
+
+  .hero-section .hero-description {
+    color: rgba(255, 255, 255, 0.95) !important;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .hero-section .hero-icon {
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    color: #ffffff !important;
+  }
+
+  /* Category-specific gradients - Light Mode - Using !important for specificity */
+  .hero-gradient-home { background: linear-gradient(120deg, #0066ff, #00b4ff, #00e5cc) !important; }
+  .hero-gradient-finance { background: linear-gradient(120deg, #00c853, #b2ff59) !important; }
+  .hero-gradient-health { background: linear-gradient(120deg, #ff6b6b, #feca57) !important; }
+  .hero-gradient-math { background: linear-gradient(120deg, #1de9b6, #1dc4e9) !important; }
+  .hero-gradient-conversion { background: linear-gradient(120deg, #a18cd1, #fbc2eb) !important; }
+  .hero-gradient-tech { background: linear-gradient(120deg, #2193b0, #6dd5ed) !important; }
+  .hero-gradient-engineering { background: linear-gradient(120deg, #42a5f5, #478ed1) !important; }
+  .hero-gradient-science { background: linear-gradient(120deg, #64b5f6, #81c784) !important; }
+  .hero-gradient-business { background: linear-gradient(120deg, #396afc, #2948ff) !important; }
+  .hero-gradient-real-estate { background: linear-gradient(120deg, #ffa751, #ffe259) !important; }
+  .hero-gradient-crypto { background: linear-gradient(120deg, #ffb347, #ffcc33) !important; }
+  .hero-gradient-blog { background: linear-gradient(120deg, #667eea, #764ba2) !important; }
+  .hero-gradient-faq { background: linear-gradient(120deg, #11998e, #38ef7d) !important; }
+  .hero-gradient-contact { background: linear-gradient(120deg, #4facfe, #00f2fe) !important; }
+  .hero-gradient-about { background: linear-gradient(120deg, #fa709a, #fee140) !important; }
+  .hero-gradient-utility { background: linear-gradient(120deg, #0066ff, #00b4ff, #00e5cc) !important; }
+
+  /* Dark mode gradients */
+  .dark .hero-gradient-home { background: linear-gradient(120deg, #0044cc, #0088cc, #00aa99) !important; }
+  .dark .hero-gradient-finance { background: linear-gradient(120deg, #00c853, #007e33) !important; }
+  .dark .hero-gradient-health { background: linear-gradient(120deg, #ff416c, #ff4b2b) !important; }
+  .dark .hero-gradient-math { background: linear-gradient(120deg, #00b09b, #96c93d) !important; }
+  .dark .hero-gradient-conversion { background: linear-gradient(120deg, #667eea, #764ba2) !important; }
+  .dark .hero-gradient-tech { background: linear-gradient(120deg, #0f2027, #203a43, #2c5364) !important; }
+  .dark .hero-gradient-engineering { background: linear-gradient(120deg, #1e3c72, #2a5298) !important; }
+  .dark .hero-gradient-science { background: linear-gradient(120deg, #283e51, #485563) !important; }
+  .dark .hero-gradient-business { background: linear-gradient(120deg, #141E30, #243B55) !important; }
+  .dark .hero-gradient-real-estate { background: linear-gradient(120deg, #fc4a1a, #f7b733) !important; }
+  .dark .hero-gradient-crypto { background: linear-gradient(120deg, #ff8c00, #ffb347) !important; }
+  .dark .hero-gradient-blog { background: linear-gradient(120deg, #434343, #000000) !important; }
+  .dark .hero-gradient-faq { background: linear-gradient(120deg, #0f9b0f, #000000) !important; }
+  .dark .hero-gradient-contact { background: linear-gradient(120deg, #2193b0, #6dd5ed) !important; }
+  .dark .hero-gradient-about { background: linear-gradient(120deg, #c31432, #240b36) !important; }
+
+  /* Dark mode brightness adjustments */
+  .dark .hero-section {
+    filter: brightness(0.9);
+  }
+
+  .dark .hero-section.hero-hovered {
+    filter: brightness(0.95);
+  }
+
+  .dark .hero-section.hero-pulse {
+    animation: heroPulse 0.6s ease-out, heroGradientFlow 10s ease infinite;
+    filter: brightness(1);
+  }
+
+  /* Responsive hero height */
+  @media (max-width: 768px) {
+    .hero-section {
+      min-height: auto;
+      padding: 3rem 0;
+    }
+    
+    .hero-section .hero-title {
+      font-size: 2rem;
+    }
+    
+    .hero-section .hero-description {
+      font-size: 1rem;
+    }
   }
 }

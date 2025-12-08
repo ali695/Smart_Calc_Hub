@@ -38,6 +38,8 @@ const CryptoCalculators = () => {
       <PageHeader 
         title="Crypto Calculators"
         description="Cryptocurrency investment and trading calculators"
+        icon={<Coins className="h-10 w-10" />}
+        category="crypto"
       />
 
       <div className="container mx-auto px-4 py-12">

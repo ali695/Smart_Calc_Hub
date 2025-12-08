@@ -234,6 +234,7 @@ export const CalculatorLayout = ({
           title={title}
           description={description}
           icon={<Calculator className="h-10 w-10" />}
+          category={category.toLowerCase()}
         />
         
         <div className="container mx-auto px-4 py-12">

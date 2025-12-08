@@ -1,5 +1,6 @@
 import { useState, useCallback, KeyboardEvent } from "react";
 import { toast } from "@/hooks/use-toast";
+import { triggerCalculatePulse } from "@/components/HeroSection";
 
 export const useCalculatorEnhancements = () => {
   const [isCalculating, setIsCalculating] = useState(false);
@@ -8,6 +9,8 @@ export const useCalculatorEnhancements = () => {
     setIsCalculating(true);
     try {
       await calculationFn();
+      // Trigger hero gradient pulse effect on successful calculation
+      triggerCalculatePulse();
     } catch (error) {
       console.error("Calculation error:", error);
       toast({

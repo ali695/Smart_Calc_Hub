@@ -51,6 +51,7 @@ const FAQ = () => {
         title="Frequently Asked Questions"
         description="Find answers to common questions about SmartCalc Hub calculators"
         icon={<HelpCircle className="h-10 w-10" />}
+        category="faq"
       />
 
       <div className="container mx-auto px-4 py-16">
