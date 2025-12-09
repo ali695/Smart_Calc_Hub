@@ -1,9 +1,9 @@
 import { Card } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { ReactNode, useEffect } from "react";
+import { ReactNode, useEffect, createContext, useContext, useState, useCallback } from "react";
 import { SEOHead } from "@/components/SEOHead";
 import { RelatedCalculators } from "@/components/RelatedCalculators";
-import { AIRecommendation } from "@/components/AIRecommendation";
+import { AIInsightPanel } from "@/components/AIInsightPanel";
 import { useRecentCalculators } from "@/hooks/useRecentCalculators";
 import { getCategoryOGImage } from "@/utils/ogImageMapping";
 import { 
@@ -17,6 +17,21 @@ import {
 import { Link, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { Calculator } from "lucide-react";
+
+// Context for sharing AI insight data between calculator and layout
+interface AIInsightContextType {
+  inputs: Record<string, any>;
+  results: Record<string, any> | null;
+  setInputs: (inputs: Record<string, any>) => void;
+  setResults: (results: Record<string, any> | null) => void;
+}
+
+const AIInsightContext = createContext<AIInsightContextType | null>(null);
+
+export const useAIInsightContext = () => {
+  const context = useContext(AIInsightContext);
+  return context;
+};
 
 interface FAQ {
   question: string;
@@ -56,6 +71,10 @@ export const CalculatorLayout = ({
 }: CalculatorLayoutProps) => {
   const location = useLocation();
   const { addRecentCalculator } = useRecentCalculators();
+  
+  // State for AI Insight context
+  const [aiInputs, setAiInputs] = useState<Record<string, any>>({});
+  const [aiResults, setAiResults] = useState<Record<string, any> | null>(null);
 
   // Track recently used calculator
   useEffect(() => {
@@ -269,7 +288,14 @@ export const CalculatorLayout = ({
 
           {/* Calculator Card */}
           <Card className="p-6 md:p-8 shadow-large animate-fade-in">
-            {children}
+            <AIInsightContext.Provider value={{
+              inputs: aiInputs,
+              results: aiResults,
+              setInputs: setAiInputs,
+              setResults: setAiResults
+            }}>
+              {children}
+            </AIInsightContext.Provider>
           </Card>
 
           {/* How It Works */}
@@ -299,11 +325,13 @@ export const CalculatorLayout = ({
             </Accordion>
           </Card>
 
-          {/* AI Recommendation */}
-          <AIRecommendation 
-            calculatorType={title}
-            result={null}
+          {/* AI Insight Panel */}
+          <AIInsightPanel 
+            calculatorName={title}
             category={category.toLowerCase()}
+            inputs={aiInputs}
+            results={aiResults}
+            autoTrigger={true}
           />
 
           {/* Related Calculators Section */}

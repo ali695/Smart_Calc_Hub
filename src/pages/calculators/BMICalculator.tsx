@@ -16,7 +16,7 @@ const BMICalculator = () => {
   const [weight, setWeight] = useState("");
   const [bmi, setBMI] = useState<number | null>(null);
   const [category, setCategory] = useState("");
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculateBMI = () => {
@@ -33,12 +33,21 @@ const BMICalculator = () => {
       const h = validatedData.height / 100;
       const w = validatedData.weight;
       const bmiValue = w / (h * h);
-      setBMI(parseFloat(bmiValue.toFixed(1)));
+      const bmiResult = parseFloat(bmiValue.toFixed(1));
+      setBMI(bmiResult);
       
-      if (bmiValue < 18.5) setCategory("Underweight");
-      else if (bmiValue < 25) setCategory("Normal weight");
-      else if (bmiValue < 30) setCategory("Overweight");
-      else setCategory("Obese");
+      let cat = "";
+      if (bmiValue < 18.5) cat = "Underweight";
+      else if (bmiValue < 25) cat = "Normal weight";
+      else if (bmiValue < 30) cat = "Overweight";
+      else cat = "Obese";
+      setCategory(cat);
+      
+      // Update AI insight with calculation data
+      updateAIInsight(
+        { height: heightValue, weight: weightValue, unit: "cm/kg" },
+        { bmi: bmiResult, category: cat, healthyRange: "18.5-24.9" }
+      );
     } catch (error) {
       if (error instanceof z.ZodError) {
         toast.error(error.errors[0].message);

@@ -1,16 +1,32 @@
 import { useState, useCallback, KeyboardEvent } from "react";
 import { toast } from "@/hooks/use-toast";
 import { triggerCalculatePulse } from "@/components/HeroSection";
+import { useAIInsightContext } from "@/components/CalculatorLayout";
 
 export const useCalculatorEnhancements = () => {
   const [isCalculating, setIsCalculating] = useState(false);
+  const aiContext = useAIInsightContext();
 
-  const handleCalculation = useCallback(async (calculationFn: () => void | Promise<void>) => {
+  const handleCalculation = useCallback(async (
+    calculationFn: () => void | Promise<void>,
+    options?: {
+      inputs?: Record<string, any>;
+      results?: Record<string, any>;
+    }
+  ) => {
     setIsCalculating(true);
     try {
       await calculationFn();
       // Trigger hero gradient pulse effect on successful calculation
       triggerCalculatePulse();
+      
+      // Update AI insight context if provided
+      if (aiContext && options?.inputs) {
+        aiContext.setInputs(options.inputs);
+      }
+      if (aiContext && options?.results) {
+        aiContext.setResults(options.results);
+      }
     } catch (error) {
       console.error("Calculation error:", error);
       toast({
@@ -21,7 +37,7 @@ export const useCalculatorEnhancements = () => {
     } finally {
       setIsCalculating(false);
     }
-  }, []);
+  }, [aiContext]);
 
   const handleKeyPress = useCallback(
     (e: KeyboardEvent<HTMLInputElement>, calculationFn: () => void) => {
@@ -49,10 +65,19 @@ export const useCalculatorEnhancements = () => {
     }
   }, []);
 
+  // Helper to update AI insight context directly
+  const updateAIInsight = useCallback((inputs: Record<string, any>, results: Record<string, any>) => {
+    if (aiContext) {
+      aiContext.setInputs(inputs);
+      aiContext.setResults(results);
+    }
+  }, [aiContext]);
+
   return {
     isCalculating,
     handleCalculation,
     handleKeyPress,
     copyToClipboard,
+    updateAIInsight,
   };
 };
