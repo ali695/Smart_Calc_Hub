@@ -18,7 +18,7 @@ const LoanCalculator = () => {
   const [monthlyPayment, setMonthlyPayment] = useState<number | null>(null);
   const [totalPayment, setTotalPayment] = useState<number | null>(null);
   const [totalInterest, setTotalInterest] = useState<number | null>(null);
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculateLoan = () => {
@@ -50,6 +50,17 @@ const LoanCalculator = () => {
       setMonthlyPayment(parseFloat(monthly.toFixed(2)));
       setTotalPayment(parseFloat(total.toFixed(2)));
       setTotalInterest(parseFloat(interest.toFixed(2)));
+
+      // Update AI insight
+      updateAIInsight(
+        { loanAmount: p, interestRate: rateValue, loanTerm: yearsValue },
+        { 
+          monthlyPayment: monthly.toFixed(2),
+          totalPayment: total.toFixed(2),
+          totalInterest: interest.toFixed(2),
+          interestToLoanRatio: ((interest / p) * 100).toFixed(1) + "%"
+        }
+      );
     } catch (error) {
       if (error instanceof z.ZodError) {
         toast.error(error.errors[0].message);

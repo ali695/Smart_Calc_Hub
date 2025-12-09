@@ -5,6 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
+import { Copy, Loader2 } from "lucide-react";
 
 const TDEECalculator = () => {
   const [weight, setWeight] = useState("");
@@ -13,6 +15,7 @@ const TDEECalculator = () => {
   const [gender, setGender] = useState("male");
   const [activity, setActivity] = useState("sedentary");
   const [result, setResult] = useState<{ bmr: number; tdee: number } | null>(null);
+  const { isCalculating, handleCalculation, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
 
   const activityMultipliers: Record<string, number> = {
     sedentary: 1.2,
@@ -20,6 +23,14 @@ const TDEECalculator = () => {
     moderate: 1.55,
     active: 1.725,
     veryActive: 1.9
+  };
+
+  const activityLabels: Record<string, string> = {
+    sedentary: "Sedentary",
+    light: "Light Exercise",
+    moderate: "Moderate Exercise",
+    active: "Active",
+    veryActive: "Very Active"
   };
 
   const calculate = () => {
@@ -36,6 +47,23 @@ const TDEECalculator = () => {
       }
       const tdee = bmr * activityMultipliers[activity];
       setResult({ bmr, tdee });
+
+      // Update AI insight
+      updateAIInsight(
+        { 
+          weight: w, 
+          height: h, 
+          age: a, 
+          gender, 
+          activityLevel: activityLabels[activity] 
+        },
+        { 
+          bmr: Math.round(bmr),
+          tdee: Math.round(tdee),
+          weightLossCalories: Math.round(tdee - 500),
+          weightGainCalories: Math.round(tdee + 500)
+        }
+      );
     }
   };
 
@@ -63,6 +91,7 @@ const TDEECalculator = () => {
       title="TDEE Calculator"
       description="Calculate your Total Daily Energy Expenditure for weight management"
       category="health"
+      calculatorId="tdee"
       howItWorks="This calculator estimates your TDEE using the Mifflin-St Jeor equation for BMR, then multiplies it by your activity level. TDEE represents the total calories you burn daily, helping you plan your diet for weight loss, maintenance, or gain."
       formula="TDEE = BMR × Activity Factor | BMR = 10×weight(kg) + 6.25×height(cm) − 5×age + 5 (male) or −161 (female)"
       faqs={faqs}
@@ -134,18 +163,36 @@ const TDEECalculator = () => {
         </div>
 
         <Button 
-          onClick={calculate} 
+          type="button"
+          onClick={() => handleCalculation(calculate)} 
           className="w-full bg-gradient-to-r from-primary to-primary-accent hover:shadow-glow transition-all duration-300"
           size="lg"
+          disabled={isCalculating}
         >
-          Calculate TDEE
+          {isCalculating ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Calculating...
+            </>
+          ) : (
+            "Calculate TDEE"
+          )}
         </Button>
 
         {result && (
           <Card className="p-6 bg-gradient-to-br from-primary/10 to-primary-accent/10 border-primary hover:scale-[1.02] transition-all duration-300 animate-fade-in">
             <div className="space-y-4">
               <div className="text-center">
-                <p className="text-sm font-medium text-muted-foreground mb-2">Total Daily Energy Expenditure</p>
+                <div className="flex items-center justify-center gap-2">
+                  <p className="text-sm font-medium text-muted-foreground mb-2">Total Daily Energy Expenditure</p>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => copyToClipboard(`${Math.round(result.tdee)} calories/day`, "TDEE")}
+                  >
+                    <Copy className="h-4 w-4" />
+                  </Button>
+                </div>
                 <p className="text-4xl font-bold bg-gradient-to-r from-primary to-primary-accent bg-clip-text text-transparent">
                   {Math.round(result.tdee)} cal/day
                 </p>
