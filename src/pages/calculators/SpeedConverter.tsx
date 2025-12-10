@@ -5,8 +5,10 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
 
 const SpeedConverter = () => {
+  const { updateAIInsight } = useCalculatorEnhancements();
   const [value, setValue] = useState("");
   const [fromUnit, setFromUnit] = useState("kmh");
   const [toUnit, setToUnit] = useState("mph");
@@ -36,6 +38,7 @@ const SpeedConverter = () => {
       const inKmh = inputValue / conversionRates[fromUnit];
       const converted = inKmh * conversionRates[toUnit];
       setResult(converted);
+      updateAIInsight({ value: inputValue, fromUnit, toUnit }, { result: converted, inKmh });
     }
   };
 

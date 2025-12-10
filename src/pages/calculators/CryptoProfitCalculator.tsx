@@ -13,8 +13,9 @@ const CryptoProfitCalculator = () => {
   const [sellPrice, setSellPrice] = useState("");
   const [investment, setInvestment] = useState("");
   const [result, setResult] = useState<{ profit: number; roi: number; coins: number; finalValue: number } | null>(null);
-  const { isCalculating, handleCalculation, copyToClipboard } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
+
+  const { isCalculating, handleCalculation, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
 
   const calculate = () => {
     const buy = parseFloat(buyPrice);
@@ -26,6 +27,10 @@ const CryptoProfitCalculator = () => {
     const profit = finalValue - inv;
     const roi = ((finalValue - inv) / inv) * 100;
     setResult({ profit, roi, coins, finalValue });
+    updateAIInsight(
+      { buyPrice: buy, sellPrice: sell, investment: inv },
+      { profit, roi, coins, finalValue }
+    );
   };
 
   const faqs = [{ question: "How is crypto profit calculated?", answer: "Profit = (Sell Price - Buy Price) × Number of Coins. ROI = (Profit / Investment) × 100." }];

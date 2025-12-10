@@ -1,12 +1,13 @@
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Mail, Send, HelpCircle, Shield, Lightbulb } from "lucide-react";
+import { Mail, Send, HelpCircle, Shield, Lightbulb, Loader2 } from "lucide-react";
 import { SEOHead } from "@/components/SEOHead";
-import { useToast } from "@/hooks/use-toast";
 import { PageHeader } from "@/components/PageHeader";
+import { useContactForm } from "@/hooks/useContactForm";
 
 const quickFaqs = [
   {
@@ -27,14 +28,21 @@ const quickFaqs = [
 ];
 
 const Contact = () => {
-  const { toast } = useToast();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
+  const { submitContact, isSubmitting } = useContactForm();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Thank you for contacting SmartCalc Hub!",
-      description: "We've received your message and will reply soon.",
-    });
+    const success = await submitContact(name, email, `${subject}: ${message}`);
+    if (success) {
+      setName("");
+      setEmail("");
+      setSubject("");
+      setMessage("");
+    }
   };
 
   return (
@@ -85,32 +93,62 @@ const Contact = () => {
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="space-y-2">
                     <Label htmlFor="name">Name</Label>
-                    <Input id="name" placeholder="Your name" required />
+                    <Input 
+                      id="name" 
+                      placeholder="Your name" 
+                      required 
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                    />
                   </div>
                   
                   <div className="space-y-2">
                     <Label htmlFor="email">Email</Label>
-                    <Input id="email" type="email" placeholder="your@email.com" required />
+                    <Input 
+                      id="email" 
+                      type="email" 
+                      placeholder="your@email.com" 
+                      required 
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
                   </div>
                   
                   <div className="space-y-2">
                     <Label htmlFor="subject">Subject</Label>
-                    <Input id="subject" placeholder="What is this about?" required />
+                    <Input 
+                      id="subject" 
+                      placeholder="What is this about?" 
+                      required 
+                      value={subject}
+                      onChange={(e) => setSubject(e.target.value)}
+                    />
                   </div>
                   
                   <div className="space-y-2">
                     <Label htmlFor="message">Message</Label>
                     <Textarea 
                       id="message" 
-                      placeholder="Your message..." 
+                      placeholder="Your message (min 10 characters)..." 
                       rows={5}
                       required 
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
                     />
                   </div>
 
-                  <Button type="submit" className="w-full gap-2">
-                    <Send className="h-4 w-4" />
-                    Send Message
+                  <Button type="submit" className="w-full gap-2" disabled={isSubmitting}>
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="h-4 w-4" />
+                        Send Message
+                      </>
+                    )}
                   </Button>
                 </form>
               </CardContent>

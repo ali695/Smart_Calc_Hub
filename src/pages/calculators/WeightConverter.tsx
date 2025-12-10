@@ -3,8 +3,10 @@ import { CalculatorLayout } from "@/components/CalculatorLayout";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
 
 const WeightConverter = () => {
+  const { updateAIInsight } = useCalculatorEnhancements();
   const [value, setValue] = useState("");
   const [fromUnit, setFromUnit] = useState("kilogram");
   const [toUnit, setToUnit] = useState("pound");
@@ -25,7 +27,9 @@ const WeightConverter = () => {
     if (!isNaN(numValue)) {
       const kilograms = numValue / conversions[fromUnit];
       const converted = kilograms * conversions[toUnit];
-      setResult(parseFloat(converted.toFixed(6)));
+      const res = parseFloat(converted.toFixed(6));
+      setResult(res);
+      updateAIInsight({ value: numValue, fromUnit, toUnit }, { result: res, kilograms });
     } else {
       setResult(null);
     }

@@ -14,7 +14,7 @@ const DCACalculator = () => {
   const [years, setYears] = useState("");
   const [expectedReturn, setExpectedReturn] = useState("8");
   const [result, setResult] = useState<{ totalInvested: number; futureValue: number; gains: number; avgCost: number } | null>(null);
-  const { isCalculating, handleCalculation, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
@@ -35,6 +35,10 @@ const DCACalculator = () => {
     const avgCost = totalInvested / periods; // Per investment period
 
     setResult({ totalInvested, futureValue, gains, avgCost });
+    updateAIInsight(
+      { investmentAmount: amount, frequency: freq, years: yrs, expectedReturn: rate * 100 },
+      { totalInvested, futureValue, gains, avgCost }
+    );
   };
 
   const faqs = [

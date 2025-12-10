@@ -14,7 +14,7 @@ const BitcoinConverter = () => {
   const [usd, setUsd] = useState("");
   const [btcPrice, setBtcPrice] = useState("67000"); // Default BTC price
   const [result, setResult] = useState<{ type: string; value: string; sats?: number } | null>(null);
-  const { isCalculating, handleCalculation, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const btcToUsd = () => {
@@ -24,6 +24,7 @@ const BitcoinConverter = () => {
     const usdValue = btcAmount * price;
     const sats = btcAmount * 100000000;
     setResult({ type: "USD Value", value: `$${usdValue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`, sats });
+    updateAIInsight({ btcAmount, btcPrice: price }, { usdValue, sats });
   };
 
   const usdToBtc = () => {
@@ -33,6 +34,7 @@ const BitcoinConverter = () => {
     const btcValue = usdAmount / price;
     const sats = btcValue * 100000000;
     setResult({ type: "BTC Value", value: `₿${btcValue.toFixed(8)}`, sats });
+    updateAIInsight({ usdAmount, btcPrice: price }, { btcValue, sats });
   };
 
   const faqs = [

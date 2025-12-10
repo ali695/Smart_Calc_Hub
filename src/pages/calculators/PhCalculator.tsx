@@ -22,7 +22,7 @@ const PhCalculator = () => {
     ohConcentration: string;
     type: string;
   } | null>(null);
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
@@ -59,6 +59,7 @@ const PhCalculator = () => {
       ohConcentration: ohConc.toExponential(2),
       type
     });
+    updateAIInsight({ calculateFor, hConcentration, ohConcentration, ph, poh }, { ph: calcPh, poh: calcPoh, type });
   };
 
   const faqs = [

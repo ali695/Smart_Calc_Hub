@@ -14,7 +14,7 @@ const HalfLifeCalculator = () => {
   const [time, setTime] = useState("");
   const [result, setResult] = useState<{ remaining: number; decayed: number; percentage: number } | null>(null);
 
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
@@ -27,6 +27,7 @@ const HalfLifeCalculator = () => {
       const decayed = n0 - remaining;
       const percentage = (remaining / n0) * 100;
       setResult({ remaining, decayed, percentage });
+      updateAIInsight({ initialAmount: n0, halfLife: t_half, time: t }, { remaining, decayed, percentage });
     }
   };
 
