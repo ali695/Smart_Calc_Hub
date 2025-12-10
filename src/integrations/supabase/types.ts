@@ -14,6 +14,105 @@ export type Database = {
   }
   public: {
     Tables: {
+      analytics_logs: {
+        Row: {
+          calculator_slug: string | null
+          created_at: string | null
+          event_type: string
+          id: number
+          metadata: Json | null
+          user_id: string | null
+        }
+        Insert: {
+          calculator_slug?: string | null
+          created_at?: string | null
+          event_type: string
+          id?: number
+          metadata?: Json | null
+          user_id?: string | null
+        }
+        Update: {
+          calculator_slug?: string | null
+          created_at?: string | null
+          event_type?: string
+          id?: number
+          metadata?: Json | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      calculator_history: {
+        Row: {
+          calculator_slug: string
+          created_at: string | null
+          id: number
+          input_data: Json | null
+          result_data: Json | null
+          user_id: string
+        }
+        Insert: {
+          calculator_slug: string
+          created_at?: string | null
+          id?: number
+          input_data?: Json | null
+          result_data?: Json | null
+          user_id: string
+        }
+        Update: {
+          calculator_slug?: string
+          created_at?: string | null
+          id?: number
+          input_data?: Json | null
+          result_data?: Json | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      contact_messages: {
+        Row: {
+          email: string
+          id: number
+          message: string
+          name: string | null
+          submitted_at: string | null
+        }
+        Insert: {
+          email: string
+          id?: number
+          message: string
+          name?: string | null
+          submitted_at?: string | null
+        }
+        Update: {
+          email?: string
+          id?: number
+          message?: string
+          name?: string | null
+          submitted_at?: string | null
+        }
+        Relationships: []
+      }
+      favorites: {
+        Row: {
+          calculator_slug: string
+          created_at: string | null
+          id: number
+          user_id: string
+        }
+        Insert: {
+          calculator_slug: string
+          created_at?: string | null
+          id?: number
+          user_id: string
+        }
+        Update: {
+          calculator_slug?: string
+          created_at?: string | null
+          id?: number
+          user_id?: string
+        }
+        Relationships: []
+      }
       newsletter_subscribers: {
         Row: {
           email: string
@@ -32,6 +131,33 @@ export type Database = {
           id?: string
           is_active?: boolean
           subscribed_at?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string | null
+          full_name: string | null
+          id: string
+          updated_at: string | null
+          username: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string | null
+          full_name?: string | null
+          id: string
+          updated_at?: string | null
+          username?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string | null
+          full_name?: string | null
+          id?: string
+          updated_at?: string | null
+          username?: string | null
         }
         Relationships: []
       }
