@@ -5,8 +5,10 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
 
 const AreaConverter = () => {
+  const { updateAIInsight } = useCalculatorEnhancements();
   const [value, setValue] = useState("");
   const [fromUnit, setFromUnit] = useState("sqm");
   const [toUnit, setToUnit] = useState("sqft");
@@ -40,6 +42,7 @@ const AreaConverter = () => {
       const inSqMeters = inputValue / conversionRates[fromUnit];
       const converted = inSqMeters * conversionRates[toUnit];
       setResult(converted);
+      updateAIInsight({ value: inputValue, fromUnit, toUnit }, { result: converted, inSqMeters });
     }
   };
 

@@ -14,7 +14,7 @@ const MolarityCalculator = () => {
   const [volume, setVolume] = useState("");
   const [result, setResult] = useState<number | null>(null);
 
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
@@ -23,6 +23,7 @@ const MolarityCalculator = () => {
     if (!isNaN(m) && !isNaN(v) && v > 0) {
       const molarity = m / v;
       setResult(molarity);
+      updateAIInsight({ moles: m, volume: v }, { molarity, mmolPerL: molarity * 1000 });
     }
   };
 

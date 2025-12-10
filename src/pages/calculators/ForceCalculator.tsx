@@ -15,30 +15,29 @@ const ForceCalculator = () => {
   const [mass, setMass] = useState("");
   const [acceleration, setAcceleration] = useState("");
   const [result, setResult] = useState<{value: number; unit: string} | null>(null);
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
     const F = parseFloat(force);
     const m = parseFloat(mass);
     const a = parseFloat(acceleration);
+    let res: {value: number; unit: string} | null = null;
 
     switch (calculateFor) {
       case "force":
-        if (m && a) {
-          setResult({ value: m * a, unit: "N" });
-        }
+        if (m && a) res = { value: m * a, unit: "N" };
         break;
       case "mass":
-        if (F && a) {
-          setResult({ value: F / a, unit: "kg" });
-        }
+        if (F && a) res = { value: F / a, unit: "kg" };
         break;
       case "acceleration":
-        if (F && m) {
-          setResult({ value: F / m, unit: "m/s²" });
-        }
+        if (F && m) res = { value: F / m, unit: "m/s²" };
         break;
+    }
+    if (res) {
+      setResult(res);
+      updateAIInsight({ force: F, mass: m, acceleration: a, calculateFor }, { result: res.value, unit: res.unit });
     }
   };
 

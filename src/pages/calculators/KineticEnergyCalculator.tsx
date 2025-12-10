@@ -13,7 +13,7 @@ const KineticEnergyCalculator = () => {
   const [velocity, setVelocity] = useState("");
   const [result, setResult] = useState<number | null>(null);
 
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
@@ -22,6 +22,7 @@ const KineticEnergyCalculator = () => {
     if (!isNaN(m) && !isNaN(v) && m > 0) {
       const ke = 0.5 * m * v * v;
       setResult(ke);
+      updateAIInsight({ mass: m, velocity: v }, { kineticEnergy: ke, kilojoules: ke / 1000 });
     }
   };
 

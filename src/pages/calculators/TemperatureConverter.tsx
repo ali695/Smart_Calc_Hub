@@ -13,7 +13,7 @@ const TemperatureConverter = () => {
   const [fromUnit, setFromUnit] = useState("celsius");
   const [result, setResult] = useState<any>(null);
 
-  const { copyToClipboard } = useCalculatorEnhancements();
+  const { copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const convert = (val: string, from: string) => {
@@ -24,11 +24,13 @@ const TemperatureConverter = () => {
       if (from === "fahrenheit") celsius = (num - 32) * 5/9;
       else if (from === "kelvin") celsius = num - 273.15;
       
-      setResult({
+      const res = {
         celsius: parseFloat(celsius.toFixed(2)),
         fahrenheit: parseFloat((celsius * 9/5 + 32).toFixed(2)),
         kelvin: parseFloat((celsius + 273.15).toFixed(2))
-      });
+      };
+      setResult(res);
+      updateAIInsight({ value: num, fromUnit: from }, res);
     } else {
       setResult(null);
     }

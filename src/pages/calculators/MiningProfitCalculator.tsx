@@ -16,7 +16,7 @@ const MiningProfitCalculator = () => {
   const [btcPrice, setBtcPrice] = useState("67000");
   const [networkDifficulty, setNetworkDifficulty] = useState("75"); // in trillions
   const [result, setResult] = useState<{ dailyRevenue: number; dailyCost: number; dailyProfit: number; monthlyProfit: number; breakEvenDays: number } | null>(null);
-  const { isCalculating, handleCalculation, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
@@ -41,6 +41,10 @@ const MiningProfitCalculator = () => {
     const breakEvenDays = dailyProfit > 0 ? 0 : Infinity; // Simplified
 
     setResult({ dailyRevenue, dailyCost, dailyProfit, monthlyProfit, breakEvenDays });
+    updateAIInsight(
+      { hashRate: hr, powerConsumption: power, electricityCost: elecCost, btcPrice: price },
+      { dailyRevenue, dailyCost, dailyProfit, monthlyProfit }
+    );
   };
 
   const faqs = [

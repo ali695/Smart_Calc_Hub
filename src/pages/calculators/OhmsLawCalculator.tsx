@@ -15,7 +15,7 @@ const OhmsLawCalculator = () => {
   const [resistance, setResistance] = useState("");
   const [power, setPower] = useState("");
   const [result, setResult] = useState<string>("");
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
 
   const calculateValues = () => {
     const V = parseFloat(voltage);
@@ -62,6 +62,9 @@ const OhmsLawCalculator = () => {
     }
 
     setResult(calculatedValue || "Please provide valid inputs");
+    if (calculatedValue) {
+      updateAIInsight({ voltage: V, current: I, resistance: R, power: P, calculate }, { result: calculatedValue });
+    }
   };
 
   const faqs = [

@@ -13,7 +13,7 @@ const DensityCalculator = () => {
   const [volume, setVolume] = useState("");
   const [result, setResult] = useState<number | null>(null);
 
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
@@ -22,6 +22,7 @@ const DensityCalculator = () => {
     if (!isNaN(m) && !isNaN(v) && v > 0) {
       const density = m / v;
       setResult(density);
+      updateAIInsight({ mass: m, volume: v }, { density, kgPerM3: density * 1000 });
     }
   };
 

@@ -11,13 +11,15 @@ const TorqueCalculator = () => {
   const [force, setForce] = useState("");
   const [distance, setDistance] = useState("");
   const [result, setResult] = useState<number | null>(null);
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
 
   const calculate = () => {
     const F = parseFloat(force);
     const d = parseFloat(distance);
     if (F && d) {
-      setResult(F * d);
+      const torque = F * d;
+      setResult(torque);
+      updateAIInsight({ force: F, distance: d }, { torque });
     }
   };
 

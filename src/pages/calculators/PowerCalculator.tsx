@@ -16,7 +16,7 @@ const PowerCalculator = () => {
   const [force, setForce] = useState("");
   const [velocity, setVelocity] = useState("");
   const [result, setResult] = useState<number | null>(null);
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
@@ -24,13 +24,17 @@ const PowerCalculator = () => {
       const V = parseFloat(voltage);
       const I = parseFloat(current);
       if (V && I) {
-        setResult(V * I);
+        const power = V * I;
+        setResult(power);
+        updateAIInsight({ type, voltage: V, current: I }, { power });
       }
     } else {
       const F = parseFloat(force);
       const v = parseFloat(velocity);
       if (F && v) {
-        setResult(F * v);
+        const power = F * v;
+        setResult(power);
+        updateAIInsight({ type, force: F, velocity: v }, { power });
       }
     }
   };
