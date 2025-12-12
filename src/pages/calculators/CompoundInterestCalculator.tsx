@@ -4,9 +4,9 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { CalculatorChart, generateGrowthData } from "@/components/CalculatorChart";
 import { safeParseFloat } from "@/lib/validation";
 import { toast } from "sonner";
-import { SchemaMarkup } from "@/components/SchemaMarkup";
 import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
 
 const CompoundInterestCalculator = () => {
@@ -85,6 +85,20 @@ const CompoundInterestCalculator = () => {
     calculateCompoundInterest();
   }, [principal, monthlyContribution, interestRate, years, compoundFrequency]);
 
+  // Chart data
+  const growthData = result ? generateGrowthData(
+    parseFloat(principal) || 0,
+    parseFloat(monthlyContribution) || 0,
+    parseFloat(interestRate) || 7,
+    parseFloat(years) || 10
+  ) : [];
+
+  const breakdownData = result ? [
+    { name: "Initial Principal", value: parseFloat(principal) || 0 },
+    { name: "Contributions", value: (parseFloat(monthlyContribution) || 0) * (parseFloat(years) || 0) * 12 },
+    { name: "Interest Earned", value: result.totalInterest }
+  ] : [];
+
   const faqs = [
     {
       question: "What is compound interest?",
@@ -105,91 +119,84 @@ const CompoundInterestCalculator = () => {
   ];
 
   return (
-    <>
-      <SchemaMarkup
-        type="WebApplication"
-        data={{
-          name: "Compound Interest Calculator",
-          description: "Calculate how your investments grow over time with compound interest",
-          url: "https://smartcalchub.com/calculator/compound-interest"
-        }}
-      />
-      <CalculatorLayout
-        title="Compound Interest Calculator"
-        description="Calculate how your investments grow over time with compound interest"
-        seoTitle="Compound Interest Calculator - Investment Growth Calculator | SmartCalc Hub"
-        seoDescription="Free compound interest calculator to see how your investments grow over time. Calculate returns with different compounding frequencies. Perfect for retirement planning and savings goals."
-        keywords="compound interest calculator, investment calculator, compound interest, savings calculator, investment growth, retirement calculator"
-        canonicalUrl="https://smartcalchub.com/calculator/compound-interest"
-        category="finance"
-        howItWorks="This calculator shows how your initial investment and regular contributions grow over time through the power of compound interest. The compounding frequency determines how often interest is calculated and added back to your principal, affecting your total returns."
-        formula="FV = P(1 + r/n)^(nt) + PMT × [(1 + r/n)^(nt) - 1] / (r/n), where P is principal, r is annual rate, n is compound frequency, t is time in years, and PMT is periodic payment"
-        faqs={faqs}
-      >
-        <div className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-2">
-              <Label htmlFor="principal">Initial Investment ($)</Label>
-              <Input
-                id="principal"
-                type="number"
-                value={principal}
-                onChange={(e) => setPrincipal(e.target.value)}
-                placeholder="10000"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="monthlyContribution">Monthly Contribution ($)</Label>
-              <Input
-                id="monthlyContribution"
-                type="number"
-                value={monthlyContribution}
-                onChange={(e) => setMonthlyContribution(e.target.value)}
-                placeholder="200"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="interestRate">Annual Interest Rate (%)</Label>
-              <Input
-                id="interestRate"
-                type="number"
-                step="0.1"
-                value={interestRate}
-                onChange={(e) => setInterestRate(e.target.value)}
-                placeholder="7"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="years">Investment Period (years)</Label>
-              <Input
-                id="years"
-                type="number"
-                value={years}
-                onChange={(e) => setYears(e.target.value)}
-                placeholder="10"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="compoundFrequency">Compound Frequency</Label>
-              <Select value={compoundFrequency} onValueChange={setCompoundFrequency}>
-                <SelectTrigger>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="1">Annually</SelectItem>
-                  <SelectItem value="4">Quarterly</SelectItem>
-                  <SelectItem value="12">Monthly</SelectItem>
-                  <SelectItem value="365">Daily</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
+    <CalculatorLayout
+      title="Compound Interest Calculator"
+      description="Calculate how your investments grow over time with compound interest"
+      seoTitle="Compound Interest Calculator - Investment Growth Calculator | SmartCalc Hub"
+      seoDescription="Free compound interest calculator to see how your investments grow over time. Calculate returns with different compounding frequencies. Perfect for retirement planning and savings goals."
+      keywords="compound interest calculator, investment calculator, compound interest, savings calculator, investment growth, retirement calculator"
+      canonicalUrl="https://smartcalchub.com/calculator/compound-interest"
+      category="finance"
+      calculatorId="compound-interest"
+      howItWorks="This calculator shows how your initial investment and regular contributions grow over time through the power of compound interest. The compounding frequency determines how often interest is calculated and added back to your principal, affecting your total returns."
+      formula="FV = P(1 + r/n)^(nt) + PMT × [(1 + r/n)^(nt) - 1] / (r/n), where P is principal, r is annual rate, n is compound frequency, t is time in years, and PMT is periodic payment"
+      faqs={faqs}
+    >
+      <div className="space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-2">
+            <Label htmlFor="principal">Initial Investment ($)</Label>
+            <Input
+              id="principal"
+              type="number"
+              value={principal}
+              onChange={(e) => setPrincipal(e.target.value)}
+              placeholder="10000"
+            />
           </div>
 
-          {result && (
+          <div className="space-y-2">
+            <Label htmlFor="monthlyContribution">Monthly Contribution ($)</Label>
+            <Input
+              id="monthlyContribution"
+              type="number"
+              value={monthlyContribution}
+              onChange={(e) => setMonthlyContribution(e.target.value)}
+              placeholder="200"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="interestRate">Annual Interest Rate (%)</Label>
+            <Input
+              id="interestRate"
+              type="number"
+              step="0.1"
+              value={interestRate}
+              onChange={(e) => setInterestRate(e.target.value)}
+              placeholder="7"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="years">Investment Period (years)</Label>
+            <Input
+              id="years"
+              type="number"
+              value={years}
+              onChange={(e) => setYears(e.target.value)}
+              placeholder="10"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="compoundFrequency">Compound Frequency</Label>
+            <Select value={compoundFrequency} onValueChange={setCompoundFrequency}>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="1">Annually</SelectItem>
+                <SelectItem value="4">Quarterly</SelectItem>
+                <SelectItem value="12">Monthly</SelectItem>
+                <SelectItem value="365">Daily</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+
+        {result && (
+          <>
             <Card className="p-6 bg-gradient-to-br from-primary/10 to-primary-accent/10 border-primary hover:scale-[1.02] transition-all duration-300 animate-fade-in">
               <h3 className="text-xl font-semibold mb-4">Investment Growth Summary</h3>
               <div className="space-y-4">
@@ -239,10 +246,29 @@ const CompoundInterestCalculator = () => {
                 </div>
               </div>
             </Card>
-          )}
-        </div>
-      </CalculatorLayout>
-    </>
+
+            {/* Growth chart */}
+            <CalculatorChart
+              title="Investment Growth Over Time"
+              data={growthData}
+              chartType="area"
+              category="finance"
+              xAxisLabel="Timeline"
+              valueFormatter={(v) => `$${v.toLocaleString()}`}
+            />
+
+            {/* Breakdown pie chart */}
+            <CalculatorChart
+              title="Investment Breakdown"
+              data={breakdownData}
+              chartType="pie"
+              category="finance"
+              valueFormatter={(v) => `$${v.toLocaleString()}`}
+            />
+          </>
+        )}
+      </div>
+    </CalculatorLayout>
   );
 };
 

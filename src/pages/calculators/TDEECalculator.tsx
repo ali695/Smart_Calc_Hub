@@ -5,8 +5,10 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { CalculatorChart } from "@/components/CalculatorChart";
 import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
-import { Copy, Loader2 } from "lucide-react";
+import { usePrintCalculator } from "@/hooks/usePrintCalculator";
+import { Copy, Loader2, Printer } from "lucide-react";
 
 const TDEECalculator = () => {
   const [weight, setWeight] = useState("");
@@ -16,6 +18,7 @@ const TDEECalculator = () => {
   const [activity, setActivity] = useState("sedentary");
   const [result, setResult] = useState<{ bmr: number; tdee: number } | null>(null);
   const { isCalculating, handleCalculation, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
+  const { printCalculation } = usePrintCalculator();
 
   const activityMultipliers: Record<string, number> = {
     sedentary: 1.2,
@@ -180,6 +183,7 @@ const TDEECalculator = () => {
         </Button>
 
         {result && (
+          <>
           <Card className="p-6 bg-gradient-to-br from-primary/10 to-primary-accent/10 border-primary hover:scale-[1.02] transition-all duration-300 animate-fade-in">
             <div className="space-y-4">
               <div className="text-center">
@@ -219,6 +223,21 @@ const TDEECalculator = () => {
               </div>
             </div>
           </Card>
+
+          {/* Calorie Comparison Chart */}
+          <CalculatorChart
+            title="Daily Calorie Targets"
+            data={[
+              { name: "BMR (Rest)", value: Math.round(result.bmr) },
+              { name: "Weight Loss", value: Math.round(result.tdee - 500) },
+              { name: "Maintenance", value: Math.round(result.tdee) },
+              { name: "Weight Gain", value: Math.round(result.tdee + 500) }
+            ]}
+            chartType="bar"
+            category="health"
+            valueFormatter={(v) => `${v} cal`}
+          />
+          </>
         )}
       </div>
     </CalculatorLayout>
