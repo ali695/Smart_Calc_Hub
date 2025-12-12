@@ -4,6 +4,9 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { SchemaMarkup } from "@/components/SchemaMarkup";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
+import { usePrintCalculator } from "@/hooks/usePrintCalculator";
+import { Copy, Loader2, Printer } from "lucide-react";
 
 const TaxCalculator = () => {
   const [income, setIncome] = useState("");
@@ -12,6 +15,8 @@ const TaxCalculator = () => {
   const [taxableIncome, setTaxableIncome] = useState<number | null>(null);
   const [taxAmount, setTaxAmount] = useState<number | null>(null);
   const [netIncome, setNetIncome] = useState<number | null>(null);
+  const { isCalculating, handleCalculation, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
+  const { printCalculation } = usePrintCalculator();
 
   const calculateTax = () => {
     const inc = parseFloat(income) || 0;
@@ -23,9 +28,23 @@ const TaxCalculator = () => {
       const tax = (taxable * rate) / 100;
       const net = inc - tax;
       
-      setTaxableIncome(parseFloat(taxable.toFixed(2)));
-      setTaxAmount(parseFloat(tax.toFixed(2)));
-      setNetIncome(parseFloat(net.toFixed(2)));
+      const taxableResult = parseFloat(taxable.toFixed(2));
+      const taxResult = parseFloat(tax.toFixed(2));
+      const netResult = parseFloat(net.toFixed(2));
+      
+      setTaxableIncome(taxableResult);
+      setTaxAmount(taxResult);
+      setNetIncome(netResult);
+      
+      updateAIInsight(
+        { grossIncome: inc, taxRate: rate, deductions: ded },
+        { 
+          taxableIncome: taxableResult,
+          taxAmount: taxResult,
+          netIncome: netResult,
+          effectiveTaxRate: ((taxResult / inc) * 100).toFixed(2) + "%"
+        }
+      );
     }
   };
 
@@ -66,11 +85,17 @@ const TaxCalculator = () => {
         }}
       />
       <CalculatorLayout
-      title="Tax Calculator"
-      description="Calculate your income tax based on earnings and deductions"
-      howItWorks="This tax calculator helps you estimate your income tax liability. Enter your gross income, applicable tax rate, and any deductions you qualify for. The calculator will show your taxable income (after deductions), the total tax amount, and your net income after tax. This is a simplified calculator; actual tax calculations may involve multiple brackets and additional factors."
-      formula="Taxable Income = Gross Income - Deductions | Tax Amount = Taxable Income × (Tax Rate / 100) | Net Income = Gross Income - Tax Amount"
-      faqs={faqs}
+        title="Tax Calculator"
+        description="Calculate your income tax based on earnings and deductions"
+        seoTitle="Tax Calculator - Calculate Income Tax | SmartCalc Hub"
+        seoDescription="Free tax calculator to estimate your income tax liability. Calculate taxable income, tax amount, and net income after deductions."
+        keywords="tax calculator, income tax calculator, tax estimator, deductions calculator, net income calculator"
+        canonicalUrl="https://smartcalchub.com/calculator/tax"
+        category="finance"
+        calculatorId="tax"
+        howItWorks="This tax calculator helps you estimate your income tax liability. Enter your gross income, applicable tax rate, and any deductions you qualify for. The calculator will show your taxable income (after deductions), the total tax amount, and your net income after tax. This is a simplified calculator; actual tax calculations may involve multiple brackets and additional factors."
+        formula="Taxable Income = Gross Income - Deductions | Tax Amount = Taxable Income × (Tax Rate / 100) | Net Income = Gross Income - Tax Amount"
+        faqs={faqs}
     >
       <div className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -109,8 +134,21 @@ const TaxCalculator = () => {
           </div>
         </div>
 
-        <Button onClick={calculateTax} className="w-full bg-gradient-to-r from-primary to-primary-accent hover:shadow-glow transition-all duration-300" size="lg">
-          Calculate Tax
+        <Button 
+          type="button"
+          onClick={() => handleCalculation(calculateTax)} 
+          className="w-full bg-gradient-to-r from-primary to-primary-accent hover:shadow-glow transition-all duration-300" 
+          size="lg"
+          disabled={isCalculating}
+        >
+          {isCalculating ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Calculating...
+            </>
+          ) : (
+            "Calculate Tax"
+          )}
         </Button>
 
         {taxAmount !== null && (

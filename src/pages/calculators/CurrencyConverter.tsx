@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CalculatorLayout } from "@/components/CalculatorLayout";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
+import { SchemaMarkup } from "@/components/SchemaMarkup";
 
 const CurrencyConverter = () => {
+  const { updateAIInsight } = useCalculatorEnhancements();
   const [amount, setAmount] = useState("");
   const [fromCurrency, setFromCurrency] = useState("USD");
   const [toCurrency, setToCurrency] = useState("EUR");
@@ -52,12 +55,23 @@ const CurrencyConverter = () => {
     KES: 129.50,
   };
 
-  const convert = (val: string) => {
+  const convert = (val: string, from?: string, to?: string) => {
     const numValue = parseFloat(val);
-    if (!isNaN(numValue)) {
-      const usdAmount = numValue / exchangeRates[fromCurrency];
-      const converted = usdAmount * exchangeRates[toCurrency];
-      setResult(parseFloat(converted.toFixed(2)));
+    const fromCurr = from || fromCurrency;
+    const toCurr = to || toCurrency;
+    if (!isNaN(numValue) && numValue > 0) {
+      const usdAmount = numValue / exchangeRates[fromCurr];
+      const converted = usdAmount * exchangeRates[toCurr];
+      const convertedResult = parseFloat(converted.toFixed(2));
+      setResult(convertedResult);
+      
+      updateAIInsight(
+        { amount: numValue, fromCurrency: fromCurr, toCurrency: toCurr },
+        { 
+          convertedAmount: convertedResult,
+          exchangeRate: (exchangeRates[toCurr] / exchangeRates[fromCurr]).toFixed(4)
+        }
+      );
     } else {
       setResult(null);
     }
@@ -71,12 +85,12 @@ const CurrencyConverter = () => {
 
   const handleFromCurrencyChange = (currency: string) => {
     setFromCurrency(currency);
-    if (amount) convert(amount);
+    if (amount) convert(amount, currency, toCurrency);
   };
 
   const handleToCurrencyChange = (currency: string) => {
     setToCurrency(currency);
-    if (amount) convert(amount);
+    if (amount) convert(amount, fromCurrency, currency);
   };
 
   const currencies = [
@@ -140,14 +154,27 @@ const CurrencyConverter = () => {
   ];
 
   return (
-    <CalculatorLayout
-      title="Currency Converter"
-      description="Convert between major world currencies with live rates"
-      category="conversion"
-      calculatorId="currency"
-      howItWorks="This currency converter allows you to convert between major world currencies. Select your source currency and target currency, enter the amount, and get instant conversion results. Note: This calculator uses sample exchange rates for demonstration. For actual transactions, always use current rates from reliable financial sources."
-      formula="Converted Amount = (Input Amount / Source Rate) × Target Rate (all rates relative to USD)"
-      faqs={faqs}
+    <>
+      <SchemaMarkup
+        type="WebApplication"
+        data={{
+          name: "Currency Converter",
+          description: "Convert between major world currencies",
+          url: "https://smartcalchub.com/calculator/currency"
+        }}
+      />
+      <CalculatorLayout
+        title="Currency Converter"
+        description="Convert between major world currencies with live rates"
+        seoTitle="Currency Converter - Convert World Currencies | SmartCalc Hub"
+        seoDescription="Free currency converter for 38+ world currencies. Convert USD, EUR, GBP, JPY, INR, PKR and more. Quick and accurate currency conversion."
+        keywords="currency converter, exchange rate calculator, USD to EUR, currency exchange, forex calculator"
+        canonicalUrl="https://smartcalchub.com/calculator/currency"
+        category="conversion"
+        calculatorId="currency"
+        howItWorks="This currency converter allows you to convert between major world currencies. Select your source currency and target currency, enter the amount, and get instant conversion results. Note: This calculator uses sample exchange rates for demonstration. For actual transactions, always use current rates from reliable financial sources."
+        formula="Converted Amount = (Input Amount / Source Rate) × Target Rate (all rates relative to USD)"
+        faqs={faqs}
     >
       <div className="space-y-6">
         <div className="space-y-2">
@@ -218,6 +245,7 @@ const CurrencyConverter = () => {
         </div>
       </div>
     </CalculatorLayout>
+    </>
   );
 };
 
