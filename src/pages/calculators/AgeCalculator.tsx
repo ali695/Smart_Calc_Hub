@@ -4,10 +4,15 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { SchemaMarkup } from "@/components/SchemaMarkup";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
+import { usePrintCalculator } from "@/hooks/usePrintCalculator";
+import { Copy, Printer, Loader2 } from "lucide-react";
 
 const AgeCalculator = () => {
   const [birthDate, setBirthDate] = useState("");
   const [ageData, setAgeData] = useState<any>(null);
+  const { isCalculating, handleCalculation, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
+  const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
     if (birthDate) {
@@ -39,7 +44,7 @@ const AgeCalculator = () => {
       }
       const daysToNext = Math.floor((nextBirthday.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
       
-      setAgeData({
+      const data = {
         years,
         months,
         days,
@@ -47,7 +52,19 @@ const AgeCalculator = () => {
         totalWeeks,
         totalMonths,
         daysToNext
-      });
+      };
+      setAgeData(data);
+      
+      updateAIInsight(
+        { birthDate, currentDate: today.toISOString().split('T')[0] },
+        { 
+          age: `${years} years, ${months} months, ${days} days`,
+          totalDays,
+          totalWeeks,
+          totalMonths,
+          daysToNextBirthday: daysToNext
+        }
+      );
     }
   };
 
@@ -90,6 +107,10 @@ const AgeCalculator = () => {
       <CalculatorLayout
       title="Age Calculator"
       description="Calculate your exact age in years, months, days, and more"
+      seoTitle="Age Calculator - Calculate Your Exact Age | SmartCalc Hub"
+      seoDescription="Free age calculator to find your exact age in years, months, and days. Calculate total days lived, weeks, and days until your next birthday."
+      keywords="age calculator, birthday calculator, how old am I, age in days, age in months"
+      canonicalUrl="https://smartcalchub.com/calculator/age"
       category="math"
       calculatorId="age"
       howItWorks="This calculator determines your precise age from your birth date to today. It shows your age in multiple formats: years/months/days, total days, total weeks, total months, and days until your next birthday."
@@ -102,12 +123,51 @@ const AgeCalculator = () => {
           <Input type="date" value={birthDate} onChange={(e) => setBirthDate(e.target.value)} />
         </div>
 
-        <Button type="button" onClick={calculate} className="w-full" size="lg">Calculate Age</Button>
+        <Button 
+          type="button" 
+          onClick={() => handleCalculation(calculate)} 
+          className="w-full" 
+          size="lg"
+          disabled={isCalculating}
+        >
+          {isCalculating ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Calculating...
+            </>
+          ) : (
+            "Calculate Age"
+          )}
+        </Button>
 
         {ageData && (
           <div className="space-y-4 animate-fade-in">
             <div className="p-6 bg-primary/10 rounded-lg text-center">
-              <p className="text-sm font-medium text-muted-foreground">Your Age</p>
+              <div className="flex items-center justify-center gap-2 mb-2">
+                <p className="text-sm font-medium text-muted-foreground">Your Age</p>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => copyToClipboard(`${ageData.years} years, ${ageData.months} months, ${ageData.days} days`, "Age")}
+                >
+                  <Copy className="h-4 w-4" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => printCalculation({
+                    title: "Age Calculator Results",
+                    inputs: [{ label: "Birth Date", value: birthDate }],
+                    results: [
+                      { label: "Age", value: `${ageData.years} years, ${ageData.months} months, ${ageData.days} days` },
+                      { label: "Total Days", value: ageData.totalDays.toString() },
+                      { label: "Days to Birthday", value: ageData.daysToNext.toString() }
+                    ]
+                  })}
+                >
+                  <Printer className="h-4 w-4" />
+                </Button>
+              </div>
               <p className="text-4xl font-bold text-primary">
                 {ageData.years} years, {ageData.months} months, {ageData.days} days
               </p>
