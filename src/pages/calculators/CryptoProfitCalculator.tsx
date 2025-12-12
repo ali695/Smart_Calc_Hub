@@ -4,6 +4,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CalculatorLayout } from "@/components/CalculatorLayout";
+import { CalculatorChart } from "@/components/CalculatorChart";
 import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
 import { usePrintCalculator } from "@/hooks/usePrintCalculator";
 import { Copy, Loader2, Printer } from "lucide-react";
@@ -33,10 +34,27 @@ const CryptoProfitCalculator = () => {
     );
   };
 
-  const faqs = [{ question: "How is crypto profit calculated?", answer: "Profit = (Sell Price - Buy Price) × Number of Coins. ROI = (Profit / Investment) × 100." }];
+  const faqs = [
+    { question: "How is crypto profit calculated?", answer: "Profit = (Sell Price - Buy Price) × Number of Coins. ROI = (Profit / Investment) × 100." },
+    { question: "What is ROI in crypto trading?", answer: "ROI (Return on Investment) measures the percentage gain or loss relative to your initial investment. A 50% ROI means you earned 50% of your original investment as profit." },
+    { question: "Should I use stop-loss orders?", answer: "Yes, stop-loss orders help limit potential losses by automatically selling when the price drops to a specified level. They're essential for risk management." },
+    { question: "How do taxes work on crypto profits?", answer: "Cryptocurrency profits are typically subject to capital gains tax. Short-term gains (held less than a year) are usually taxed at higher rates than long-term gains." }
+  ];
 
   return (
-    <CalculatorLayout title="Crypto Profit Calculator" description="Calculate your cryptocurrency investment profit and ROI." category="finance" calculatorId="crypto-profit" howItWorks="Enter buy price, sell price, and investment amount." formula="Profit = (Coins × Sell Price) - Investment" faqs={faqs}>
+    <CalculatorLayout 
+      title="Crypto Profit Calculator" 
+      description="Calculate your cryptocurrency investment profit and ROI." 
+      seoTitle="Crypto Profit Calculator - Calculate Investment Returns | SmartCalc Hub"
+      seoDescription="Free cryptocurrency profit calculator to compute your investment returns, ROI, and profit/loss. Essential tool for crypto traders and investors."
+      keywords="crypto profit calculator, cryptocurrency calculator, bitcoin profit, ROI calculator, crypto investment, trading calculator"
+      canonicalUrl="https://smartcalchub.com/calculator/crypto-profit"
+      category="crypto" 
+      calculatorId="crypto-profit" 
+      howItWorks="Enter your buy price, sell price, and initial investment amount. The calculator determines your profit/loss, ROI percentage, number of coins purchased, and final portfolio value." 
+      formula="Profit = (Coins × Sell Price) - Investment | ROI = (Profit / Investment) × 100" 
+      faqs={faqs}
+    >
       <div className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div><Label>Buy Price ($)</Label><Input type="number" step="any" value={buyPrice} onChange={(e) => setBuyPrice(e.target.value)} placeholder="e.g., 30000" /></div>
@@ -45,6 +63,7 @@ const CryptoProfitCalculator = () => {
         </div>
         <Button type="button" onClick={() => handleCalculation(calculate)} className="w-full" size="lg" disabled={isCalculating}>{isCalculating ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Calculating...</> : "Calculate Profit"}</Button>
         {result && (
+          <>
           <Card className="bg-primary/5 border-primary">
             <CardContent className="pt-6">
               <div className="space-y-4">
@@ -63,6 +82,20 @@ const CryptoProfitCalculator = () => {
               </div>
             </CardContent>
           </Card>
+
+          {/* Investment Breakdown Chart */}
+          <CalculatorChart
+            title="Investment Analysis"
+            data={[
+              { name: "Initial Investment", value: parseFloat(investment) || 0 },
+              { name: "Final Value", value: result.finalValue },
+              { name: result.profit >= 0 ? "Profit" : "Loss", value: Math.abs(result.profit) }
+            ]}
+            chartType="bar"
+            category="crypto"
+            valueFormatter={(v) => `$${v.toFixed(2)}`}
+          />
+          </>
         )}
       </div>
     </CalculatorLayout>

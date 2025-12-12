@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { CalculatorChart, ChartDataPoint } from "@/components/CalculatorChart";
 import { safeParseFloat } from "@/lib/validation";
 import { toast } from "sonner";
 import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
@@ -214,6 +215,7 @@ const MortgageCalculator = () => {
           </div>
 
           {result && (
+            <>
             <Card className="p-6 bg-primary/5 border-primary/20">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-xl font-semibold">Monthly Payment Breakdown</h3>
@@ -285,7 +287,34 @@ const MortgageCalculator = () => {
                 </div>
               </div>
             </Card>
-          )}
+
+            {/* Payment Breakdown Pie Chart */}
+            <CalculatorChart
+              title="Monthly Payment Breakdown"
+              data={[
+                { name: "Principal & Interest", value: result.principalAndInterest },
+                { name: "Property Tax", value: (parseFloat(propertyTax) || 0) / 12 },
+                { name: "Insurance", value: (parseFloat(homeInsurance) || 0) / 12 },
+                { name: "PMI", value: parseFloat(pmi) || 0 }
+              ]}
+              chartType="pie"
+              category="finance"
+              valueFormatter={(v) => `$${v.toFixed(0)}`}
+            />
+
+            {/* Principal vs Interest */}
+            <CalculatorChart
+              title="Loan Principal vs Total Interest"
+              data={[
+                { name: "Principal", value: (parseFloat(homePrice) || 0) - (parseFloat(downPayment) || 0) },
+                { name: "Interest", value: result.totalInterest }
+              ]}
+              chartType="bar"
+              category="finance"
+              valueFormatter={(v) => `$${v.toLocaleString()}`}
+            />
+          </>
+        )}
         </div>
       </CalculatorLayout>
     </>
