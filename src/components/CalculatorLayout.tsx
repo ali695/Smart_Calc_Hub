@@ -4,7 +4,10 @@ import { ReactNode, useEffect, createContext, useContext, useState, useCallback 
 import { SEOHead } from "@/components/SEOHead";
 import { RelatedCalculators } from "@/components/RelatedCalculators";
 import { AIInsightPanel } from "@/components/AIInsightPanel";
+import { CalculatorActions } from "@/components/CalculatorActions";
 import { useRecentCalculators } from "@/hooks/useRecentCalculators";
+import { useRealtimeHistory } from "@/hooks/useRealtimeHistory";
+import { useAnalytics } from "@/hooks/useAnalytics";
 import { getCategoryOGImage } from "@/utils/ogImageMapping";
 import { 
   Breadcrumb, 
@@ -71,19 +74,32 @@ export const CalculatorLayout = ({
 }: CalculatorLayoutProps) => {
   const location = useLocation();
   const { addRecentCalculator } = useRecentCalculators();
+  const { saveHistory } = useRealtimeHistory();
+  const { logPageView } = useAnalytics();
   
   // State for AI Insight context
   const [aiInputs, setAiInputs] = useState<Record<string, any>>({});
   const [aiResults, setAiResults] = useState<Record<string, any> | null>(null);
 
-  // Track recently used calculator
+  // Extract calculator slug from path
+  const calculatorSlug = location.pathname.split('/').pop() || '';
+
+  // Track recently used calculator and log page view
   useEffect(() => {
     addRecentCalculator({
       name: title,
       url: location.pathname,
       category: category.toLowerCase(),
     });
-  }, [title, location.pathname, category, addRecentCalculator]);
+    logPageView(calculatorSlug);
+  }, [title, location.pathname, category, addRecentCalculator, logPageView, calculatorSlug]);
+
+  // Auto-save to history when results change
+  useEffect(() => {
+    if (aiResults && Object.keys(aiResults).length > 0) {
+      saveHistory(calculatorSlug, aiInputs, aiResults);
+    }
+  }, [aiResults, aiInputs, calculatorSlug, saveHistory]);
 
   // Map category IDs to display names
   const categoryNames: Record<string, string> = {
@@ -295,6 +311,14 @@ export const CalculatorLayout = ({
               setResults: setAiResults
             }}>
               {children}
+              
+              {/* Calculator Actions - Favorites, Copy, Print, Share */}
+              <CalculatorActions
+                calculatorSlug={calculatorSlug}
+                calculatorName={title}
+                results={aiResults}
+                inputs={aiInputs}
+              />
             </AIInsightContext.Provider>
           </Card>
 

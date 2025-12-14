@@ -6,6 +6,7 @@ import { ThemeToggle } from "./ThemeToggle";
 import { Footer } from "./Footer";
 import { AIChatbot } from "./AIChatbot";
 import { useAdminCheck } from "@/hooks/useAdminCheck";
+import { UserMenu } from "./UserMenu";
 
 interface LayoutProps {
   children: ReactNode;
@@ -101,6 +102,7 @@ export const Layout = ({ children }: LayoutProps) => {
               <div className="neon-ring rounded-lg transition-all">
                 <ThemeToggle />
               </div>
+              <UserMenu />
             </nav>
 
             {/* Mobile Menu Button */}
