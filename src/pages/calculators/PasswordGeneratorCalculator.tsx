@@ -36,10 +36,24 @@ const PasswordGeneratorCalculator = () => {
       return;
     }
 
-    let result = "";
     const len = parseInt(length) || 16;
+    const array = new Uint32Array(len);
+
+    if (window.crypto && window.crypto.getRandomValues) {
+      window.crypto.getRandomValues(array);
+    } else if (typeof crypto !== "undefined" && "getRandomValues" in crypto) {
+      // Fallback for environments where crypto is global
+      (crypto as Crypto).getRandomValues(array);
+    } else {
+      // Last-resort fallback to Math.random (non-crypto secure)
+      for (let i = 0; i < len; i++) {
+        array[i] = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
+      }
+    }
+
+    let result = "";
     for (let i = 0; i < len; i++) {
-      result += chars.charAt(Math.floor(Math.random() * chars.length));
+      result += chars.charAt(array[i] % chars.length);
     }
     setPassword(result);
   };
