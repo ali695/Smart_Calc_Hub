@@ -144,6 +144,7 @@ import BitcoinConverter from "./pages/calculators/BitcoinConverter";
 import MiningProfitCalculator from "./pages/calculators/MiningProfitCalculator";
 import RealEstateCalculators from "./pages/RealEstateCalculators";
 import CryptoCalculators from "./pages/CryptoCalculators";
+import AdminDashboard from "./pages/AdminDashboard";
 
 const queryClient = new QueryClient();
 
@@ -175,6 +176,7 @@ const App = () => (
               <Route path="/categories" element={<Categories />} />
               <Route path="/real-estate" element={<RealEstateCalculators />} />
               <Route path="/crypto" element={<CryptoCalculators />} />
+              <Route path="/admin" element={<AdminDashboard />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/faq" element={<FAQ />} />
