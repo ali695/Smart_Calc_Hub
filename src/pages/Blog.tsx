@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Link } from "react-router-dom";
 import { useState, useMemo } from "react";
-import { NewsletterSignup } from "@/components/NewsletterSignup";
 import { PageHeader } from "@/components/PageHeader";
 
 import { blogPosts } from "@/data/blogPosts";
@@ -161,9 +160,6 @@ const Blog = () => {
           </div>
         </div>
       </div>
-
-      {/* Newsletter at the end */}
-      <NewsletterSignup />
     </div>
   );
 };

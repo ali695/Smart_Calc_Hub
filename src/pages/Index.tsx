@@ -8,7 +8,6 @@ import { useState, useEffect } from "react";
 import { RecentlyUsedCalculators } from "@/components/RecentlyUsedCalculators";
 import { FeaturedPosts } from "@/components/FeaturedPosts";
 import { Testimonials } from "@/components/Testimonials";
-import { NewsletterSignup } from "@/components/NewsletterSignup";
 
 const Index = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -295,9 +294,6 @@ const Index = () => {
           </div>
         </div>
       </section>
-
-      {/* Newsletter Signup */}
-      <NewsletterSignup />
 
       {/* Schema Markup */}
       <script type="application/ld+json">
