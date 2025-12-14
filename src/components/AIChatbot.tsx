@@ -1,26 +1,35 @@
 import { useState, useEffect, useRef } from "react";
-import { MessageCircle, X, Send, Loader2 } from "lucide-react";
+import { MessageCircle, X, Send, Loader2, Calculator, HelpCircle, BookOpen, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { useLocation } from "react-router-dom";
 
 interface Message {
   role: "user" | "assistant";
   content: string;
 }
 
+const QUICK_REPLIES = [
+  { label: "Explain result", icon: HelpCircle, message: "Can you explain my last calculation result?" },
+  { label: "Show formula", icon: BookOpen, message: "What formula was used in this calculation?" },
+  { label: "Find calculator", icon: Calculator, message: "Help me find the right calculator for my needs" },
+  { label: "New calculation", icon: RefreshCw, message: "I want to start a new calculation" },
+];
+
 export const AIChatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      content: "Hello! I'm your calculator assistant. Ask me anything about our calculators, or tell me what you need to calculate!",
+      content: "Hello! I'm your SmartCalc assistant. I can help explain calculations, find the right calculator, or answer questions. What do you need?",
     },
   ]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
 
   // Auto-scroll to bottom when messages change
   useEffect(() => {
@@ -29,16 +38,30 @@ export const AIChatbot = () => {
     }
   }, [messages]);
 
-  const handleSend = async () => {
-    if (!input.trim() || isLoading) return;
+  // Get current page context
+  const getCurrentContext = () => {
+    const path = location.pathname;
+    if (path.includes("/calculators/")) {
+      const calculatorName = path.split("/calculators/")[1]?.replace(/-/g, " ");
+      return `User is currently on the ${calculatorName} calculator page.`;
+    }
+    if (path.includes("/blog/")) {
+      return "User is currently reading a blog article.";
+    }
+    return "User is browsing SmartCalc Hub.";
+  };
 
-    const userMessage: Message = { role: "user", content: input };
+  const handleSend = async (messageText?: string) => {
+    const textToSend = messageText || input;
+    if (!textToSend.trim() || isLoading) return;
+
+    const userMessage: Message = { role: "user", content: textToSend };
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
     setIsLoading(true);
 
     try {
-      // Call Lovable AI (Google Gemini 2.5 Flash) through edge function
+      const contextMessage = getCurrentContext();
       const response = await fetch(
         'https://lbcpqynztwwvatcviatc.supabase.co/functions/v1/deepseek-chat',
         {
@@ -47,10 +70,14 @@ export const AIChatbot = () => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            messages: [...messages, userMessage].map(msg => ({
-              role: msg.role,
-              content: msg.content
-            }))
+            messages: [
+              { role: "system", content: `You are SmartCalc Hub's helpful assistant. ${contextMessage} Help users with calculator questions, explain results, and guide them to the right tools. Be concise and friendly.` },
+              ...messages.map(msg => ({
+                role: msg.role,
+                content: msg.content
+              })),
+              { role: "user", content: textToSend }
+            ]
           }),
         }
       );
@@ -67,7 +94,7 @@ export const AIChatbot = () => {
         ...prev,
         { 
           role: "assistant", 
-          content: "I'm having trouble connecting right now. But I can still help! We have 90+ calculators for Finance, Health, Math, and Conversions. What would you like to calculate?" 
+          content: "I'm having trouble connecting right now. We have 90+ calculators for Finance, Health, Math, and Conversions. What would you like to calculate?" 
         }
       ]);
     } finally {
@@ -75,6 +102,9 @@ export const AIChatbot = () => {
     }
   };
 
+  const handleQuickReply = (message: string) => {
+    handleSend(message);
+  };
 
   return (
     <>
@@ -92,11 +122,11 @@ export const AIChatbot = () => {
 
       {/* Chatbot Window */}
       {isOpen && (
-        <Card className="fixed bottom-0 right-0 md:bottom-6 md:right-6 z-50 w-full h-full md:w-96 md:h-[500px] md:max-h-[80vh] shadow-2xl animate-scale-in flex flex-col md:rounded-lg rounded-none">
+        <Card className="fixed bottom-0 right-0 md:bottom-6 md:right-6 z-50 w-full h-full md:w-96 md:h-[520px] md:max-h-[80vh] shadow-2xl animate-scale-in flex flex-col md:rounded-lg rounded-none">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4 bg-gradient-to-r from-primary to-primary-glow text-primary-foreground md:rounded-t-lg">
             <CardTitle className="text-base md:text-lg font-semibold flex items-center gap-2">
               <MessageCircle className="h-4 w-4 md:h-5 md:w-5" />
-              Calculator Assistant
+              SmartCalc Assistant
             </CardTitle>
             <Button
               variant="ghost"
@@ -141,10 +171,27 @@ export const AIChatbot = () => {
               </div>
             </ScrollArea>
 
+            {/* Quick Reply Chips */}
+            <div className="px-4 pb-2 flex flex-wrap gap-2">
+              {QUICK_REPLIES.map((reply, index) => (
+                <Button
+                  key={index}
+                  variant="outline"
+                  size="sm"
+                  className="h-7 text-xs gap-1 hover:bg-primary/10"
+                  onClick={() => handleQuickReply(reply.message)}
+                  disabled={isLoading}
+                >
+                  <reply.icon className="h-3 w-3" />
+                  {reply.label}
+                </Button>
+              ))}
+            </div>
+
             <div className="p-4 border-t bg-background/95 backdrop-blur-sm">
               <div className="flex gap-2">
                 <Input
-                  placeholder="Ask about calculators or what to calculate..."
+                  placeholder="Ask about calculators..."
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={(e) => {
@@ -157,7 +204,7 @@ export const AIChatbot = () => {
                   disabled={isLoading}
                 />
                 <Button 
-                  onClick={handleSend} 
+                  onClick={() => handleSend()} 
                   size="icon" 
                   disabled={isLoading || !input.trim()}
                   className="shadow-md hover:shadow-lg transition-all"
