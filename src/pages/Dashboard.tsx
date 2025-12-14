@@ -3,6 +3,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { useRealtimeFavorites } from "@/hooks/useRealtimeFavorites";
 import { useRealtimeHistory } from "@/hooks/useRealtimeHistory";
+import { useUserStats } from "@/hooks/useUserStats";
 import { SEOHead } from "@/components/SEOHead";
 import { PageHeader } from "@/components/PageHeader";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -13,9 +14,18 @@ import { Link } from "react-router-dom";
 import { calculators } from "@/data/calculators";
 import { 
   User, Heart, History, Trash2, Calculator, 
-  Loader2, ExternalLink, Clock 
+  Loader2, ExternalLink, Clock, TrendingUp, Settings, BarChart3
 } from "lucide-react";
 import { format } from "date-fns";
+import { 
+  BarChart, 
+  Bar, 
+  XAxis, 
+  YAxis, 
+  CartesianGrid, 
+  Tooltip, 
+  ResponsiveContainer 
+} from "recharts";
 
 const Dashboard = () => {
   const { user, isLoading: authLoading } = useAuth();
@@ -23,8 +33,9 @@ const Dashboard = () => {
   const [searchParams] = useSearchParams();
   const [activeTab, setActiveTab] = useState(searchParams.get("tab") || "overview");
   
-  const { favorites, isLoading: favLoading } = useRealtimeFavorites();
+  const { favorites, isLoading: favLoading, toggleFavorite } = useRealtimeFavorites();
   const { history, isLoading: histLoading, deleteHistory } = useRealtimeHistory();
+  const { stats, isLoading: statsLoading } = useUserStats();
 
   useEffect(() => {
     if (!authLoading && !user) {
@@ -69,79 +80,170 @@ const Dashboard = () => {
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-4xl mx-auto">
           <Tabs value={activeTab} onValueChange={setActiveTab}>
-            <TabsList className="grid w-full grid-cols-3 mb-8">
+            <TabsList className="grid w-full grid-cols-4 mb-8">
               <TabsTrigger value="overview" className="gap-2">
                 <Calculator className="h-4 w-4" />
-                Overview
+                <span className="hidden sm:inline">Overview</span>
               </TabsTrigger>
               <TabsTrigger value="favorites" className="gap-2">
                 <Heart className="h-4 w-4" />
-                Favorites ({favorites.length})
+                <span className="hidden sm:inline">Favorites</span>
+                <Badge variant="secondary" className="ml-1 text-xs">{favorites.length}</Badge>
               </TabsTrigger>
               <TabsTrigger value="history" className="gap-2">
                 <History className="h-4 w-4" />
-                History ({history.length})
+                <span className="hidden sm:inline">History</span>
+                <Badge variant="secondary" className="ml-1 text-xs">{history.length}</Badge>
+              </TabsTrigger>
+              <TabsTrigger value="analytics" className="gap-2">
+                <BarChart3 className="h-4 w-4" />
+                <span className="hidden sm:inline">Analytics</span>
               </TabsTrigger>
             </TabsList>
 
             <TabsContent value="overview" className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {/* Welcome Card */}
+              <Card className="bg-gradient-to-r from-primary/10 to-primary-accent/10 border-primary/20">
+                <CardContent className="pt-6">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h2 className="text-2xl font-bold">Welcome back!</h2>
+                      <p className="text-muted-foreground">{user.email}</p>
+                    </div>
+                    <Button asChild variant="outline">
+                      <Link to="/profile">
+                        <Settings className="h-4 w-4 mr-2" />
+                        Edit Profile
+                      </Link>
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Stats Grid */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <Card>
                   <CardHeader className="pb-2">
-                    <CardTitle className="text-lg flex items-center gap-2">
-                      <Heart className="h-5 w-5 text-red-500" />
+                    <CardTitle className="text-sm font-medium text-muted-foreground">
+                      Total Calculations
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-3xl font-bold">{stats.totalCalculations}</p>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-sm font-medium text-muted-foreground">
                       Favorites
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-3xl font-bold">{favorites.length}</p>
-                    <p className="text-sm text-muted-foreground">Saved calculators</p>
+                    <p className="text-3xl font-bold text-rose-500">{stats.favoriteCount}</p>
                   </CardContent>
                 </Card>
                 <Card>
                   <CardHeader className="pb-2">
-                    <CardTitle className="text-lg flex items-center gap-2">
-                      <History className="h-5 w-5 text-blue-500" />
-                      Calculations
+                    <CardTitle className="text-sm font-medium text-muted-foreground">
+                      Most Used
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-3xl font-bold">{history.length}</p>
-                    <p className="text-sm text-muted-foreground">Recent calculations</p>
+                    <p className="text-sm font-semibold truncate">
+                      {stats.mostUsedCalculator 
+                        ? getCalculatorName(stats.mostUsedCalculator) 
+                        : "N/A"}
+                    </p>
                   </CardContent>
                 </Card>
                 <Card>
                   <CardHeader className="pb-2">
-                    <CardTitle className="text-lg flex items-center gap-2">
-                      <User className="h-5 w-5 text-green-500" />
-                      Account
+                    <CardTitle className="text-sm font-medium text-muted-foreground">
+                      Member Since
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-sm font-medium truncate">{user.email}</p>
-                    <p className="text-sm text-muted-foreground">Active</p>
+                    <p className="text-sm font-semibold">
+                      {stats.accountCreated 
+                        ? format(new Date(stats.accountCreated), "MMM yyyy") 
+                        : "N/A"}
+                    </p>
                   </CardContent>
                 </Card>
               </div>
 
-              {favorites.length > 0 && (
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <Heart className="h-5 w-5" />
-                      Quick Access
-                    </CardTitle>
-                    <CardDescription>Your favorite calculators</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="flex flex-wrap gap-2">
-                      {favorites.slice(0, 6).map((fav) => (
-                        <Button key={fav.id} variant="outline" size="sm" asChild>
-                          <Link to={getCalculatorUrl(fav.calculator_slug)}>
-                            {getCalculatorName(fav.calculator_slug)}
-                          </Link>
-                        </Button>
+              {/* Quick Actions */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* Recent History */}
+                {history.length > 0 && (
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-2 text-lg">
+                        <History className="h-5 w-5 text-blue-500" />
+                        Recent Calculations
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-2">
+                      {history.slice(0, 3).map((entry) => (
+                        <div key={entry.id} className="flex items-center justify-between py-2 border-b last:border-0">
+                          <div>
+                            <p className="font-medium text-sm">{getCalculatorName(entry.calculator_slug)}</p>
+                            <p className="text-xs text-muted-foreground">
+                              {format(new Date(entry.created_at!), "MMM d, HH:mm")}
+                            </p>
+                          </div>
+                          <Button variant="ghost" size="sm" asChild>
+                            <Link to={getCalculatorUrl(entry.calculator_slug)}>
+                              <ExternalLink className="h-4 w-4" />
+                            </Link>
+                          </Button>
+                        </div>
                       ))}
+                    </CardContent>
+                  </Card>
+                )}
+
+                {/* Favorites Quick Access */}
+                {favorites.length > 0 && (
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-2 text-lg">
+                        <Heart className="h-5 w-5 text-rose-500" />
+                        Favorite Calculators
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="flex flex-wrap gap-2">
+                        {favorites.slice(0, 6).map((fav) => (
+                          <Button key={fav.id} variant="outline" size="sm" asChild>
+                            <Link to={getCalculatorUrl(fav.calculator_slug)}>
+                              {getCalculatorName(fav.calculator_slug)}
+                            </Link>
+                          </Button>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
+              </div>
+
+              {/* Continue Last Calculator */}
+              {history.length > 0 && (
+                <Card>
+                  <CardContent className="pt-6">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="font-medium">Continue where you left off</p>
+                        <p className="text-sm text-muted-foreground">
+                          {getCalculatorName(history[0].calculator_slug)}
+                        </p>
+                      </div>
+                      <Button asChild className="bg-gradient-to-r from-primary to-primary-accent">
+                        <Link to={getCalculatorUrl(history[0].calculator_slug)}>
+                          Continue
+                          <ExternalLink className="h-4 w-4 ml-2" />
+                        </Link>
+                      </Button>
                     </div>
                   </CardContent>
                 </Card>
@@ -254,6 +356,106 @@ const Dashboard = () => {
                   ))}
                 </div>
               )}
+            </TabsContent>
+
+            {/* Analytics Tab */}
+            <TabsContent value="analytics" className="space-y-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <TrendingUp className="h-5 w-5 text-primary" />
+                    Activity Overview
+                  </CardTitle>
+                  <CardDescription>Your calculation activity over the last 7 days</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  {statsLoading ? (
+                    <div className="flex justify-center py-12">
+                      <Loader2 className="h-8 w-8 animate-spin text-primary" />
+                    </div>
+                  ) : stats.recentActivity.length > 0 ? (
+                    <div className="h-64">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <BarChart data={stats.recentActivity}>
+                          <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
+                          <XAxis 
+                            dataKey="date" 
+                            tick={{ fontSize: 12 }}
+                            tickFormatter={(value) => format(new Date(value), "EEE")}
+                          />
+                          <YAxis tick={{ fontSize: 12 }} />
+                          <Tooltip 
+                            labelFormatter={(value) => format(new Date(value), "MMM d, yyyy")}
+                            contentStyle={{
+                              backgroundColor: 'hsl(var(--card))',
+                              border: '1px solid hsl(var(--border))',
+                              borderRadius: '8px',
+                            }}
+                          />
+                          <Bar 
+                            dataKey="count" 
+                            fill="hsl(var(--primary))" 
+                            radius={[4, 4, 0, 0]}
+                            name="Calculations"
+                          />
+                        </BarChart>
+                      </ResponsiveContainer>
+                    </div>
+                  ) : (
+                    <div className="text-center py-12 text-muted-foreground">
+                      <BarChart3 className="h-12 w-12 mx-auto mb-4 opacity-50" />
+                      <p>No activity data yet. Start using calculators to see your stats!</p>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+
+              {/* Summary Stats */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <Card>
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-sm font-medium text-muted-foreground">
+                      Total Calculations
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-3xl font-bold">{stats.totalCalculations}</p>
+                    <p className="text-xs text-muted-foreground mt-1">All time</p>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-sm font-medium text-muted-foreground">
+                      Most Used Calculator
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-lg font-semibold truncate">
+                      {stats.mostUsedCalculator 
+                        ? getCalculatorName(stats.mostUsedCalculator) 
+                        : "N/A"}
+                    </p>
+                    {stats.mostUsedCalculator && (
+                      <Button variant="link" className="p-0 h-auto text-xs" asChild>
+                        <Link to={getCalculatorUrl(stats.mostUsedCalculator)}>
+                          Open Calculator
+                        </Link>
+                      </Button>
+                    )}
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-sm font-medium text-muted-foreground">
+                      Saved Favorites
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-3xl font-bold text-rose-500">{stats.favoriteCount}</p>
+                    <p className="text-xs text-muted-foreground mt-1">Quick access calculators</p>
+                  </CardContent>
+                </Card>
+              </div>
             </TabsContent>
           </Tabs>
         </div>
