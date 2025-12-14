@@ -9,8 +9,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Switch } from "@/components/ui/switch";
 import { toast } from "@/hooks/use-toast";
-import { User, Camera, Save, Loader2, ArrowLeft } from "lucide-react";
+import { User, Camera, Save, Loader2, ArrowLeft, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
 
 interface ProfileData {
@@ -24,6 +25,8 @@ const Profile = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [isNewsletterLoading, setIsNewsletterLoading] = useState(false);
+  const [isSubscribed, setIsSubscribed] = useState(false);
   const [profile, setProfile] = useState<ProfileData>({
     username: "",
     full_name: "",
@@ -38,8 +41,82 @@ const Profile = () => {
 
     if (user) {
       fetchProfile();
+      checkNewsletterStatus();
     }
   }, [user, authLoading, navigate]);
+
+  const checkNewsletterStatus = async () => {
+    if (!user?.email) return;
+    
+    try {
+      const emailHash = await hashEmail(user.email);
+      const { data } = await supabase
+        .from("newsletter_subscribers")
+        .select("is_active")
+        .eq("email_hash", emailHash)
+        .single();
+      
+      setIsSubscribed(data?.is_active ?? false);
+    } catch {
+      setIsSubscribed(false);
+    }
+  };
+
+  const hashEmail = async (email: string): Promise<string> => {
+    const msgBuffer = new TextEncoder().encode(email.toLowerCase());
+    const hashBuffer = await crypto.subtle.digest("SHA-256", msgBuffer);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
+  };
+
+  const handleNewsletterToggle = async (checked: boolean) => {
+    if (!user?.email) return;
+    
+    setIsNewsletterLoading(true);
+    try {
+      const emailHash = await hashEmail(user.email);
+      
+      if (checked) {
+        // Subscribe
+        const { error } = await supabase
+          .from("newsletter_subscribers")
+          .upsert({
+            email: user.email,
+            email_hash: emailHash,
+            is_active: true,
+          }, { onConflict: "email_hash" });
+        
+        if (error) throw error;
+        setIsSubscribed(true);
+        toast({
+          title: "Subscribed!",
+          description: "You'll receive our newsletter updates.",
+        });
+      } else {
+        // Unsubscribe
+        const { error } = await supabase
+          .from("newsletter_subscribers")
+          .update({ is_active: false })
+          .eq("email_hash", emailHash);
+        
+        if (error) throw error;
+        setIsSubscribed(false);
+        toast({
+          title: "Unsubscribed",
+          description: "You've been removed from the newsletter.",
+        });
+      }
+    } catch (error) {
+      console.error("Newsletter toggle error:", error);
+      toast({
+        title: "Error",
+        description: "Failed to update newsletter preference.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsNewsletterLoading(false);
+    }
+  };
 
   const fetchProfile = async () => {
     if (!user) return;
@@ -242,6 +319,41 @@ const Profile = () => {
                 )}
                 Save Changes
               </Button>
+            </CardContent>
+          </Card>
+
+          {/* Newsletter Preferences Card */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Mail className="h-5 w-5" />
+                Newsletter Preferences
+              </CardTitle>
+              <CardDescription>
+                Manage your email subscription preferences
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex items-center justify-between">
+                <div className="space-y-0.5">
+                  <Label htmlFor="newsletter-toggle">Email Newsletter</Label>
+                  <p className="text-sm text-muted-foreground">
+                    Receive updates, tips, and new calculator announcements
+                  </p>
+                </div>
+                <Switch
+                  id="newsletter-toggle"
+                  checked={isSubscribed}
+                  onCheckedChange={handleNewsletterToggle}
+                  disabled={isNewsletterLoading}
+                />
+              </div>
+              {isNewsletterLoading && (
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                  Updating...
+                </div>
+              )}
             </CardContent>
           </Card>
 
