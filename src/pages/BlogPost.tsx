@@ -1,9 +1,10 @@
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, Calendar, User, Clock } from "lucide-react";
+import { ArrowLeft, Calendar, User, Clock, Tag } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { getBlogPost, blogPosts } from "@/data/blogPosts";
 import { SEOHead } from "@/components/SEOHead";
-import { getBlogOGImage } from "@/utils/ogImageMapping";
+import { getBlogOGImage, getCategoryOGImage } from "@/utils/ogImageMapping";
 import { RelatedBlogPosts } from "@/components/RelatedBlogPosts";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ReadingProgress } from "@/components/ReadingProgress";
@@ -79,38 +80,62 @@ const BlogPost = () => {
       </script>
       
       <article className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
+        {/* Featured Image Hero Banner */}
+        <div className="relative w-full h-64 md:h-80 lg:h-96 overflow-hidden">
+          <div 
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ 
+              backgroundImage: `url(${getCategoryOGImage(post.category.toLowerCase())})`,
+            }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 mix-blend-overlay" />
+          
+          {/* Category Badge on Hero */}
+          <div className="absolute top-6 left-6">
+            <Badge variant="secondary" className="bg-background/90 backdrop-blur-sm text-primary font-semibold px-4 py-2">
+              <Tag className="h-3 w-3 mr-2" />
+              {post.category}
+            </Badge>
+          </div>
+          
+          {/* Author and Meta on Hero */}
+          <div className="absolute bottom-6 left-6 right-6">
+            <div className="flex flex-wrap items-center gap-4 text-sm">
+              <div className="flex items-center gap-2 bg-background/80 backdrop-blur-sm rounded-full px-3 py-1.5">
+                <User className="h-3.5 w-3.5 text-primary" />
+                <span className="font-medium">{post.author}</span>
+              </div>
+              <div className="flex items-center gap-2 bg-background/80 backdrop-blur-sm rounded-full px-3 py-1.5">
+                <Calendar className="h-3.5 w-3.5 text-primary" />
+                <span>{post.date}</span>
+              </div>
+              <div className="flex items-center gap-2 bg-background/80 backdrop-blur-sm rounded-full px-3 py-1.5">
+                <Clock className="h-3.5 w-3.5 text-primary" />
+                <span>{post.readTime}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <Breadcrumbs />
-        <div className="container mx-auto px-4 py-16">
+        <div className="container mx-auto px-4 py-8">
           <div className="max-w-4xl mx-auto">
             <Link 
               to="/blog" 
-              className="inline-flex items-center gap-2 text-primary hover:gap-3 transition-all mb-8"
+              className="inline-flex items-center gap-2 text-primary hover:gap-3 transition-all mb-6"
             >
               <ArrowLeft className="h-4 w-4" />
               Back to Blog
             </Link>
 
             <div className="mb-8">
-              <div className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-semibold mb-4">
-                {post.category}
-              </div>
-              <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary via-primary-glow to-accent bg-clip-text text-transparent">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-primary via-primary-glow to-accent bg-clip-text text-transparent leading-tight">
                 {post.title}
               </h1>
-              <div className="flex flex-wrap items-center gap-4 text-muted-foreground">
-                <div className="flex items-center gap-2">
-                  <User className="h-4 w-4" />
-                  <span>{post.author}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Calendar className="h-4 w-4" />
-                  <span>{post.date}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Clock className="h-4 w-4" />
-                  <span>{post.readTime}</span>
-                </div>
-              </div>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                {post.seoDescription}
+              </p>
             </div>
 
             <Card className="glass-card mb-12">
