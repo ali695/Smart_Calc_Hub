@@ -4,6 +4,8 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CalculatorLayout } from "@/components/CalculatorLayout";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
+import { CalculatorChart } from "@/components/CalculatorChart";
 
 const QuadraticCalculator = () => {
   const [a, setA] = useState("");
@@ -15,6 +17,7 @@ const QuadraticCalculator = () => {
     discriminant: number;
     type: string;
   } | null>(null);
+  const { updateAIInsight } = useCalculatorEnhancements();
 
   const calculate = () => {
     const aVal = parseFloat(a);
@@ -48,6 +51,11 @@ const QuadraticCalculator = () => {
     }
 
     setResult({ x1, x2, discriminant, type });
+    
+    updateAIInsight(
+      { a: aVal, b: bVal, c: cVal, equation: `${aVal}x² + ${bVal}x + ${cVal} = 0` },
+      { discriminant, solutionType: type, root1: x1, root2: x2, vertex: `(${(-bVal/(2*aVal)).toFixed(2)}, ${(aVal*Math.pow(-bVal/(2*aVal), 2) + bVal*(-bVal/(2*aVal)) + cVal).toFixed(2)})` }
+    );
   };
 
   const faqs = [
@@ -69,6 +77,12 @@ const QuadraticCalculator = () => {
     <CalculatorLayout
       title="Quadratic Equation Solver"
       description="Solve quadratic equations of the form ax² + bx + c = 0 and get step-by-step solutions."
+      seoTitle="Quadratic Equation Solver - Find Roots & Discriminant | SmartCalc Hub"
+      seoDescription="Free quadratic equation solver. Calculate roots, discriminant, and vertex for any quadratic equation ax² + bx + c = 0. Instant solutions with step-by-step explanation."
+      keywords="quadratic equation solver, quadratic formula calculator, discriminant calculator, roots calculator, parabola calculator"
+      canonicalUrl="https://smartcalchub.com/calculator/quadratic"
+      category="math"
+      calculatorId="quadratic"
       howItWorks="Enter the coefficients a, b, and c from your equation ax² + bx + c = 0. The calculator will find the roots using the quadratic formula."
       formula="x = [-b ± √(b² - 4ac)] / 2a"
       faqs={faqs}
@@ -123,32 +137,46 @@ const QuadraticCalculator = () => {
         </Button>
 
         {result && (
-          <Card className="bg-gradient-to-br from-primary/10 to-primary-accent/10 border-primary hover:scale-[1.02] transition-all duration-300 animate-fade-in">
-            <CardContent className="pt-6">
-              <div className="space-y-4">
-                <div>
-                  <p className="text-sm text-muted-foreground">Solution Type</p>
-                  <p className="text-xl font-bold bg-gradient-to-r from-primary to-primary-accent bg-clip-text text-transparent">{result.type}</p>
-                </div>
-
-                <div className="grid grid-cols-2 gap-4">
+          <>
+            <Card className="bg-gradient-to-br from-primary/10 to-primary-accent/10 border-primary hover:scale-[1.02] transition-all duration-300 animate-fade-in">
+              <CardContent className="pt-6">
+                <div className="space-y-4">
                   <div>
-                    <p className="text-sm text-muted-foreground">x₁</p>
-                    <p className="text-lg font-semibold">{result.x1}</p>
+                    <p className="text-sm text-muted-foreground">Solution Type</p>
+                    <p className="text-xl font-bold bg-gradient-to-r from-primary to-primary-accent bg-clip-text text-transparent">{result.type}</p>
                   </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">x₂</p>
-                    <p className="text-lg font-semibold">{result.x2}</p>
-                  </div>
-                </div>
 
-                <div>
-                  <p className="text-sm text-muted-foreground">Discriminant (b² - 4ac)</p>
-                  <p className="text-lg font-semibold">{result.discriminant.toFixed(4)}</p>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <p className="text-sm text-muted-foreground">x₁</p>
+                      <p className="text-lg font-semibold">{result.x1}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-muted-foreground">x₂</p>
+                      <p className="text-lg font-semibold">{result.x2}</p>
+                    </div>
+                  </div>
+
+                  <div>
+                    <p className="text-sm text-muted-foreground">Discriminant (b² - 4ac)</p>
+                    <p className="text-lg font-semibold">{result.discriminant.toFixed(4)}</p>
+                  </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+
+            {result.discriminant >= 0 && (
+              <CalculatorChart
+                chartType="line"
+                data={Array.from({length: 50}, (_, i) => {
+                  const x = (i - 25) / 5;
+                  const y = parseFloat(a) * x * x + parseFloat(b) * x + parseFloat(c);
+                  return { name: x.toFixed(1), value: y };
+                })}
+                title="Parabola Graph"
+              />
+            )}
+          </>
         )}
       </div>
     </CalculatorLayout>

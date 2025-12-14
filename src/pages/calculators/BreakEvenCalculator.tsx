@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CalculatorLayout } from "@/components/CalculatorLayout";
 import { SchemaMarkup } from "@/components/SchemaMarkup";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
+import { CalculatorChart } from "@/components/CalculatorChart";
 
 const BreakEvenCalculator = () => {
   const [fixedCosts, setFixedCosts] = useState("");
@@ -14,6 +16,7 @@ const BreakEvenCalculator = () => {
     breakEvenUnits: number;
     breakEvenRevenue: number;
   } | null>(null);
+  const { updateAIInsight } = useCalculatorEnhancements();
 
   const calculate = () => {
     const fixed = parseFloat(fixedCosts);
@@ -26,6 +29,11 @@ const BreakEvenCalculator = () => {
     const breakEvenRevenue = breakEvenUnits * price;
 
     setResult({ breakEvenUnits, breakEvenRevenue });
+    
+    updateAIInsight(
+      { fixedCosts: fixed, variableCostPerUnit: variable, sellingPrice: price, contributionMargin: price - variable },
+      { breakEvenUnits: Math.ceil(breakEvenUnits), breakEvenRevenue: breakEvenRevenue.toFixed(2), contributionMarginRatio: (((price - variable) / price) * 100).toFixed(1) + "%" }
+    );
   };
 
   const faqs = [
@@ -63,6 +71,12 @@ const BreakEvenCalculator = () => {
       <CalculatorLayout
       title="Break-Even Calculator"
       description="Calculate the break-even point for your business to understand when you'll start making profit."
+      seoTitle="Break-Even Calculator - Business Profit Analysis | SmartCalc Hub"
+      seoDescription="Free break-even calculator for businesses. Calculate break-even point, units needed, and revenue targets. Essential tool for pricing and financial planning."
+      keywords="break even calculator, break even point, business calculator, profit calculator, contribution margin"
+      canonicalUrl="https://smartcalchub.com/calculator/break-even"
+      category="business"
+      calculatorId="break-even"
       howItWorks="Enter your fixed costs, variable cost per unit, and selling price. The calculator shows how many units you need to sell to break even."
       formula="Break-Even Units = Fixed Costs / (Selling Price - Variable Cost)"
       faqs={faqs}
@@ -108,25 +122,37 @@ const BreakEvenCalculator = () => {
         </Button>
 
         {result && (
-          <Card className="bg-primary/5 border-primary">
-            <CardContent className="pt-6">
-              <div className="space-y-4">
-                <div>
-                  <p className="text-sm text-muted-foreground">Break-Even Units</p>
-                  <p className="text-3xl font-bold text-primary">
-                    {Math.ceil(result.breakEvenUnits).toLocaleString()} units
-                  </p>
-                </div>
+          <>
+            <Card className="bg-primary/5 border-primary">
+              <CardContent className="pt-6">
+                <div className="space-y-4">
+                  <div>
+                    <p className="text-sm text-muted-foreground">Break-Even Units</p>
+                    <p className="text-3xl font-bold text-primary">
+                      {Math.ceil(result.breakEvenUnits).toLocaleString()} units
+                    </p>
+                  </div>
 
-                <div>
-                  <p className="text-sm text-muted-foreground">Break-Even Revenue</p>
-                  <p className="text-xl font-semibold">
-                    ${result.breakEvenRevenue.toLocaleString(undefined, { maximumFractionDigits: 2 })}
-                  </p>
+                  <div>
+                    <p className="text-sm text-muted-foreground">Break-Even Revenue</p>
+                    <p className="text-xl font-semibold">
+                      ${result.breakEvenRevenue.toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+
+            <CalculatorChart
+              chartType="line"
+              data={Array.from({length: Math.ceil(result.breakEvenUnits) * 2}, (_, i) => ({
+                name: i.toString(),
+                value: parseFloat(sellingPrice) * i,
+                value2: parseFloat(fixedCosts) + parseFloat(variableCost) * i
+              }))}
+              title="Break-Even Analysis"
+            />
+          </>
         )}
       </div>
     </CalculatorLayout>

@@ -7,6 +7,7 @@ import { CalculatorLayout } from "@/components/CalculatorLayout";
 import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
 import { usePrintCalculator } from "@/hooks/usePrintCalculator";
 import { Copy, Loader2, Printer } from "lucide-react";
+import { CalculatorChart } from "@/components/CalculatorChart";
 
 const CapRateCalculator = () => {
   const [propertyValue, setPropertyValue] = useState("");
@@ -73,14 +74,15 @@ const CapRateCalculator = () => {
     <CalculatorLayout 
       title="Cap Rate Calculator" 
       description="Calculate capitalization rate for real estate investments to evaluate property returns." 
+      seoTitle="Cap Rate Calculator - Real Estate Investment Analysis | SmartCalc Hub"
+      seoDescription="Free cap rate calculator for real estate investors. Calculate capitalization rate to evaluate property investments and compare potential returns."
+      keywords="cap rate calculator, capitalization rate, real estate investment, NOI calculator, property investment analysis"
+      canonicalUrl="https://smartcalchub.com/calculator/cap-rate"
       category="real-estate" 
       calculatorId="cap-rate" 
       howItWorks="Enter property value, annual rental income, and operating expenses to calculate the capitalization rate. Cap rate helps you evaluate the potential return on a real estate investment." 
       formula="Cap Rate = (Net Operating Income / Property Value) × 100" 
       faqs={faqs}
-      seoTitle="Cap Rate Calculator - Real Estate Investment Analysis | SmartCalc Hub"
-      seoDescription="Free cap rate calculator for real estate investors. Calculate capitalization rate to evaluate property investments and compare potential returns."
-      keywords="cap rate calculator, capitalization rate, real estate investment, NOI calculator, property investment analysis"
     >
       <div className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -134,49 +136,60 @@ const CapRateCalculator = () => {
         </Button>
         
         {result && (
-          <Card className="bg-primary/5 border-primary">
-            <CardContent className="pt-6">
-              <div className="flex items-start justify-between mb-4">
-                <div>
-                  <p className="text-sm text-muted-foreground">Cap Rate</p>
-                  <p className="text-3xl font-bold text-primary">{result.capRate.toFixed(2)}%</p>
-                  <p className="text-sm text-muted-foreground mt-1">{result.assessment}</p>
+          <>
+            <Card className="bg-primary/5 border-primary">
+              <CardContent className="pt-6">
+                <div className="flex items-start justify-between mb-4">
+                  <div>
+                    <p className="text-sm text-muted-foreground">Cap Rate</p>
+                    <p className="text-3xl font-bold text-primary">{result.capRate.toFixed(2)}%</p>
+                    <p className="text-sm text-muted-foreground mt-1">{result.assessment}</p>
+                  </div>
+                  <div className="flex gap-2">
+                    <Button 
+                      variant="outline" 
+                      size="icon" 
+                      onClick={() => copyToClipboard(`${result.capRate.toFixed(2)}%`, "Cap Rate")}
+                    >
+                      <Copy className="h-4 w-4" />
+                    </Button>
+                    <Button 
+                      variant="outline" 
+                      size="icon" 
+                      onClick={() => printCalculation({ 
+                        title: "Cap Rate Calculator", 
+                        inputs: [
+                          { label: "Property Value", value: `$${propertyValue}` },
+                          { label: "Annual Income", value: `$${annualIncome}` },
+                          { label: "Operating Expenses", value: `$${expenses}` }
+                        ], 
+                        results: [
+                          { label: "Cap Rate", value: `${result.capRate.toFixed(2)}%` },
+                          { label: "NOI", value: `$${result.noi.toLocaleString()}` },
+                          { label: "Assessment", value: result.assessment }
+                        ] 
+                      })}
+                    >
+                      <Printer className="h-4 w-4" />
+                    </Button>
+                  </div>
                 </div>
-                <div className="flex gap-2">
-                  <Button 
-                    variant="outline" 
-                    size="icon" 
-                    onClick={() => copyToClipboard(`${result.capRate.toFixed(2)}%`, "Cap Rate")}
-                  >
-                    <Copy className="h-4 w-4" />
-                  </Button>
-                  <Button 
-                    variant="outline" 
-                    size="icon" 
-                    onClick={() => printCalculation({ 
-                      title: "Cap Rate Calculator", 
-                      inputs: [
-                        { label: "Property Value", value: `$${propertyValue}` },
-                        { label: "Annual Income", value: `$${annualIncome}` },
-                        { label: "Operating Expenses", value: `$${expenses}` }
-                      ], 
-                      results: [
-                        { label: "Cap Rate", value: `${result.capRate.toFixed(2)}%` },
-                        { label: "NOI", value: `$${result.noi.toLocaleString()}` },
-                        { label: "Assessment", value: result.assessment }
-                      ] 
-                    })}
-                  >
-                    <Printer className="h-4 w-4" />
-                  </Button>
+                <div className="p-3 bg-primary/10 rounded-lg">
+                  <p className="text-xs text-muted-foreground">Net Operating Income (NOI)</p>
+                  <p className="text-lg font-semibold text-primary">${result.noi.toLocaleString()}/year</p>
                 </div>
-              </div>
-              <div className="p-3 bg-primary/10 rounded-lg">
-                <p className="text-xs text-muted-foreground">Net Operating Income (NOI)</p>
-                <p className="text-lg font-semibold text-primary">${result.noi.toLocaleString()}/year</p>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+
+            <CalculatorChart
+              chartType="pie"
+              data={[
+                { name: "NOI", value: result.noi },
+                { name: "Expenses", value: parseFloat(expenses) || 0 }
+              ]}
+              title="Income Breakdown"
+            />
+          </>
         )}
       </div>
     </CalculatorLayout>

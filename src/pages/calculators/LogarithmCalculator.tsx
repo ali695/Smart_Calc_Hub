@@ -7,13 +7,14 @@ import { Card } from "@/components/ui/card";
 import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
 import { usePrintCalculator } from "@/hooks/usePrintCalculator";
 import { Copy, Printer } from "lucide-react";
+import { CalculatorChart } from "@/components/CalculatorChart";
 
 const LogarithmCalculator = () => {
   const [number, setNumber] = useState("");
   const [base, setBase] = useState("10");
   const [result, setResult] = useState<number | null>(null);
 
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
@@ -22,6 +23,11 @@ const LogarithmCalculator = () => {
     if (n > 0 && b > 0 && b !== 1) {
       const logResult = Math.log(n) / Math.log(b);
       setResult(logResult);
+      
+      updateAIInsight(
+        { number: n, base: b, logType: b === 10 ? "Common Log" : b === Math.E ? "Natural Log" : "Custom Base" },
+        { logarithm: logResult.toFixed(6), verification: `${b}^${logResult.toFixed(6)} ≈ ${Math.pow(b, logResult).toFixed(6)}` }
+      );
     }
   };
 
@@ -114,38 +120,49 @@ const LogarithmCalculator = () => {
         </Button>
 
         {result !== null && (
-          <Card className="p-6 bg-gradient-to-br from-primary/10 to-primary-accent/10 border-primary hover:scale-[1.02] transition-all duration-300 animate-fade-in">
-            <div className="text-center space-y-2">
-              <p className="text-sm font-medium text-muted-foreground">Logarithm Result</p>
-              <p className="text-4xl font-bold bg-gradient-to-r from-primary to-primary-accent bg-clip-text text-transparent">
-                log<sub>{base}</sub>({number}) = {result.toFixed(6)}
-              </p>
-              <div className="pt-4 border-t border-border/50 mt-4">
-                <p className="text-xs text-muted-foreground">
-                  Verification: {base}^{result.toFixed(6)} ≈ {Math.pow(parseFloat(base), result).toFixed(6)}
+          <>
+            <Card className="p-6 bg-gradient-to-br from-primary/10 to-primary-accent/10 border-primary hover:scale-[1.02] transition-all duration-300 animate-fade-in">
+              <div className="text-center space-y-2">
+                <p className="text-sm font-medium text-muted-foreground">Logarithm Result</p>
+                <p className="text-4xl font-bold bg-gradient-to-r from-primary to-primary-accent bg-clip-text text-transparent">
+                  log<sub>{base}</sub>({number}) = {result.toFixed(6)}
                 </p>
-              </div>
+                <div className="pt-4 border-t border-border/50 mt-4">
+                  <p className="text-xs text-muted-foreground">
+                    Verification: {base}^{result.toFixed(6)} ≈ {Math.pow(parseFloat(base), result).toFixed(6)}
+                  </p>
+                </div>
 
-              <div className="flex gap-2 justify-center pt-4">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => copyToClipboard(result.toFixed(6), "Logarithm")}
-                >
-                  <Copy className="w-4 h-4 mr-2" />
-                  Copy Result
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={handlePrint}
-                >
-                  <Printer className="w-4 h-4 mr-2" />
-                  Print
-                </Button>
+                <div className="flex gap-2 justify-center pt-4">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => copyToClipboard(result.toFixed(6), "Logarithm")}
+                  >
+                    <Copy className="w-4 h-4 mr-2" />
+                    Copy Result
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={handlePrint}
+                  >
+                    <Printer className="w-4 h-4 mr-2" />
+                    Print
+                  </Button>
+                </div>
               </div>
-            </div>
-          </Card>
+            </Card>
+
+            <CalculatorChart
+              chartType="line"
+              data={Array.from({length: 20}, (_, i) => {
+                const x = (i + 1) * (parseFloat(number) / 10);
+                return { name: x.toFixed(1), value: Math.log(x) / Math.log(parseFloat(base)) };
+              })}
+              title={`Logarithm Curve (base ${base})`}
+            />
+          </>
         )}
       </div>
     </CalculatorLayout>
