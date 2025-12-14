@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
 
-const emailSchema = z.string().email("Please enter a valid email address");
+const emailSchema = z.string().email("Please enter a valid email address").max(255, "Email is too long");
 
 export const NewsletterSignup = () => {
   const [email, setEmail] = useState("");
@@ -19,19 +19,26 @@ export const NewsletterSignup = () => {
       emailSchema.parse(email);
       setIsSubmitting(true);
       
-      // Save to Supabase
-      const { error } = await supabase
-        .from('newsletter_subscribers')
-        .insert([{ email: email.toLowerCase().trim() }]);
+      // Use secure edge function instead of direct Supabase insert
+      const { data, error } = await supabase.functions.invoke('subscribe-newsletter', {
+        body: { email: email.toLowerCase().trim() }
+      });
 
       if (error) {
-        if (error.code === '23505') {
-          toast.info("You're already subscribed!", {
-            description: "This email is already on our list."
-          });
-        } else {
-          throw error;
-        }
+        console.error('Newsletter subscription error:', error);
+        toast.error("Something went wrong. Please try again.");
+        return;
+      }
+
+      if (data?.error) {
+        toast.error(data.error);
+        return;
+      }
+
+      if (data?.message === 'Already subscribed') {
+        toast.info("You're already subscribed!", {
+          description: "This email is already on our list."
+        });
       } else {
         toast.success("Welcome aboard!", {
           description: "You'll receive our latest calculator tips and financial insights."
