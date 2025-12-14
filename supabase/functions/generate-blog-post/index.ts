@@ -5,9 +5,42 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
+// Simple in-memory rate limiter (per Deno instance)
+const rateLimits = new Map<string, { count: number; resetAt: number }>();
+
+function checkRateLimit(ip: string, maxRequests = 10, windowMs = 60000): boolean {
+  const now = Date.now();
+  const current = rateLimits.get(ip);
+
+  if (!current || now > current.resetAt) {
+    rateLimits.set(ip, { count: 1, resetAt: now + windowMs });
+    return true;
+  }
+
+  if (current.count >= maxRequests) {
+    return false;
+  }
+
+  current.count++;
+  return true;
+}
+
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
+  }
+
+  const ip = req.headers.get('x-forwarded-for')?.split(',')[0] || 'unknown';
+  if (!checkRateLimit(ip, 5, 600000)) { // 5 requests per 10 minutes
+    return new Response(
+      JSON.stringify({ 
+        error: "Too many blog generations from your IP. Please wait a few minutes before trying again.",
+      }),
+      {
+        status: 429,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      }
+    );
   }
 
   try {
@@ -18,7 +51,7 @@ serve(async (req) => {
       throw new Error('LOVABLE_API_KEY is not configured');
     }
 
-    console.log('Generating blog post for topic:', topic);
+    console.log('Generating blog post for topic:', topic, 'from ip:', ip);
 
     const systemPrompt = `You are an expert SEO content writer for SmartCalc Hub, a comprehensive online calculator platform. Your task is to write high-quality, SEO-optimized blog posts about calculators and related topics.
 
@@ -76,7 +109,7 @@ Make it valuable for readers searching for calculator guides and mathematical/fi
         model: 'google/gemini-2.5-pro',
         messages: [
           { role: 'system', content: systemPrompt },
-          { role: 'user', content: userPrompt }
+          { role: 'user', content: userPrompt },
         ],
         temperature: 0.8,
         max_tokens: 8000,
@@ -87,16 +120,16 @@ Make it valuable for readers searching for calculator guides and mathematical/fi
       if (response.status === 429) {
         return new Response(
           JSON.stringify({ error: "Rate limit exceeded. Please try again in a moment." }),
-          { status: 429, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+          { status: 429, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
         );
       }
       if (response.status === 402) {
         return new Response(
           JSON.stringify({ error: "AI credits required. Please add credits to continue." }),
-          { status: 402, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+          { status: 402, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
         );
       }
-      
+
       const errorText = await response.text();
       console.error('Lovable AI error:', response.status, errorText);
       throw new Error(`AI service error: ${response.status}`);
@@ -112,8 +145,8 @@ Make it valuable for readers searching for calculator guides and mathematical/fi
       blogPost = JSON.parse(generatedContent);
     } catch {
       // If that fails, try to extract JSON from markdown code blocks
-      const jsonMatch = generatedContent.match(/```json\n([\s\S]*?)\n```/) || 
-                       generatedContent.match(/```\n([\s\S]*?)\n```/);
+      const jsonMatch = generatedContent.match(/```json\n([\s\S]*?)\n```/) ||
+        generatedContent.match(/```\n([\s\S]*?)\n```/);
       if (jsonMatch) {
         blogPost = JSON.parse(jsonMatch[1]);
       } else {
@@ -126,17 +159,17 @@ Make it valuable for readers searching for calculator guides and mathematical/fi
     blogPost.author = "Ali Haider";
     blogPost.readTime = `${Math.ceil(blogPost.content.sections.reduce((acc: number, s: any) => acc + s.content.split(' ').length, 0) / 200)} min read`;
 
-    console.log('Blog post generated successfully:', blogPost.slug);
+    console.log('Blog post generated successfully for ip:', ip, 'slug:', blogPost.slug);
 
     return new Response(
       JSON.stringify({ blogPost }),
-      { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      { headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
     );
   } catch (error) {
     console.error('Error generating blog post:', error);
     return new Response(
-      JSON.stringify({ 
-        error: error instanceof Error ? error.message : 'Failed to generate blog post'
+      JSON.stringify({
+        error: error instanceof Error ? error.message : 'Failed to generate blog post',
       }),
       {
         status: 500,

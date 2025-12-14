@@ -5,6 +5,26 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
+// Simple in-memory rate limiter (per Deno instance)
+const rateLimits = new Map<string, { count: number; resetAt: number }>();
+
+function checkRateLimit(ip: string, maxRequests = 20, windowMs = 60000): boolean {
+  const now = Date.now();
+  const current = rateLimits.get(ip);
+
+  if (!current || now > current.resetAt) {
+    rateLimits.set(ip, { count: 1, resetAt: now + windowMs });
+    return true;
+  }
+
+  if (current.count >= maxRequests) {
+    return false;
+  }
+
+  current.count++;
+  return true;
+}
+
 // Category-specific system prompts for contextual AI interpretation
 const categoryPrompts: Record<string, string> = {
   finance: `You are an AI Finance Advisor for SmartCalc Hub. Your role is to:
@@ -81,7 +101,7 @@ Keep responses to 2-3 sentences maximum. Be clear and practical.`,
 - Explain calculation results in simple, understandable terms
 - Provide practical context and real-world applications
 - Give helpful tips related to the calculation
-Keep responses to 2-3 sentences maximum. Be friendly and informative.`
+Keep responses to 2-3 sentences maximum. Be friendly and informative.`,
 };
 
 // Get the appropriate icon/module name for the category
@@ -106,10 +126,23 @@ serve(async (req) => {
     return new Response(null, { headers: corsHeaders });
   }
 
+  const ip = req.headers.get('x-forwarded-for')?.split(',')[0] || 'unknown';
+  if (!checkRateLimit(ip, 20, 60000)) { // 20 requests per minute
+    return new Response(
+      JSON.stringify({ 
+        interpretation: "You're using AI insights very frequently. Please wait a moment before trying again.",
+        moduleName: "AI Assistant",
+        moduleIcon: "✨",
+        error: true,
+      }),
+      { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
+    );
+  }
+
   try {
     const { calculatorName, category, inputs, results } = await req.json();
-    
-    console.log('AI Interpret request:', { calculatorName, category, inputs, results });
+
+    console.log('AI Interpret request:', { calculatorName, category, from: ip });
 
     const LOVABLE_API_KEY = Deno.env.get('LOVABLE_API_KEY');
     if (!LOVABLE_API_KEY) {
@@ -136,7 +169,7 @@ Please provide a brief, insightful interpretation of these calculation results.`
         model: 'google/gemini-2.5-flash',
         messages: [
           { role: 'system', content: systemPrompt },
-          { role: 'user', content: userMessage }
+          { role: 'user', content: userMessage },
         ],
         temperature: 0.7,
         max_tokens: 200,
@@ -150,9 +183,9 @@ Please provide a brief, insightful interpretation of these calculation results.`
             interpretation: "I'm processing a lot of requests. Your result is ready above!",
             moduleName: moduleInfo.name,
             moduleIcon: moduleInfo.icon,
-            error: true
+            error: true,
           }),
-          { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+          { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
         );
       }
       if (response.status === 402) {
@@ -161,12 +194,12 @@ Please provide a brief, insightful interpretation of these calculation results.`
             interpretation: "AI insights are temporarily unavailable. Your calculation is complete!",
             moduleName: moduleInfo.name,
             moduleIcon: moduleInfo.icon,
-            error: true
+            error: true,
           }),
-          { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+          { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
         );
       }
-      
+
       const errorText = await response.text();
       console.error('Lovable AI error:', response.status, errorText);
       throw new Error(`AI service error: ${response.status}`);
@@ -175,29 +208,29 @@ Please provide a brief, insightful interpretation of these calculation results.`
     const data = await response.json();
     const interpretation = data.choices[0].message.content;
 
-    console.log('AI interpretation generated successfully');
+    console.log('AI interpretation generated successfully for ip:', ip);
 
     return new Response(
       JSON.stringify({ 
         interpretation,
         moduleName: moduleInfo.name,
-        moduleIcon: moduleInfo.icon
+        moduleIcon: moduleInfo.icon,
       }),
-      { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      { headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
     );
 
   } catch (error) {
     console.error('Error in AI interpret function:', error);
-    
+
     // Return a graceful fallback
     return new Response(
       JSON.stringify({ 
         interpretation: "Your calculation is complete! Check the results above.",
         moduleName: "AI Assistant",
         moduleIcon: "✨",
-        error: true
+        error: true,
       }),
-      { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
     );
   }
 });
