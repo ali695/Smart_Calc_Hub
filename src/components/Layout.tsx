@@ -1,10 +1,11 @@
 import { ReactNode, useState } from "react";
 import { Link } from "react-router-dom";
-import { Calculator, Menu, X } from "lucide-react";
+import { Calculator, Menu, X, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "./ThemeToggle";
 import { Footer } from "./Footer";
 import { AIChatbot } from "./AIChatbot";
+import { useAdminCheck } from "@/hooks/useAdminCheck";
 
 interface LayoutProps {
   children: ReactNode;
@@ -12,6 +13,7 @@ interface LayoutProps {
 
 export const Layout = ({ children }: LayoutProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { isAdmin } = useAdminCheck();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
@@ -90,6 +92,12 @@ export const Layout = ({ children }: LayoutProps) => {
               <Link to="/blog" className="relative text-sm font-medium text-foreground/80 hover:text-foreground transition-colors after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary after:to-primary-glow hover:after:w-full after:transition-all after:duration-300">
                 Blog
               </Link>
+              {isAdmin && (
+                <Link to="/admin" className="relative text-sm font-medium text-foreground/80 hover:text-foreground transition-colors after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary after:to-primary-glow hover:after:w-full after:transition-all after:duration-300 flex items-center gap-1">
+                  <Shield className="h-4 w-4" />
+                  Admin
+                </Link>
+              )}
               <div className="neon-ring rounded-lg transition-all">
                 <ThemeToggle />
               </div>
@@ -154,6 +162,16 @@ export const Layout = ({ children }: LayoutProps) => {
               >
                 Blog
               </Link>
+              {isAdmin && (
+                <Link
+                  to="/admin"
+                  className="block text-sm font-medium text-foreground/80 hover:text-foreground transition-colors flex items-center gap-1"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <Shield className="h-4 w-4" />
+                  Admin
+                </Link>
+              )}
             </nav>
           )}
         </div>

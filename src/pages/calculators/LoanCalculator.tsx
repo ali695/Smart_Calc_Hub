@@ -10,6 +10,7 @@ import { z } from "zod";
 import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
 import { usePrintCalculator } from "@/hooks/usePrintCalculator";
 import { Copy, Loader2, Printer } from "lucide-react";
+import { CalculatorChart } from "@/components/CalculatorChart";
 
 const LoanCalculator = () => {
   const [principal, setPrincipal] = useState("");
@@ -159,58 +160,69 @@ const LoanCalculator = () => {
         </Button>
 
         {monthlyPayment !== null && (
-          <Card>
-            <CardContent className="pt-6">
-              <div className="space-y-4">
-                <div className="flex items-start justify-between">
-                  <div className="flex-1">
-                    <p className="text-sm text-muted-foreground">Monthly Payment</p>
-                    <p className="text-3xl font-bold">${monthlyPayment.toLocaleString()}</p>
+          <>
+            <Card>
+              <CardContent className="pt-6">
+                <div className="space-y-4">
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <p className="text-sm text-muted-foreground">Monthly Payment</p>
+                      <p className="text-3xl font-bold">${monthlyPayment.toLocaleString()}</p>
+                    </div>
+                    <div className="flex gap-2">
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        onClick={() => copyToClipboard(`$${monthlyPayment.toLocaleString()}`, "Monthly Payment")}
+                      >
+                        <Copy className="h-4 w-4" />
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        onClick={() => printCalculation({
+                          title: "Loan Calculator",
+                          inputs: [
+                            { label: "Loan Amount", value: `$${principal}` },
+                            { label: "Interest Rate", value: `${rate}%` },
+                            { label: "Loan Term", value: `${years} years` }
+                          ],
+                          results: [
+                            { label: "Monthly Payment", value: `$${monthlyPayment.toLocaleString()}` },
+                            { label: "Total Payment", value: `$${totalPayment?.toLocaleString()}` },
+                            { label: "Total Interest", value: `$${totalInterest?.toLocaleString()}` }
+                          ],
+                          formula: "M = P × [r(1 + r)^n] / [(1 + r)^n - 1]"
+                        })}
+                      >
+                        <Printer className="h-4 w-4" />
+                      </Button>
+                    </div>
                   </div>
-                  <div className="flex gap-2">
-                    <Button
-                      variant="outline"
-                      size="icon"
-                      onClick={() => copyToClipboard(`$${monthlyPayment.toLocaleString()}`, "Monthly Payment")}
-                    >
-                      <Copy className="h-4 w-4" />
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="icon"
-                      onClick={() => printCalculation({
-                        title: "Loan Calculator",
-                        inputs: [
-                          { label: "Loan Amount", value: `$${principal}` },
-                          { label: "Interest Rate", value: `${rate}%` },
-                          { label: "Loan Term", value: `${years} years` }
-                        ],
-                        results: [
-                          { label: "Monthly Payment", value: `$${monthlyPayment.toLocaleString()}` },
-                          { label: "Total Payment", value: `$${totalPayment?.toLocaleString()}` },
-                          { label: "Total Interest", value: `$${totalInterest?.toLocaleString()}` }
-                        ],
-                        formula: "M = P × [r(1 + r)^n] / [(1 + r)^n - 1]"
-                      })}
-                    >
-                      <Printer className="h-4 w-4" />
-                    </Button>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 border-t">
+                    <div>
+                      <p className="text-sm text-muted-foreground">Total Payment</p>
+                      <p className="text-xl font-semibold">${totalPayment?.toLocaleString()}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-muted-foreground">Total Interest</p>
+                      <p className="text-xl font-semibold">${totalInterest?.toLocaleString()}</p>
+                    </div>
                   </div>
                 </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 border-t">
-                  <div>
-                    <p className="text-sm text-muted-foreground">Total Payment</p>
-                    <p className="text-xl font-semibold">${totalPayment?.toLocaleString()}</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Total Interest</p>
-                    <p className="text-xl font-semibold">${totalInterest?.toLocaleString()}</p>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+
+            <CalculatorChart
+              chartType="pie"
+              data={[
+                { name: "Principal", value: safeParseFloat(principal) || 0 },
+                { name: "Interest", value: totalInterest || 0 }
+              ]}
+              title="Loan Breakdown"
+            />
+          </>
         )}
       </div>
     </CalculatorLayout>
