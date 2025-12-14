@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from "react";
-import { MessageCircle, X, Send, Loader2, Calculator, HelpCircle, BookOpen, RefreshCw } from "lucide-react";
+import { useState, useEffect, useRef, useCallback } from "react";
+import { MessageCircle, X, Send, Loader2, Calculator, HelpCircle, BookOpen, RefreshCw, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -9,6 +9,7 @@ import { useLocation } from "react-router-dom";
 interface Message {
   role: "user" | "assistant";
   content: string;
+  timestamp?: number;
 }
 
 const QUICK_REPLIES = [
@@ -18,18 +19,61 @@ const QUICK_REPLIES = [
   { label: "New calculation", icon: RefreshCw, message: "I want to start a new calculation" },
 ];
 
+const STORAGE_KEY = "smartcalc_chat_history";
+const MAX_STORED_MESSAGES = 50;
+
+const DEFAULT_MESSAGE: Message = {
+  role: "assistant",
+  content: "Hello! I'm your SmartCalc assistant. I can help explain calculations, find the right calculator, or answer questions. What do you need?",
+  timestamp: Date.now(),
+};
+
+// Load messages from localStorage
+const loadStoredMessages = (): Message[] => {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        return parsed;
+      }
+    }
+  } catch (error) {
+    console.error("Error loading chat history:", error);
+  }
+  return [DEFAULT_MESSAGE];
+};
+
+// Save messages to localStorage
+const saveMessages = (messages: Message[]) => {
+  try {
+    const toStore = messages.slice(-MAX_STORED_MESSAGES);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(toStore));
+  } catch (error) {
+    console.error("Error saving chat history:", error);
+  }
+};
+
 export const AIChatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      role: "assistant",
-      content: "Hello! I'm your SmartCalc assistant. I can help explain calculations, find the right calculator, or answer questions. What do you need?",
-    },
-  ]);
+  const [messages, setMessages] = useState<Message[]>(() => loadStoredMessages());
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
+
+  // Save messages to localStorage whenever they change
+  useEffect(() => {
+    if (messages.length > 1 || messages[0]?.content !== DEFAULT_MESSAGE.content) {
+      saveMessages(messages);
+    }
+  }, [messages]);
+
+  // Clear chat history
+  const clearHistory = useCallback(() => {
+    setMessages([{ ...DEFAULT_MESSAGE, timestamp: Date.now() }]);
+    localStorage.removeItem(STORAGE_KEY);
+  }, []);
 
   // Auto-scroll to bottom when messages change
   useEffect(() => {
@@ -55,7 +99,7 @@ export const AIChatbot = () => {
     const textToSend = messageText || input;
     if (!textToSend.trim() || isLoading) return;
 
-    const userMessage: Message = { role: "user", content: textToSend };
+    const userMessage: Message = { role: "user", content: textToSend, timestamp: Date.now() };
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
     setIsLoading(true);
@@ -86,7 +130,7 @@ export const AIChatbot = () => {
 
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", content: data.message }
+        { role: "assistant", content: data.message, timestamp: Date.now() }
       ]);
     } catch (error) {
       console.error('Error calling AI:', error);
@@ -128,14 +172,25 @@ export const AIChatbot = () => {
               <MessageCircle className="h-4 w-4 md:h-5 md:w-5" />
               SmartCalc Assistant
             </CardTitle>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setIsOpen(false)}
-              className="h-8 w-8 text-primary-foreground hover:bg-white/20"
-            >
-              <X className="h-4 w-4" />
-            </Button>
+            <div className="flex items-center gap-1">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={clearHistory}
+                className="h-8 w-8 text-primary-foreground hover:bg-white/20"
+                title="Clear chat history"
+              >
+                <Trash2 className="h-4 w-4" />
+              </Button>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setIsOpen(false)}
+                className="h-8 w-8 text-primary-foreground hover:bg-white/20"
+              >
+                <X className="h-4 w-4" />
+              </Button>
+            </div>
           </CardHeader>
 
           <CardContent className="flex-1 flex flex-col p-0 overflow-hidden">

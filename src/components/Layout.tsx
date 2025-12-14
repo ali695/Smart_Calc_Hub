@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "./ThemeToggle";
 import { Footer } from "./Footer";
 import { AIChatbot } from "./AIChatbot";
+import { NewsletterSignup } from "./NewsletterSignup";
 import { useAdminCheck } from "@/hooks/useAdminCheck";
 import { UserMenu } from "./UserMenu";
 
@@ -181,6 +182,9 @@ export const Layout = ({ children }: LayoutProps) => {
 
       {/* Main Content */}
       <main>{children}</main>
+
+      {/* Newsletter Section - Above Footer */}
+      <NewsletterSignup />
 
       {/* AI Chatbot */}
       <AIChatbot />
