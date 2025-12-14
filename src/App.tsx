@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { Layout } from "@/components/Layout";
+import { AuthProvider } from "@/contexts/AuthContext";
 import { useEffect } from "react";
 import { trackPageView } from "@/utils/analytics";
 import { ThemeProvider } from "./components/ThemeProvider";
@@ -18,6 +19,8 @@ import BlogGenerator from "./pages/BlogGenerator";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import NotFound from "./pages/NotFound";
+import Auth from "./pages/Auth";
+import Dashboard from "./pages/Dashboard";
 import BMICalculator from "./pages/calculators/BMICalculator";
 import LoanCalculator from "./pages/calculators/LoanCalculator";
 import PercentageCalculator from "./pages/calculators/PercentageCalculator";
@@ -165,24 +168,27 @@ const AnalyticsTracker = () => {
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <AnalyticsTracker />
-          <Layout>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/categories" element={<Categories />} />
-              <Route path="/real-estate" element={<RealEstateCalculators />} />
-              <Route path="/crypto" element={<CryptoCalculators />} />
-              <Route path="/admin" element={<AdminDashboard />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/faq" element={<FAQ />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/:slug" element={<BlogPost />} />
-              <Route path="/blog-generator" element={<BlogGenerator />} />
+      <AuthProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <AnalyticsTracker />
+            <Layout>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/auth" element={<Auth />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/categories" element={<Categories />} />
+                <Route path="/real-estate" element={<RealEstateCalculators />} />
+                <Route path="/crypto" element={<CryptoCalculators />} />
+                <Route path="/admin" element={<AdminDashboard />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/faq" element={<FAQ />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:slug" element={<BlogPost />} />
+                <Route path="/blog-generator" element={<BlogGenerator />} />
               <Route path="/calculator/bmi" element={<BMICalculator />} />
               <Route path="/calculator/loan" element={<LoanCalculator />} />
               <Route path="/calculator/percentage" element={<PercentageCalculator />} />
@@ -316,6 +322,7 @@ const App = () => (
           </Layout>
         </BrowserRouter>
       </TooltipProvider>
+    </AuthProvider>
     </ThemeProvider>
   </QueryClientProvider>
 );
