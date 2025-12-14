@@ -7,11 +7,12 @@ import { CalculatorLayout } from "@/components/CalculatorLayout";
 import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
 import { usePrintCalculator } from "@/hooks/usePrintCalculator";
 import { Copy, Loader2, Printer } from "lucide-react";
+import { CalculatorChart } from "@/components/CalculatorChart";
 
 const StandardDeviationCalculator = () => {
   const [numbers, setNumbers] = useState("");
   const [result, setResult] = useState<{ mean: number; variance: number; stdDev: number; count: number } | null>(null);
-  const { isCalculating, handleCalculation, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
@@ -21,34 +22,63 @@ const StandardDeviationCalculator = () => {
     const variance = nums.reduce((sum, n) => sum + Math.pow(n - mean, 2), 0) / nums.length;
     const stdDev = Math.sqrt(variance);
     setResult({ mean, variance, stdDev, count: nums.length });
+    
+    updateAIInsight(
+      { numberSet: numbers, sampleSize: nums.length },
+      { mean: mean.toFixed(4), variance: variance.toFixed(4), standardDeviation: stdDev.toFixed(4), coefficient: ((stdDev / mean) * 100).toFixed(2) + "%" }
+    );
   };
 
   const faqs = [{ question: "What is standard deviation?", answer: "Standard deviation measures the spread of data points from the mean. A low SD means data is clustered around the mean." }];
 
   return (
-    <CalculatorLayout title="Standard Deviation Calculator" description="Calculate standard deviation, variance, and mean for a set of numbers." category="math" calculatorId="standard-deviation" howItWorks="Enter numbers separated by commas or spaces." formula="σ = √(Σ(x - μ)² / N)" faqs={faqs}>
+    <CalculatorLayout 
+      title="Standard Deviation Calculator" 
+      description="Calculate standard deviation, variance, and mean for a set of numbers." 
+      seoTitle="Standard Deviation Calculator - Variance & Mean | SmartCalc Hub"
+      seoDescription="Free standard deviation calculator for statistics. Calculate SD, variance, and mean from any data set. Perfect for math, science, and data analysis."
+      keywords="standard deviation calculator, variance calculator, mean calculator, statistics calculator, data analysis"
+      canonicalUrl="https://smartcalchub.com/calculator/standard-deviation"
+      category="math" 
+      calculatorId="standard-deviation" 
+      howItWorks="Enter numbers separated by commas or spaces." 
+      formula="σ = √(Σ(x - μ)² / N)" 
+      faqs={faqs}
+    >
       <div className="space-y-6">
         <div><Label>Numbers (comma or space separated)</Label><Input value={numbers} onChange={(e) => setNumbers(e.target.value)} placeholder="e.g., 10, 20, 30, 40, 50" /></div>
         <Button type="button" onClick={() => handleCalculation(calculate)} className="w-full" size="lg" disabled={isCalculating}>{isCalculating ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Calculating...</> : "Calculate"}</Button>
         {result && (
-          <Card className="bg-primary/5 border-primary">
-            <CardContent className="pt-6">
-              <div className="space-y-4">
-                <div className="flex items-start justify-between">
-                  <div><p className="text-sm text-muted-foreground">Standard Deviation (σ)</p><p className="text-3xl font-bold text-primary">{result.stdDev.toFixed(4)}</p></div>
-                  <div className="flex gap-2">
-                    <Button variant="outline" size="icon" onClick={() => copyToClipboard(result.stdDev.toFixed(4), "Std Dev")}><Copy className="h-4 w-4" /></Button>
-                    <Button variant="outline" size="icon" onClick={() => printCalculation({ title: "Standard Deviation", inputs: [{ label: "Numbers", value: numbers }], results: [{ label: "Std Dev", value: result.stdDev.toFixed(4) }, { label: "Mean", value: result.mean.toFixed(4) }] })}><Printer className="h-4 w-4" /></Button>
+          <>
+            <Card className="bg-primary/5 border-primary">
+              <CardContent className="pt-6">
+                <div className="space-y-4">
+                  <div className="flex items-start justify-between">
+                    <div><p className="text-sm text-muted-foreground">Standard Deviation (σ)</p><p className="text-3xl font-bold text-primary">{result.stdDev.toFixed(4)}</p></div>
+                    <div className="flex gap-2">
+                      <Button variant="outline" size="icon" onClick={() => copyToClipboard(result.stdDev.toFixed(4), "Std Dev")}><Copy className="h-4 w-4" /></Button>
+                      <Button variant="outline" size="icon" onClick={() => printCalculation({ title: "Standard Deviation", inputs: [{ label: "Numbers", value: numbers }], results: [{ label: "Std Dev", value: result.stdDev.toFixed(4) }, { label: "Mean", value: result.mean.toFixed(4) }] })}><Printer className="h-4 w-4" /></Button>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-3 gap-4">
+                    <div><p className="text-sm text-muted-foreground">Mean</p><p className="text-xl font-semibold">{result.mean.toFixed(4)}</p></div>
+                    <div><p className="text-sm text-muted-foreground">Variance</p><p className="text-xl font-semibold">{result.variance.toFixed(4)}</p></div>
+                    <div><p className="text-sm text-muted-foreground">Count</p><p className="text-xl font-semibold">{result.count}</p></div>
                   </div>
                 </div>
-                <div className="grid grid-cols-3 gap-4">
-                  <div><p className="text-sm text-muted-foreground">Mean</p><p className="text-xl font-semibold">{result.mean.toFixed(4)}</p></div>
-                  <div><p className="text-sm text-muted-foreground">Variance</p><p className="text-xl font-semibold">{result.variance.toFixed(4)}</p></div>
-                  <div><p className="text-sm text-muted-foreground">Count</p><p className="text-xl font-semibold">{result.count}</p></div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+
+            <CalculatorChart
+              chartType="bar"
+              data={[
+                { name: "Mean", value: result.mean },
+                { name: "Variance", value: result.variance },
+                { name: "Std Dev", value: result.stdDev }
+              ]}
+              title="Statistical Metrics"
+            />
+          </>
         )}
       </div>
     </CalculatorLayout>
