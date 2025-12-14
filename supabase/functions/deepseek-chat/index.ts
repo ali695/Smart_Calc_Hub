@@ -5,9 +5,42 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
+// Simple in-memory rate limiter (per Deno instance)
+const rateLimits = new Map<string, { count: number; resetAt: number }>();
+
+function checkRateLimit(ip: string, maxRequests = 10, windowMs = 60000): boolean {
+  const now = Date.now();
+  const current = rateLimits.get(ip);
+
+  if (!current || now > current.resetAt) {
+    rateLimits.set(ip, { count: 1, resetAt: now + windowMs });
+    return true;
+  }
+
+  if (current.count >= maxRequests) {
+    return false;
+  }
+
+  current.count++;
+  return true;
+}
+
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
+  }
+
+  const ip = req.headers.get('x-forwarded-for')?.split(',')[0] || 'unknown';
+  if (!checkRateLimit(ip, 10, 60000)) {
+    return new Response(
+      JSON.stringify({ 
+        message: "Too many requests from your IP. Please wait a moment before trying again.",
+      }),
+      {
+        status: 429,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      }
+    );
   }
 
   try {
@@ -18,7 +51,7 @@ serve(async (req) => {
       throw new Error('LOVABLE_API_KEY is not configured');
     }
 
-    console.log('Calling Lovable AI with messages:', messages.length);
+    console.log('Calling Lovable AI with messages:', messages.length, 'from ip:', ip);
 
     const response = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
       method: 'POST',
@@ -79,9 +112,9 @@ When helping users:
 - Keep responses clear, concise, and helpful (2-4 sentences typically)
 - Use emojis sparingly for friendliness
 
-Be knowledgeable, accurate, and guide users confidently to the right tools.`
+Be knowledgeable, accurate, and guide users confidently to the right tools.`,
           },
-          ...messages
+          ...messages,
         ],
         temperature: 0.7,
         max_tokens: 600,
@@ -92,7 +125,7 @@ Be knowledgeable, accurate, and guide users confidently to the right tools.`
       if (response.status === 429) {
         return new Response(
           JSON.stringify({ 
-            message: "I'm getting a lot of requests right now. Please try again in a moment! In the meantime, feel free to browse our 90+ calculators for Finance, Health, Math, and more." 
+            message: "I'm getting a lot of requests right now. Please try again in a moment! In the meantime, feel free to browse our 90+ calculators for Finance, Health, Math, and more.",
           }),
           {
             status: 429,
@@ -103,7 +136,7 @@ Be knowledgeable, accurate, and guide users confidently to the right tools.`
       if (response.status === 402) {
         return new Response(
           JSON.stringify({ 
-            message: "The AI service needs more credits. But don't worry - you can still browse all our calculators! What would you like to calculate? Finance, Health, Math, or Conversions?" 
+            message: "The AI service needs more credits. But don't worry - you can still browse all our calculators! What would you like to calculate? Finance, Health, Math, or Conversions?",
           }),
           {
             status: 402,
@@ -118,7 +151,7 @@ Be knowledgeable, accurate, and guide users confidently to the right tools.`
     }
 
     const data = await response.json();
-    console.log('Lovable AI response received successfully');
+    console.log('Lovable AI response received successfully for ip:', ip);
 
     const assistantMessage = data.choices[0].message.content;
 
@@ -132,7 +165,7 @@ Be knowledgeable, accurate, and guide users confidently to the right tools.`
     console.error('Error in chat function:', error);
     return new Response(
       JSON.stringify({ 
-        message: "I can help you find the right calculator! We have 90+ tools:\n\n📊 Finance - Loans, investments, budgeting\n❤️ Health - BMI, calories, fitness tracking\n🔢 Math - Percentages, algebra, geometry\n🔄 Conversions - Length, weight, temperature\n\nWhat would you like to calculate?"
+        message: "I can help you find the right calculator! We have 90+ tools:\n\n📊 Finance - Loans, investments, budgeting\n❤️ Health - BMI, calories, fitness tracking\n🔢 Math - Percentages, algebra, geometry\n🔄 Conversions - Length, weight, temperature\n\nWhat would you like to calculate?",
       }),
       {
         status: 200,
@@ -141,4 +174,3 @@ Be knowledgeable, accurate, and guide users confidently to the right tools.`
     );
   }
 });
-
