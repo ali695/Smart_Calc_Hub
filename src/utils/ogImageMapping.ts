@@ -3,22 +3,40 @@
  */
 export const getCategoryOGImage = (category: string): string => {
   const categoryMap: Record<string, string> = {
-    finance: 'https://smartcalchub.com/og-finance.png',
-    health: 'https://smartcalchub.com/og-health.png',
-    math: 'https://smartcalchub.com/og-math.png',
-    conversion: 'https://smartcalchub.com/og-conversion.png',
-    utility: 'https://smartcalchub.com/og-utility.png',
-    engineering: 'https://smartcalchub.com/og-engineering.png',
-    tech: 'https://smartcalchub.com/og-tech.png',
+    finance: '/og-finance.png',
+    health: '/og-health.png',
+    math: '/og-math.png',
+    conversion: '/og-conversion.png',
+    utility: '/og-utility.png',
+    engineering: '/og-engineering.png',
+    tech: '/og-tech.png',
   };
 
-  return categoryMap[category.toLowerCase()] || 'https://smartcalchub.com/og-calculator.png';
+  return categoryMap[category.toLowerCase()] || '/og-calculator.png';
+};
+
+/**
+ * Maps blog categories to their respective hero images
+ */
+export const getBlogHeroImage = (category: string): string => {
+  const heroMap: Record<string, string> = {
+    finance: '/blog-hero-finance.webp',
+    health: '/blog-hero-health.webp',
+    math: '/blog-hero-math.webp',
+    conversion: '/blog-hero-conversion.webp',
+    business: '/blog-hero-finance.webp',
+    utility: '/blog-hero-conversion.webp',
+    engineering: '/blog-hero-math.webp',
+    tech: '/blog-hero-math.webp',
+  };
+
+  return heroMap[category.toLowerCase()] || '/blog-hero-finance.webp';
 };
 
 export const getBlogOGImage = (): string => {
-  return 'https://smartcalchub.com/og-blog.png';
+  return '/og-blog.png';
 };
 
 export const getDefaultOGImage = (): string => {
-  return 'https://smartcalchub.com/og-calculator.png';
+  return '/og-calculator.png';
 };

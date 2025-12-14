@@ -168,10 +168,17 @@ export const AIChatbot = () => {
       {isOpen && (
         <Card className="fixed bottom-0 right-0 md:bottom-6 md:right-6 z-50 w-full h-full md:w-96 md:h-[520px] md:max-h-[80vh] shadow-2xl animate-scale-in flex flex-col md:rounded-lg rounded-none">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4 bg-gradient-to-r from-primary to-primary-glow text-primary-foreground md:rounded-t-lg">
-            <CardTitle className="text-base md:text-lg font-semibold flex items-center gap-2">
-              <MessageCircle className="h-4 w-4 md:h-5 md:w-5" />
-              SmartCalc Assistant
-            </CardTitle>
+            <div className="flex items-center gap-2">
+              <CardTitle className="text-base md:text-lg font-semibold flex items-center gap-2">
+                <MessageCircle className="h-4 w-4 md:h-5 md:w-5" />
+                SmartCalc Assistant
+              </CardTitle>
+              {messages.length > 1 && (
+                <span className="text-xs bg-white/20 px-2 py-0.5 rounded-full">
+                  {messages.length} msgs
+                </span>
+              )}
+            </div>
             <div className="flex items-center gap-1">
               <Button
                 variant="ghost"

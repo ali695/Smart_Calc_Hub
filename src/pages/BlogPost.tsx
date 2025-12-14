@@ -4,12 +4,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { getBlogPost, blogPosts } from "@/data/blogPosts";
 import { SEOHead } from "@/components/SEOHead";
-import { getBlogOGImage, getCategoryOGImage } from "@/utils/ogImageMapping";
+import { getBlogOGImage, getBlogHeroImage } from "@/utils/ogImageMapping";
 import { RelatedBlogPosts } from "@/components/RelatedBlogPosts";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ReadingProgress } from "@/components/ReadingProgress";
 import { SocialShareButtons } from "@/components/SocialShareButtons";
-import { NewsletterSignup } from "@/components/NewsletterSignup";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -85,7 +84,7 @@ const BlogPost = () => {
           <div 
             className="absolute inset-0 bg-cover bg-center"
             style={{ 
-              backgroundImage: `url(${getCategoryOGImage(post.category.toLowerCase())})`,
+              backgroundImage: `url(${getBlogHeroImage(post.category)})`,
             }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
@@ -183,11 +182,6 @@ const BlogPost = () => {
                 title={post.title}
                 description={post.seoDescription}
               />
-            </div>
-
-            {/* Newsletter Signup */}
-            <div className="mt-8">
-              <NewsletterSignup />
             </div>
 
             <div className="mt-12 text-center">
