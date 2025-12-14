@@ -92,6 +92,12 @@ export const UserMenu = () => {
             History
           </Link>
         </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link to="/profile" className="cursor-pointer">
+            <Settings className="mr-2 h-4 w-4" />
+            Profile Settings
+          </Link>
+        </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer text-destructive">
           <LogOut className="mr-2 h-4 w-4" />
