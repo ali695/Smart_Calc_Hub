@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import { z } from "zod";
 import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
 import { Copy, Loader2 } from "lucide-react";
+import { CalculatorChart } from "@/components/CalculatorChart";
 
 const CalorieCalculator = () => {
   const [age, setAge] = useState("");
@@ -111,6 +112,10 @@ const CalorieCalculator = () => {
     <CalculatorLayout
       title="Calorie Calculator"
       description="Calculate your daily calorie needs for weight loss, maintenance, or gain"
+      seoTitle="Calorie Calculator - Daily Calorie Needs & TDEE | SmartCalc Hub"
+      seoDescription="Free calorie calculator to determine your daily calorie needs. Calculate TDEE, BMR, and calories for weight loss or muscle gain. Personalized nutrition guidance."
+      keywords="calorie calculator, tdee calculator, daily calorie needs, bmr calculator, weight loss calories, calorie deficit"
+      canonicalUrl="https://smartcalchub.com/calculator/calorie"
       category="health"
       calculatorId="calorie"
       howItWorks="This calculator estimates your daily calorie needs using the Mifflin-St Jeor equation to calculate BMR, then multiplies by your activity level to get Total Daily Energy Expenditure (TDEE). Based on your goal, it recommends calorie targets."
@@ -196,44 +201,55 @@ const CalorieCalculator = () => {
         </Button>
 
         {calories !== null && (
-          <div className="space-y-4 animate-fade-in">
-            <div className="p-6 bg-primary/10 rounded-lg">
-              <div className="flex items-center justify-between">
-                <div className="text-center flex-1">
-                  <p className="text-sm font-medium text-muted-foreground">Maintenance Calories</p>
-                  <p className="text-4xl font-bold text-primary">{calories} cal/day</p>
+          <>
+            <div className="space-y-4 animate-fade-in">
+              <div className="p-6 bg-primary/10 rounded-lg">
+                <div className="flex items-center justify-between">
+                  <div className="text-center flex-1">
+                    <p className="text-sm font-medium text-muted-foreground">Maintenance Calories</p>
+                    <p className="text-4xl font-bold text-primary">{calories} cal/day</p>
+                  </div>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => copyToClipboard(`${calories} calories/day`, "Maintenance Calories")}
+                  >
+                    <Copy className="h-4 w-4" />
+                  </Button>
                 </div>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  onClick={() => copyToClipboard(`${calories} calories/day`, "Maintenance Calories")}
-                >
-                  <Copy className="h-4 w-4" />
-                </Button>
+              </div>
+              
+              <div className="p-6 bg-muted/50 rounded-lg">
+                <div className="flex items-center justify-between">
+                  <div className="text-center flex-1">
+                    <p className="text-sm font-medium text-muted-foreground">Recommended for Your Goal</p>
+                    <p className="text-3xl font-bold">{goalCalories} cal/day</p>
+                    <p className="text-sm text-muted-foreground mt-2">
+                      {goal === "lose" && "To lose ~1 lb/week"}
+                      {goal === "maintain" && "To maintain current weight"}
+                      {goal === "gain" && "To gain ~1 lb/week"}
+                    </p>
+                  </div>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => copyToClipboard(`${goalCalories} calories/day`, "Target Calories")}
+                  >
+                    <Copy className="h-4 w-4" />
+                  </Button>
+                </div>
               </div>
             </div>
-            
-            <div className="p-6 bg-muted/50 rounded-lg">
-              <div className="flex items-center justify-between">
-                <div className="text-center flex-1">
-                  <p className="text-sm font-medium text-muted-foreground">Recommended for Your Goal</p>
-                  <p className="text-3xl font-bold">{goalCalories} cal/day</p>
-                  <p className="text-sm text-muted-foreground mt-2">
-                    {goal === "lose" && "To lose ~1 lb/week"}
-                    {goal === "maintain" && "To maintain current weight"}
-                    {goal === "gain" && "To gain ~1 lb/week"}
-                  </p>
-                </div>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  onClick={() => copyToClipboard(`${goalCalories} calories/day`, "Target Calories")}
-                >
-                  <Copy className="h-4 w-4" />
-                </Button>
-              </div>
-            </div>
-          </div>
+
+            <CalculatorChart
+              chartType="bar"
+              data={[
+                { name: "Maintenance", value: calories },
+                { name: "Your Goal", value: goalCalories || calories }
+              ]}
+              title="Daily Calorie Targets"
+            />
+          </>
         )}
       </div>
     </CalculatorLayout>

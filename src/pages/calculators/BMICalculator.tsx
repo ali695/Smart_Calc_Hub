@@ -10,6 +10,7 @@ import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
 import { usePrintCalculator } from "@/hooks/usePrintCalculator";
 import { Copy, Loader2, Printer } from "lucide-react";
 import { SchemaMarkup } from "@/components/SchemaMarkup";
+import { CalculatorChart } from "@/components/CalculatorChart";
 
 const BMICalculator = () => {
   const [height, setHeight] = useState("");
@@ -111,6 +112,10 @@ const BMICalculator = () => {
       <CalculatorLayout
       title="BMI Calculator"
       description="Calculate your Body Mass Index and check if you're in a healthy weight range"
+      seoTitle="BMI Calculator - Body Mass Index Calculator | SmartCalc Hub"
+      seoDescription="Free BMI calculator to check your Body Mass Index. Instant BMI calculation with weight and height. Find if you're underweight, normal, overweight, or obese. Accurate BMI ranges."
+      keywords="bmi calculator, body mass index, bmi chart, healthy weight, overweight, underweight, obesity calculator"
+      canonicalUrl="https://smartcalchub.com/calculator/bmi"
       category="health"
       calculatorId="bmi"
       howItWorks="The BMI calculator uses your height and weight to calculate your Body Mass Index. Simply enter your height in centimeters and weight in kilograms, and the calculator will instantly determine your BMI and category. BMI is calculated by dividing your weight in kilograms by the square of your height in meters."
@@ -162,41 +167,55 @@ const BMICalculator = () => {
         </Button>
 
         {bmi !== null && (
-          <div className="mt-6 p-6 bg-primary/10 rounded-lg space-y-4 animate-fade-in">
-            <div className="flex items-start justify-between">
-              <div className="flex-1">
-                <p className="text-sm font-medium text-muted-foreground">Your BMI</p>
-                <p className="text-5xl font-bold text-primary">{bmi}</p>
-                <p className="text-lg font-semibold mt-2">{category}</p>
+          <>
+            <div className="mt-6 p-6 bg-primary/10 rounded-lg space-y-4 animate-fade-in">
+              <div className="flex items-start justify-between">
+                <div className="flex-1">
+                  <p className="text-sm font-medium text-muted-foreground">Your BMI</p>
+                  <p className="text-5xl font-bold text-primary">{bmi}</p>
+                  <p className="text-lg font-semibold mt-2">{category}</p>
+                </div>
+                <div className="flex gap-2">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => copyToClipboard(`${bmi} - ${category}`, "BMI")}
+                    title="Copy to clipboard"
+                  >
+                    <Copy className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={handlePrint}
+                    title="Print results"
+                  >
+                    <Printer className="h-4 w-4" />
+                  </Button>
+                </div>
               </div>
-              <div className="flex gap-2">
-                <Button
-                  variant="outline"
-                  size="icon"
-                  onClick={() => copyToClipboard(`${bmi} - ${category}`, "BMI")}
-                  title="Copy to clipboard"
-                >
-                  <Copy className="h-4 w-4" />
-                </Button>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  onClick={handlePrint}
-                  title="Print results"
-                >
-                  <Printer className="h-4 w-4" />
-                </Button>
+              
+              <div className="mt-4 text-sm text-muted-foreground">
+                <p>BMI Categories:</p>
+                <p>Underweight: &lt; 18.5</p>
+                <p>Normal: 18.5 - 24.9</p>
+                <p>Overweight: 25 - 29.9</p>
+                <p>Obese: ≥ 30</p>
               </div>
             </div>
-            
-            <div className="mt-4 text-sm text-muted-foreground">
-              <p>BMI Categories:</p>
-              <p>Underweight: &lt; 18.5</p>
-              <p>Normal: 18.5 - 24.9</p>
-              <p>Overweight: 25 - 29.9</p>
-              <p>Obese: ≥ 30</p>
-            </div>
-          </div>
+
+            <CalculatorChart
+              chartType="bar"
+              data={[
+                { name: "Underweight", value: 18.5 },
+                { name: "Normal", value: 24.9 },
+                { name: "Overweight", value: 29.9 },
+                { name: "Obese", value: 35 },
+                { name: "Your BMI", value: bmi }
+              ]}
+              title="BMI Categories"
+            />
+          </>
         )}
       </div>
     </CalculatorLayout>
