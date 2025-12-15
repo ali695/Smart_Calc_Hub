@@ -200,15 +200,22 @@ export const AIInsightCard = ({
     }
   }, [isSimplified]);
 
-  // Show compact loading placeholder when results exist but AI is still loading
-  if (!results || Object.keys(results).length === 0) {
-    return null;
+  const hasResults = results && Object.keys(results).length > 0;
+
+  // Always show a placeholder row (even before first calculation)
+  if (!hasResults) {
+    return (
+      <div className="mt-4 flex items-center gap-2 text-sm text-muted-foreground/60 py-2 px-3 rounded-lg border border-dashed border-muted-foreground/20">
+        <Sparkles className="h-4 w-4" />
+        <span>AI Insight will appear after you calculate</span>
+      </div>
+    );
   }
 
   // Show inline loading indicator immediately after calculation
   if (isLoading && !insight) {
     return (
-      <div className="mt-4 flex items-center gap-2 text-sm text-muted-foreground animate-pulse">
+      <div className="mt-4 flex items-center gap-2 text-sm text-muted-foreground animate-pulse py-2 px-3 rounded-lg bg-primary/5">
         <Sparkles className="h-4 w-4 text-primary animate-spin" />
         <span>AI Insight loading…</span>
       </div>
