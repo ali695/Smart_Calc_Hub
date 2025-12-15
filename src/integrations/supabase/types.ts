@@ -14,6 +14,45 @@ export type Database = {
   }
   public: {
     Tables: {
+      ai_insights_cache: {
+        Row: {
+          calculator_slug: string
+          created_at: string
+          expires_at: string
+          id: string
+          inputs_hash: string
+          insight_text: string
+          module_icon: string
+          module_name: string
+          region: string
+          user_id: string | null
+        }
+        Insert: {
+          calculator_slug: string
+          created_at?: string
+          expires_at?: string
+          id?: string
+          inputs_hash: string
+          insight_text: string
+          module_icon: string
+          module_name: string
+          region?: string
+          user_id?: string | null
+        }
+        Update: {
+          calculator_slug?: string
+          created_at?: string
+          expires_at?: string
+          id?: string
+          inputs_hash?: string
+          insight_text?: string
+          module_icon?: string
+          module_name?: string
+          region?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       analytics_logs: {
         Row: {
           calculator_slug: string | null

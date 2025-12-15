@@ -408,12 +408,12 @@ export const calculators: CalculatorData[] = [
     seoDescription: "Calculate percentage increase or decrease between two values."
   },
   {
-    id: "mean-median-mode",
+    id: "average",
     title: "Mean, Median & Mode",
     description: "Statistical measures calculator",
     category: "math",
     icon: Sigma,
-    path: "/calculator/mean-median-mode",
+    path: "/calculator/average",
     seoTitle: "Mean Median Mode Calculator | SmartCalc Hub",
     seoDescription: "Calculate mean, median, and mode for any set of numbers."
   },
@@ -484,7 +484,7 @@ export const calculators: CalculatorData[] = [
     description: "Convert Joules, Calories, kWh, and more",
     category: "conversion",
     icon: Zap,
-    path: "/calculator/energy",
+    path: "/calculator/energy-converter",
     seoTitle: "Energy Unit Converter | SmartCalc Hub",
     seoDescription: "Convert between Joules, Calories, kWh, and other energy units."
   },
@@ -494,7 +494,7 @@ export const calculators: CalculatorData[] = [
     description: "Convert square feet, meters, acres, and more",
     category: "conversion",
     icon: Map,
-    path: "/calculator/area-unit",
+    path: "/calculator/area-converter",
     seoTitle: "Area Unit Converter | SmartCalc Hub",
     seoDescription: "Convert between square feet, square meters, acres, and hectares."
   },
@@ -514,7 +514,7 @@ export const calculators: CalculatorData[] = [
     description: "Convert bar, psi, kPa, and more",
     category: "conversion",
     icon: Gauge,
-    path: "/calculator/pressure",
+    path: "/calculator/pressure-converter",
     seoTitle: "Pressure Converter | SmartCalc Hub",
     seoDescription: "Convert between bar, psi, kPa, and other pressure units."
   },
