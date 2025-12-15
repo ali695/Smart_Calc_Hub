@@ -200,8 +200,19 @@ export const AIInsightCard = ({
     }
   }, [isSimplified]);
 
+  // Show compact loading placeholder when results exist but AI is still loading
   if (!results || Object.keys(results).length === 0) {
     return null;
+  }
+
+  // Show inline loading indicator immediately after calculation
+  if (isLoading && !insight) {
+    return (
+      <div className="mt-4 flex items-center gap-2 text-sm text-muted-foreground animate-pulse">
+        <Sparkles className="h-4 w-4 text-primary animate-spin" />
+        <span>AI Insight loading…</span>
+      </div>
+    );
   }
 
   const icon = getCategoryIcon(category.toLowerCase());
