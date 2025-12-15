@@ -5,6 +5,47 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
+// Validate request payload
+function validatePayload(body: unknown): { valid: boolean; error?: string; data?: { calculatorName: string; category: string; inputs: Record<string, unknown>; results: Record<string, unknown> } } {
+  if (!body || typeof body !== 'object') {
+    return { valid: false, error: 'Request body must be a JSON object' };
+  }
+  
+  const payload = body as Record<string, unknown>;
+  
+  if (!payload.calculatorName || typeof payload.calculatorName !== 'string') {
+    return { valid: false, error: 'calculatorName is required and must be a string' };
+  }
+  
+  if (!payload.category || typeof payload.category !== 'string') {
+    return { valid: false, error: 'category is required and must be a string' };
+  }
+  
+  if (!payload.inputs || typeof payload.inputs !== 'object') {
+    return { valid: false, error: 'inputs is required and must be an object' };
+  }
+  
+  if (!payload.results || typeof payload.results !== 'object') {
+    return { valid: false, error: 'results is required and must be an object' };
+  }
+  
+  // Sanitize calculator name (max 100 chars, alphanumeric and spaces only)
+  const sanitizedName = String(payload.calculatorName).slice(0, 100).replace(/[^a-zA-Z0-9\s\-]/g, '');
+  
+  // Normalize category
+  const normalizedCategory = String(payload.category).toLowerCase().trim();
+  
+  return {
+    valid: true,
+    data: {
+      calculatorName: sanitizedName,
+      category: normalizedCategory,
+      inputs: payload.inputs as Record<string, unknown>,
+      results: payload.results as Record<string, unknown>
+    }
+  };
+}
+
 // Simple in-memory rate limiter (per Deno instance)
 const rateLimits = new Map<string, { count: number; resetAt: number }>();
 
@@ -116,9 +157,12 @@ const getCategoryModule = (category: string): { name: string; icon: string } => 
     engineering: { name: "AI Engineering Consultant", icon: "⚙️" },
     crypto: { name: "AI Investment Analyst", icon: "₿" },
     conversion: { name: "AI Conversion Expert", icon: "🔄" },
+    tech: { name: "AI Tech Expert", icon: "💻" },
     utility: { name: "AI Assistant", icon: "✨" },
   };
-  return modules[category] || modules.utility;
+  // Normalize category lookup
+  const normalized = category.toLowerCase().trim();
+  return modules[normalized] || modules.utility;
 };
 
 serve(async (req) => {
@@ -140,8 +184,23 @@ serve(async (req) => {
   }
 
   try {
-    const { calculatorName, category, inputs, results } = await req.json();
-
+    const rawBody = await req.json();
+    const validation = validatePayload(rawBody);
+    
+    if (!validation.valid) {
+      console.error('Validation error:', validation.error);
+      return new Response(
+        JSON.stringify({ 
+          interpretation: "Unable to process this calculation. Please try again.",
+          moduleName: "AI Assistant",
+          moduleIcon: "✨",
+          error: true,
+        }),
+        { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
+      );
+    }
+    
+    const { calculatorName, category, inputs, results } = validation.data!;
     console.log('AI Interpret request:', { calculatorName, category, from: ip });
 
     const LOVABLE_API_KEY = Deno.env.get('LOVABLE_API_KEY');
