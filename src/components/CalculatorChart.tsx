@@ -41,23 +41,32 @@ interface CalculatorChartProps {
   showExport?: boolean;
 }
 
-// Category-specific colors
+// Category-specific colors (use semantic tokens; keep hex out of components)
 const getCategoryColors = (category: string) => {
   const colors: Record<string, { primary: string; secondary: string; tertiary: string }> = {
-    finance: { primary: "#10b981", secondary: "#34d399", tertiary: "#6ee7b7" },
-    business: { primary: "#3b82f6", secondary: "#60a5fa", tertiary: "#93c5fd" },
-    "real-estate": { primary: "#f97316", secondary: "#fb923c", tertiary: "#fdba74" },
-    health: { primary: "#ec4899", secondary: "#f472b6", tertiary: "#f9a8d4" },
-    math: { primary: "#06b6d4", secondary: "#22d3ee", tertiary: "#67e8f9" },
-    science: { primary: "#8b5cf6", secondary: "#a78bfa", tertiary: "#c4b5fd" },
-    engineering: { primary: "#64748b", secondary: "#94a3b8", tertiary: "#cbd5e1" },
-    crypto: { primary: "#eab308", secondary: "#facc15", tertiary: "#fde047" },
-    conversion: { primary: "#a855f7", secondary: "#c084fc", tertiary: "#d8b4fe" },
+    finance: { primary: "hsl(var(--primary))", secondary: "hsl(var(--accent))", tertiary: "hsl(var(--muted-foreground))" },
+    business: { primary: "hsl(var(--primary))", secondary: "hsl(var(--accent))", tertiary: "hsl(var(--muted-foreground))" },
+    "real-estate": { primary: "hsl(var(--primary))", secondary: "hsl(var(--accent))", tertiary: "hsl(var(--muted-foreground))" },
+    health: { primary: "hsl(var(--primary))", secondary: "hsl(var(--accent))", tertiary: "hsl(var(--muted-foreground))" },
+    math: { primary: "hsl(var(--primary))", secondary: "hsl(var(--accent))", tertiary: "hsl(var(--muted-foreground))" },
+    science: { primary: "hsl(var(--primary))", secondary: "hsl(var(--accent))", tertiary: "hsl(var(--muted-foreground))" },
+    engineering: { primary: "hsl(var(--primary))", secondary: "hsl(var(--accent))", tertiary: "hsl(var(--muted-foreground))" },
+    crypto: { primary: "hsl(var(--primary))", secondary: "hsl(var(--accent))", tertiary: "hsl(var(--muted-foreground))" },
+    conversion: { primary: "hsl(var(--primary))", secondary: "hsl(var(--accent))", tertiary: "hsl(var(--muted-foreground))" },
+    tech: { primary: "hsl(var(--primary))", secondary: "hsl(var(--accent))", tertiary: "hsl(var(--muted-foreground))" },
+    utility: { primary: "hsl(var(--primary))", secondary: "hsl(var(--accent))", tertiary: "hsl(var(--muted-foreground))" },
   };
-  return colors[category] || { primary: "#6366f1", secondary: "#818cf8", tertiary: "#a5b4fc" };
+  return colors[category] || colors.utility;
 };
 
-const PIE_COLORS = ["#10b981", "#3b82f6", "#f97316", "#ec4899", "#8b5cf6", "#eab308"];
+const PIE_COLORS = [
+  "hsl(var(--primary))",
+  "hsl(var(--accent))",
+  "hsl(var(--secondary))",
+  "hsl(var(--muted-foreground))",
+  "hsl(var(--primary))",
+  "hsl(var(--accent))",
+];
 
 export const CalculatorChart = ({
   title,
