@@ -10,7 +10,7 @@ import { usePrintCalculator } from "@/hooks/usePrintCalculator";
 import { Copy, Printer, Loader2 } from "lucide-react";
 
 const FractionCalculator = () => {
-  const { isCalculating, handleCalculation, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
   const [num1, setNum1] = useState("");
   const [den1, setDen1] = useState("");
@@ -62,6 +62,10 @@ const FractionCalculator = () => {
         fraction: `${simplified.num}/${simplified.den}`,
         decimal: (simplified.num / simplified.den).toFixed(4)
       });
+      updateAIInsight(
+        { fraction1: `${n1}/${d1}`, fraction2: `${n2}/${d2}`, operation },
+        { resultFraction: `${simplified.num}/${simplified.den}`, decimal: (simplified.num / simplified.den).toFixed(4) }
+      );
     }
   };
 

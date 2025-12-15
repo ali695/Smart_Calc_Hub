@@ -9,7 +9,7 @@ import { usePrintCalculator } from "@/hooks/usePrintCalculator";
 import { Copy, Loader2, Printer } from "lucide-react";
 
 const ExponentCalculator = () => {
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
   const [base, setBase] = useState("");
   const [exponent, setExponent] = useState("");
@@ -19,7 +19,12 @@ const ExponentCalculator = () => {
     const b = parseFloat(base);
     const e = parseFloat(exponent);
     if (!isNaN(b) && !isNaN(e)) {
-      setResult(Math.pow(b, e));
+      const power = Math.pow(b, e);
+      setResult(power);
+      updateAIInsight(
+        { base: b, exponent: e },
+        { result: power, scientific: power.toExponential(6), standard: power.toLocaleString('en-US', { maximumFractionDigits: 10 }) }
+      );
     }
   };
 

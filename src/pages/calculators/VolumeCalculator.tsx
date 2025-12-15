@@ -14,30 +14,39 @@ const VolumeCalculator = () => {
   const [value1, setValue1] = useState("");
   const [value2, setValue2] = useState("");
   const [result, setResult] = useState<number | null>(null);
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
     const v1 = parseFloat(value1);
     const v2 = parseFloat(value2);
     let volume = 0;
+    let formula = "";
 
     switch (shape) {
       case "cube":
         volume = v1 * v1 * v1;
+        formula = `${v1}³ = ${volume.toFixed(2)}`;
         break;
       case "sphere":
         volume = (4/3) * Math.PI * v1 * v1 * v1;
+        formula = `(4/3)π × ${v1}³ = ${volume.toFixed(2)}`;
         break;
       case "cylinder":
         volume = Math.PI * v1 * v1 * v2;
+        formula = `π × ${v1}² × ${v2} = ${volume.toFixed(2)}`;
         break;
       case "cone":
         volume = (1/3) * Math.PI * v1 * v1 * v2;
+        formula = `(1/3)π × ${v1}² × ${v2} = ${volume.toFixed(2)}`;
         break;
     }
 
     setResult(volume);
+    updateAIInsight(
+      { shape, value1: v1, value2: v2 },
+      { volume: volume.toFixed(2), formula }
+    );
   };
 
   const faqs = [

@@ -10,7 +10,7 @@ import { Copy, Loader2, Printer } from "lucide-react";
 import { SchemaMarkup } from "@/components/SchemaMarkup";
 
 const DiscountCalculator = () => {
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
   const [originalPrice, setOriginalPrice] = useState("");
   const [discountPercent, setDiscountPercent] = useState("");
@@ -24,6 +24,10 @@ const DiscountCalculator = () => {
       const savings = (price * discount) / 100;
       const finalPrice = price - savings;
       setResult({ finalPrice, savings });
+      updateAIInsight(
+        { originalPrice: price, discountPercent: discount },
+        { finalPrice: finalPrice.toFixed(2), savings: savings.toFixed(2), savingsPercent: discount + "%" }
+      );
     }
   };
 
