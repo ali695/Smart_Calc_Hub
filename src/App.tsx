@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { Layout } from "@/components/Layout";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { RegionProvider } from "@/contexts/RegionContext";
 import { useEffect } from "react";
 import { trackPageView } from "@/utils/analytics";
 import { ThemeProvider } from "./components/ThemeProvider";
@@ -175,6 +176,7 @@ const AnalyticsTracker = () => {
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <RegionProvider>
       <AuthProvider>
         <TooltipProvider>
           <Toaster />
@@ -337,6 +339,7 @@ const App = () => (
         </BrowserRouter>
       </TooltipProvider>
     </AuthProvider>
+      </RegionProvider>
     </ThemeProvider>
   </QueryClientProvider>
 );

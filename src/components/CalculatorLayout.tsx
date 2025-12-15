@@ -3,11 +3,13 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { ReactNode, useEffect, createContext, useContext, useState, useCallback } from "react";
 import { SEOHead } from "@/components/SEOHead";
 import { RelatedCalculators } from "@/components/RelatedCalculators";
-import { AIInsightPanel } from "@/components/AIInsightPanel";
+import { AIInsightCard } from "@/components/AIInsightCard";
 import { CalculatorActions } from "@/components/CalculatorActions";
+import { RegionToggle } from "@/components/RegionToggle";
 import { useRecentCalculators } from "@/hooks/useRecentCalculators";
 import { useRealtimeHistory } from "@/hooks/useRealtimeHistory";
 import { useAnalytics } from "@/hooks/useAnalytics";
+import { useRegion } from "@/contexts/RegionContext";
 import { getCategoryOGImage } from "@/utils/ogImageMapping";
 import { 
   Breadcrumb, 
@@ -76,6 +78,7 @@ export const CalculatorLayout = ({
   const { addRecentCalculator } = useRecentCalculators();
   const { saveHistory } = useRealtimeHistory();
   const { logPageView } = useAnalytics();
+  const { region, config } = useRegion();
   
   // State for AI Insight context
   const [aiInputs, setAiInputs] = useState<Record<string, any>>({});
@@ -303,7 +306,11 @@ export const CalculatorLayout = ({
           </Breadcrumb>
 
           {/* Calculator Card */}
-          <Card className="p-6 md:p-8 shadow-large animate-fade-in">
+          <Card className="p-6 md:p-8 shadow-large animate-fade-in relative">
+            {/* Region Toggle */}
+            <div className="absolute top-4 right-4">
+              <RegionToggle />
+            </div>
             <AIInsightContext.Provider value={{
               inputs: aiInputs,
               results: aiResults,
@@ -349,8 +356,8 @@ export const CalculatorLayout = ({
             </Accordion>
           </Card>
 
-          {/* AI Insight Panel */}
-          <AIInsightPanel 
+          {/* AI Insight Card */}
+          <AIInsightCard 
             calculatorName={title}
             category={category.toLowerCase()}
             inputs={aiInputs}

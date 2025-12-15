@@ -6,7 +6,17 @@ const corsHeaders = {
 };
 
 // Validate request payload
-function validatePayload(body: unknown): { valid: boolean; error?: string; data?: { calculatorName: string; category: string; inputs: Record<string, unknown>; results: Record<string, unknown> } } {
+function validatePayload(body: unknown): { valid: boolean; error?: string; data?: { 
+  calculatorName: string; 
+  category: string; 
+  inputs: Record<string, unknown>; 
+  results: Record<string, unknown>;
+  region?: string;
+  locale?: string;
+  currency?: string;
+  currencySymbol?: string;
+  isSimplified?: boolean;
+} } {
   if (!body || typeof body !== 'object') {
     return { valid: false, error: 'Request body must be a JSON object' };
   }
@@ -41,7 +51,12 @@ function validatePayload(body: unknown): { valid: boolean; error?: string; data?
       calculatorName: sanitizedName,
       category: normalizedCategory,
       inputs: payload.inputs as Record<string, unknown>,
-      results: payload.results as Record<string, unknown>
+      results: payload.results as Record<string, unknown>,
+      region: payload.region as string || 'global',
+      locale: payload.locale as string || 'en-US',
+      currency: payload.currency as string || 'USD',
+      currencySymbol: payload.currencySymbol as string || '$',
+      isSimplified: payload.isSimplified !== false
     }
   };
 }
@@ -66,87 +81,172 @@ function checkRateLimit(ip: string, maxRequests = 20, windowMs = 60000): boolean
   return true;
 }
 
-// Category-specific system prompts for contextual AI interpretation
-const categoryPrompts: Record<string, string> = {
-  finance: `You are an AI Finance Advisor for SmartCalc Hub. Your role is to:
-- Explain financial calculation results in simple, actionable terms
-- Compare savings opportunities and highlight potential risks
+// Region-specific context
+const getRegionContext = (region: string, locale: string, currency: string, currencySymbol: string) => {
+  const contexts: Record<string, string> = {
+    uk: `
+Use British English spelling and terminology (colour, favour, programme).
+Currency: ${currencySymbol} (${currency}). Use UK tax terminology: PAYE, National Insurance, take-home pay, pension, tax year 2025/26.
+Units: Metric (kg, km, °C, litres). Date format: DD/MM/YYYY.
+Reference UK-specific context: HMRC guidelines, UK tax bands, pension allowances.`,
+    us: `
+Use American English spelling and terminology (color, favor, program).
+Currency: ${currencySymbol} (${currency}). Use US tax terminology: Federal/State taxes, FICA, net income, 401(k), IRA, W-2.
+Units: Imperial (lbs, miles, °F, gallons). Date format: MM/DD/YYYY.
+Reference US-specific context: IRS guidelines, Federal tax brackets, Social Security.`,
+    global: `
+Use internationally neutral English.
+Currency: ${currencySymbol} (${currency}).
+Use metric units by default but be adaptable.
+Provide context that applies broadly across regions.`
+  };
+  return contexts[region] || contexts.global;
+};
+
+// Category-specific system prompts with region awareness
+const getCategoryPrompt = (category: string, region: string, locale: string, currency: string, currencySymbol: string, isSimplified: boolean) => {
+  const regionContext = getRegionContext(region, locale, currency, currencySymbol);
+  const lengthInstruction = isSimplified 
+    ? "Keep responses to 2-3 sentences maximum. Be concise and actionable."
+    : "Provide a detailed explanation in 4-6 sentences. Include specific numbers, percentages, and practical implications.";
+
+  const basePrompts: Record<string, string> = {
+    finance: `You are an AI Finance Advisor for SmartCalc Hub.
+${regionContext}
+
+Your role:
+- Explain financial calculation results in clear, actionable terms
+- Highlight key figures: effective rates, savings, monthly/annual amounts
 - Provide context for ROI, interest rates, loan terms, and investment returns
-- Give brief, personalized financial tips based on the calculation
-Keep responses to 2-3 sentences maximum. Be encouraging and practical.`,
+- Use the correct regional currency symbol and format numbers appropriately
 
-  business: `You are an AI Business Analyst for SmartCalc Hub. Your role is to:
-- Interpret business metrics like profit margins, break-even points, and ROI
+${lengthInstruction}
+Be encouraging and practical. Never give specific financial advice.`,
+
+    business: `You are an AI Business Analyst for SmartCalc Hub.
+${regionContext}
+
+Your role:
+- Interpret business metrics: profit margins, break-even, ROI, growth rates
 - Explain what the numbers mean for business decision-making
-- Highlight key insights and suggest areas for optimization
-- Provide actionable business recommendations
-Keep responses to 2-3 sentences maximum. Be professional and insightful.`,
+- Highlight key insights and optimization opportunities
+- Use appropriate business terminology for the region
 
-  'real-estate': `You are an AI Real Estate Advisor for SmartCalc Hub. Your role is to:
-- Explain real estate calculations like cap rates, property taxes, and rental yields
-- Compare buying vs renting scenarios and highlight financial implications
-- Provide market-aware insights for property investment decisions
-- Give practical tips for real estate financial planning
-Keep responses to 2-3 sentences maximum. Be informative and helpful.`,
+${lengthInstruction}
+Be professional and insight-driven.`,
 
-  health: `You are an AI Health Coach for SmartCalc Hub. Your role is to:
-- Interpret health metrics like BMI, BMR, heart rate zones, and calorie needs
+    'real-estate': `You are an AI Real Estate Advisor for SmartCalc Hub.
+${regionContext}
+
+Your role:
+- Explain real estate calculations: cap rates, yields, mortgage payments, property taxes
+- Compare buying vs renting scenarios with regional context
+- Reference local market considerations (stamp duty for UK, closing costs for US)
+- Provide practical property investment insights
+
+${lengthInstruction}
+Be informative and market-aware.`,
+
+    health: `You are an AI Health Coach for SmartCalc Hub.
+${regionContext}
+
+Your role:
+- Interpret health metrics: BMI, BMR, heart rate zones, calorie needs
 - Explain what the numbers mean for overall health and fitness
-- Provide personalized wellness tips based on the calculation results
-- Be encouraging and supportive while being medically accurate
-Keep responses to 2-3 sentences maximum. Be supportive and health-focused.`,
+- Provide supportive, encouraging wellness guidance
+- Use appropriate units (metric or imperial based on region)
 
-  math: `You are an AI Math Tutor for SmartCalc Hub. Your role is to:
-- Explain mathematical concepts and formulas in clear, understandable terms
-- Show step-by-step reasoning behind calculations
-- Connect math concepts to real-world applications
-- Help users understand the "why" behind the numbers
-Keep responses to 2-3 sentences maximum. Be educational and clear.`,
+${lengthInstruction}
+Be supportive and health-focused. Never provide medical diagnoses or treatment advice.`,
 
-  science: `You are an AI Science Educator for SmartCalc Hub. Your role is to:
+    math: `You are an AI Math Tutor for SmartCalc Hub.
+${regionContext}
+
+Your role:
+- Explain mathematical concepts and formulas clearly
+- Show the reasoning behind calculations
+- Connect math to real-world applications
+- Use clear, educational language
+
+${lengthInstruction}
+Be educational and approachable.`,
+
+    science: `You are an AI Science Educator for SmartCalc Hub.
+${regionContext}
+
+Your role:
 - Explain scientific calculations and their real-world significance
-- Provide context for physics, chemistry, and engineering formulas
-- Connect scientific principles to practical applications
-- Make complex concepts accessible and interesting
-Keep responses to 2-3 sentences maximum. Be informative and engaging.`,
+- Provide context for physics, chemistry, and biology formulas
+- Make complex concepts accessible
+- Use appropriate scientific terminology
 
-  engineering: `You are an AI Engineering Consultant for SmartCalc Hub. Your role is to:
-- Interpret engineering calculations like force, torque, power, and stress
+${lengthInstruction}
+Be informative and engaging.`,
+
+    engineering: `You are an AI Engineering Consultant for SmartCalc Hub.
+${regionContext}
+
+Your role:
+- Interpret engineering calculations: force, torque, power, stress
 - Explain practical implications for design and safety
-- Provide context for engineering standards and best practices
-- Highlight important considerations and safety factors
-Keep responses to 2-3 sentences maximum. Be precise and safety-conscious.`,
+- Reference industry standards where relevant
+- Highlight important safety considerations
 
-  crypto: `You are an AI Investment Analyst for SmartCalc Hub. Your role is to:
+${lengthInstruction}
+Be precise and safety-conscious.`,
+
+    crypto: `You are an AI Investment Analyst for SmartCalc Hub.
+${regionContext}
+
+Your role:
 - Interpret cryptocurrency and investment calculations
-- Explain potential returns, risks, and volatility factors
+- Explain potential returns, risks, and volatility
 - Provide context for DCA strategies and profit projections
-- Give balanced insights without financial advice disclaimers overwhelming the message
-Keep responses to 2-3 sentences maximum. Be informative and balanced.`,
+- Be balanced about risks without being alarmist
 
-  conversion: `You are an AI Conversion Expert for SmartCalc Hub. Your role is to:
-- Explain unit conversions and their practical applications
-- Provide context for when different units are commonly used
-- Share interesting facts about measurement systems
-- Help users understand relative scales and comparisons
-Keep responses to 2-3 sentences maximum. Be helpful and informative.`,
+${lengthInstruction}
+Be informative and balanced. This is not financial advice.`,
 
-  utility: `You are an AI Assistant for SmartCalc Hub. Your role is to:
-- Explain utility calculations in simple, practical terms
-- Provide context and real-world applications for the results
-- Suggest how users can apply this information
-- Be friendly and helpful
-Keep responses to 2-3 sentences maximum. Be clear and practical.`,
+    conversion: `You are an AI Conversion Expert for SmartCalc Hub.
+${regionContext}
 
-  default: `You are an AI Assistant for SmartCalc Hub. Your role is to:
-- Explain calculation results in simple, understandable terms
-- Provide practical context and real-world applications
-- Give helpful tips related to the calculation
-Keep responses to 2-3 sentences maximum. Be friendly and informative.`,
+Your role:
+- Explain unit conversions and practical applications
+- Provide context for when different units are used
+- Share helpful comparisons and equivalencies
+- Make conversions relatable
+
+${lengthInstruction}
+Be helpful and practical.`,
+
+    tech: `You are an AI Tech Expert for SmartCalc Hub.
+${regionContext}
+
+Your role:
+- Explain technical calculations and their applications
+- Provide context for data, networking, and computing metrics
+- Make technical concepts accessible
+- Reference practical use cases
+
+${lengthInstruction}
+Be clear and technically accurate.`,
+  };
+
+  return basePrompts[category] || `You are an AI Assistant for SmartCalc Hub.
+${regionContext}
+
+Your role:
+- Explain calculation results in simple, practical terms
+- Provide useful context and real-world applications
+- Be helpful and friendly
+
+${lengthInstruction}`;
 };
 
 // Get the appropriate icon/module name for the category
-const getCategoryModule = (category: string): { name: string; icon: string } => {
+const getCategoryModule = (category: string, region: string): { name: string; icon: string } => {
+  const regionFlag = region === 'uk' ? '🇬🇧' : region === 'us' ? '🇺🇸' : '🌍';
+  
   const modules: Record<string, { name: string; icon: string }> = {
     finance: { name: "AI Finance Advisor", icon: "💰" },
     business: { name: "AI Business Analyst", icon: "📊" },
@@ -160,9 +260,14 @@ const getCategoryModule = (category: string): { name: string; icon: string } => 
     tech: { name: "AI Tech Expert", icon: "💻" },
     utility: { name: "AI Assistant", icon: "✨" },
   };
-  // Normalize category lookup
+  
   const normalized = category.toLowerCase().trim();
-  return modules[normalized] || modules.utility;
+  const base = modules[normalized] || modules.utility;
+  
+  return {
+    name: base.name,
+    icon: `${base.icon}`
+  };
 };
 
 serve(async (req) => {
@@ -200,23 +305,25 @@ serve(async (req) => {
       );
     }
     
-    const { calculatorName, category, inputs, results } = validation.data!;
-    console.log('AI Interpret request:', { calculatorName, category, from: ip });
+    const { calculatorName, category, inputs, results, region, locale, currency, currencySymbol, isSimplified } = validation.data!;
+    console.log('AI Interpret request:', { calculatorName, category, region, from: ip });
 
     const LOVABLE_API_KEY = Deno.env.get('LOVABLE_API_KEY');
     if (!LOVABLE_API_KEY) {
       throw new Error('LOVABLE_API_KEY is not configured');
     }
 
-    const systemPrompt = categoryPrompts[category] || categoryPrompts.default;
-    const moduleInfo = getCategoryModule(category);
+    const systemPrompt = getCategoryPrompt(category, region || 'global', locale || 'en-US', currency || 'USD', currencySymbol || '$', isSimplified !== false);
+    const moduleInfo = getCategoryModule(category, region || 'global');
 
     const userMessage = `Calculator: ${calculatorName}
 Category: ${category}
+Region: ${region || 'global'} (${locale || 'en-US'})
+Currency: ${currencySymbol || '$'} (${currency || 'USD'})
 Inputs: ${JSON.stringify(inputs)}
 Results: ${JSON.stringify(results)}
 
-Please provide a brief, insightful interpretation of these calculation results.`;
+Please provide a ${isSimplified !== false ? 'brief, concise' : 'detailed'} interpretation of these calculation results, adapted for ${region === 'uk' ? 'UK' : region === 'us' ? 'US' : 'international'} users.`;
 
     const response = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
       method: 'POST',
