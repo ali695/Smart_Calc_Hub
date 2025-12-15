@@ -139,12 +139,18 @@ export const CalculatorLayout = ({
     crypto: "/crypto"
   };
   
+  // Build canonical URL
+  const baseUrl = "https://smartcalchub.com";
+  const currentPath = location.pathname;
+  const fullCanonicalUrl = canonicalUrl || `${baseUrl}${currentPath}`;
+  const ogImageUrl = ogImage || `${baseUrl}${getCategoryOGImage(category)}`;
+
   // Generate WebApplication structured data (replaces SoftwareApplication)
   const webApplicationSchema = {
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": title,
-    "url": canonicalUrl || (typeof window !== "undefined" ? window.location.href : ""),
+    "url": fullCanonicalUrl,
     "applicationCategory": categoryNames[category.toLowerCase()] || "UtilityApplication",
     "operatingSystem": "All",
     "description": seoDescription || description,
@@ -156,7 +162,7 @@ export const CalculatorLayout = ({
     "publisher": {
       "@type": "Organization",
       "name": "SmartCalc Hub",
-      "url": "https://smartcalchub.com"
+      "url": baseUrl
     },
     "aggregateRating": {
       "@type": "AggregateRating",
@@ -179,25 +185,25 @@ export const CalculatorLayout = ({
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": "https://smartcalchub.com"
+        "item": baseUrl
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": categoryNames[category.toLowerCase()] || "Calculators",
-        "item": `https://smartcalchub.com${categoryPaths[category.toLowerCase()] || "/categories"}`
+        "item": `${baseUrl}${categoryPaths[category.toLowerCase()] || "/categories"}`
       },
       {
         "@type": "ListItem",
         "position": 3,
         "name": title,
-        "item": canonicalUrl || (typeof window !== "undefined" ? window.location.href : "")
+        "item": fullCanonicalUrl
       }
     ]
   };
 
   // Generate FAQPage structured data
-  const faqStructuredData = {
+  const faqStructuredData = faqs.length > 0 ? {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": faqs.map((faq) => ({
@@ -208,7 +214,7 @@ export const CalculatorLayout = ({
         "text": faq.answer
       }
     }))
-  };
+  } : null;
 
   // Generate HowTo structured data for step-by-step instructions
   const howToStructuredData = {
@@ -216,7 +222,7 @@ export const CalculatorLayout = ({
     "@type": "HowTo",
     "name": `How to Use ${title}`,
     "description": description,
-    "image": getCategoryOGImage(category),
+    "image": ogImageUrl,
     "totalTime": "PT2M",
     "estimatedCost": {
       "@type": "MonetaryAmount",
@@ -233,21 +239,21 @@ export const CalculatorLayout = ({
         "position": 1,
         "name": "Enter Your Values",
         "text": "Input the required values into the calculator fields. Make sure all values are accurate for the best results.",
-        "image": getCategoryOGImage(category)
+        "image": ogImageUrl
       },
       {
         "@type": "HowToStep",
         "position": 2,
         "name": "Click Calculate",
         "text": "Press the calculate button to process your inputs and generate results based on the formula.",
-        "image": getCategoryOGImage(category)
+        "image": ogImageUrl
       },
       {
         "@type": "HowToStep",
         "position": 3,
         "name": "Review Results",
         "text": "Analyze the calculated results displayed. You can copy the results or print them for your records.",
-        "image": getCategoryOGImage(category)
+        "image": ogImageUrl
       }
     ]
   };
@@ -258,31 +264,37 @@ export const CalculatorLayout = ({
         title={seoTitle || `${title} | SmartCalc Hub`}
         description={seoDescription || description}
         keywords={keywords}
-        canonicalUrl={canonicalUrl}
+        canonicalUrl={fullCanonicalUrl}
         ogType="website"
-        ogImage={ogImage || getCategoryOGImage(category)}
+        ogImage={ogImageUrl}
         author="Ali Haider"
       />
       
       {/* WebApplication Schema */}
-      <script type="application/ld+json">
-        {JSON.stringify(webApplicationSchema)}
-      </script>
+      <script 
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webApplicationSchema) }}
+      />
       
-      {/* FAQPage Schema */}
-      <script type="application/ld+json">
-        {JSON.stringify(faqStructuredData)}
-      </script>
+      {/* FAQPage Schema - only render if FAQs exist */}
+      {faqStructuredData && (
+        <script 
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
+        />
+      )}
 
       {/* BreadcrumbList Schema */}
-      <script type="application/ld+json">
-        {JSON.stringify(breadcrumbStructuredData)}
-      </script>
+      <script 
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbStructuredData) }}
+      />
 
       {/* HowTo Schema */}
-      <script type="application/ld+json">
-        {JSON.stringify(howToStructuredData)}
-      </script>
+      <script 
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToStructuredData) }}
+      />
       
       <div className="min-h-screen">
         <PageHeader 
