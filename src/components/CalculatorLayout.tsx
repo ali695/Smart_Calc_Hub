@@ -332,20 +332,31 @@ export const CalculatorLayout = ({
                 calculatorSlug={calculatorSlug} 
               />
             </div>
-            <AIInsightContext.Provider value={{
-              inputs: aiInputs,
-              results: aiResults,
-              setInputs: setAiInputs,
-              setResults: setAiResults
-            }}>
+            <AIInsightContext.Provider
+              value={{
+                inputs: aiInputs,
+                results: aiResults,
+                setInputs: setAiInputs,
+                setResults: setAiResults,
+              }}
+            >
               {children}
-              
+
               {/* Calculator Actions - Favorites, Copy, Print, Share */}
               <CalculatorActions
                 calculatorSlug={calculatorSlug}
                 calculatorName={title}
                 results={aiResults}
                 inputs={aiInputs}
+              />
+
+              {/* AI Insight Card (inside Provider so hook can access context) */}
+              <AIInsightCard
+                calculatorName={title}
+                category={category.toLowerCase()}
+                inputs={aiInputs}
+                results={aiResults}
+                autoTrigger={true}
               />
             </AIInsightContext.Provider>
           </Card>
@@ -377,14 +388,6 @@ export const CalculatorLayout = ({
             </Accordion>
           </Card>
 
-          {/* AI Insight Card */}
-          <AIInsightCard 
-            calculatorName={title}
-            category={category.toLowerCase()}
-            inputs={aiInputs}
-            results={aiResults}
-            autoTrigger={true}
-          />
 
           {/* Related Calculators Section */}
           {category && (
