@@ -24,10 +24,11 @@ export const getBlogHeroImage = (category: string): string => {
     health: '/blog-hero-health.webp',
     math: '/blog-hero-math.webp',
     conversion: '/blog-hero-conversion.webp',
-    business: '/blog-hero-finance.webp',
-    utility: '/blog-hero-conversion.webp',
-    engineering: '/blog-hero-math.webp',
-    tech: '/blog-hero-math.webp',
+    business: '/blog-hero-business.webp',
+    utility: '/blog-hero-tech.webp',
+    engineering: '/blog-hero-engineering.webp',
+    tech: '/blog-hero-tech.webp',
+    science: '/blog-hero-science.webp',
   };
 
   return heroMap[category.toLowerCase()] || '/blog-hero-finance.webp';
