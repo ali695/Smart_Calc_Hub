@@ -4,12 +4,19 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { CalculatorChart, generateBreakdownData } from "@/components/CalculatorChart";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
+import { usePrintCalculator } from "@/hooks/usePrintCalculator";
 
 const EMICalculator = () => {
   const [principal, setPrincipal] = useState("");
   const [rate, setRate] = useState("");
   const [tenure, setTenure] = useState("");
   const [result, setResult] = useState<{ emi: number; totalPayment: number; totalInterest: number } | null>(null);
+  const [chartData, setChartData] = useState<any[]>([]);
+
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
+  const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
     const p = parseFloat(principal);
@@ -21,6 +28,27 @@ const EMICalculator = () => {
       const totalPayment = emi * n;
       const totalInterest = totalPayment - p;
       setResult({ emi, totalPayment, totalInterest });
+
+      // Generate chart data for breakdown
+      setChartData(generateBreakdownData({
+        "Principal": p,
+        "Interest": totalInterest
+      }));
+
+      // Update AI insight
+      updateAIInsight(
+        {
+          loanAmount: p,
+          annualInterestRate: parseFloat(rate),
+          tenureYears: parseFloat(tenure)
+        },
+        {
+          monthlyEMI: emi.toFixed(2),
+          totalPayment: totalPayment.toFixed(2),
+          totalInterest: totalInterest.toFixed(2),
+          interestPercentage: ((totalInterest / p) * 100).toFixed(1)
+        }
+      );
     }
   };
 
@@ -64,6 +92,7 @@ const EMICalculator = () => {
               type="number"
               value={principal}
               onChange={(e) => setPrincipal(e.target.value)}
+              onKeyPress={(e) => handleKeyPress(e, calculate)}
               placeholder="e.g., 50000"
             />
           </div>
@@ -74,6 +103,7 @@ const EMICalculator = () => {
               type="number"
               value={rate}
               onChange={(e) => setRate(e.target.value)}
+              onKeyPress={(e) => handleKeyPress(e, calculate)}
               placeholder="e.g., 7.5"
               step="0.1"
             />
@@ -85,46 +115,64 @@ const EMICalculator = () => {
               type="number"
               value={tenure}
               onChange={(e) => setTenure(e.target.value)}
+              onKeyPress={(e) => handleKeyPress(e, calculate)}
               placeholder="e.g., 5"
             />
           </div>
         </div>
 
         <Button 
-          onClick={calculate} 
+          onClick={() => handleCalculation(calculate)} 
+          disabled={isCalculating}
           className="w-full bg-gradient-to-r from-primary to-primary-accent hover:shadow-glow transition-all duration-300"
           size="lg"
+          type="button"
         >
-          Calculate EMI
+          {isCalculating ? "Calculating..." : "Calculate EMI"}
         </Button>
 
         {result && (
-          <Card className="p-6 bg-gradient-to-br from-primary/10 to-primary-accent/10 border-primary hover:scale-[1.02] transition-all duration-300 animate-fade-in">
-            <div className="space-y-4">
-              <div className="text-center">
-                <p className="text-sm font-medium text-muted-foreground mb-2">Monthly EMI</p>
-                <p className="text-4xl font-bold bg-gradient-to-r from-primary to-primary-accent bg-clip-text text-transparent">
-                  ${result.emi.toFixed(2)}
-                </p>
+          <>
+            <Card className="p-6 bg-gradient-to-br from-primary/10 to-primary-accent/10 border-primary hover:scale-[1.02] transition-all duration-300 animate-fade-in">
+              <div className="space-y-4">
+                <div 
+                  className="text-center cursor-pointer"
+                  onClick={() => copyToClipboard(`$${result.emi.toFixed(2)}`, "Monthly EMI")}
+                >
+                  <p className="text-sm font-medium text-muted-foreground mb-2">Monthly EMI</p>
+                  <p className="text-4xl font-bold bg-gradient-to-r from-primary to-primary-accent bg-clip-text text-transparent">
+                    ${result.emi.toFixed(2)}
+                  </p>
+                </div>
+                <div className="pt-4 border-t border-border/50">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Principal Amount:</span>
+                    <span className="font-semibold">${parseFloat(principal).toFixed(2)}</span>
+                  </div>
+                  <div className="flex justify-between text-sm mt-2">
+                    <span className="text-muted-foreground">Total Interest:</span>
+                    <span className="font-semibold">${result.totalInterest.toFixed(2)}</span>
+                  </div>
+                  <div className="flex justify-between text-sm mt-2 pt-2 border-t border-border/50">
+                    <span className="text-muted-foreground font-semibold">Total Payment:</span>
+                    <span className="font-bold text-lg bg-gradient-to-r from-primary to-primary-accent bg-clip-text text-transparent">
+                      ${result.totalPayment.toFixed(2)}
+                    </span>
+                  </div>
+                </div>
               </div>
-              <div className="pt-4 border-t border-border/50">
-                <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">Principal Amount:</span>
-                  <span className="font-semibold">${parseFloat(principal).toFixed(2)}</span>
-                </div>
-                <div className="flex justify-between text-sm mt-2">
-                  <span className="text-muted-foreground">Total Interest:</span>
-                  <span className="font-semibold">${result.totalInterest.toFixed(2)}</span>
-                </div>
-                <div className="flex justify-between text-sm mt-2 pt-2 border-t border-border/50">
-                  <span className="text-muted-foreground font-semibold">Total Payment:</span>
-                  <span className="font-bold text-lg bg-gradient-to-r from-primary to-primary-accent bg-clip-text text-transparent">
-                    ${result.totalPayment.toFixed(2)}
-                  </span>
-                </div>
-              </div>
-            </div>
-          </Card>
+            </Card>
+
+            {chartData.length > 0 && (
+              <CalculatorChart
+                data={chartData}
+                chartType="pie"
+                title="Loan Breakdown"
+                category="finance"
+                valueFormatter={(v) => `$${v.toLocaleString()}`}
+              />
+            )}
+          </>
         )}
       </div>
     </CalculatorLayout>
