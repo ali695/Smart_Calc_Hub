@@ -25,7 +25,8 @@ const K401Calculator = () => {
     investmentGrowth: number;
   } | null>(null);
 
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } =
+    useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
@@ -41,9 +42,8 @@ const K401Calculator = () => {
     if (!salaryVal || !age || !retAge || age >= retAge) return;
 
     const years = retAge - age;
-    
-    // Calculate annual contributions
-    const annualContribution = Math.min(salaryVal * contribPct, 23000); // 2024 limit
+
+    const annualContribution = Math.min(salaryVal * contribPct, 23000);
     const matchableContribution = Math.min(salaryVal * contribPct, salaryVal * matchLimitPct);
     const annualEmployerMatch = matchableContribution * matchPct;
 
@@ -52,7 +52,6 @@ const K401Calculator = () => {
     const monthlyReturn = returnRate / 12;
     const months = years * 12;
 
-    // Calculate future value with monthly compounding
     let futureValue = balance;
     for (let i = 0; i < months; i++) {
       futureValue = (futureValue + monthlyContrib) * (1 + monthlyReturn);
@@ -66,7 +65,13 @@ const K401Calculator = () => {
     setResult(resultData);
 
     updateAIInsight(
-      { salary: salaryVal, contributionPercent: contribPct * 100, employerMatch: matchPct * 100, currentAge: age, retirementAge: retAge },
+      {
+        salary: salaryVal,
+        contributionPercent: contribPct * 100,
+        employerMatch: matchPct * 100,
+        currentAge: age,
+        retirementAge: retAge,
+      },
       { futureValue, totalContributions, employerContributions, investmentGrowth }
     );
   };
@@ -74,16 +79,19 @@ const K401Calculator = () => {
   const faqs = [
     {
       question: "What is a 401(k)?",
-      answer: "A 401(k) is an employer-sponsored retirement plan that lets you save and invest part of your paycheck before taxes are taken out. Many employers match a portion of your contributions."
+      answer:
+        "A 401(k) is an employer-sponsored retirement plan that lets you save and invest part of your paycheck before taxes are taken out. Many employers match a portion of your contributions.",
     },
     {
       question: "What's the 2024 401(k) contribution limit?",
-      answer: "For 2024, you can contribute up to $23,000 ($30,500 if you're 50 or older with catch-up contributions). Employer matches don't count toward your limit."
+      answer:
+        "For 2024, you can contribute up to $23,000 ($30,500 if you're 50 or older with catch-up contributions). Employer matches don't count toward your limit.",
     },
     {
       question: "What is an employer match?",
-      answer: "An employer match is when your company contributes to your 401(k) based on how much you contribute. A common formula is 50% match up to 6% of salary - essentially free money!"
-    }
+      answer:
+        "An employer match is when your company contributes to your 401(k) based on how much you contribute. A common formula is 50% match up to 6% of salary.",
+    },
   ];
 
   return (
@@ -93,7 +101,7 @@ const K401Calculator = () => {
         data={{
           name: "401(k) Calculator",
           description: "Calculate 401(k) retirement savings growth with employer matching",
-          url: "https://smartcalchub.com/calculator/401k"
+          url: "https://smartcalchub.com/calculator/401k",
         }}
       />
       <CalculatorLayout
@@ -105,7 +113,7 @@ const K401Calculator = () => {
         formula="FV = PV(1+r)^n + (Employee + Employer) × [((1+r)^n - 1) / r]"
         faqs={faqs}
       >
-        <div className="space-y-6" ref={printRef}>
+        <div className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <Label htmlFor="balance">Current 401(k) Balance ($)</Label>
@@ -227,7 +235,10 @@ const K401Calculator = () => {
                   <div>
                     <p className="text-sm text-muted-foreground">Projected 401(k) Balance</p>
                     <p className="text-3xl font-bold text-primary">
-                      ${result.futureValue.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                      ${result.futureValue.toLocaleString("en-US", {
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0,
+                      })}
                     </p>
                   </div>
                   <div className="flex gap-2">
@@ -238,7 +249,30 @@ const K401Calculator = () => {
                     >
                       <Copy className="h-4 w-4" />
                     </Button>
-                    <Button variant="outline" size="icon" onClick={handlePrint}>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={() =>
+                        printCalculation({
+                          title: "401(k) Retirement Calculator",
+                          inputs: [
+                            { label: "Salary", value: `$${salary}` },
+                            { label: "Your Contribution", value: `${contributionPercent}%` },
+                            { label: "Employer Match", value: `${employerMatch}% up to ${matchLimit}%` },
+                            { label: "Current Age", value: currentAge },
+                            { label: "Retirement Age", value: retirementAge },
+                            { label: "Expected Return", value: `${expectedReturn}%` },
+                          ],
+                          results: [
+                            { label: "Projected Balance", value: `$${result.futureValue.toFixed(0)}` },
+                            { label: "Your Contributions", value: `$${result.totalContributions.toFixed(0)}` },
+                            { label: "Employer Contributions", value: `$${result.employerContributions.toFixed(0)}` },
+                            { label: "Investment Growth", value: `$${result.investmentGrowth.toFixed(0)}` },
+                          ],
+                          formula: "FV = PV(1+r)^n + (Employee + Employer) × [((1+r)^n - 1) / r]",
+                        })
+                      }
+                    >
                       <Printer className="h-4 w-4" />
                     </Button>
                   </div>
@@ -248,19 +282,28 @@ const K401Calculator = () => {
                   <div>
                     <p className="text-sm text-muted-foreground">Your Contributions</p>
                     <p className="text-lg font-semibold">
-                      ${result.totalContributions.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                      ${result.totalContributions.toLocaleString("en-US", {
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0,
+                      })}
                     </p>
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">Employer Match</p>
                     <p className="text-lg font-semibold text-green-600">
-                      ${result.employerContributions.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                      ${result.employerContributions.toLocaleString("en-US", {
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0,
+                      })}
                     </p>
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">Investment Growth</p>
                     <p className="text-lg font-semibold text-primary">
-                      ${result.investmentGrowth.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                      ${result.investmentGrowth.toLocaleString("en-US", {
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0,
+                      })}
                     </p>
                   </div>
                 </div>

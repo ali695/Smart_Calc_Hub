@@ -22,7 +22,8 @@ const RothIRACalculator = () => {
     taxSavings: number;
   } | null>(null);
 
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } =
+    useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
@@ -39,7 +40,6 @@ const RothIRACalculator = () => {
     const months = years * 12;
     const monthlyContribution = contribution / 12;
 
-    // Calculate future value with monthly compounding
     let futureValue = balance;
     for (let i = 0; i < months; i++) {
       futureValue = (futureValue + monthlyContribution) * (1 + monthlyReturn);
@@ -47,15 +47,19 @@ const RothIRACalculator = () => {
 
     const totalContributions = contribution * years + balance;
     const totalGrowth = futureValue - totalContributions;
-    
-    // Estimate tax savings (assuming 22% marginal rate at retirement)
     const taxSavings = totalGrowth * 0.22;
 
     const resultData = { futureValue, totalContributions, totalGrowth, taxSavings };
     setResult(resultData);
 
     updateAIInsight(
-      { currentBalance: balance, annualContribution: contribution, currentAge: age, retirementAge: retAge, expectedReturn: returnRate * 100 },
+      {
+        currentBalance: balance,
+        annualContribution: contribution,
+        currentAge: age,
+        retirementAge: retAge,
+        expectedReturn: returnRate * 100,
+      },
       { futureValue, totalContributions, totalGrowth, taxSavings }
     );
   };
@@ -63,16 +67,19 @@ const RothIRACalculator = () => {
   const faqs = [
     {
       question: "What is a Roth IRA?",
-      answer: "A Roth IRA is a retirement account where you contribute after-tax money, but all qualified withdrawals in retirement are completely tax-free, including investment gains."
+      answer:
+        "A Roth IRA is a retirement account where you contribute after-tax money, but all qualified withdrawals in retirement are completely tax-free, including investment gains.",
     },
     {
       question: "What's the 2024 Roth IRA contribution limit?",
-      answer: "For 2024, you can contribute up to $7,000 per year ($8,000 if you're 50 or older). Income limits apply for contribution eligibility."
+      answer:
+        "For 2024, you can contribute up to $7,000 per year ($8,000 if you're 50 or older). Income limits apply for contribution eligibility.",
     },
     {
       question: "How does Roth IRA compare to Traditional IRA?",
-      answer: "Roth IRA contributions are made with after-tax dollars but grow and withdraw tax-free. Traditional IRA contributions may be tax-deductible, but withdrawals are taxed as income."
-    }
+      answer:
+        "Roth IRA contributions are made with after-tax dollars but grow and withdraw tax-free. Traditional IRA contributions may be tax-deductible, but withdrawals are taxed as income.",
+    },
   ];
 
   return (
@@ -82,7 +89,7 @@ const RothIRACalculator = () => {
         data={{
           name: "Roth IRA Calculator",
           description: "Calculate Roth IRA growth and tax-free retirement savings",
-          url: "https://smartcalchub.com/calculator/roth-ira"
+          url: "https://smartcalchub.com/calculator/roth-ira",
         }}
       />
       <CalculatorLayout
@@ -94,7 +101,7 @@ const RothIRACalculator = () => {
         formula="FV = PV(1+r)^n + PMT × [((1+r)^n - 1) / r]"
         faqs={faqs}
       >
-        <div className="space-y-6" ref={printRef}>
+        <div className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <Label htmlFor="balance">Current Balance ($)</Label>
@@ -180,7 +187,10 @@ const RothIRACalculator = () => {
                   <div>
                     <p className="text-sm text-muted-foreground">Future Value at Retirement</p>
                     <p className="text-3xl font-bold text-primary">
-                      ${result.futureValue.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                      ${result.futureValue.toLocaleString("en-US", {
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0,
+                      })}
                     </p>
                   </div>
                   <div className="flex gap-2">
@@ -191,7 +201,28 @@ const RothIRACalculator = () => {
                     >
                       <Copy className="h-4 w-4" />
                     </Button>
-                    <Button variant="outline" size="icon" onClick={handlePrint}>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={() =>
+                        printCalculation({
+                          title: "Roth IRA Calculator",
+                          inputs: [
+                            { label: "Current Balance", value: `$${currentBalance || 0}` },
+                            { label: "Annual Contribution", value: `$${annualContribution}` },
+                            { label: "Current Age", value: currentAge },
+                            { label: "Retirement Age", value: retirementAge },
+                            { label: "Expected Return", value: `${expectedReturn}%` },
+                          ],
+                          results: [
+                            { label: "Future Value", value: `$${result.futureValue.toFixed(0)}` },
+                            { label: "Total Contributions", value: `$${result.totalContributions.toFixed(0)}` },
+                            { label: "Tax-Free Growth", value: `$${result.totalGrowth.toFixed(0)}` },
+                          ],
+                          formula: "FV = PV(1+r)^n + PMT × [((1+r)^n - 1) / r]",
+                        })
+                      }
+                    >
                       <Printer className="h-4 w-4" />
                     </Button>
                   </div>
@@ -201,13 +232,19 @@ const RothIRACalculator = () => {
                   <div>
                     <p className="text-sm text-muted-foreground">Total Contributions</p>
                     <p className="text-xl font-semibold">
-                      ${result.totalContributions.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                      ${result.totalContributions.toLocaleString("en-US", {
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0,
+                      })}
                     </p>
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">Tax-Free Growth</p>
                     <p className="text-xl font-semibold text-green-600">
-                      ${result.totalGrowth.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                      ${result.totalGrowth.toLocaleString("en-US", {
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0,
+                      })}
                     </p>
                   </div>
                 </div>
@@ -215,7 +252,10 @@ const RothIRACalculator = () => {
                 <div className="pt-2 border-t">
                   <p className="text-sm text-muted-foreground">Estimated Tax Savings vs. Taxable Account</p>
                   <p className="text-xl font-semibold text-green-600">
-                    ~${result.taxSavings.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                    ~${result.taxSavings.toLocaleString("en-US", {
+                      minimumFractionDigits: 0,
+                      maximumFractionDigits: 0,
+                    })}
                   </p>
                 </div>
               </CardContent>

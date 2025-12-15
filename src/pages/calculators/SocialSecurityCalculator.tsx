@@ -20,7 +20,8 @@ const SocialSecurityCalculator = () => {
     adjustmentPercent: number;
   } | null>(null);
 
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } =
+    useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
@@ -28,43 +29,39 @@ const SocialSecurityCalculator = () => {
     const age = parseInt(retirementAge);
     if (!earnings || earnings <= 0) return;
 
-    // Simplified PIA calculation using 2024 bend points
     const bendPoint1 = 1174;
     const bendPoint2 = 7078;
 
     let pia = 0;
     if (earnings <= bendPoint1) {
-      pia = earnings * 0.90;
+      pia = earnings * 0.9;
     } else if (earnings <= bendPoint2) {
-      pia = (bendPoint1 * 0.90) + ((earnings - bendPoint1) * 0.32);
+      pia = bendPoint1 * 0.9 + (earnings - bendPoint1) * 0.32;
     } else {
-      pia = (bendPoint1 * 0.90) + ((bendPoint2 - bendPoint1) * 0.32) + ((earnings - bendPoint2) * 0.15);
+      pia = bendPoint1 * 0.9 + (bendPoint2 - bendPoint1) * 0.32 + (earnings - bendPoint2) * 0.15;
     }
 
-    // Apply age adjustment
     const fullRetirementAge = 67;
     let adjustmentPercent = 0;
     let adjustedBenefit = pia;
 
     if (age < fullRetirementAge) {
-      // Reduction for early retirement
       const monthsEarly = (fullRetirementAge - age) * 12;
       if (monthsEarly <= 36) {
-        adjustmentPercent = monthsEarly * (5/9);
+        adjustmentPercent = monthsEarly * (5 / 9);
       } else {
-        adjustmentPercent = 36 * (5/9) + (monthsEarly - 36) * (5/12);
+        adjustmentPercent = 36 * (5 / 9) + (monthsEarly - 36) * (5 / 12);
       }
       adjustedBenefit = pia * (1 - adjustmentPercent / 100);
     } else if (age > fullRetirementAge) {
-      // Delayed retirement credits
       const monthsDelayed = Math.min((age - fullRetirementAge) * 12, 36);
-      adjustmentPercent = monthsDelayed * (2/3);
+      adjustmentPercent = monthsDelayed * (2 / 3);
       adjustedBenefit = pia * (1 + adjustmentPercent / 100);
     }
 
     const monthlyBenefit = Math.round(adjustedBenefit);
     const annualBenefit = monthlyBenefit * 12;
-    const lifeExpectancy = 85; // Average life expectancy
+    const lifeExpectancy = 85;
     const yearsReceiving = lifeExpectancy - age;
     const lifetimeBenefit = annualBenefit * yearsReceiving;
 
@@ -80,16 +77,19 @@ const SocialSecurityCalculator = () => {
   const faqs = [
     {
       question: "How is Social Security calculated?",
-      answer: "Benefits are based on your 35 highest-earning years, adjusted for inflation. The formula applies different percentages to portions of your average monthly earnings."
+      answer:
+        "Benefits are based on your 35 highest-earning years, adjusted for inflation. The formula applies different percentages to portions of your average monthly earnings.",
     },
     {
       question: "What is full retirement age?",
-      answer: "For people born in 1960 or later, full retirement age is 67. You can claim as early as 62 with reduced benefits, or delay until 70 for increased benefits."
+      answer:
+        "For people born in 1960 or later, full retirement age is 67. You can claim as early as 62 with reduced benefits, or delay until 70 for increased benefits.",
     },
     {
       question: "How much does early retirement reduce benefits?",
-      answer: "Claiming at 62 instead of 67 reduces benefits by about 30%. Delaying until 70 increases benefits by about 24% (8% per year after full retirement age)."
-    }
+      answer:
+        "Claiming at 62 instead of 67 reduces benefits by about 30%. Delaying until 70 increases benefits by about 24% (8% per year after full retirement age).",
+    },
   ];
 
   return (
@@ -99,7 +99,7 @@ const SocialSecurityCalculator = () => {
         data={{
           name: "US Social Security Benefits Estimator",
           description: "Estimate your Social Security retirement benefits based on earnings history",
-          url: "https://smartcalchub.com/calculator/social-security"
+          url: "https://smartcalchub.com/calculator/social-security",
         }}
       />
       <CalculatorLayout
@@ -111,7 +111,7 @@ const SocialSecurityCalculator = () => {
         formula="PIA = 90% of first $1,174 + 32% of $1,174-$7,078 + 15% above $7,078"
         faqs={faqs}
       >
-        <div className="space-y-6" ref={printRef}>
+        <div className="space-y-6">
           <div>
             <Label htmlFor="earnings">Average Monthly Indexed Earnings ($)</Label>
             <Input
@@ -171,9 +171,7 @@ const SocialSecurityCalculator = () => {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm text-muted-foreground">Monthly Benefit</p>
-                    <p className="text-3xl font-bold text-primary">
-                      ${result.monthlyBenefit.toLocaleString()}
-                    </p>
+                    <p className="text-3xl font-bold text-primary">${result.monthlyBenefit.toLocaleString()}</p>
                   </div>
                   <div className="flex gap-2">
                     <Button
@@ -183,7 +181,26 @@ const SocialSecurityCalculator = () => {
                     >
                       <Copy className="h-4 w-4" />
                     </Button>
-                    <Button variant="outline" size="icon" onClick={handlePrint}>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={() =>
+                        printCalculation({
+                          title: "US Social Security Benefits Estimator",
+                          inputs: [
+                            { label: "Average Monthly Earnings (AIME)", value: `$${averageEarnings}` },
+                            { label: "Retirement Age", value: retirementAge },
+                          ],
+                          results: [
+                            { label: "Monthly Benefit", value: `$${result.monthlyBenefit}` },
+                            { label: "Annual Benefit", value: `$${result.annualBenefit}` },
+                            { label: "Lifetime Benefits", value: `$${result.lifetimeBenefit}` },
+                          ],
+                          formula:
+                            "PIA = 90% of first $1,174 + 32% of $1,174-$7,078 + 15% above $7,078",
+                        })
+                      }
+                    >
                       <Printer className="h-4 w-4" />
                     </Button>
                   </div>
@@ -197,16 +214,15 @@ const SocialSecurityCalculator = () => {
                   <div>
                     <p className="text-sm text-muted-foreground">Adjustment</p>
                     <p className="text-xl font-semibold">
-                      {result.adjustmentPercent > 0 ? "+" : ""}{result.adjustmentPercent.toFixed(1)}%
+                      {result.adjustmentPercent > 0 ? "+" : ""}
+                      {result.adjustmentPercent.toFixed(1)}%
                     </p>
                   </div>
                 </div>
 
                 <div className="pt-2 border-t">
                   <p className="text-sm text-muted-foreground">Estimated Lifetime Benefits (to age 85)</p>
-                  <p className="text-xl font-semibold text-primary">
-                    ${result.lifetimeBenefit.toLocaleString()}
-                  </p>
+                  <p className="text-xl font-semibold text-primary">${result.lifetimeBenefit.toLocaleString()}</p>
                 </div>
               </CardContent>
             </Card>
