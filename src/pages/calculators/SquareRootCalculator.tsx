@@ -11,13 +11,18 @@ import { Copy, Loader2, Printer } from "lucide-react";
 const SquareRootCalculator = () => {
   const [number, setNumber] = useState("");
   const [result, setResult] = useState<number | null>(null);
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
     const n = parseFloat(number);
     if (n >= 0) {
-      setResult(Math.sqrt(n));
+      const sqrt = Math.sqrt(n);
+      setResult(sqrt);
+      updateAIInsight(
+        { number: n },
+        { squareRoot: sqrt.toFixed(6), verification: `${sqrt.toFixed(6)} × ${sqrt.toFixed(6)} = ${(sqrt * sqrt).toFixed(6)}` }
+      );
     }
   };
 

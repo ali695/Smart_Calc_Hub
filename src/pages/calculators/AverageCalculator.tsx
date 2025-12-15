@@ -9,7 +9,7 @@ import { usePrintCalculator } from "@/hooks/usePrintCalculator";
 import { Copy, Printer, Loader2 } from "lucide-react";
 
 const AverageCalculator = () => {
-  const { isCalculating, handleCalculation, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
   const [numbers, setNumbers] = useState("");
   const [mean, setMean] = useState<number | null>(null);
@@ -21,18 +21,26 @@ const AverageCalculator = () => {
     
     if (nums.length > 0) {
       const avg = nums.reduce((a, b) => a + b, 0) / nums.length;
-      setMean(parseFloat(avg.toFixed(2)));
+      const meanVal = parseFloat(avg.toFixed(2));
+      setMean(meanVal);
       
       const sorted = [...nums].sort((a, b) => a - b);
       const mid = Math.floor(sorted.length / 2);
       const med = sorted.length % 2 === 0 ? (sorted[mid - 1] + sorted[mid]) / 2 : sorted[mid];
-      setMedian(parseFloat(med.toFixed(2)));
+      const medianVal = parseFloat(med.toFixed(2));
+      setMedian(medianVal);
       
       const frequency: {[key: number]: number} = {};
       nums.forEach(n => frequency[n] = (frequency[n] || 0) + 1);
       const maxFreq = Math.max(...Object.values(frequency));
       const modes = Object.keys(frequency).filter(k => frequency[parseFloat(k)] === maxFreq);
-      setMode(maxFreq > 1 ? modes.join(', ') : 'No mode');
+      const modeVal = maxFreq > 1 ? modes.join(', ') : 'No mode';
+      setMode(modeVal);
+
+      updateAIInsight(
+        { numbers: nums, count: nums.length },
+        { mean: meanVal, median: medianVal, mode: modeVal, sum: nums.reduce((a, b) => a + b, 0) }
+      );
     }
   };
 

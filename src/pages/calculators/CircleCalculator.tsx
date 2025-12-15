@@ -11,7 +11,7 @@ import { Copy, Loader2, Printer } from "lucide-react";
 const CircleCalculator = () => {
   const [radius, setRadius] = useState("");
   const [result, setResult] = useState<{ area: number; circumference: number; diameter: number } | null>(null);
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
@@ -21,6 +21,10 @@ const CircleCalculator = () => {
       const circumference = 2 * Math.PI * r;
       const diameter = 2 * r;
       setResult({ area, circumference, diameter });
+      updateAIInsight(
+        { radius: r },
+        { area: area.toFixed(2), circumference: circumference.toFixed(2), diameter: diameter.toFixed(2) }
+      );
     }
   };
 

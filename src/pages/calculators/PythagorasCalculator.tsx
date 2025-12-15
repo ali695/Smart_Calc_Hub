@@ -4,11 +4,16 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
+import { usePrintCalculator } from "@/hooks/usePrintCalculator";
+import { Copy, Loader2, Printer } from "lucide-react";
 
 const PythagorasCalculator = () => {
   const [sideA, setSideA] = useState("");
   const [sideB, setSideB] = useState("");
   const [result, setResult] = useState<{ hypotenuse: number; area: number; perimeter: number } | null>(null);
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
+  const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
     const a = parseFloat(sideA);
@@ -18,6 +23,10 @@ const PythagorasCalculator = () => {
       const area = (a * b) / 2;
       const perimeter = a + b + hypotenuse;
       setResult({ hypotenuse, area, perimeter });
+      updateAIInsight(
+        { sideA: a, sideB: b },
+        { hypotenuse: hypotenuse.toFixed(4), area: area.toFixed(4), perimeter: perimeter.toFixed(4), verification: `${a}² + ${b}² = ${hypotenuse.toFixed(2)}²` }
+      );
     }
   };
 
@@ -82,11 +91,12 @@ const PythagorasCalculator = () => {
         </div>
 
         <Button 
-          onClick={calculate} 
+          onClick={() => handleCalculation(calculate)} 
           className="w-full bg-gradient-to-r from-primary to-primary-accent hover:shadow-glow transition-all duration-300"
           size="lg"
+          disabled={isCalculating}
         >
-          Calculate Hypotenuse
+          {isCalculating ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Calculating...</> : "Calculate Hypotenuse"}
         </Button>
 
         {result && (

@@ -12,14 +12,19 @@ const TriangleAreaCalculator = () => {
   const [base, setBase] = useState("");
   const [height, setHeight] = useState("");
   const [result, setResult] = useState<number | null>(null);
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
     const b = parseFloat(base);
     const h = parseFloat(height);
     if (b > 0 && h > 0) {
-      setResult((b * h) / 2);
+      const area = (b * h) / 2;
+      setResult(area);
+      updateAIInsight(
+        { base: b, height: h },
+        { area: area.toFixed(2), formula: `(${b} × ${h}) / 2 = ${area.toFixed(2)}` }
+      );
     }
   };
 

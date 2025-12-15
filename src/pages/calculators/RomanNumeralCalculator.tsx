@@ -13,7 +13,7 @@ const RomanNumeralCalculator = () => {
   const [decimal, setDecimal] = useState("");
   const [roman, setRoman] = useState("");
   const [result, setResult] = useState<{ type: string; value: string } | null>(null);
-  const { isCalculating, handleCalculation, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const decimalToRoman = (num: number): string => {
@@ -47,13 +47,16 @@ const RomanNumeralCalculator = () => {
   const convertToRoman = () => {
     const num = parseInt(decimal);
     if (!num || num <= 0 || num > 3999) return;
-    setResult({ type: "Roman Numeral", value: decimalToRoman(num) });
+    const romanVal = decimalToRoman(num);
+    setResult({ type: "Roman Numeral", value: romanVal });
+    updateAIInsight({ decimal: num, conversionType: "Decimal to Roman" }, { roman: romanVal });
   };
 
   const convertToDecimal = () => {
     if (!roman.trim()) return;
     const num = romanToDecimal(roman.trim());
     setResult({ type: "Decimal", value: num.toString() });
+    updateAIInsight({ roman: roman.trim(), conversionType: "Roman to Decimal" }, { decimal: num });
   };
 
   const faqs = [

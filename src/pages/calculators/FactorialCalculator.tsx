@@ -9,7 +9,7 @@ import { usePrintCalculator } from "@/hooks/usePrintCalculator";
 import { Copy, Loader2, Printer } from "lucide-react";
 
 const FactorialCalculator = () => {
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
   const [number, setNumber] = useState("");
   const [result, setResult] = useState<{ factorial: string; steps: string } | null>(null);
@@ -31,6 +31,10 @@ const FactorialCalculator = () => {
         ? Array.from({ length: n }, (_, i) => i + 1).join(' × ') || "1"
         : `1 × 2 × 3 × ... × ${n}`;
       setResult({ factorial: factorial.toString(), steps });
+      updateAIInsight(
+        { number: n },
+        { factorial: factorial.toString(), steps, digitCount: factorial.toString().length }
+      );
     }
   };
 
