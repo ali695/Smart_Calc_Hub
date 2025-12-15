@@ -87,6 +87,11 @@ export const CalculatorLayout = ({
   // Extract calculator slug from path
   const calculatorSlug = location.pathname.split('/').pop() || '';
 
+  // Smooth scroll to top on calculator page load
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [location.pathname]);
+
   // Track recently used calculator and log page view
   useEffect(() => {
     addRecentCalculator({
@@ -110,7 +115,13 @@ export const CalculatorLayout = ({
     health: "Health",
     math: "Math",
     conversion: "Conversion",
-    utility: "Utility"
+    utility: "Utility",
+    tech: "Tech Tools",
+    engineering: "Engineering",
+    business: "Business",
+    science: "Science",
+    'real-estate': "Real Estate",
+    crypto: "Crypto"
   };
 
   // Map category IDs to paths
@@ -119,7 +130,13 @@ export const CalculatorLayout = ({
     health: "/categories#health",
     math: "/categories#math",
     conversion: "/categories#conversion",
-    utility: "/categories"
+    utility: "/categories",
+    tech: "/categories#tech",
+    engineering: "/categories#engineering",
+    business: "/categories#business",
+    science: "/categories#science",
+    'real-estate': "/real-estate",
+    crypto: "/crypto"
   };
   
   // Generate WebApplication structured data (replaces SoftwareApplication)

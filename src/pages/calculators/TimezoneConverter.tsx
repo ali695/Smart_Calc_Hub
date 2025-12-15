@@ -14,8 +14,17 @@ const TimezoneConverter = () => {
   const [fromZone, setFromZone] = useState("0");
   const [toZone, setToZone] = useState("-5");
   const [result, setResult] = useState("");
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
+
+  const timezoneLabels: Record<string, string> = {
+    "0": "UTC (GMT)",
+    "-5": "EST (UTC-5)",
+    "-8": "PST (UTC-8)",
+    "1": "CET (UTC+1)",
+    "5.5": "IST (UTC+5:30)",
+    "8": "CST China (UTC+8)"
+  };
 
   const calculate = () => {
     if (!time) return;
@@ -26,7 +35,13 @@ const TimezoneConverter = () => {
     let newHours = hours + diff;
     if (newHours < 0) newHours += 24;
     if (newHours >= 24) newHours -= 24;
-    setResult(`${newHours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`);
+    const convertedTime = `${newHours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+    setResult(convertedTime);
+    
+    updateAIInsight(
+      { inputTime: time, fromTimezone: timezoneLabels[fromZone] || fromZone, toTimezone: timezoneLabels[toZone] || toZone },
+      { convertedTime, hourDifference: diff }
+    );
   };
 
   const faqs = [

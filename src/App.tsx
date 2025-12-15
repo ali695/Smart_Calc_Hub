@@ -156,6 +156,7 @@ import K401Calculator from "./pages/calculators/K401Calculator";
 import RealEstateCalculators from "./pages/RealEstateCalculators";
 import CryptoCalculators from "./pages/CryptoCalculators";
 import AdminDashboard from "./pages/AdminDashboard";
+import { ScrollToTop } from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -181,8 +182,9 @@ const App = () => (
         <TooltipProvider>
           <Toaster />
           <Sonner />
-          <BrowserRouter>
+        <BrowserRouter>
             <AnalyticsTracker />
+            <ScrollToTop />
             <Layout>
               <Routes>
                 <Route path="/" element={<Index />} />
