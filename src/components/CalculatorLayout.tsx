@@ -324,9 +324,13 @@ export const CalculatorLayout = ({
 
           {/* Calculator Card */}
           <Card className="p-6 md:p-8 shadow-large animate-fade-in relative">
-            {/* Region Toggle */}
+            {/* Region Toggle with Currency Selector */}
             <div className="absolute top-4 right-4">
-              <RegionToggle />
+              <RegionToggle 
+                showCurrency={true} 
+                category={category.toLowerCase()} 
+                calculatorSlug={calculatorSlug} 
+              />
             </div>
             <AIInsightContext.Provider value={{
               inputs: aiInputs,

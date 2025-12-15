@@ -1,10 +1,51 @@
 import { createContext, useContext, useState, useEffect, ReactNode, useCallback } from "react";
 
 export type Region = "uk" | "us" | "global";
+export type Currency = "USD" | "GBP" | "EUR" | "CAD" | "INR" | "BTC";
+
+interface CurrencyConfig {
+  code: Currency;
+  symbol: string;
+  name: string;
+  locale: string;
+}
+
+export const currencies: Record<Currency, CurrencyConfig> = {
+  USD: { code: "USD", symbol: "$", name: "US Dollar", locale: "en-US" },
+  GBP: { code: "GBP", symbol: "£", name: "British Pound", locale: "en-GB" },
+  EUR: { code: "EUR", symbol: "€", name: "Euro", locale: "de-DE" },
+  CAD: { code: "CAD", symbol: "C$", name: "Canadian Dollar", locale: "en-CA" },
+  INR: { code: "INR", symbol: "₹", name: "Indian Rupee", locale: "en-IN" },
+  BTC: { code: "BTC", symbol: "₿", name: "Bitcoin", locale: "en-US" },
+};
+
+// Categories that should show currency selector
+export const currencyEnabledCategories = [
+  "finance",
+  "business",
+  "crypto",
+  "real-estate"
+];
+
+// Calculators that should show currency selector (slug-based)
+export const currencyEnabledCalculators = [
+  "loan", "mortgage", "compound-interest", "simple-interest", "emi",
+  "investment-return", "retirement", "savings-goal", "budget-planner",
+  "net-worth", "profit-margin", "break-even", "payback-period",
+  "inflation", "currency-converter", "crypto-profit", "dca", 
+  "mining-profit", "bitcoin-converter", "cap-rate", "house-flip",
+  "property-tax", "rent-affordability", "buy-vs-rent", "refinance",
+  "mortgage-recast", "car-loan", "credit-card-payoff", "debt-to-income",
+  "us-income-tax", "uk-income-tax", "canada-income-tax", "india-income-tax",
+  "australia-income-tax", "salary-after-tax", "paycheck", "401k", "roth-ira",
+  "social-security", "national-insurance", "stamp-duty", "sales-tax", "tax",
+  "ltv", "inventory-turnover", "conversion-rate", "customer-lifetime-value",
+  "growth-rate"
+];
 
 interface RegionConfig {
   region: Region;
-  currency: string;
+  currency: Currency;
   currencySymbol: string;
   locale: string;
   language: string;
@@ -66,9 +107,13 @@ interface RegionContextType {
   region: Region;
   config: RegionConfig;
   setRegion: (region: Region) => void;
-  formatCurrency: (amount: number) => string;
+  currency: Currency;
+  setCurrency: (currency: Currency) => void;
+  getCurrencyConfig: () => CurrencyConfig;
+  formatCurrency: (amount: number, customCurrency?: Currency) => string;
   formatDate: (date: Date) => string;
   formatNumber: (num: number, decimals?: number) => string;
+  shouldShowCurrency: (category?: string, calculatorSlug?: string) => boolean;
 }
 
 const RegionContext = createContext<RegionContextType | null>(null);
@@ -107,7 +152,6 @@ interface RegionProviderProps {
 
 export const RegionProvider = ({ children }: RegionProviderProps) => {
   const [region, setRegionState] = useState<Region>(() => {
-    // Check localStorage first
     if (typeof window !== "undefined") {
       const stored = localStorage.getItem("smartcalc-region");
       if (stored && (stored === "uk" || stored === "us" || stored === "global")) {
@@ -117,21 +161,52 @@ export const RegionProvider = ({ children }: RegionProviderProps) => {
     return detectRegion();
   });
 
+  const [currency, setCurrencyState] = useState<Currency>(() => {
+    if (typeof window !== "undefined") {
+      const stored = localStorage.getItem("smartcalc-currency");
+      if (stored && stored in currencies) {
+        return stored as Currency;
+      }
+    }
+    return regionConfigs[region].currency;
+  });
+
   const config = regionConfigs[region];
 
   const setRegion = useCallback((newRegion: Region) => {
     setRegionState(newRegion);
     localStorage.setItem("smartcalc-region", newRegion);
+    // Auto-update currency to match region default
+    const newCurrency = regionConfigs[newRegion].currency;
+    setCurrencyState(newCurrency);
+    localStorage.setItem("smartcalc-currency", newCurrency);
   }, []);
 
-  const formatCurrency = useCallback((amount: number): string => {
-    return new Intl.NumberFormat(config.locale, {
+  const setCurrency = useCallback((newCurrency: Currency) => {
+    setCurrencyState(newCurrency);
+    localStorage.setItem("smartcalc-currency", newCurrency);
+  }, []);
+
+  const getCurrencyConfig = useCallback((): CurrencyConfig => {
+    return currencies[currency];
+  }, [currency]);
+
+  const formatCurrency = useCallback((amount: number, customCurrency?: Currency): string => {
+    const curr = customCurrency || currency;
+    const currConfig = currencies[curr];
+    
+    // Special handling for BTC
+    if (curr === "BTC") {
+      return `${currConfig.symbol}${amount.toFixed(8)}`;
+    }
+    
+    return new Intl.NumberFormat(currConfig.locale, {
       style: "currency",
-      currency: config.currency,
+      currency: curr,
       minimumFractionDigits: 2,
       maximumFractionDigits: 2
     }).format(amount);
-  }, [config.locale, config.currency]);
+  }, [currency]);
 
   const formatDate = useCallback((date: Date): string => {
     return new Intl.DateTimeFormat(config.locale, {
@@ -148,14 +223,28 @@ export const RegionProvider = ({ children }: RegionProviderProps) => {
     }).format(num);
   }, [config.locale]);
 
+  const shouldShowCurrency = useCallback((category?: string, calculatorSlug?: string): boolean => {
+    if (calculatorSlug && currencyEnabledCalculators.includes(calculatorSlug)) {
+      return true;
+    }
+    if (category && currencyEnabledCategories.includes(category.toLowerCase())) {
+      return true;
+    }
+    return false;
+  }, []);
+
   return (
     <RegionContext.Provider value={{
       region,
       config,
       setRegion,
+      currency,
+      setCurrency,
+      getCurrencyConfig,
       formatCurrency,
       formatDate,
-      formatNumber
+      formatNumber,
+      shouldShowCurrency
     }}>
       {children}
     </RegionContext.Provider>
