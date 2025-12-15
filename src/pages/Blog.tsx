@@ -1,10 +1,11 @@
-import { Calendar, User, ArrowRight, Sparkles, Search, BookOpen } from "lucide-react";
+import { Calendar, User, ArrowRight, Search, BookOpen } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Link } from "react-router-dom";
 import { useState, useMemo } from "react";
 import { PageHeader } from "@/components/PageHeader";
+import { getBlogHeroImage } from "@/utils/ogImageMapping";
 
 import { blogPosts } from "@/data/blogPosts";
 
@@ -93,17 +94,21 @@ const Blog = () => {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredPosts.map((post) => (
-              <Card key={post.id} className="group card-shine card-flip card-glow-hover hover:shadow-large transition-all duration-300 cursor-pointer flex flex-col border-2 border-border hover:border-primary overflow-hidden">
+              {filteredPosts.map((post) => {
+                // Use dynamic hero image based on category
+                const heroImage = post.image || getBlogHeroImage(post.category);
+                
+                return (
+              <Card key={post.id} className="group hover:shadow-lg transition-all duration-300 cursor-pointer flex flex-col border border-border hover:border-primary/50 overflow-hidden rounded-xl">
                 <div className="aspect-video overflow-hidden relative">
-                  {post.image ? (
-                    <img src={post.image} alt={post.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-                  ) : (
-                    <div className="w-full h-full bg-gradient-to-br from-primary/20 via-primary-glow/20 to-accent/20" />
-                  )}
+                  <img 
+                    src={heroImage} 
+                    alt={post.title} 
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  <div className="absolute bottom-4 left-4">
-                    <span className="px-4 py-2 bg-primary text-primary-foreground rounded-full text-sm font-semibold shadow-lg">
+                  <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4">
+                    <span className="px-3 py-1.5 sm:px-4 sm:py-2 bg-primary text-primary-foreground rounded-full text-xs sm:text-sm font-semibold shadow-lg">
                       {post.category}
                     </span>
                   </div>
@@ -138,7 +143,8 @@ const Blog = () => {
                   </div>
                 </CardContent>
               </Card>
-              ))}
+                );
+              })}
             </div>
           )}
 

@@ -146,6 +146,12 @@ import HouseFlipCalculator from "./pages/calculators/HouseFlipCalculator";
 import DCACalculator from "./pages/calculators/DCACalculator";
 import BitcoinConverter from "./pages/calculators/BitcoinConverter";
 import MiningProfitCalculator from "./pages/calculators/MiningProfitCalculator";
+import NationalInsuranceCalculator from "./pages/calculators/NationalInsuranceCalculator";
+import StampDutyCalculator from "./pages/calculators/StampDutyCalculator";
+import SocialSecurityCalculator from "./pages/calculators/SocialSecurityCalculator";
+import RothIRACalculator from "./pages/calculators/RothIRACalculator";
+import SalesTaxCalculator from "./pages/calculators/SalesTaxCalculator";
+import K401Calculator from "./pages/calculators/K401Calculator";
 import RealEstateCalculators from "./pages/RealEstateCalculators";
 import CryptoCalculators from "./pages/CryptoCalculators";
 import AdminDashboard from "./pages/AdminDashboard";
@@ -317,6 +323,12 @@ const App = () => (
               <Route path="/calculator/dca" element={<DCACalculator />} />
               <Route path="/calculator/bitcoin-converter" element={<BitcoinConverter />} />
               <Route path="/calculator/mining-profit" element={<MiningProfitCalculator />} />
+              <Route path="/calculator/national-insurance" element={<NationalInsuranceCalculator />} />
+              <Route path="/calculator/stamp-duty" element={<StampDutyCalculator />} />
+              <Route path="/calculator/social-security" element={<SocialSecurityCalculator />} />
+              <Route path="/calculator/roth-ira" element={<RothIRACalculator />} />
+              <Route path="/calculator/sales-tax" element={<SalesTaxCalculator />} />
+              <Route path="/calculator/401k" element={<K401Calculator />} />
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/terms" element={<Terms />} />
               <Route path="*" element={<NotFound />} />

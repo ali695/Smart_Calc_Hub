@@ -1319,6 +1319,68 @@ export const calculators: CalculatorData[] = [
     path: "/calculator/mining-profit",
     seoTitle: "Mining Profit Calculator – Crypto Mining Profitability | SmartCalc Hub",
     seoDescription: "Free mining profit calculator. Calculate crypto mining revenue and costs."
+  },
+  // UK Finance Calculators
+  {
+    id: "national-insurance",
+    title: "National Insurance Calculator",
+    description: "Calculate UK National Insurance contributions (Class 1, 2, 4)",
+    category: "finance",
+    icon: Receipt,
+    path: "/calculator/national-insurance",
+    seoTitle: "UK National Insurance Calculator 2025/26 | SmartCalc Hub",
+    seoDescription: "Free UK National Insurance calculator. Calculate NI contributions for Class 1, 2, and 4. PAYE ready."
+  },
+  {
+    id: "stamp-duty",
+    title: "Stamp Duty Calculator",
+    description: "Calculate UK Stamp Duty Land Tax (SDLT) for property purchases",
+    category: "finance",
+    icon: Home,
+    path: "/calculator/stamp-duty",
+    seoTitle: "UK Stamp Duty Calculator (SDLT) 2025 | SmartCalc Hub",
+    seoDescription: "Free UK Stamp Duty calculator. Calculate SDLT for England & Northern Ireland property purchases."
+  },
+  // US Finance Calculators
+  {
+    id: "social-security",
+    title: "Social Security Estimator",
+    description: "Estimate your US Social Security benefits at retirement",
+    category: "finance",
+    icon: PiggyBank,
+    path: "/calculator/social-security",
+    seoTitle: "Social Security Benefits Estimator 2025 | SmartCalc Hub",
+    seoDescription: "Free Social Security calculator. Estimate your retirement benefits based on earnings history."
+  },
+  {
+    id: "roth-ira",
+    title: "Roth IRA Calculator",
+    description: "Calculate Roth IRA growth and compare with Traditional IRA",
+    category: "finance",
+    icon: TrendingUp,
+    path: "/calculator/roth-ira",
+    seoTitle: "Roth IRA Calculator – Compare IRA Options | SmartCalc Hub",
+    seoDescription: "Free Roth IRA calculator. Project growth and compare Roth vs Traditional IRA tax benefits."
+  },
+  {
+    id: "sales-tax",
+    title: "Sales Tax Calculator",
+    description: "Calculate US sales tax by state and county",
+    category: "finance",
+    icon: Receipt,
+    path: "/calculator/sales-tax",
+    seoTitle: "US Sales Tax Calculator by State | SmartCalc Hub",
+    seoDescription: "Free sales tax calculator. Calculate sales tax for all US states with local rates."
+  },
+  {
+    id: "401k",
+    title: "401(k) Calculator",
+    description: "Calculate 401(k) retirement savings growth with employer match",
+    category: "finance",
+    icon: PiggyBank,
+    path: "/calculator/401k",
+    seoTitle: "401(k) Retirement Calculator 2025 | SmartCalc Hub",
+    seoDescription: "Free 401(k) calculator. Project retirement savings with employer match and compound growth."
   }
 ];
 
