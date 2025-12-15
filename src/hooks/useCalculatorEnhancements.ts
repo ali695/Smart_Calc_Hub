@@ -19,7 +19,7 @@ export const useCalculatorEnhancements = () => {
       await calculationFn();
       // Trigger hero gradient pulse effect on successful calculation
       triggerCalculatePulse();
-      
+
       // Update AI insight context if provided
       if (aiContext && options?.inputs) {
         aiContext.setInputs(options.inputs);
@@ -40,7 +40,7 @@ export const useCalculatorEnhancements = () => {
   }, [aiContext]);
 
   const handleKeyPress = useCallback(
-    (e: KeyboardEvent<HTMLInputElement>, calculationFn: () => void) => {
+    (e: KeyboardEvent<HTMLInputElement>, calculationFn: () => void | Promise<void>) => {
       if (e.key === "Enter") {
         e.preventDefault();
         handleCalculation(calculationFn);

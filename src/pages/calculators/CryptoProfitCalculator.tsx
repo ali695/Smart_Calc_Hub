@@ -27,10 +27,13 @@ const CryptoProfitCalculator = () => {
     const finalValue = coins * sell;
     const profit = finalValue - inv;
     const roi = ((finalValue - inv) / inv) * 100;
-    setResult({ profit, roi, coins, finalValue });
+    const nextResult = { profit, roi, coins, finalValue };
+    setResult(nextResult);
+
+    // Ensure CalculatorLayout receives AI inputs/results via context (needed for AIInsightCard)
     updateAIInsight(
       { buyPrice: buy, sellPrice: sell, investment: inv },
-      { profit, roi, coins, finalValue }
+      nextResult
     );
   };
 
