@@ -3,6 +3,9 @@ import { CalculatorLayout } from "@/components/CalculatorLayout";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { CalculatorChart, generateGrowthData } from "@/components/CalculatorChart";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
+import { usePrintCalculator } from "@/hooks/usePrintCalculator";
 
 const SavingsGoalCalculator = () => {
   const [goalAmount, setGoalAmount] = useState("");
@@ -12,25 +15,29 @@ const SavingsGoalCalculator = () => {
   const [monthsNeeded, setMonthsNeeded] = useState<number | null>(null);
   const [totalContributions, setTotalContributions] = useState<number | null>(null);
   const [interestEarned, setInterestEarned] = useState<number | null>(null);
+  const [chartData, setChartData] = useState<any[]>([]);
+
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
+  const { printCalculation } = usePrintCalculator();
 
   const calculateSavingsGoal = () => {
     const goal = parseFloat(goalAmount) || 0;
     const current = parseFloat(currentSavings) || 0;
     const monthly = parseFloat(monthlyContribution) || 0;
-    const rate = (parseFloat(interestRate) || 0) / 100 / 12;
+    const annualRate = parseFloat(interestRate) || 0;
+    const rate = annualRate / 100 / 12;
     
     if (goal > 0 && monthly > 0) {
       const remaining = goal - current;
+      let months = 0;
+      let balance = current;
       
       if (rate === 0) {
-        const months = Math.ceil(remaining / monthly);
+        months = Math.ceil(remaining / monthly);
         setMonthsNeeded(months);
         setTotalContributions(parseFloat((monthly * months).toFixed(2)));
         setInterestEarned(0);
       } else {
-        let months = 0;
-        let balance = current;
-        
         while (balance < goal && months < 1200) {
           balance += monthly;
           balance += balance * rate;
@@ -44,6 +51,28 @@ const SavingsGoalCalculator = () => {
         setTotalContributions(parseFloat(contributions.toFixed(2)));
         setInterestEarned(parseFloat(Math.max(interest, 0).toFixed(2)));
       }
+      
+      // Generate chart data
+      const years = Math.ceil(months / 12);
+      const growthData = generateGrowthData(current, monthly, annualRate, years);
+      setChartData(growthData);
+
+      // Update AI insights with calculation data
+      updateAIInsight(
+        {
+          goalAmount: goal,
+          currentSavings: current,
+          monthlyContribution: monthly,
+          annualInterestRate: annualRate
+        },
+        {
+          monthsNeeded: months,
+          yearsNeeded: Math.floor(months / 12),
+          totalContributions: parseFloat((monthly * months).toFixed(2)),
+          interestEarned: parseFloat(Math.max(goal - current - (monthly * months), 0).toFixed(2)),
+          finalBalance: goal
+        }
+      );
     }
   };
 
@@ -73,6 +102,10 @@ const SavingsGoalCalculator = () => {
       howItWorks="This savings goal calculator helps you determine how many months you need to reach your financial target. Enter your goal amount, current savings, monthly contribution, and expected interest rate. The calculator will show how long it will take, total contributions needed, and interest earned along the way."
       formula="Future Value = Current Savings × (1 + r)^n + Monthly Payment × [((1 + r)^n - 1) / r], where r is monthly interest rate and n is number of months"
       faqs={faqs}
+      category="finance"
+      seoTitle="Savings Goal Calculator | How Long to Reach Your Financial Goals"
+      seoDescription="Calculate how long it will take to reach your savings goal with monthly contributions and compound interest. Free savings timeline calculator."
+      keywords="savings goal calculator, savings timeline, compound interest calculator, financial planning, savings target"
     >
       <div className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -84,6 +117,7 @@ const SavingsGoalCalculator = () => {
               placeholder="20000"
               value={goalAmount}
               onChange={(e) => setGoalAmount(e.target.value)}
+              onKeyPress={(e) => handleKeyPress(e, calculateSavingsGoal)}
             />
           </div>
           
@@ -95,6 +129,7 @@ const SavingsGoalCalculator = () => {
               placeholder="5000"
               value={currentSavings}
               onChange={(e) => setCurrentSavings(e.target.value)}
+              onKeyPress={(e) => handleKeyPress(e, calculateSavingsGoal)}
             />
           </div>
           
@@ -106,6 +141,7 @@ const SavingsGoalCalculator = () => {
               placeholder="500"
               value={monthlyContribution}
               onChange={(e) => setMonthlyContribution(e.target.value)}
+              onKeyPress={(e) => handleKeyPress(e, calculateSavingsGoal)}
             />
           </div>
           
@@ -118,12 +154,19 @@ const SavingsGoalCalculator = () => {
               placeholder="5"
               value={interestRate}
               onChange={(e) => setInterestRate(e.target.value)}
+              onKeyPress={(e) => handleKeyPress(e, calculateSavingsGoal)}
             />
           </div>
         </div>
 
-        <Button onClick={calculateSavingsGoal} className="w-full bg-gradient-to-r from-primary to-primary-accent hover:shadow-glow transition-all duration-300" size="lg">
-          Calculate Timeline
+        <Button 
+          onClick={() => handleCalculation(calculateSavingsGoal)} 
+          disabled={isCalculating}
+          className="w-full bg-gradient-to-r from-primary to-primary-accent hover:shadow-glow transition-all duration-300" 
+          size="lg"
+          type="button"
+        >
+          {isCalculating ? "Calculating..." : "Calculate Timeline"}
         </Button>
 
         {monthsNeeded !== null && (
@@ -137,21 +180,41 @@ const SavingsGoalCalculator = () => {
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="p-4 bg-muted/50 rounded-lg">
+              <div 
+                className="p-4 bg-muted/50 rounded-lg cursor-pointer hover:bg-muted/70 transition-colors"
+                onClick={() => copyToClipboard(`$${parseFloat(goalAmount || "0").toLocaleString()}`, "Goal Amount")}
+              >
                 <p className="text-sm font-medium text-muted-foreground">Goal Amount</p>
                 <p className="text-2xl font-bold">${parseFloat(goalAmount || "0").toLocaleString()}</p>
               </div>
               
-              <div className="p-4 bg-muted/50 rounded-lg">
+              <div 
+                className="p-4 bg-muted/50 rounded-lg cursor-pointer hover:bg-muted/70 transition-colors"
+                onClick={() => copyToClipboard(`$${totalContributions?.toLocaleString()}`, "Total Contributions")}
+              >
                 <p className="text-sm font-medium text-muted-foreground">Total Contributions</p>
                 <p className="text-2xl font-bold">${totalContributions?.toLocaleString()}</p>
               </div>
               
-              <div className="p-4 bg-muted/50 rounded-lg">
+              <div 
+                className="p-4 bg-muted/50 rounded-lg cursor-pointer hover:bg-muted/70 transition-colors"
+                onClick={() => copyToClipboard(`$${interestEarned?.toLocaleString()}`, "Interest Earned")}
+              >
                 <p className="text-sm font-medium text-muted-foreground">Interest Earned</p>
                 <p className="text-2xl font-bold text-green-600 dark:text-green-400">${interestEarned?.toLocaleString()}</p>
               </div>
             </div>
+
+            {/* Savings Growth Chart */}
+            {chartData.length > 0 && (
+              <CalculatorChart
+                data={chartData}
+                chartType="area"
+                title="Savings Growth Over Time"
+                category="finance"
+                valueFormatter={(v) => `$${v.toLocaleString()}`}
+              />
+            )}
           </div>
         )}
       </div>

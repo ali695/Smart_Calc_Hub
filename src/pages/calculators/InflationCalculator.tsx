@@ -16,7 +16,7 @@ const InflationCalculator = () => {
     futureValue: number;
     purchasingPowerLoss: number;
   } | null>(null);
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
@@ -33,6 +33,20 @@ const InflationCalculator = () => {
       futureValue,
       purchasingPowerLoss: loss
     });
+
+    // Update AI insight
+    updateAIInsight(
+      {
+        currentAmount: amt,
+        years: yrs,
+        inflationRate: parseFloat(inflationRate)
+      },
+      {
+        futureValue: futureValue.toFixed(2),
+        purchasingPowerLoss: loss.toFixed(2),
+        lossPercentage: ((loss / amt) * 100).toFixed(1)
+      }
+    );
   };
 
   const faqs = [
@@ -54,9 +68,13 @@ const InflationCalculator = () => {
     <CalculatorLayout
       title="Inflation Calculator"
       description="Calculate how inflation affects the purchasing power of your money over time."
+      category="finance"
       howItWorks="Enter an amount of money, the number of years, and the expected annual inflation rate. The calculator shows what that money will be worth in the future."
       formula="Future Value = Present Value / (1 + inflation rate)^years"
       faqs={faqs}
+      seoTitle="Inflation Calculator | Purchasing Power Over Time"
+      seoDescription="Calculate how inflation affects your money's purchasing power. Free inflation impact calculator for financial planning."
+      keywords="inflation calculator, purchasing power, money value, inflation rate, financial planning"
     >
       <div className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
