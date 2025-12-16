@@ -3,11 +3,13 @@ import { CalculatorLayout } from "@/components/CalculatorLayout";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
 
 const HeartRateCalculator = () => {
   const [age, setAge] = useState("");
   const [restingHR, setRestingHR] = useState("");
   const [zones, setZones] = useState<any>(null);
+  const { updateAIInsight, handleCalculation } = useCalculatorEnhancements();
 
   const calculate = () => {
     const a = parseFloat(age);
@@ -17,7 +19,7 @@ const HeartRateCalculator = () => {
       const maxHR = 220 - a;
       const hrReserve = maxHR - rhr;
       
-      setZones({
+      const zonesResult = {
         max: maxHR,
         resting: rhr,
         warmup: {
@@ -36,7 +38,19 @@ const HeartRateCalculator = () => {
           min: Math.round(maxHR * 0.80),
           max: Math.round(maxHR * 0.90)
         }
-      });
+      };
+      setZones(zonesResult);
+      
+      updateAIInsight(
+        { age: a, restingHeartRate: rhr },
+        { 
+          maxHeartRate: maxHR, 
+          heartRateReserve: hrReserve,
+          fatBurnZone: `${zonesResult.fatBurn.min}-${zonesResult.fatBurn.max} bpm`,
+          cardioZone: `${zonesResult.cardio.min}-${zonesResult.cardio.max} bpm`,
+          peakZone: `${zonesResult.peak.min}-${zonesResult.peak.max} bpm`
+        }
+      );
     }
   };
 
@@ -80,7 +94,7 @@ const HeartRateCalculator = () => {
           </div>
         </div>
 
-        <Button onClick={calculate} className="w-full bg-gradient-to-r from-primary to-primary-accent hover:shadow-glow transition-all duration-300" size="lg">Calculate Zones</Button>
+        <Button type="button" onClick={() => handleCalculation(calculate)} className="w-full bg-gradient-to-r from-primary to-primary-accent hover:shadow-glow transition-all duration-300" size="lg">Calculate Zones</Button>
 
         {zones && (
           <div className="space-y-4 animate-fade-in">

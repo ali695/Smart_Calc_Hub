@@ -5,12 +5,14 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
 
 const PressureConverter = () => {
   const [value, setValue] = useState("");
   const [fromUnit, setFromUnit] = useState("bar");
   const [toUnit, setToUnit] = useState("psi");
   const [result, setResult] = useState<number | null>(null);
+  const { updateAIInsight } = useCalculatorEnhancements();
 
   const conversionRates: Record<string, number> = {
     bar: 1,
@@ -40,6 +42,10 @@ const PressureConverter = () => {
       const inBar = inputValue / conversionRates[fromUnit];
       const converted = inBar * conversionRates[toUnit];
       setResult(converted);
+      updateAIInsight(
+        { value: inputValue, fromUnit, toUnit },
+        { result: converted, inBar }
+      );
     }
   };
 

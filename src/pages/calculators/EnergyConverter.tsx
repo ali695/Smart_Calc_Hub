@@ -5,12 +5,14 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
 
 const EnergyConverter = () => {
   const [value, setValue] = useState("");
   const [fromUnit, setFromUnit] = useState("joules");
   const [toUnit, setToUnit] = useState("calories");
   const [result, setResult] = useState<number | null>(null);
+  const { updateAIInsight } = useCalculatorEnhancements();
 
   const conversionRates: { [key: string]: number } = {
     joules: 1,
@@ -30,6 +32,10 @@ const EnergyConverter = () => {
       const valueInJoules = inputValue * conversionRates[fromUnit];
       const convertedValue = valueInJoules / conversionRates[toUnit];
       setResult(convertedValue);
+      updateAIInsight(
+        { value: inputValue, fromUnit, toUnit },
+        { result: convertedValue, valueInJoules }
+      );
     }
   };
 

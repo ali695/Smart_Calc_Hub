@@ -4,11 +4,13 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
 
 const IdealWeightCalculator = () => {
   const [height, setHeight] = useState("");
   const [gender, setGender] = useState("male");
   const [results, setResults] = useState<any>(null);
+  const { updateAIInsight, handleCalculation } = useCalculatorEnhancements();
 
   const calculate = () => {
     const h = parseFloat(height);
@@ -30,14 +32,25 @@ const IdealWeightCalculator = () => {
         max: avg + 5
       };
       
-      setResults({
+      const resultsData = {
         robinson: Math.round(robinson),
         miller: Math.round(miller),
         devine: Math.round(devine),
         hamwi: Math.round(hamwi),
         average: Math.round(avg),
         range
-      });
+      };
+      setResults(resultsData);
+      
+      updateAIInsight(
+        { height: h, gender },
+        { 
+          averageIdealWeight: Math.round(avg),
+          healthyRange: `${Math.round(range.min)}-${Math.round(range.max)} kg`,
+          robinsonFormula: Math.round(robinson),
+          millerFormula: Math.round(miller)
+        }
+      );
     }
   };
 
@@ -89,7 +102,7 @@ const IdealWeightCalculator = () => {
           </div>
         </div>
 
-        <Button onClick={calculate} className="w-full bg-gradient-to-r from-primary to-primary-accent hover:shadow-glow transition-all duration-300" size="lg">Calculate Ideal Weight</Button>
+        <Button type="button" onClick={() => handleCalculation(calculate)} className="w-full bg-gradient-to-r from-primary to-primary-accent hover:shadow-glow transition-all duration-300" size="lg">Calculate Ideal Weight</Button>
 
         {results && (
           <div className="space-y-4 animate-fade-in">

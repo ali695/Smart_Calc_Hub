@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { CalculatorLayout } from "@/components/CalculatorLayout";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
 
 const StepsCalculator = () => {
   const [weight, setWeight] = useState("");
@@ -15,6 +16,7 @@ const StepsCalculator = () => {
     distance: number;
     calories: number;
   } | null>(null);
+  const { updateAIInsight, handleCalculation } = useCalculatorEnhancements();
 
   const calculate = () => {
     const wt = parseFloat(weight);
@@ -36,7 +38,17 @@ const StepsCalculator = () => {
     const distance = (baseSteps * 0.762) / 1000; // km (average stride)
     const calories = baseSteps * 0.04; // rough estimate
 
-    setResult({ steps: baseSteps, distance, calories });
+    const resultData = { steps: baseSteps, distance, calories };
+    setResult(resultData);
+    
+    updateAIInsight(
+      { weight: wt, activityLevel, healthGoal: goal },
+      { 
+        dailyStepGoal: baseSteps, 
+        estimatedDistance: distance.toFixed(1) + " km", 
+        caloriesBurned: Math.round(calories) 
+      }
+    );
   };
 
   const faqs = [
@@ -106,7 +118,7 @@ const StepsCalculator = () => {
           </div>
         </div>
 
-        <Button onClick={calculate} className="w-full bg-gradient-to-r from-primary to-primary-accent hover:shadow-glow transition-all duration-300" size="lg">
+        <Button type="button" onClick={() => handleCalculation(calculate)} className="w-full bg-gradient-to-r from-primary to-primary-accent hover:shadow-glow transition-all duration-300" size="lg">
           Calculate Step Goal
         </Button>
 

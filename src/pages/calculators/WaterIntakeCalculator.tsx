@@ -16,6 +16,8 @@ const WaterIntakeCalculator = () => {
   const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
+  const { updateAIInsight } = useCalculatorEnhancements();
+
   const calculate = () => {
     const w = parseFloat(weight);
     if (w > 0) {
@@ -26,7 +28,17 @@ const WaterIntakeCalculator = () => {
       
       if (climate === "hot") base *= 1.15;
       
-      setWaterIntake(parseFloat(base.toFixed(2)));
+      const waterResult = parseFloat(base.toFixed(2));
+      setWaterIntake(waterResult);
+      
+      updateAIInsight(
+        { weight: w, activityLevel: activity, climate },
+        { 
+          dailyWaterLiters: waterResult, 
+          dailyWaterMl: Math.round(waterResult * 1000),
+          glassesPerDay: Math.round(waterResult / 0.25)
+        }
+      );
     }
   };
 
