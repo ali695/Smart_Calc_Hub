@@ -4,11 +4,13 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
 
 const MacroCalculator = () => {
   const [calories, setCalories] = useState("");
   const [goal, setGoal] = useState("balanced");
   const [macros, setMacros] = useState<any>(null);
+  const { updateAIInsight, handleCalculation } = useCalculatorEnhancements();
 
   const calculate = () => {
     const cal = parseFloat(calories);
@@ -25,11 +27,24 @@ const MacroCalculator = () => {
         protein = 0.25; carbs = 0.05; fat = 0.70;
       }
       
-      setMacros({
+      const macrosResult = {
         protein: { grams: Math.round((cal * protein) / 4), percent: Math.round(protein * 100) },
         carbs: { grams: Math.round((cal * carbs) / 4), percent: Math.round(carbs * 100) },
         fat: { grams: Math.round((cal * fat) / 9), percent: Math.round(fat * 100) }
-      });
+      };
+      setMacros(macrosResult);
+      
+      updateAIInsight(
+        { dailyCalories: cal, dietGoal: goal },
+        { 
+          proteinGrams: macrosResult.protein.grams,
+          carbsGrams: macrosResult.carbs.grams,
+          fatGrams: macrosResult.fat.grams,
+          proteinPercent: macrosResult.protein.percent,
+          carbsPercent: macrosResult.carbs.percent,
+          fatPercent: macrosResult.fat.percent
+        }
+      );
     }
   };
 
@@ -81,7 +96,7 @@ const MacroCalculator = () => {
           </div>
         </div>
 
-        <Button onClick={calculate} className="w-full" size="lg">Calculate Macros</Button>
+        <Button type="button" onClick={() => handleCalculation(calculate)} className="w-full" size="lg">Calculate Macros</Button>
 
         {macros && (
           <div className="space-y-4 animate-fade-in">

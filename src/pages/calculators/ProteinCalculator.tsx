@@ -4,12 +4,14 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
 
 const ProteinCalculator = () => {
   const [weight, setWeight] = useState("");
   const [goal, setGoal] = useState("maintain");
   const [activity, setActivity] = useState("moderate");
   const [protein, setProtein] = useState<number | null>(null);
+  const { updateAIInsight, handleCalculation } = useCalculatorEnhancements();
 
   const calculate = () => {
     const w = parseFloat(weight);
@@ -23,7 +25,18 @@ const ProteinCalculator = () => {
       if (activity === "very-active") multiplier += 0.2;
       
       const dailyProtein = w * multiplier;
-      setProtein(Math.round(dailyProtein));
+      const proteinResult = Math.round(dailyProtein);
+      setProtein(proteinResult);
+      
+      updateAIInsight(
+        { weight: w, fitnessGoal: goal, activityLevel: activity },
+        { 
+          dailyProteinGrams: proteinResult, 
+          proteinPerMeal3: Math.round(proteinResult / 3),
+          proteinPerMeal4: Math.round(proteinResult / 4),
+          gramsPerKg: multiplier
+        }
+      );
     }
   };
 
@@ -87,7 +100,7 @@ const ProteinCalculator = () => {
           </div>
         </div>
 
-        <Button onClick={calculate} className="w-full" size="lg">Calculate Protein</Button>
+        <Button type="button" onClick={() => handleCalculation(calculate)} className="w-full" size="lg">Calculate Protein</Button>
 
         {protein !== null && (
           <div className="space-y-4 animate-fade-in">

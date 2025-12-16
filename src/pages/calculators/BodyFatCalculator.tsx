@@ -4,6 +4,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
 
 const BodyFatCalculator = () => {
   const [age, setAge] = useState("");
@@ -15,6 +16,7 @@ const BodyFatCalculator = () => {
   const [hip, setHip] = useState("");
   const [bodyFat, setBodyFat] = useState<number | null>(null);
   const [category, setCategory] = useState("");
+  const { updateAIInsight, handleCalculation } = useCalculatorEnhancements();
 
   const calculate = () => {
     const h = parseFloat(height);
@@ -25,29 +27,42 @@ const BodyFatCalculator = () => {
     
     if (gender === "male" && h > 0 && n > 0 && wa > 0) {
       const bf = 495 / (1.0324 - 0.19077 * Math.log10(wa - n) + 0.15456 * Math.log10(h)) - 450;
-      setBodyFat(parseFloat(bf.toFixed(1)));
-      determineCategory(bf, "male");
+      const bfResult = parseFloat(bf.toFixed(1));
+      setBodyFat(bfResult);
+      const cat = determineCategory(bf, "male");
+      updateAIInsight(
+        { gender, height: h, weight: w, neck: n, waist: wa },
+        { bodyFatPercentage: bfResult, category: cat, leanMass: w * (1 - bf / 100), fatMass: w * (bf / 100) }
+      );
     } else if (gender === "female" && h > 0 && n > 0 && wa > 0 && hi > 0) {
       const bf = 495 / (1.29579 - 0.35004 * Math.log10(wa + hi - n) + 0.22100 * Math.log10(h)) - 450;
-      setBodyFat(parseFloat(bf.toFixed(1)));
-      determineCategory(bf, "female");
+      const bfResult = parseFloat(bf.toFixed(1));
+      setBodyFat(bfResult);
+      const cat = determineCategory(bf, "female");
+      updateAIInsight(
+        { gender, height: h, weight: w, neck: n, waist: wa, hip: hi },
+        { bodyFatPercentage: bfResult, category: cat, leanMass: w * (1 - bf / 100), fatMass: w * (bf / 100) }
+      );
     }
   };
 
-  const determineCategory = (bf: number, gen: string) => {
+  const determineCategory = (bf: number, gen: string): string => {
+    let cat = "";
     if (gen === "male") {
-      if (bf < 6) setCategory("Essential Fat");
-      else if (bf < 14) setCategory("Athletes");
-      else if (bf < 18) setCategory("Fitness");
-      else if (bf < 25) setCategory("Average");
-      else setCategory("Obese");
+      if (bf < 6) cat = "Essential Fat";
+      else if (bf < 14) cat = "Athletes";
+      else if (bf < 18) cat = "Fitness";
+      else if (bf < 25) cat = "Average";
+      else cat = "Obese";
     } else {
-      if (bf < 14) setCategory("Essential Fat");
-      else if (bf < 21) setCategory("Athletes");
-      else if (bf < 25) setCategory("Fitness");
-      else if (bf < 32) setCategory("Average");
-      else setCategory("Obese");
+      if (bf < 14) cat = "Essential Fat";
+      else if (bf < 21) cat = "Athletes";
+      else if (bf < 25) cat = "Fitness";
+      else if (bf < 32) cat = "Average";
+      else cat = "Obese";
     }
+    setCategory(cat);
+    return cat;
   };
 
   const faqs = [
