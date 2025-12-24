@@ -82,13 +82,35 @@ export const CalculatorLayout = ({
   const { logPageView } = useAnalytics();
   const { region, config } = useRegion();
   
+  // Extract calculator slug from path
+  const calculatorSlug = location.pathname.split('/').pop() || '';
+
   // State for AI Insight context
   const [aiInputs, setAiInputs] = useState<Record<string, any>>({});
   const [aiResults, setAiResults] = useState<Record<string, any> | null>(null);
 
-  // Extract calculator slug from path
-  const calculatorSlug = location.pathname.split('/').pop() || '';
+  // Listen for AI insight updates dispatched from calculators (see useCalculatorEnhancements).
+  useEffect(() => {
+    const handler = (event: Event) => {
+      const e = event as CustomEvent<{
+        calculatorSlug?: string;
+        inputs?: Record<string, any>;
+        results?: Record<string, any>;
+      }>;
 
+      const detail = e.detail;
+      if (!detail) return;
+
+      // Ignore events from other calculator pages
+      if (detail.calculatorSlug && detail.calculatorSlug !== calculatorSlug) return;
+
+      if (detail.inputs) setAiInputs(detail.inputs);
+      if (detail.results) setAiResults(detail.results);
+    };
+
+    window.addEventListener("smartcalc:ai-insight", handler as EventListener);
+    return () => window.removeEventListener("smartcalc:ai-insight", handler as EventListener);
+  }, [calculatorSlug]);
   // Smooth scroll to top on calculator page load
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
