@@ -5,8 +5,10 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
 
 const ArccosCalculator = () => {
+  const { updateAIInsight } = useCalculatorEnhancements();
   const [value, setValue] = useState("");
   const [outputUnit, setOutputUnit] = useState("degrees");
   const [result, setResult] = useState<number | null>(null);
@@ -24,8 +26,12 @@ const ArccosCalculator = () => {
     }
     setError("");
     const radians = Math.acos(v);
-    const result = outputUnit === "degrees" ? (radians * 180) / Math.PI : radians;
-    setResult(result);
+    const res = outputUnit === "degrees" ? (radians * 180) / Math.PI : radians;
+    setResult(res);
+    updateAIInsight(
+      { value: v, outputUnit },
+      { result: res.toFixed(6), radians: radians.toFixed(6), degrees: ((radians * 180) / Math.PI).toFixed(6) }
+    );
   };
 
   const faqs = [

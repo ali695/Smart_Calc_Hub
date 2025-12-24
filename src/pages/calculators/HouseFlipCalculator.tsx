@@ -15,7 +15,7 @@ const HouseFlipCalculator = () => {
   const [sellingPrice, setSellingPrice] = useState("");
   const [closingCosts, setClosingCosts] = useState("6");
   const [result, setResult] = useState<{ totalCost: number; profit: number; roi: number; profitMargin: number } | null>(null);
-  const { isCalculating, handleCalculation, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
@@ -34,6 +34,10 @@ const HouseFlipCalculator = () => {
     const profitMargin = (profit / arv) * 100;
 
     setResult({ totalCost, profit, roi, profitMargin });
+    updateAIInsight(
+      { purchasePrice: purchase, rehabCost: rehab, holdingCosts: holding, afterRepairValue: arv },
+      { totalCost, profit, roi: roi.toFixed(1) + "%", profitMargin: profitMargin.toFixed(1) + "%" }
+    );
   };
 
   const faqs = [

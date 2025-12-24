@@ -12,7 +12,7 @@ const PercentageDecreaseCalculator = () => {
   const [originalValue, setOriginalValue] = useState("");
   const [percentage, setPercentage] = useState("");
   const [result, setResult] = useState<{ decrease: number; finalValue: number } | null>(null);
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
@@ -23,6 +23,10 @@ const PercentageDecreaseCalculator = () => {
     const decrease = original * (pct / 100);
     const finalValue = original - decrease;
     setResult({ decrease, finalValue });
+    updateAIInsight(
+      { originalValue: original, percentage: pct },
+      { decreaseAmount: decrease.toFixed(2), finalValue: finalValue.toFixed(2) }
+    );
   };
 
   const faqs = [

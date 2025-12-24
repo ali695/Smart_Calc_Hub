@@ -14,25 +14,29 @@ const FractionDecimalCalculator = () => {
   const [denominator, setDenominator] = useState("");
   const [decimal, setDecimal] = useState("");
   const [result, setResult] = useState<{ type: string; value: string } | null>(null);
-  const { isCalculating, handleCalculation, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const fractionToDecimal = () => {
     const num = parseFloat(numerator);
     const den = parseFloat(denominator);
     if (!den || den === 0) return;
-    setResult({ type: "decimal", value: (num / den).toString() });
+    const decimalValue = (num / den).toString();
+    setResult({ type: "decimal", value: decimalValue });
+    updateAIInsight({ numerator: num, denominator: den, operation: "Fraction to Decimal" }, { decimal: decimalValue });
   };
 
   const decimalToFraction = () => {
     const dec = parseFloat(decimal);
     if (isNaN(dec)) return;
     const precision = decimal.split('.')[1]?.length || 0;
-    const denominator = Math.pow(10, precision);
-    const numerator = Math.round(dec * denominator);
+    const den = Math.pow(10, precision);
+    const num = Math.round(dec * den);
     const gcd = (a: number, b: number): number => b === 0 ? a : gcd(b, a % b);
-    const divisor = gcd(numerator, denominator);
-    setResult({ type: "fraction", value: `${numerator / divisor}/${denominator / divisor}` });
+    const divisor = gcd(num, den);
+    const fractionValue = `${num / divisor}/${den / divisor}`;
+    setResult({ type: "fraction", value: fractionValue });
+    updateAIInsight({ decimal: dec, operation: "Decimal to Fraction" }, { fraction: fractionValue });
   };
 
   const faqs = [{ question: "How to convert fraction to decimal?", answer: "Divide the numerator by the denominator." }];

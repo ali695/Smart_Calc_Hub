@@ -10,7 +10,7 @@ import { usePrintCalculator } from "@/hooks/usePrintCalculator";
 import { Copy, Printer, Loader2 } from "lucide-react";
 
 const BasalTempCalculator = () => {
-  const { isCalculating, handleCalculation, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
   const [temperature, setTemperature] = useState("");
   const [result, setResult] = useState<{
@@ -40,6 +40,10 @@ const BasalTempCalculator = () => {
     }
 
     setResult({ category, phase });
+    updateAIInsight(
+      { temperature: temp },
+      { category, phase }
+    );
   };
 
   const faqs = [

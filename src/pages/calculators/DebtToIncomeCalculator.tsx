@@ -15,7 +15,7 @@ const DebtToIncomeCalculator = () => {
     dti: number;
     category: string;
   } | null>(null);
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
@@ -33,6 +33,10 @@ const DebtToIncomeCalculator = () => {
     else category = "High - Difficult to qualify for loans";
 
     setResult({ dti, category });
+    updateAIInsight(
+      { monthlyIncome: income, monthlyDebts: debts },
+      { dtiRatio: dti.toFixed(2) + "%", category }
+    );
   };
 
   const faqs = [

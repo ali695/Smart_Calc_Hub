@@ -20,7 +20,7 @@ const StressStrainCalculator = () => {
     youngsModulus: number;
   } | null>(null);
 
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
@@ -39,6 +39,10 @@ const StressStrainCalculator = () => {
         strain: parseFloat(strain.toFixed(6)),
         youngsModulus: parseFloat(youngsModulus.toFixed(2))
       });
+      updateAIInsight(
+        { force: f, area: a, originalLength: l0, changeInLength: dl },
+        { stress: stress.toFixed(2) + " Pa", strain: strain.toFixed(6), youngsModulus: youngsModulus.toFixed(2) + " Pa" }
+      );
     }
   };
 

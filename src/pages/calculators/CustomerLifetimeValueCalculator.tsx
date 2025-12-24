@@ -13,7 +13,7 @@ const CustomerLifetimeValueCalculator = () => {
   const [purchaseFrequency, setPurchaseFrequency] = useState("");
   const [customerLifespan, setCustomerLifespan] = useState("");
   const [result, setResult] = useState<{ clv: number; yearlyValue: number } | null>(null);
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
@@ -29,6 +29,10 @@ const CustomerLifetimeValueCalculator = () => {
         clv: parseFloat(clv.toFixed(2)),
         yearlyValue: parseFloat(yearlyValue.toFixed(2))
       });
+      updateAIInsight(
+        { averagePurchaseValue: avgPurchase, purchaseFrequency: frequency, customerLifespan: lifespan },
+        { customerLifetimeValue: clv.toFixed(2), yearlyValue: yearlyValue.toFixed(2) }
+      );
     }
   };
 
