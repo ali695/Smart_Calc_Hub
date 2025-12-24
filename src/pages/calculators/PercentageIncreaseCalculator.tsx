@@ -15,7 +15,7 @@ const PercentageIncreaseCalculator = () => {
     increase: number;
     finalValue: number;
   } | null>(null);
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
@@ -26,6 +26,7 @@ const PercentageIncreaseCalculator = () => {
     const increase = original * (pct / 100);
     const finalValue = original + increase;
     setResult({ increase, finalValue });
+    updateAIInsight({ originalValue: original, percentage: pct }, { increase, finalValue });
   };
 
   const faqs = [

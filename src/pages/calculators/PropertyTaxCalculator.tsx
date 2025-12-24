@@ -13,7 +13,7 @@ const PropertyTaxCalculator = () => {
   const [taxRate, setTaxRate] = useState("");
   const [exemptions, setExemptions] = useState("0");
   const [result, setResult] = useState<{ annualTax: number; monthlyTax: number; effectiveRate: number } | null>(null);
-  const { isCalculating, handleCalculation, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
@@ -29,6 +29,10 @@ const PropertyTaxCalculator = () => {
     const effectiveRate = (annualTax / value) * 100;
 
     setResult({ annualTax, monthlyTax, effectiveRate });
+    updateAIInsight(
+      { assessedValue: value, taxRate: rate, exemptions: exempt },
+      { annualTax, monthlyTax, effectiveRate }
+    );
   };
 
   const faqs = [

@@ -12,7 +12,7 @@ const ProbabilityCalculator = () => {
   const [favorable, setFavorable] = useState("");
   const [total, setTotal] = useState("");
   const [result, setResult] = useState<{ probability: number; percentage: number; odds: string } | null>(null);
-  const { isCalculating, handleCalculation, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
@@ -23,6 +23,7 @@ const ProbabilityCalculator = () => {
     const percentage = probability * 100;
     const odds = `${fav}:${tot - fav}`;
     setResult({ probability, percentage, odds });
+    updateAIInsight({ favorableOutcomes: fav, totalOutcomes: tot }, { probability, percentage, odds });
   };
 
   const faqs = [{ question: "What is probability?", answer: "Probability measures the likelihood of an event occurring, expressed as a number between 0 (impossible) and 1 (certain)." }];

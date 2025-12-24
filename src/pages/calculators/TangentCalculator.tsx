@@ -14,14 +14,16 @@ const TangentCalculator = () => {
   const [unit, setUnit] = useState("degrees");
   const [result, setResult] = useState<number | null>(null);
 
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
     const a = parseFloat(angle);
     if (!isNaN(a)) {
       const radians = unit === "degrees" ? (a * Math.PI) / 180 : a;
-      setResult(Math.tan(radians));
+      const tanResult = Math.tan(radians);
+      setResult(tanResult);
+      updateAIInsight({ angle: a, unit }, { tangent: tanResult });
     }
   };
 

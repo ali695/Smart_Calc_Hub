@@ -24,7 +24,7 @@ const RefinanceCalculator = () => {
     totalInterestCurrent: number;
     totalInterestNew: number;
   } | null>(null);
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
@@ -46,6 +46,10 @@ const RefinanceCalculator = () => {
     const totalSavings = totalInterestCurrent - totalInterestNew - costs;
 
     setResult({ currentPayment, newPayment, monthlySavings, breakEvenMonths, totalSavings, totalInterestCurrent, totalInterestNew });
+    updateAIInsight(
+      { currentBalance: balance, currentRate: parseFloat(currentRate), newRate: parseFloat(newRate), newTerm: parseInt(newTerm), closingCosts: costs },
+      { currentPayment, newPayment, monthlySavings, breakEvenMonths, totalSavings }
+    );
   };
 
   const faqs = [

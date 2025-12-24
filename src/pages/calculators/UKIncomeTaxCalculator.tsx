@@ -18,7 +18,7 @@ const UKIncomeTaxCalculator = () => {
     takeHome: number;
     effectiveRate: number;
   } | null>(null);
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
@@ -67,6 +67,11 @@ const UKIncomeTaxCalculator = () => {
       takeHome,
       effectiveRate: (totalTax / grossIncome) * 100,
     });
+    
+    updateAIInsight(
+      { grossIncome },
+      { taxableIncome, incomeTax, nationalInsurance: ni, totalTax, takeHome, effectiveRate: (totalTax / grossIncome) * 100 }
+    );
   };
 
   const faqs = [

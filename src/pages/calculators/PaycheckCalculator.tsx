@@ -21,7 +21,7 @@ const PaycheckCalculator = () => {
     totalDeductions: number;
     netPay: number;
   } | null>(null);
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
@@ -54,6 +54,10 @@ const PaycheckCalculator = () => {
     const netPay = grossPay - totalDeductions;
 
     setResult({ grossPay, federalTax, socialSecurity, medicare, totalDeductions, netPay });
+    updateAIInsight(
+      { annualSalary, payFrequency, filingStatus },
+      { grossPay, federalTax, socialSecurity, medicare, totalDeductions, netPay }
+    );
   };
 
   const faqs = [
