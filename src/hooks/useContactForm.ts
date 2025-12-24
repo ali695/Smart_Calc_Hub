@@ -15,6 +15,7 @@ export const useContactForm = () => {
   const submitContact = useCallback(async (name: string, email: string, message: string) => {
     setIsSubmitting(true);
 
+    // Client-side validation
     const validation = contactSchema.safeParse({ name, email, message });
     if (!validation.success) {
       toast({
@@ -26,17 +27,44 @@ export const useContactForm = () => {
       return false;
     }
 
-    const { error } = await supabase
-      .from('contact_messages')
-      .insert({
-        name: validation.data.name,
-        email: validation.data.email,
-        message: validation.data.message
+    try {
+      // Submit via edge function (bypasses RLS, has rate limiting)
+      const { data, error } = await supabase.functions.invoke('submit-contact', {
+        body: {
+          name: validation.data.name,
+          email: validation.data.email,
+          message: validation.data.message
+        }
       });
 
-    setIsSubmitting(false);
+      setIsSubmitting(false);
 
-    if (error) {
+      if (error) {
+        toast({
+          title: "Error",
+          description: "Failed to submit message. Please try again.",
+          variant: "destructive"
+        });
+        return false;
+      }
+
+      // Check for rate limit or other errors in response
+      if (data?.error) {
+        toast({
+          title: "Error",
+          description: data.error,
+          variant: "destructive"
+        });
+        return false;
+      }
+
+      toast({
+        title: "Message Sent!",
+        description: "We'll get back to you soon."
+      });
+      return true;
+    } catch {
+      setIsSubmitting(false);
       toast({
         title: "Error",
         description: "Failed to submit message. Please try again.",
@@ -44,12 +72,6 @@ export const useContactForm = () => {
       });
       return false;
     }
-
-    toast({
-      title: "Message Sent!",
-      description: "We'll get back to you soon."
-    });
-    return true;
   }, []);
 
   return { submitContact, isSubmitting };

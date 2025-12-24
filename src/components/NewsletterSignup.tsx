@@ -24,7 +24,6 @@ export const NewsletterSignup = () => {
       });
 
       if (error) {
-        console.error('Newsletter subscription error:', error);
         toast.error("Something went wrong. Please try again.");
         return;
       }
@@ -34,22 +33,16 @@ export const NewsletterSignup = () => {
         return;
       }
 
-      if (data?.message === 'Already subscribed') {
-        toast.info("You're already subscribed!", {
-          description: "This email is already on our list."
-        });
-      } else {
-        toast.success("Welcome aboard!", {
-          description: "You'll receive our latest calculator tips and financial insights."
-        });
-      }
+      // Don't reveal if already subscribed - same success message for all
+      toast.success("Thank you!", {
+        description: "You'll receive our latest calculator tips and financial insights."
+      });
       
       setEmail("");
     } catch (error) {
       if (error instanceof z.ZodError) {
         toast.error(error.errors[0].message);
       } else {
-        console.error('Newsletter subscription error:', error);
         toast.error("Something went wrong. Please try again.");
       }
     } finally {
