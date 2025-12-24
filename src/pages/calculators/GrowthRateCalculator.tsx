@@ -14,7 +14,7 @@ const GrowthRateCalculator = () => {
   const [endingValue, setEndingValue] = useState("");
   const [periods, setPeriods] = useState("");
   const [result, setResult] = useState<{ cagr: number; totalGrowth: number; yoyGrowth: number } | null>(null);
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
@@ -27,11 +27,17 @@ const GrowthRateCalculator = () => {
       const totalGrowth = ((end - start) / start) * 100;
       const yoyGrowth = cagr;
       
-      setResult({
+      const resultData = {
         cagr: parseFloat(cagr.toFixed(2)),
         totalGrowth: parseFloat(totalGrowth.toFixed(2)),
         yoyGrowth: parseFloat(yoyGrowth.toFixed(2))
-      });
+      };
+      setResult(resultData);
+      
+      updateAIInsight(
+        { startingValue: start, endingValue: end, years: n },
+        { cagr: resultData.cagr + "%", totalGrowth: resultData.totalGrowth + "%", absoluteGrowth: (end - start).toFixed(2) }
+      );
     }
   };
 

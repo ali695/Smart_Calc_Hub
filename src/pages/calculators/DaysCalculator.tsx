@@ -12,7 +12,7 @@ const DaysCalculator = () => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [result, setResult] = useState<{ days: number; weeks: number; months: number } | null>(null);
-  const { isCalculating, handleCalculation, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
@@ -23,7 +23,13 @@ const DaysCalculator = () => {
     const days = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     const weeks = Math.floor(days / 7);
     const months = Math.floor(days / 30.44);
-    setResult({ days, weeks, months });
+    const resultData = { days, weeks, months };
+    setResult(resultData);
+    
+    updateAIInsight(
+      { startDate, endDate },
+      { totalDays: days, totalWeeks: weeks, approximateMonths: months }
+    );
   };
 
   const faqs = [{ question: "How are days between dates calculated?", answer: "Days are calculated by finding the difference in milliseconds and dividing by milliseconds per day." }];

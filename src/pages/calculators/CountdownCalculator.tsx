@@ -11,7 +11,7 @@ import { Copy, Loader2, Printer } from "lucide-react";
 const CountdownCalculator = () => {
   const [targetDate, setTargetDate] = useState("");
   const [result, setResult] = useState<{ days: number; hours: number; minutes: number; seconds: number; total: string } | null>(null);
-  const { isCalculating, handleCalculation, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
@@ -30,7 +30,13 @@ const CountdownCalculator = () => {
     const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((diff % (1000 * 60)) / 1000);
     
-    setResult({ days, hours, minutes, seconds, total: `${days}d ${hours}h ${minutes}m ${seconds}s` });
+    const resultData = { days, hours, minutes, seconds, total: `${days}d ${hours}h ${minutes}m ${seconds}s` };
+    setResult(resultData);
+    
+    updateAIInsight(
+      { targetDate, currentDate: now.toISOString() },
+      { daysRemaining: days, hoursRemaining: hours, totalTimeRemaining: resultData.total }
+    );
   };
 
   useEffect(() => {

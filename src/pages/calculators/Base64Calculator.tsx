@@ -5,15 +5,21 @@ import { Card, CardContent } from "@/components/ui/card";
 import { CalculatorLayout } from "@/components/CalculatorLayout";
 import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
 
 const Base64Calculator = () => {
   const [input, setInput] = useState("");
   const [result, setResult] = useState("");
+  const { updateAIInsight } = useCalculatorEnhancements();
 
   const encode = () => {
     try {
       const encoded = btoa(input);
       setResult(encoded);
+      updateAIInsight(
+        { operation: "encode", inputLength: input.length },
+        { outputLength: encoded.length, ratio: (encoded.length / input.length).toFixed(2) }
+      );
     } catch (error) {
       setResult("Error: Invalid input for encoding");
     }
@@ -23,6 +29,10 @@ const Base64Calculator = () => {
     try {
       const decoded = atob(input);
       setResult(decoded);
+      updateAIInsight(
+        { operation: "decode", inputLength: input.length },
+        { outputLength: decoded.length, success: true }
+      );
     } catch (error) {
       setResult("Error: Invalid Base64 string");
     }

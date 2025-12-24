@@ -5,12 +5,14 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
 
 const BodySurfaceAreaCalculator = () => {
   const [weight, setWeight] = useState("");
   const [height, setHeight] = useState("");
   const [formula, setFormula] = useState("dubois");
   const [result, setResult] = useState<number | null>(null);
+  const { updateAIInsight } = useCalculatorEnhancements();
 
   const calculate = () => {
     const w = parseFloat(weight);
@@ -35,6 +37,11 @@ const BodySurfaceAreaCalculator = () => {
       }
 
       setResult(bsa);
+      
+      updateAIInsight(
+        { weight: w, height: h, formula },
+        { bsa: bsa.toFixed(3) + " m²", formulaUsed: formula === "dubois" ? "Du Bois" : formula === "mosteller" ? "Mosteller" : "Haycock" }
+      );
     }
   };
 

@@ -12,7 +12,7 @@ const ColorConverterCalculator = () => {
   const [hex, setHex] = useState("#FF5733");
   const [rgb, setRgb] = useState({ r: 255, g: 87, b: 51 });
   const [hsl, setHsl] = useState({ h: 9, s: 100, l: 60 });
-  const { isCalculating, handleCalculation, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const hexToRgb = (hex: string) => {
@@ -61,7 +61,13 @@ const ColorConverterCalculator = () => {
     const rgbResult = hexToRgb(hex);
     if (rgbResult) {
       setRgb(rgbResult);
-      setHsl(rgbToHsl(rgbResult.r, rgbResult.g, rgbResult.b));
+      const hslResult = rgbToHsl(rgbResult.r, rgbResult.g, rgbResult.b);
+      setHsl(hslResult);
+      
+      updateAIInsight(
+        { hexColor: hex },
+        { rgb: `rgb(${rgbResult.r}, ${rgbResult.g}, ${rgbResult.b})`, hsl: `hsl(${hslResult.h}, ${hslResult.s}%, ${hslResult.l}%)` }
+      );
     }
   };
 

@@ -17,7 +17,7 @@ const PasswordGeneratorCalculator = () => {
     numbers: true,
     symbols: true
   });
-  const { isCalculating, handleCalculation, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
 
   const generate = () => {
     const uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -56,6 +56,10 @@ const PasswordGeneratorCalculator = () => {
       result += chars.charAt(array[i] % chars.length);
     }
     setPassword(result);
+    updateAIInsight(
+      { length: len, options },
+      { passwordGenerated: true, charPoolSize: chars.length, strength: len >= 16 ? "Strong" : len >= 12 ? "Good" : "Moderate" }
+    );
   };
 
   const faqs = [

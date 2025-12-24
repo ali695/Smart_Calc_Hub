@@ -15,7 +15,7 @@ const BloodPressureCalculator = () => {
     category: string;
     recommendation: string;
   } | null>(null);
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
@@ -45,6 +45,11 @@ const BloodPressureCalculator = () => {
     }
 
     setResult({ category, recommendation });
+    
+    updateAIInsight(
+      { systolic: sys, diastolic: dia, reading: `${sys}/${dia} mmHg` },
+      { category, recommendation, isNormal: category === "Normal" }
+    );
   };
 
   const faqs = [

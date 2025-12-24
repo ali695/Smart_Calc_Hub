@@ -17,7 +17,7 @@ const InventoryTurnoverCalculator = () => {
     daysInventoryOutstanding: number;
   } | null>(null);
 
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
@@ -28,10 +28,16 @@ const InventoryTurnoverCalculator = () => {
       const turnoverRatio = cogs / avgInv;
       const daysInventoryOutstanding = 365 / turnoverRatio;
 
-      setResult({
+      const resultData = {
         turnoverRatio: parseFloat(turnoverRatio.toFixed(2)),
         daysInventoryOutstanding: parseFloat(daysInventoryOutstanding.toFixed(0))
-      });
+      };
+      setResult(resultData);
+      
+      updateAIInsight(
+        { costOfGoodsSold: cogs, averageInventory: avgInv },
+        { turnoverRatio: resultData.turnoverRatio + "x", daysInventoryOutstanding: resultData.daysInventoryOutstanding + " days" }
+      );
     }
   };
 
