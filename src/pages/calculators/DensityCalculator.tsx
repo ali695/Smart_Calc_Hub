@@ -73,7 +73,7 @@ const DensityCalculator = () => {
       seoTitle="Density Calculator – Mass, Volume, Density | SmartCalc Hub"
       seoDescription="Free density calculator. Calculate density using mass and volume (ρ = m/V) for science."
       keywords="density calculator, mass volume density, physics calculator, material density"
-      canonicalUrl="https://smartcalchub.com/science/density-calculator"
+      canonicalUrl="https://smartcalhub.online/science/density-calculator"
     >
       <div className="space-y-6">
         <div className="grid md:grid-cols-2 gap-6">

@@ -51,7 +51,7 @@ const ConversionRateCalculator = () => {
       seoTitle="Conversion Rate Calculator – Optimize Marketing ROI | SmartCalc Hub"
       seoDescription="Free conversion rate calculator. Measure and optimize your website, landing page, and marketing campaign performance."
       keywords="conversion rate calculator, marketing metrics, ROI calculator, landing page optimization, e-commerce analytics"
-      canonicalUrl="https://smartcalchub.com/calculator/conversion-rate"
+      canonicalUrl="https://smartcalhub.online/calculator/conversion-rate"
     >
       <div className="space-y-6">
         <div className="grid md:grid-cols-2 gap-6">

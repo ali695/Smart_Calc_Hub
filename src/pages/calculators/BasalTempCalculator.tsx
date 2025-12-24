@@ -64,7 +64,7 @@ const BasalTempCalculator = () => {
         data={{
           name: "Basal Body Temperature Tracker",
           description: "Track your basal body temperature to identify ovulation patterns and optimize fertility awareness",
-          url: "https://smartcalchub.com/health/basal-temp-calculator"
+          url: "https://smartcalhub.online/health/basal-temp-calculator"
         }}
       />
       <CalculatorLayout

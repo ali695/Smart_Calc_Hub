@@ -90,7 +90,7 @@ const TemperatureConverter = () => {
       seoTitle="Temperature Converter - Celsius, Fahrenheit & Kelvin | SmartCalc Hub"
       seoDescription="Free temperature converter for Celsius, Fahrenheit, and Kelvin. Instant temperature conversions with accurate formulas. Perfect for science, cooking, and weather."
       keywords="temperature converter, celsius to fahrenheit, fahrenheit to celsius, kelvin converter, temperature conversion"
-      canonicalUrl="https://smartcalchub.com/calculator/temperature"
+      canonicalUrl="https://smartcalhub.online/calculator/temperature"
       category="conversion"
       calculatorId="temperature"
       howItWorks="This converter transforms temperatures between Celsius, Fahrenheit, and Kelvin scales. Enter a value in any unit to see instant conversions to all other units."

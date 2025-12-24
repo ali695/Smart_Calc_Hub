@@ -77,7 +77,7 @@ const AreaConverter = () => {
       seoTitle="Area Converter – Convert Square Meters, Feet, Acres | SmartCalc Hub"
       seoDescription="Free area converter for square meters, square feet, acres, hectares and more. Instant accurate conversions for land area calculations."
       keywords="area converter, square meter converter, acre converter, hectare converter, land area calculator"
-      canonicalUrl="https://smartcalchub.com/conversion/area-converter"
+      canonicalUrl="https://smartcalhub.online/conversion/area-converter"
     >
       <div className="space-y-6">
         <div className="grid md:grid-cols-2 gap-6">

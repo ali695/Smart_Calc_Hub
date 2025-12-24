@@ -125,7 +125,7 @@ const CompoundInterestCalculator = () => {
       seoTitle="Compound Interest Calculator - Investment Growth Calculator | SmartCalc Hub"
       seoDescription="Free compound interest calculator to see how your investments grow over time. Calculate returns with different compounding frequencies. Perfect for retirement planning and savings goals."
       keywords="compound interest calculator, investment calculator, compound interest, savings calculator, investment growth, retirement calculator"
-      canonicalUrl="https://smartcalchub.com/calculator/compound-interest"
+      canonicalUrl="https://smartcalhub.online/calculator/compound-interest"
       category="finance"
       calculatorId="compound-interest"
       howItWorks="This calculator shows how your initial investment and regular contributions grow over time through the power of compound interest. The compounding frequency determines how often interest is calculated and added back to your principal, affecting your total returns."

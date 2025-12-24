@@ -59,7 +59,7 @@ const TriangleAreaCalculator = () => {
       seoTitle="Triangle Area Calculator – Calculate Triangle Area Online | SmartCalc Hub"
       seoDescription="Free triangle area calculator using base and height. Get instant accurate results for any triangle type."
       keywords="triangle area calculator, area of triangle, triangle calculator, geometry calculator"
-      canonicalUrl="https://smartcalchub.com/math/triangle-area-calculator"
+      canonicalUrl="https://smartcalhub.online/math/triangle-area-calculator"
     >
       <div className="space-y-6">
         <div className="grid md:grid-cols-2 gap-6">

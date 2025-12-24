@@ -84,7 +84,7 @@ const PasswordGeneratorCalculator = () => {
       seoTitle="Password Generator – Create Strong Secure Passwords | SmartCalc Hub"
       seoDescription="Free password generator. Create strong, random, secure passwords with custom length and character options."
       keywords="password generator, strong password, secure password, random password"
-      canonicalUrl="https://smartcalchub.com/calculator/password-generator"
+      canonicalUrl="https://smartcalhub.online/calculator/password-generator"
     >
       <div className="space-y-6">
         <div className="space-y-4">

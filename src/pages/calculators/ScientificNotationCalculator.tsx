@@ -55,7 +55,7 @@ const ScientificNotationCalculator = () => {
       seoTitle="Scientific Notation Calculator – Convert to Exponential Form | SmartCalc Hub"
       seoDescription="Free scientific notation calculator. Convert numbers to and from exponential notation instantly."
       keywords="scientific notation calculator, exponential notation, standard form converter, E notation"
-      canonicalUrl="https://smartcalchub.com/math/scientific-notation-calculator"
+      canonicalUrl="https://smartcalhub.online/math/scientific-notation-calculator"
     >
       <div className="space-y-6">
         <div className="grid md:grid-cols-2 gap-6">

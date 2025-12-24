@@ -101,7 +101,7 @@ const TDEECalculator = () => {
       seoTitle="TDEE Calculator – Calculate Total Daily Energy Expenditure | SmartCalc Hub"
       seoDescription="Free TDEE calculator to determine your daily calorie needs based on activity level. Perfect for weight loss, gain, or maintenance planning."
       keywords="tdee calculator, total daily energy expenditure, calorie needs calculator, maintenance calories"
-      canonicalUrl="https://smartcalchub.com/health/tdee-calculator"
+      canonicalUrl="https://smartcalhub.online/health/tdee-calculator"
     >
       <div className="space-y-6">
         <div className="grid md:grid-cols-2 gap-6">

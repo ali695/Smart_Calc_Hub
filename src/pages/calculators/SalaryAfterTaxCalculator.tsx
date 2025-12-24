@@ -63,7 +63,7 @@ const SalaryAfterTaxCalculator = () => {
       seoTitle="Salary After Tax Calculator – Calculate Take-Home Pay | SmartCalc Hub"
       seoDescription="Free salary after tax calculator. Calculate your net income and take-home pay after federal and state tax deductions."
       keywords="salary calculator, take home pay, after tax salary, net income calculator, paycheck calculator"
-      canonicalUrl="https://smartcalchub.com/finance/salary-after-tax-calculator"
+      canonicalUrl="https://smartcalhub.online/finance/salary-after-tax-calculator"
     >
       <div className="space-y-6">
         <div className="grid md:grid-cols-2 gap-6">

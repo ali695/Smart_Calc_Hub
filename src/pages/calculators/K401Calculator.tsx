@@ -101,7 +101,7 @@ const K401Calculator = () => {
         data={{
           name: "401(k) Calculator",
           description: "Calculate 401(k) retirement savings growth with employer matching",
-          url: "https://smartcalchub.com/calculator/401k",
+          url: "https://smartcalhub.online/calculator/401k",
         }}
       />
       <CalculatorLayout

@@ -69,7 +69,7 @@ const BodySurfaceAreaCalculator = () => {
       seoTitle="Body Surface Area Calculator – BSA for Medical Dosing | SmartCalc Hub"
       seoDescription="Free BSA calculator using Du Bois, Mosteller, and Haycock formulas. Calculate body surface area for accurate medication dosing."
       keywords="body surface area calculator, BSA calculator, Du Bois formula, medical dosage calculator"
-      canonicalUrl="https://smartcalchub.com/health/body-surface-area-calculator"
+      canonicalUrl="https://smartcalhub.online/health/body-surface-area-calculator"
     >
       <div className="space-y-6">
         <div className="grid md:grid-cols-3 gap-6">

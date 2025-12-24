@@ -95,7 +95,7 @@ const FractionCalculator = () => {
         data={{
           name: "Fraction Calculator",
           description: "Add, subtract, multiply, and divide fractions",
-          url: "https://smartcalchub.com/math/fraction-calculator"
+          url: "https://smartcalhub.online/math/fraction-calculator"
         }}
       />
       <CalculatorLayout

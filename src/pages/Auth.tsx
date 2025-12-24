@@ -223,7 +223,7 @@ const [isGoogleLoading, setIsGoogleLoading] = useState(false);
       <SEOHead
         title="Sign In | SmartCalc Hub"
         description="Sign in to SmartCalc Hub to save your calculator history, favorites, and access personalized features."
-        canonicalUrl="https://smartcalchub.com/auth"
+        canonicalUrl="https://smartcalhub.online/auth"
       />
 
       <PageHeader

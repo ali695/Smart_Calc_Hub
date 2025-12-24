@@ -59,7 +59,7 @@ const ArccosCalculator = () => {
       seoTitle="Arccosine Calculator – Calculate cos⁻¹(x) Online | SmartCalc Hub"
       seoDescription="Free inverse cosine (arccos) calculator. Convert cosine ratios to angles in degrees or radians instantly."
       keywords="arccos calculator, inverse cosine, cos^-1, arccosine, trigonometry calculator"
-      canonicalUrl="https://smartcalchub.com/math/arccos-calculator"
+      canonicalUrl="https://smartcalhub.online/math/arccos-calculator"
     >
       <div className="space-y-6">
         <div className="grid md:grid-cols-2 gap-6">

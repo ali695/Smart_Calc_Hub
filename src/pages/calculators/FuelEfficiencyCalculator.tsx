@@ -51,7 +51,7 @@ const FuelEfficiencyCalculator = () => {
         data={{
           name: "Fuel Efficiency Converter",
           description: "Convert between MPG and L/100km fuel efficiency measurements",
-          url: "https://smartcalchub.com/calculator/fuel"
+          url: "https://smartcalhub.online/calculator/fuel"
         }}
       />
       <CalculatorLayout

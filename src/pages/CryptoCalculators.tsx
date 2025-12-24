@@ -17,7 +17,7 @@ const CryptoCalculators = () => {
         description="Free cryptocurrency calculators for Bitcoin, Ethereum and more. Calculate crypto profits, DCA returns, mining profitability, and convert BTC to USD instantly."
         keywords="crypto calculator, bitcoin calculator, cryptocurrency profit, DCA calculator, mining profitability, BTC to USD converter"
         ogType="website"
-        canonicalUrl="https://smartcalchub.com/crypto"
+        canonicalUrl="https://smartcalhub.online/crypto"
       />
       
       <SchemaMarkup
@@ -25,7 +25,7 @@ const CryptoCalculators = () => {
         data={{
           name: "Crypto Calculators - SmartCalc Hub",
           description: "Free online cryptocurrency calculators for Bitcoin, profit calculations, DCA strategy, and mining profitability",
-          url: "https://smartcalchub.com/crypto",
+          url: "https://smartcalhub.online/crypto",
           applicationCategory: "FinanceApplication",
           operatingSystem: "Any",
           offers: {

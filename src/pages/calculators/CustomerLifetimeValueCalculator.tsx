@@ -58,7 +58,7 @@ const CustomerLifetimeValueCalculator = () => {
       seoTitle="Customer Lifetime Value Calculator – CLV Analysis | SmartCalc Hub"
       seoDescription="Free CLV calculator. Calculate customer lifetime value to optimize marketing spend and improve customer retention strategies."
       keywords="CLV calculator, customer lifetime value, customer profitability, marketing ROI, business metrics"
-      canonicalUrl="https://smartcalchub.com/calculator/customer-lifetime-value"
+      canonicalUrl="https://smartcalhub.online/calculator/customer-lifetime-value"
     >
       <div className="space-y-6">
         <div className="grid md:grid-cols-2 gap-6">
