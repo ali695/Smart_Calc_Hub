@@ -13,7 +13,7 @@ const HashGeneratorCalculator = () => {
   const [input, setInput] = useState("");
   const [algorithm, setAlgorithm] = useState("md5");
   const [result, setResult] = useState("");
-  const { isCalculating, handleCalculation, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
 
   const generateHash = async () => {
     const encoder = new TextEncoder();
@@ -43,6 +43,10 @@ const HashGeneratorCalculator = () => {
     const hashArray = Array.from(new Uint8Array(hashBuffer));
     const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
     setResult(hashHex);
+    updateAIInsight(
+      { inputLength: input.length, algorithm },
+      { hashLength: hashHex.length, hash: hashHex.substring(0, 16) + "..." }
+    );
   };
 
   const faqs = [

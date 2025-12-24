@@ -9,7 +9,7 @@ import { usePrintCalculator } from "@/hooks/usePrintCalculator";
 import { Copy, Printer, Loader2 } from "lucide-react";
 
 const PregnancyCalculator = () => {
-  const { isCalculating, handleCalculation, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
   const [lastPeriod, setLastPeriod] = useState("");
   const [dueDate, setDueDate] = useState<string | null>(null);
@@ -25,8 +25,18 @@ const PregnancyCalculator = () => {
       const diffTime = today.getTime() - lmp.getTime();
       const weeks = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 7));
       
-      setDueDate(due.toLocaleDateString());
+      const dueDateStr = due.toLocaleDateString();
+      setDueDate(dueDateStr);
       setWeeksPregnant(weeks);
+      
+      updateAIInsight(
+        { lastMenstrualPeriod: lastPeriod },
+        { 
+          estimatedDueDate: dueDateStr, 
+          weeksPregnant: weeks, 
+          trimester: weeks < 13 ? 1 : weeks < 27 ? 2 : 3 
+        }
+      );
     }
   };
 

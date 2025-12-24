@@ -13,18 +13,22 @@ const BinaryDecimalCalculator = () => {
   const [binary, setBinary] = useState("");
   const [decimal, setDecimal] = useState("");
   const [result, setResult] = useState<{ type: string; value: string } | null>(null);
-  const { isCalculating, handleCalculation, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const binaryToDecimal = () => {
     if (!/^[01]+$/.test(binary)) return;
-    setResult({ type: "decimal", value: parseInt(binary, 2).toString() });
+    const decimalResult = parseInt(binary, 2).toString();
+    setResult({ type: "decimal", value: decimalResult });
+    updateAIInsight({ binary, operation: "Binary to Decimal" }, { decimal: decimalResult });
   };
 
   const decimalToBinary = () => {
     const num = parseInt(decimal);
     if (isNaN(num) || num < 0) return;
-    setResult({ type: "binary", value: num.toString(2) });
+    const binaryResult = num.toString(2);
+    setResult({ type: "binary", value: binaryResult });
+    updateAIInsight({ decimal: num, operation: "Decimal to Binary" }, { binary: binaryResult });
   };
 
   const faqs = [{ question: "What is binary?", answer: "Binary is a base-2 numeral system using only 0 and 1, fundamental to computing." }];

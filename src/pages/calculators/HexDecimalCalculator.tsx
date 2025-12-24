@@ -13,18 +13,22 @@ const HexDecimalCalculator = () => {
   const [hex, setHex] = useState("");
   const [decimal, setDecimal] = useState("");
   const [result, setResult] = useState<{ type: string; value: string } | null>(null);
-  const { isCalculating, handleCalculation, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const hexToDecimal = () => {
     if (!/^[0-9A-Fa-f]+$/.test(hex)) return;
-    setResult({ type: "decimal", value: parseInt(hex, 16).toString() });
+    const decimalResult = parseInt(hex, 16).toString();
+    setResult({ type: "decimal", value: decimalResult });
+    updateAIInsight({ hex, operation: "Hex to Decimal" }, { decimal: decimalResult });
   };
 
   const decimalToHex = () => {
     const num = parseInt(decimal);
     if (isNaN(num) || num < 0) return;
-    setResult({ type: "hexadecimal", value: num.toString(16).toUpperCase() });
+    const hexResult = num.toString(16).toUpperCase();
+    setResult({ type: "hexadecimal", value: hexResult });
+    updateAIInsight({ decimal: num, operation: "Decimal to Hex" }, { hex: hexResult });
   };
 
   const faqs = [{ question: "What is hexadecimal?", answer: "Hexadecimal is a base-16 numeral system using 0-9 and A-F, commonly used in computing for colors and memory addresses." }];

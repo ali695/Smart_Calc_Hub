@@ -14,7 +14,7 @@ const DataTransferCalculator = () => {
   const [fromUnit, setFromUnit] = useState("Mbps");
   const [toUnit, setToUnit] = useState("MBps");
   const [result, setResult] = useState<number | null>(null);
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
 
   const units: { [key: string]: number } = {
     "bps": 1,
@@ -31,7 +31,12 @@ const DataTransferCalculator = () => {
     const val = parseFloat(value);
     if (val && fromUnit && toUnit) {
       const inBps = val * units[fromUnit];
-      setResult(inBps / units[toUnit]);
+      const resultVal = inBps / units[toUnit];
+      setResult(resultVal);
+      updateAIInsight(
+        { value: val, fromUnit, toUnit },
+        { result: resultVal.toFixed(6), conversionFactor: (units[fromUnit] / units[toUnit]).toFixed(6) }
+      );
     }
   };
 

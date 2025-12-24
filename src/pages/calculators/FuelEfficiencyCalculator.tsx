@@ -13,18 +13,28 @@ const FuelEfficiencyCalculator = () => {
   const [lPer100km, setLPer100km] = useState("");
   const [conversionType, setConversionType] = useState<"mpg-to-l" | "l-to-mpg">("mpg-to-l");
   const [result, setResult] = useState<number | null>(null);
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
 
   const calculate = () => {
     if (conversionType === "mpg-to-l") {
       const mpgVal = parseFloat(mpg);
       if (mpgVal && mpgVal > 0) {
-        setResult(235.214 / mpgVal);
+        const resultVal = 235.214 / mpgVal;
+        setResult(resultVal);
+        updateAIInsight(
+          { mpg: mpgVal, conversionType },
+          { lPer100km: resultVal.toFixed(2), efficiency: mpgVal > 30 ? "Excellent" : mpgVal > 20 ? "Good" : "Average" }
+        );
       }
     } else {
       const lVal = parseFloat(lPer100km);
       if (lVal && lVal > 0) {
-        setResult(235.214 / lVal);
+        const resultVal = 235.214 / lVal;
+        setResult(resultVal);
+        updateAIInsight(
+          { lPer100km: lVal, conversionType },
+          { mpg: resultVal.toFixed(2), efficiency: lVal < 8 ? "Excellent" : lVal < 10 ? "Good" : "Average" }
+        );
       }
     }
   };

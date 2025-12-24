@@ -11,7 +11,7 @@ const JsonFormatterCalculator = () => {
   const [input, setInput] = useState("");
   const [result, setResult] = useState("");
   const [error, setError] = useState("");
-  const { isCalculating, handleCalculation, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
 
   const formatJson = () => {
     try {
@@ -19,6 +19,10 @@ const JsonFormatterCalculator = () => {
       const formatted = JSON.stringify(parsed, null, 2);
       setResult(formatted);
       setError("");
+      updateAIInsight(
+        { operation: "format", inputLength: input.length },
+        { outputLength: formatted.length, valid: true, keyCount: Object.keys(parsed).length }
+      );
     } catch (e) {
       setError("Invalid JSON: " + (e as Error).message);
       setResult("");
@@ -31,6 +35,10 @@ const JsonFormatterCalculator = () => {
       const minified = JSON.stringify(parsed);
       setResult(minified);
       setError("");
+      updateAIInsight(
+        { operation: "minify", inputLength: input.length },
+        { outputLength: minified.length, compressionRatio: ((1 - minified.length / input.length) * 100).toFixed(1) + "%" }
+      );
     } catch (e) {
       setError("Invalid JSON: " + (e as Error).message);
       setResult("");

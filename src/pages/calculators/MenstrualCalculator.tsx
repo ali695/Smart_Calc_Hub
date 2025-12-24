@@ -16,7 +16,7 @@ const MenstrualCalculator = () => {
     ovulation: string;
     fertileWindow: string;
   } | null>(null);
-  const { isCalculating, handleCalculation, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
@@ -36,11 +36,21 @@ const MenstrualCalculator = () => {
     const fertileEnd = new Date(ovulationDate);
     fertileEnd.setDate(fertileEnd.getDate() + 1);
 
-    setResult({
+    const resultData = {
       nextPeriod: nextPeriodDate.toLocaleDateString(),
       ovulation: ovulationDate.toLocaleDateString(),
       fertileWindow: `${fertileStart.toLocaleDateString()} - ${fertileEnd.toLocaleDateString()}`
-    });
+    };
+    setResult(resultData);
+    
+    updateAIInsight(
+      { lastPeriodDate: lastPeriod, cycleLength: cycle },
+      { 
+        nextPeriod: resultData.nextPeriod, 
+        ovulationDate: resultData.ovulation, 
+        fertileWindow: resultData.fertileWindow 
+      }
+    );
   };
 
   const faqs = [

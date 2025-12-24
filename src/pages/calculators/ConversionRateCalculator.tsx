@@ -12,7 +12,7 @@ const ConversionRateCalculator = () => {
   const [conversions, setConversions] = useState("");
   const [visitors, setVisitors] = useState("");
   const [result, setResult] = useState<number | null>(null);
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
@@ -21,7 +21,13 @@ const ConversionRateCalculator = () => {
 
     if (!isNaN(conv) && !isNaN(vis) && vis > 0) {
       const rate = (conv / vis) * 100;
-      setResult(parseFloat(rate.toFixed(2)));
+      const rateResult = parseFloat(rate.toFixed(2));
+      setResult(rateResult);
+      
+      updateAIInsight(
+        { conversions: conv, visitors: vis },
+        { conversionRate: rateResult + "%", performance: rateResult < 2 ? "Below Average" : rateResult < 5 ? "Average" : "Above Average" }
+      );
     }
   };
 
