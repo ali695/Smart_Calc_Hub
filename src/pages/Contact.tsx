@@ -51,7 +51,7 @@ const Contact = () => {
         title="Contact Us | SmartCalc Hub - Get in Touch"
         description="Have questions about our calculators? Contact SmartCalc Hub for support, suggestions, or feedback. We're here to help you with all your calculation needs."
         keywords="contact SmartCalc Hub, calculator support, feedback, suggestions"
-        canonicalUrl="https://smartcalchub.com/contact"
+        canonicalUrl="https://smartcalhub.online/contact"
       />
       
       <PageHeader 

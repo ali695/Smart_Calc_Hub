@@ -310,7 +310,7 @@ const Categories = () => {
             "@type": "ListItem",
             "position": index + 1,
             "name": calc.title,
-            "url": `https://smartcalchub.com${calc.path}`
+            "url": `https://smartcalhub.online${calc.path}`
           }))
         })}
       </script>

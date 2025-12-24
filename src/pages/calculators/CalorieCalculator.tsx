@@ -115,7 +115,7 @@ const CalorieCalculator = () => {
       seoTitle="Calorie Calculator - Daily Calorie Needs & TDEE | SmartCalc Hub"
       seoDescription="Free calorie calculator to determine your daily calorie needs. Calculate TDEE, BMR, and calories for weight loss or muscle gain. Personalized nutrition guidance."
       keywords="calorie calculator, tdee calculator, daily calorie needs, bmr calculator, weight loss calories, calorie deficit"
-      canonicalUrl="https://smartcalchub.com/calculator/calorie"
+      canonicalUrl="https://smartcalhub.online/calculator/calorie"
       category="health"
       calculatorId="calorie"
       howItWorks="This calculator estimates your daily calorie needs using the Mifflin-St Jeor equation to calculate BMR, then multiplies by your activity level to get Total Daily Energy Expenditure (TDEE). Based on your goal, it recommends calorie targets."

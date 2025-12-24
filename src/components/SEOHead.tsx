@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { isBrowser, safeDocument } from "@/utils/ssrGuards";
+import { siteConfig } from "@/config/siteConfig";
 
 interface SEOHeadProps {
   title: string;
@@ -18,9 +19,9 @@ export const SEOHead = ({
   description,
   keywords = "calculator, online calculator, free calculator, SmartCalc Hub",
   ogType = "website",
-  ogImage = "https://smartcalchub.com/og-image.png",
+  ogImage = `${siteConfig.baseUrl}/og-image.png`,
   canonicalUrl,
-  author = "Ali Haider",
+  author = siteConfig.author.name,
   publishedTime,
   modifiedTime
 }: SEOHeadProps) => {
@@ -113,10 +114,8 @@ export const SEOHead = ({
     
     // Add hreflang tags
     const hreflangs = [
-      { lang: 'en', url: `https://smartcalchub.com${currentPath}` },
-      { lang: 'de', url: `https://smartcalchub.de${currentPath}` },
-      { lang: 'tr', url: `https://smartcalchub.com/tr${currentPath}` },
-      { lang: 'x-default', url: `https://smartcalchub.com${currentPath}` }
+      { lang: 'en', url: `${siteConfig.baseUrl}${currentPath}` },
+      { lang: 'x-default', url: `${siteConfig.baseUrl}${currentPath}` }
     ];
     
     hreflangs.forEach(({ lang, url }) => {

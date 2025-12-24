@@ -12,6 +12,7 @@ import { useRealtimeHistory } from "@/hooks/useRealtimeHistory";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { useRegion } from "@/contexts/RegionContext";
 import { getCategoryOGImage } from "@/utils/ogImageMapping";
+import { siteConfig } from "@/config/siteConfig";
 import { 
   Breadcrumb, 
   BreadcrumbItem, 
@@ -140,8 +141,8 @@ export const CalculatorLayout = ({
     crypto: "/crypto"
   };
   
-  // Build canonical URL
-  const baseUrl = "https://smartcalchub.com";
+  // Build canonical URL using centralized config
+  const baseUrl = siteConfig.baseUrl;
   const currentPath = location.pathname;
   const fullCanonicalUrl = canonicalUrl || `${baseUrl}${currentPath}`;
   const ogImageUrl = ogImage || `${baseUrl}${getCategoryOGImage(category)}`;

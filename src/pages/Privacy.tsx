@@ -7,7 +7,7 @@ const Privacy = () => {
       <SEOHead
         title="Privacy Policy | SmartCalc Hub"
         description="Learn how SmartCalc Hub protects your privacy. We don't store your calculation data and respect your privacy."
-        canonicalUrl="https://smartcalchub.com/privacy"
+        canonicalUrl="https://smartcalhub.online/privacy"
       />
       
       <PageHeader 
