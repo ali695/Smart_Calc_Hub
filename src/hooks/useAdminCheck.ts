@@ -1,14 +1,24 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { isReactSnap } from "@/utils/ssrGuards";
 
 export const useAdminCheck = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    // Never hit backend during react-snap pre-rendering
+    if (isReactSnap) {
+      setIsAdmin(false);
+      setIsLoading(false);
+      return;
+    }
+
     checkAdminStatus();
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(() => {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(() => {
       checkAdminStatus();
     });
 
@@ -16,9 +26,13 @@ export const useAdminCheck = () => {
   }, []);
 
   const checkAdminStatus = async () => {
+    if (isReactSnap) return;
+
     try {
-      const { data: { user } } = await supabase.auth.getUser();
-      
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
       if (!user) {
         setIsAdmin(false);
         setIsLoading(false);
