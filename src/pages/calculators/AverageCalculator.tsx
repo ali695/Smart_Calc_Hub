@@ -70,7 +70,7 @@ const AverageCalculator = () => {
         data={{
           name: "Average Calculator",
           description: "Calculate mean, median, and mode of a set of numbers",
-          url: "https://smartcalchub.com/math/average-calculator"
+          url: "https://smartcalhub.online/calculator/average"
         }}
       />
       <CalculatorLayout

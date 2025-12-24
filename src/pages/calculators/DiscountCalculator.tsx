@@ -57,7 +57,7 @@ const DiscountCalculator = () => {
         data={{
           name: "Discount Calculator",
           description: "Calculate final price and savings with discount percentage instantly",
-          url: "https://smartcalchub.com/finance/discount-calculator",
+          url: "https://smartcalhub.online/calculator/discount",
           applicationCategory: "FinanceApplication",
           operatingSystem: "Any",
           offers: {
@@ -77,7 +77,7 @@ const DiscountCalculator = () => {
       seoTitle="Discount Calculator – Calculate Sale Prices & Savings | SmartCalc Hub"
       seoDescription="Free discount calculator to find final prices and savings instantly. Perfect for shopping, sales, and budgeting calculations."
       keywords="discount calculator, sale price calculator, percentage off calculator, savings calculator"
-      canonicalUrl="https://smartcalchub.com/finance/discount-calculator"
+      canonicalUrl="https://smartcalhub.online/calculator/discount"
     >
       <div className="space-y-6">
         <div className="grid md:grid-cols-2 gap-6">

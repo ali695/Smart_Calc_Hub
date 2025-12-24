@@ -77,7 +77,7 @@ const CapRateCalculator = () => {
       seoTitle="Cap Rate Calculator - Real Estate Investment Analysis | SmartCalc Hub"
       seoDescription="Free cap rate calculator for real estate investors. Calculate capitalization rate to evaluate property investments and compare potential returns."
       keywords="cap rate calculator, capitalization rate, real estate investment, NOI calculator, property investment analysis"
-      canonicalUrl="https://smartcalchub.com/calculator/cap-rate"
+      canonicalUrl="https://smartcalhub.online/calculator/cap-rate"
       category="real-estate" 
       calculatorId="cap-rate" 
       howItWorks="Enter property value, annual rental income, and operating expenses to calculate the capitalization rate. Cap rate helps you evaluate the potential return on a real estate investment." 

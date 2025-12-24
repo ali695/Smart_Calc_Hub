@@ -24,10 +24,10 @@ export const Layout = ({ children }: LayoutProps) => {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "SmartCalc Hub",
-    "url": "https://smartcalchub.com",
+    "url": "https://smartcalhub.online",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://smartcalchub.com/logo.png",
+      "url": "https://smartcalhub.online/logo.png",
       "width": "512",
       "height": "512"
     },
@@ -71,7 +71,7 @@ export const Layout = ({ children }: LayoutProps) => {
               <span className="bg-gradient-primary bg-clip-text text-transparent" itemProp="name">
                 SmartCalc Hub
               </span>
-              <meta itemProp="url" content="https://smartcalchub.com" />
+              <meta itemProp="url" content="https://smartcalhub.online" />
             </Link>
 
             {/* Desktop Navigation */}

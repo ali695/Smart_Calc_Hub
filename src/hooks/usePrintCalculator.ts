@@ -197,7 +197,7 @@ export const usePrintCalculator = () => {
 
           <div class="footer">
             <p><strong>SmartCalc Hub</strong> - Your Trusted Calculator Platform</p>
-            <p>Visit smartcalchub.com for more calculators and tools</p>
+            <p>Visit smartcalhub.online for more calculators and tools</p>
             <p style="margin-top: 10px; font-size: 10px;">
               Disclaimer: These calculations are for informational purposes only. 
               Please consult with professionals for important financial, health, or engineering decisions.

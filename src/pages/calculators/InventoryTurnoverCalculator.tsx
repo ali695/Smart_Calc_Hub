@@ -85,7 +85,7 @@ const InventoryTurnoverCalculator = () => {
         data={{
           name: "Inventory Turnover Calculator",
           description: "Calculate inventory turnover ratio and days inventory outstanding for stock efficiency",
-          url: "https://smartcalchub.com/calculator/inventory-turnover",
+          url: "https://smartcalhub.online/calculator/inventory-turnover",
           applicationCategory: "BusinessApplication"
         }}
       />

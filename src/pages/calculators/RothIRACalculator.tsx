@@ -89,7 +89,7 @@ const RothIRACalculator = () => {
         data={{
           name: "Roth IRA Calculator",
           description: "Calculate Roth IRA growth and tax-free retirement savings",
-          url: "https://smartcalchub.com/calculator/roth-ira",
+          url: "https://smartcalhub.online/calculator/roth-ira",
         }}
       />
       <CalculatorLayout

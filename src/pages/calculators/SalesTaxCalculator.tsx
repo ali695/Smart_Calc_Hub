@@ -123,7 +123,7 @@ const SalesTaxCalculator = () => {
         data={{
           name: "US Sales Tax Calculator",
           description: "Calculate sales tax for any US state or custom rate",
-          url: "https://smartcalchub.com/calculator/sales-tax",
+          url: "https://smartcalhub.online/calculator/sales-tax",
         }}
       />
       <CalculatorLayout

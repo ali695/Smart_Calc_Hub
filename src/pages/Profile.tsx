@@ -210,7 +210,7 @@ const Profile = () => {
       <SEOHead
         title="Profile Settings | SmartCalc Hub"
         description="Manage your SmartCalc Hub profile, display name, and avatar."
-        canonicalUrl="https://smartcalchub.com/profile"
+        canonicalUrl="https://smartcalhub.online/profile"
       />
 
       <PageHeader

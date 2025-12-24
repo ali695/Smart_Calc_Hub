@@ -113,7 +113,7 @@ const StampDutyCalculator = () => {
         data={{
           name: "UK Stamp Duty Calculator",
           description: "Calculate Stamp Duty Land Tax for property purchases in England and Northern Ireland",
-          url: "https://smartcalchub.com/calculator/stamp-duty",
+          url: "https://smartcalhub.online/calculator/stamp-duty",
         }}
       />
       <CalculatorLayout

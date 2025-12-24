@@ -58,7 +58,7 @@ const PaybackPeriodCalculator = () => {
       seoTitle="Payback Period Calculator – Investment Recovery Time | SmartCalc Hub"
       seoDescription="Free payback period calculator. Determine how long it takes to recover your business investment with break-even analysis."
       keywords="payback period calculator, investment recovery, ROI calculator, break-even analysis, capital budgeting"
-      canonicalUrl="https://smartcalchub.com/calculator/payback-period"
+      canonicalUrl="https://smartcalhub.online/calculator/payback-period"
     >
       <div className="space-y-6">
         <div className="grid md:grid-cols-2 gap-6">

@@ -131,7 +131,7 @@ const USIncomeTaxCalculator = () => {
       seoTitle="US Income Tax Calculator 2024 - Federal Tax Estimator | SmartCalc Hub"
       seoDescription="Free US income tax calculator for 2024. Calculate federal income tax, effective rate, and take-home pay based on your filing status. Accurate 2024 tax brackets."
       keywords="us income tax calculator, federal tax calculator, 2024 tax brackets, tax estimator, take home pay calculator, effective tax rate"
-      canonicalUrl="https://smartcalchub.com/calculator/us-income-tax"
+      canonicalUrl="https://smartcalhub.online/calculator/us-income-tax"
       category="finance"
       calculatorId="us-income-tax"
       howItWorks="Enter your annual gross income and select your filing status. The calculator applies the 2024 standard deduction and calculates your tax using the current federal tax brackets. It shows your taxable income, total federal tax, effective rate, marginal rate, and estimated take-home pay."

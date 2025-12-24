@@ -54,7 +54,7 @@ const CosineCalculator = () => {
       seoTitle="Cosine Calculator – Calculate cos(θ) Online | SmartCalc Hub"
       seoDescription="Free online cosine calculator for angles in degrees or radians. Get accurate cos(θ) values instantly for trigonometry calculations."
       keywords="cosine calculator, cos calculator, trigonometry calculator, cos theta, trig functions"
-      canonicalUrl="https://smartcalchub.com/math/cosine-calculator"
+      canonicalUrl="https://smartcalhub.online/calculator/cosine"
     >
       <div className="space-y-6">
         <div className="grid md:grid-cols-2 gap-6">

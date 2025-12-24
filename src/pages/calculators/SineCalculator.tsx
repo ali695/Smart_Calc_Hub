@@ -70,7 +70,7 @@ const SineCalculator = () => {
       seoTitle="Sine Calculator – Calculate sin(θ) Online | SmartCalc Hub"
       seoDescription="Free online sine calculator for angles in degrees or radians. Get accurate sin(θ) values instantly for trigonometry calculations."
       keywords="sine calculator, sin calculator, trigonometry calculator, sin theta, trig functions"
-      canonicalUrl="https://smartcalchub.com/math/sine-calculator"
+      canonicalUrl="https://smartcalhub.online/calculator/sine"
     >
       <div className="space-y-6">
         <div className="grid md:grid-cols-2 gap-6">

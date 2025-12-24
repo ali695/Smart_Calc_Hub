@@ -57,7 +57,7 @@ const DataTransferCalculator = () => {
         data={{
           name: "Data Transfer Rate Calculator",
           description: "Convert between Mbps, MBps, Gbps and other data transfer rates",
-          url: "https://smartcalchub.com/calculator/data-transfer"
+          url: "https://smartcalhub.online/calculator/data-transfer"
         }}
       />
       <CalculatorLayout

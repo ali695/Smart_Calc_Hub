@@ -57,7 +57,7 @@ const GrowthRateCalculator = () => {
         data={{
           name: "Growth Rate Calculator",
           description: "Calculate CAGR and year-over-year growth rates for business analytics",
-          url: "https://smartcalchub.com/calculator/growth-rate",
+          url: "https://smartcalhub.online/calculator/growth-rate",
           applicationCategory: "BusinessApplication"
         }}
       />
@@ -71,7 +71,7 @@ const GrowthRateCalculator = () => {
       seoTitle="Growth Rate Calculator – CAGR & YoY Growth | SmartCalc Hub"
       seoDescription="Free growth rate calculator. Calculate compound annual growth rate (CAGR) and total growth percentage."
       keywords="growth rate, CAGR calculator, compound annual growth, revenue growth, business metrics"
-      canonicalUrl="https://smartcalchub.com/calculator/growth-rate"
+      canonicalUrl="https://smartcalhub.online/calculator/growth-rate"
     >
       <div className="space-y-6">
         <div className="grid md:grid-cols-2 gap-6">

@@ -67,7 +67,7 @@ const Dashboard = () => {
       <SEOHead
         title="Dashboard | SmartCalc Hub"
         description="View your saved calculations, favorites, and personalized calculator experience."
-        canonicalUrl="https://smartcalchub.com/dashboard"
+        canonicalUrl="https://smartcalhub.online/dashboard"
       />
 
       <PageHeader

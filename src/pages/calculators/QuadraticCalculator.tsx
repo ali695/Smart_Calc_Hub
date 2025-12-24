@@ -80,7 +80,7 @@ const QuadraticCalculator = () => {
       seoTitle="Quadratic Equation Solver - Find Roots & Discriminant | SmartCalc Hub"
       seoDescription="Free quadratic equation solver. Calculate roots, discriminant, and vertex for any quadratic equation ax² + bx + c = 0. Instant solutions with step-by-step explanation."
       keywords="quadratic equation solver, quadratic formula calculator, discriminant calculator, roots calculator, parabola calculator"
-      canonicalUrl="https://smartcalchub.com/calculator/quadratic"
+      canonicalUrl="https://smartcalhub.online/calculator/quadratic"
       category="math"
       calculatorId="quadratic"
       howItWorks="Enter the coefficients a, b, and c from your equation ax² + bx + c = 0. The calculator will find the roots using the quadratic formula."

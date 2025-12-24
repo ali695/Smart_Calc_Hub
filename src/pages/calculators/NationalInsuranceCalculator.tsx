@@ -99,7 +99,7 @@ const NationalInsuranceCalculator = () => {
         data={{
           name: "UK National Insurance Calculator",
           description: "Calculate UK National Insurance contributions for Class 1, 2, and 4",
-          url: "https://smartcalchub.com/calculator/national-insurance",
+          url: "https://smartcalhub.online/calculator/national-insurance",
         }}
       />
       <CalculatorLayout
