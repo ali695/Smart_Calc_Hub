@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const BASE_URL = 'https://smartcalchub.com';
+const BASE_URL = 'https://smartcalhub.online';
 
 const generateSitemap = () => {
   const currentDate = new Date().toISOString().split('T')[0];
