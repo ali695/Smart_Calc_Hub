@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { isBrowser, safeDocument } from "@/utils/ssrGuards";
 
 interface SEOHeadProps {
   title: string;
@@ -24,6 +25,9 @@ export const SEOHead = ({
   modifiedTime
 }: SEOHeadProps) => {
   useEffect(() => {
+    // Only update DOM in browser environment
+    if (!isBrowser || !safeDocument) return;
+    
     // Update document title
     document.title = title;
 

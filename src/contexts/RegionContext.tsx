@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect, ReactNode, useCallback } from "react";
-
+import { isBrowser, safeLocalStorage } from "@/utils/ssrGuards";
 export type Region = "uk" | "us" | "global";
 export type Currency = "USD" | "GBP" | "EUR" | "CAD" | "INR" | "BTC";
 
@@ -126,9 +126,9 @@ export const useRegion = () => {
   return context;
 };
 
-// Detect region from browser
+// Detect region from browser (SSR-safe)
 const detectRegion = (): Region => {
-  if (typeof window === "undefined") return "global";
+  if (!isBrowser) return "global";
   
   const language = navigator.language?.toLowerCase() || "";
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone?.toLowerCase() || "";
@@ -152,8 +152,8 @@ interface RegionProviderProps {
 
 export const RegionProvider = ({ children }: RegionProviderProps) => {
   const [region, setRegionState] = useState<Region>(() => {
-    if (typeof window !== "undefined") {
-      const stored = localStorage.getItem("smartcalc-region");
+    if (isBrowser) {
+      const stored = safeLocalStorage.getItem("smartcalc-region");
       if (stored && (stored === "uk" || stored === "us" || stored === "global")) {
         return stored as Region;
       }
@@ -162,8 +162,8 @@ export const RegionProvider = ({ children }: RegionProviderProps) => {
   });
 
   const [currency, setCurrencyState] = useState<Currency>(() => {
-    if (typeof window !== "undefined") {
-      const stored = localStorage.getItem("smartcalc-currency");
+    if (isBrowser) {
+      const stored = safeLocalStorage.getItem("smartcalc-currency");
       if (stored && stored in currencies) {
         return stored as Currency;
       }
@@ -175,16 +175,16 @@ export const RegionProvider = ({ children }: RegionProviderProps) => {
 
   const setRegion = useCallback((newRegion: Region) => {
     setRegionState(newRegion);
-    localStorage.setItem("smartcalc-region", newRegion);
+    safeLocalStorage.setItem("smartcalc-region", newRegion);
     // Auto-update currency to match region default
     const newCurrency = regionConfigs[newRegion].currency;
     setCurrencyState(newCurrency);
-    localStorage.setItem("smartcalc-currency", newCurrency);
+    safeLocalStorage.setItem("smartcalc-currency", newCurrency);
   }, []);
 
   const setCurrency = useCallback((newCurrency: Currency) => {
     setCurrencyState(newCurrency);
-    localStorage.setItem("smartcalc-currency", newCurrency);
+    safeLocalStorage.setItem("smartcalc-currency", newCurrency);
   }, []);
 
   const getCurrencyConfig = useCallback((): CurrencyConfig => {

@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { isBrowser, safeLocalStorage } from "@/utils/ssrGuards";
 
 export interface RecentCalculator {
   name: string;
@@ -14,7 +15,10 @@ export const useRecentCalculators = () => {
   const [recentCalculators, setRecentCalculators] = useState<RecentCalculator[]>([]);
 
   useEffect(() => {
-    const stored = localStorage.getItem(STORAGE_KEY);
+    // Only access localStorage in browser
+    if (!isBrowser) return;
+    
+    const stored = safeLocalStorage.getItem(STORAGE_KEY);
     if (stored) {
       try {
         setRecentCalculators(JSON.parse(stored));
@@ -23,13 +27,15 @@ export const useRecentCalculators = () => {
           console.error("Failed to parse recent calculators:", error);
         }
         // Clear corrupted data silently in production
-        localStorage.removeItem(STORAGE_KEY);
+        safeLocalStorage.removeItem(STORAGE_KEY);
         setRecentCalculators([]);
       }
     }
   }, []);
 
   const addRecentCalculator = useCallback((calculator: RecentCalculator) => {
+    if (!isBrowser) return;
+    
     setRecentCalculators((prev) => {
       // Check if this calculator is already the most recent
       if (prev.length > 0 && prev[0].url === calculator.url) {
@@ -38,7 +44,7 @@ export const useRecentCalculators = () => {
       
       const filtered = prev.filter((c) => c.url !== calculator.url);
       const updated = [calculator, ...filtered].slice(0, MAX_RECENT);
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+      safeLocalStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
       return updated;
     });
   }, []);

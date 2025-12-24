@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
+import { isBrowser } from "@/utils/ssrGuards";
 
 export const ReadingProgress = () => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
+    // Only run in browser
+    if (!isBrowser) return;
+    
     const calculateProgress = () => {
       const windowHeight = window.innerHeight;
       const documentHeight = document.documentElement.scrollHeight;
