@@ -1,15 +1,24 @@
+/**
+ * Static Sitemap Generator for SmartCalc Hub
+ * Generates a comprehensive XML sitemap at build time
+ * 
+ * Usage: npx ts-node scripts/generate-sitemap.ts
+ * 
+ * This script:
+ * - Imports calculator and blog data from source files
+ * - Generates a static sitemap.xml with all public pages
+ * - Excludes auth, dashboard, profile, and admin routes
+ * - Compatible with react-snap SSG and Cloudflare CDN
+ */
+
 import { writeFileSync } from 'fs';
 import { resolve } from 'path';
 
-// Import calculator and blog post data
-const calculators = [
-  // This will be dynamically populated from the data files
-  // For now, we'll generate it programmatically
-];
+// Base URL for the production site
+const BASE_URL = 'https://smartcalhub.online';
 
-const blogPosts = [
-  // This will be dynamically populated from the data files
-];
+// Current date for lastmod
+const CURRENT_DATE = new Date().toISOString().split('T')[0];
 
 interface SitemapUrl {
   loc: string;
@@ -18,84 +27,329 @@ interface SitemapUrl {
   priority: number;
 }
 
-const BASE_URL = 'https://smartcalchub.com';
-
-const generateSitemap = (): string => {
-  const currentDate = new Date().toISOString().split('T')[0];
+// ============================================
+// STATIC PAGES (manually maintained)
+// ============================================
+const staticPages: SitemapUrl[] = [
+  // Homepage - highest priority
+  { loc: `${BASE_URL}/`, lastmod: CURRENT_DATE, changefreq: 'daily', priority: 1.0 },
   
+  // Main navigation pages
+  { loc: `${BASE_URL}/categories`, lastmod: CURRENT_DATE, changefreq: 'weekly', priority: 0.9 },
+  { loc: `${BASE_URL}/blog`, lastmod: CURRENT_DATE, changefreq: 'weekly', priority: 0.8 },
+  { loc: `${BASE_URL}/faq`, lastmod: CURRENT_DATE, changefreq: 'monthly', priority: 0.7 },
+  { loc: `${BASE_URL}/about`, lastmod: CURRENT_DATE, changefreq: 'monthly', priority: 0.6 },
+  { loc: `${BASE_URL}/contact`, lastmod: CURRENT_DATE, changefreq: 'monthly', priority: 0.6 },
+  
+  // Category landing pages
+  { loc: `${BASE_URL}/real-estate`, lastmod: CURRENT_DATE, changefreq: 'weekly', priority: 0.7 },
+  { loc: `${BASE_URL}/crypto`, lastmod: CURRENT_DATE, changefreq: 'weekly', priority: 0.7 },
+  
+  // Legal pages - lowest priority
+  { loc: `${BASE_URL}/privacy`, lastmod: CURRENT_DATE, changefreq: 'yearly', priority: 0.3 },
+  { loc: `${BASE_URL}/terms`, lastmod: CURRENT_DATE, changefreq: 'yearly', priority: 0.3 },
+];
+
+// ============================================
+// CALCULATOR PATHS (from src/data/calculators.ts)
+// ============================================
+const calculatorPaths: string[] = [
+  // Health calculators
+  '/calculator/bmi',
+  '/calculator/bmr',
+  '/calculator/calorie',
+  '/calculator/ideal-weight',
+  '/calculator/body-fat',
+  '/calculator/water',
+  '/calculator/pregnancy',
+  '/calculator/heart-rate',
+  '/calculator/macro',
+  '/calculator/protein',
+  '/calculator/blood-pressure',
+  '/calculator/sleep',
+  '/calculator/steps',
+  '/calculator/basal-temp',
+  '/calculator/menstrual',
+  '/calculator/tdee',
+  '/calculator/calorie-deficit',
+  '/calculator/waist-to-height',
+  '/calculator/body-surface-area',
+  '/calculator/one-rep-max',
+  
+  // Finance calculators
+  '/calculator/loan',
+  '/calculator/mortgage',
+  '/calculator/compound-interest',
+  '/calculator/simple-interest',
+  '/calculator/emi',
+  '/calculator/tax',
+  '/calculator/savings-goal',
+  '/calculator/investment-return',
+  '/calculator/credit-card',
+  '/calculator/car-loan',
+  '/calculator/retirement',
+  '/calculator/inflation',
+  '/calculator/ltv',
+  '/calculator/break-even',
+  '/calculator/debt-to-income',
+  '/calculator/discount',
+  '/calculator/net-worth',
+  '/calculator/budget-planner',
+  '/calculator/salary-after-tax',
+  '/calculator/us-income-tax',
+  '/calculator/uk-income-tax',
+  '/calculator/canada-income-tax',
+  '/calculator/australia-income-tax',
+  '/calculator/india-income-tax',
+  '/calculator/paycheck',
+  '/calculator/mortgage-recast',
+  '/calculator/refinance',
+  '/calculator/401k',
+  '/calculator/roth-ira',
+  '/calculator/national-insurance',
+  '/calculator/stamp-duty',
+  '/calculator/social-security',
+  '/calculator/sales-tax',
+  
+  // Math calculators
+  '/calculator/percentage',
+  '/calculator/percentage-change',
+  '/calculator/percentage-increase',
+  '/calculator/percentage-decrease',
+  '/calculator/fraction',
+  '/calculator/fraction-decimal',
+  '/calculator/average',
+  '/calculator/standard-deviation',
+  '/calculator/ratio',
+  '/calculator/age',
+  '/calculator/quadratic',
+  '/calculator/area-perimeter',
+  '/calculator/volume',
+  '/calculator/prime',
+  '/calculator/profit-margin',
+  '/calculator/factorial',
+  '/calculator/exponent',
+  '/calculator/logarithm',
+  '/calculator/square-root',
+  '/calculator/pythagoras',
+  '/calculator/triangle-area',
+  '/calculator/circle',
+  '/calculator/permutation-combination',
+  '/calculator/scientific-notation',
+  '/calculator/probability',
+  '/calculator/sine',
+  '/calculator/cosine',
+  '/calculator/tangent',
+  '/calculator/arcsin',
+  '/calculator/arccos',
+  '/calculator/arctan',
+  '/calculator/radian-degree',
+  
+  // Conversion calculators
+  '/calculator/length',
+  '/calculator/weight',
+  '/calculator/temperature',
+  '/calculator/currency',
+  '/calculator/timezone',
+  '/calculator/fuel',
+  '/calculator/area-converter',
+  '/calculator/speed-converter',
+  '/calculator/energy-converter',
+  '/calculator/data-transfer',
+  '/calculator/pressure-converter',
+  '/calculator/roman-numeral',
+  '/calculator/days',
+  '/calculator/countdown',
+  
+  // Tech tools
+  '/calculator/hash-generator',
+  '/calculator/base64-encoder',
+  '/calculator/json-formatter',
+  '/calculator/password-generator',
+  '/calculator/color-converter',
+  '/calculator/binary-decimal',
+  '/calculator/hex-decimal',
+  
+  // Engineering calculators
+  '/calculator/ohms-law',
+  '/calculator/force',
+  '/calculator/torque',
+  '/calculator/power',
+  '/calculator/stress-strain',
+  
+  // Business calculators
+  '/calculator/growth-rate',
+  '/calculator/customer-lifetime-value',
+  '/calculator/inventory-turnover',
+  '/calculator/conversion-rate',
+  '/calculator/payback-period',
+  
+  // Science calculators
+  '/calculator/ph',
+  '/calculator/molarity-calculator',
+  '/calculator/half-life',
+  '/calculator/density-calculator',
+  '/calculator/kinetic-energy',
+  
+  // Real Estate calculators
+  '/calculator/rent-affordability',
+  '/calculator/buy-vs-rent',
+  '/calculator/cap-rate',
+  '/calculator/property-tax',
+  '/calculator/house-flip',
+  
+  // Crypto calculators
+  '/calculator/crypto-profit',
+  '/calculator/dca',
+  '/calculator/bitcoin-converter',
+  '/calculator/mining-profit',
+];
+
+// ============================================
+// BLOG POST SLUGS (from src/data/blogPosts.ts)
+// ============================================
+const blogSlugs: string[] = [
+  'how-to-calculate-monthly-loan-emi',
+  'complete-guide-mortgage-calculator',
+  'compound-interest-wealth-building',
+  'bmi-calculator-guide-healthy-weight',
+  'tax-calculator-guide-2025',
+  'retirement-calculator-planning-guide',
+  'percentage-calculator-tricks-shortcuts',
+  'calorie-calculator-weight-management',
+  'currency-converter-forex-trading',
+  'age-calculator-life-milestones',
+  'investment-return-calculator-roi',
+  'unit-converter-guide-measurements',
+  'budget-planner-personal-finance',
+  'heart-rate-zones-training-guide',
+  'macro-calculator-nutrition-guide',
+  'quadratic-equation-solver-guide',
+  'body-fat-percentage-calculator-guide',
+  'savings-goal-calculator-financial-planning',
+  'ideal-weight-calculator-health-guide',
+  'time-value-money-calculator-guide',
+  'scientific-notation-calculator-guide',
+  'loan-to-value-calculator-guide',
+  'sleep-calculator-optimize-rest',
+  'break-even-analysis-calculator-guide',
+  'tdee-calculator-complete-guide',
+  'steps-to-calories-calculator-guide',
+  'net-worth-calculator-wealth-tracking',
+  'credit-card-payoff-calculator-guide',
+  'pregnancy-due-date-calculator-guide',
+  'standard-deviation-calculator-guide',
+  'ohms-law-calculator-electronics',
+  'water-intake-calculator-hydration',
+  'profit-margin-calculator-business',
+  'bmi-vs-body-fat-comparison',
+  'car-loan-calculator-guide',
+  'menstrual-cycle-calculator-guide',
+  'debt-to-income-ratio-guide',
+  'inflation-calculator-purchasing-power',
+  'basal-metabolic-rate-guide',
+  'volume-calculator-3d-shapes',
+  'blood-pressure-monitor-guide',
+  'discount-calculator-shopping-guide',
+  'probability-calculator-statistics',
+  'password-security-generator-guide',
+  'area-perimeter-calculator-geometry',
+  'protein-intake-calculator-guide',
+  'hash-generator-security-guide',
+  'waist-to-height-ratio-guide',
+  'one-rep-max-calculator-strength',
+  'json-formatter-developer-tool',
+  'base64-encoding-guide',
+  'binary-decimal-converter-guide',
+  'color-converter-hex-rgb-guide',
+  'trigonometry-calculator-guide',
+  'pythagorean-theorem-calculator',
+  'circle-calculator-geometry',
+  'factorial-calculator-math',
+  'permutation-combination-calculator',
+  'logarithm-calculator-guide',
+  'ratio-calculator-guide',
+  'fraction-calculator-guide',
+  'average-calculator-statistics',
+  'energy-converter-guide',
+  'pressure-converter-engineering',
+  'speed-converter-physics',
+  'fuel-efficiency-calculator-guide',
+  'timezone-converter-guide',
+  'roman-numeral-converter-guide',
+  'days-between-dates-calculator',
+  'countdown-timer-calculator',
+  'real-estate-cap-rate-guide',
+  'property-tax-calculator-guide',
+  'rent-vs-buy-calculator-guide',
+  'house-flipping-profit-guide',
+  'crypto-profit-calculator-guide',
+  'dca-investment-strategy-guide',
+  'bitcoin-converter-guide',
+  'mining-profitability-guide',
+  'us-income-tax-calculator-guide',
+  'uk-income-tax-calculator-guide',
+  'canada-income-tax-guide',
+  'australia-income-tax-guide',
+  'india-income-tax-guide',
+  'paycheck-calculator-take-home-pay',
+  'mortgage-recast-calculator-guide',
+  'refinance-calculator-guide',
+  '401k-retirement-calculator-guide',
+  'roth-ira-calculator-guide',
+  'national-insurance-uk-guide',
+  'stamp-duty-calculator-uk',
+  'social-security-benefits-guide',
+  'sales-tax-calculator-us',
+  'simple-interest-calculator-guide',
+  'growth-rate-cagr-calculator',
+  'customer-lifetime-value-guide',
+  'inventory-turnover-calculator',
+  'conversion-rate-optimization',
+  'payback-period-calculator-guide',
+  'ph-calculator-chemistry',
+  'molarity-calculator-chemistry',
+  'half-life-calculator-physics',
+  'density-calculator-science',
+  'kinetic-energy-calculator-physics',
+  'force-calculator-physics',
+  'torque-calculator-engineering',
+  'power-calculator-engineering',
+  'stress-strain-calculator-materials',
+  'quadratic-formula-calculator-algebra',
+  'credit-score-improvement-guide',
+];
+
+// ============================================
+// GENERATE SITEMAP
+// ============================================
+function generateSitemap(): string {
   const urls: SitemapUrl[] = [];
 
-  // Main pages
-  urls.push(
-    { loc: `${BASE_URL}/`, lastmod: currentDate, changefreq: 'daily', priority: 1.0 },
-    { loc: `${BASE_URL}/categories`, lastmod: currentDate, changefreq: 'weekly', priority: 0.9 },
-    { loc: `${BASE_URL}/blog`, lastmod: currentDate, changefreq: 'weekly', priority: 0.9 },
-    { loc: `${BASE_URL}/faq`, lastmod: currentDate, changefreq: 'monthly', priority: 0.8 },
-    { loc: `${BASE_URL}/about`, lastmod: currentDate, changefreq: 'monthly', priority: 0.7 },
-    { loc: `${BASE_URL}/contact`, lastmod: currentDate, changefreq: 'monthly', priority: 0.7 },
-    { loc: `${BASE_URL}/privacy`, lastmod: currentDate, changefreq: 'yearly', priority: 0.5 },
-    { loc: `${BASE_URL}/terms`, lastmod: currentDate, changefreq: 'yearly', priority: 0.5 }
-  );
+  // Add static pages
+  urls.push(...staticPages);
 
-  // Calculator pages - these would be dynamically loaded from calculators.ts
-  const calculatorPaths = [
-    '/calculator/bmi', '/calculator/loan', '/calculator/percentage', '/calculator/length',
-    '/calculator/mortgage', '/calculator/bmr', '/calculator/calorie', '/calculator/ideal-weight',
-    '/calculator/body-fat', '/calculator/water', '/calculator/pregnancy', '/calculator/heart-rate',
-    '/calculator/macro', '/calculator/protein', '/calculator/weight', '/calculator/temperature',
-    '/calculator/average', '/calculator/ratio', '/calculator/fraction', '/calculator/age',
-    '/calculator/compound-interest', '/calculator/tax', '/calculator/savings-goal', '/calculator/investment-return',
-    '/calculator/currency', '/calculator/credit-card', '/calculator/car-loan', '/calculator/retirement',
-    '/calculator/inflation', '/calculator/ltv', '/calculator/break-even', '/calculator/debt-to-income',
-    '/calculator/blood-pressure', '/calculator/sleep', '/calculator/steps', '/calculator/basal-temp',
-    '/calculator/menstrual', '/calculator/quadratic', '/calculator/percentage-change', '/calculator/area-perimeter',
-    '/calculator/volume', '/calculator/prime', '/calculator/profit-margin', '/calculator/emi',
-    '/calculator/discount', '/calculator/salary-after-tax', '/calculator/net-worth', '/calculator/tdee',
-    '/calculator/calorie-deficit', '/calculator/body-surface-area', '/calculator/waist-to-height',
-    '/calculator/budget-planner', '/calculator/sine', '/calculator/cosine', '/calculator/tangent',
-    '/calculator/arcsin', '/calculator/arccos', '/calculator/arctan', '/calculator/radian-degree',
-    '/calculator/area', '/calculator/speed', '/calculator/pressure', '/calculator/energy',
-    '/calculator/data-transfer', '/calculator/timezone', '/calculator/power', '/calculator/ohms-law',
-    '/calculator/force', '/calculator/torque', '/calculator/density', '/calculator/kinetic-energy',
-    '/calculator/stress-strain', '/calculator/pythagoras', '/calculator/triangle-area', '/calculator/circle',
-    '/calculator/exponent', '/calculator/logarithm', '/calculator/factorial', '/calculator/permutation-combination',
-    '/calculator/scientific-notation', '/calculator/square-root', '/calculator/fuel-efficiency',
-    '/calculator/growth-rate', '/calculator/conversion-rate', '/calculator/customer-lifetime-value',
-    '/calculator/inventory-turnover', '/calculator/payback-period', '/calculator/break-even-analysis',
-    '/calculator/ph', '/calculator/molarity', '/calculator/half-life', '/calculator/password-generator',
-    '/calculator/hash-generator', '/calculator/base64-encoder', '/calculator/json-formatter',
-    '/calculator/color-converter'
-  ];
-
+  // Add calculator pages (high priority - SEO critical)
   calculatorPaths.forEach(path => {
+    // Determine priority based on popularity
+    const highPriorityCalcs = ['/calculator/bmi', '/calculator/loan', '/calculator/percentage', '/calculator/mortgage'];
+    const priority = highPriorityCalcs.includes(path) ? 0.9 : 0.8;
+    
     urls.push({
       loc: `${BASE_URL}${path}`,
-      lastmod: currentDate,
+      lastmod: CURRENT_DATE,
       changefreq: 'monthly',
-      priority: path.includes('/bmi') || path.includes('/loan') || path.includes('/percentage') ? 0.9 : 0.8
+      priority
     });
   });
 
-  // Blog posts
-  const blogSlugs = [
-    'how-to-calculate-monthly-loan-emi',
-    'health-metrics-tracking-guide',
-    'advanced-percentage-calculations-tricks',
-    'currency-conversion-guide-2025',
-    'bmr-vs-bmi-explained',
-    'top-financial-calculators-small-business',
-    'compound-interest-wealth-building',
-    'mortgage-calculator-home-buying-guide',
-    'bmi-calculator-complete-guide',
-    'scientific-calculator-guide-engineers'
-  ];
-
-  blogSlugs.forEach((slug, index) => {
+  // Add blog posts
+  blogSlugs.forEach(slug => {
     urls.push({
       loc: `${BASE_URL}/blog/${slug}`,
-      lastmod: currentDate,
+      lastmod: CURRENT_DATE,
       changefreq: 'monthly',
-      priority: 0.8
+      priority: 0.7
     });
   });
 
@@ -108,14 +362,14 @@ const generateSitemap = (): string => {
     xml += `    <loc>${url.loc}</loc>\n`;
     xml += `    <lastmod>${url.lastmod}</lastmod>\n`;
     xml += `    <changefreq>${url.changefreq}</changefreq>\n`;
-    xml += `    <priority>${url.priority}</priority>\n`;
+    xml += `    <priority>${url.priority.toFixed(1)}</priority>\n`;
     xml += '  </url>\n';
   });
   
   xml += '</urlset>';
   
   return xml;
-};
+}
 
 // Generate and save sitemap
 const sitemap = generateSitemap();
@@ -123,8 +377,12 @@ const sitemapPath = resolve(process.cwd(), 'public', 'sitemap.xml');
 
 try {
   writeFileSync(sitemapPath, sitemap, 'utf-8');
+  const urlCount = sitemap.split('<url>').length - 1;
   console.log('✅ Sitemap generated successfully at public/sitemap.xml');
-  console.log(`📊 Total URLs: ${sitemap.split('<url>').length - 1}`);
+  console.log(`📊 Total URLs: ${urlCount}`);
+  console.log(`   - Static pages: ${staticPages.length}`);
+  console.log(`   - Calculator pages: ${calculatorPaths.length}`);
+  console.log(`   - Blog posts: ${blogSlugs.length}`);
 } catch (error) {
   console.error('❌ Error generating sitemap:', error);
   process.exit(1);
