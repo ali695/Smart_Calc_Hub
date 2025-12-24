@@ -41,10 +41,10 @@ const BlogPost = () => {
     "publisher": {
       "@type": "Organization",
       "name": "SmartCalc Hub",
-      "url": "https://smartcalchub.com",
+      "url": "https://smartcalhub.online",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://smartcalchub.com/logo.png"
+        "url": "https://smartcalhub.online/logo.png"
       }
     },
     "datePublished": new Date(post.date).toISOString(),
@@ -54,7 +54,7 @@ const BlogPost = () => {
     "keywords": post.keywords.join(", "),
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": `https://smartcalchub.com/blog/${slug}`
+      "@id": `https://smartcalhub.online/blog/${slug}`
     }
   };
 
@@ -70,7 +70,7 @@ const BlogPost = () => {
         ogImage={getBlogOGImage()}
         author={post.author}
         publishedTime={new Date(post.date).toISOString()}
-        canonicalUrl={`https://smartcalchub.com/blog/${slug}`}
+        canonicalUrl={`https://smartcalhub.online/blog/${slug}`}
       />
       
       {/* Article Schema */}

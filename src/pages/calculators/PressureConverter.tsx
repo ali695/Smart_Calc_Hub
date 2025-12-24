@@ -80,7 +80,7 @@ const PressureConverter = () => {
       seoTitle="Pressure Converter – Convert Bar, PSI, kPa, Atm | SmartCalc Hub"
       seoDescription="Free pressure converter for bar, PSI, kilopascal, atmosphere and more. Instant accurate conversions for engineering and science."
       keywords="pressure converter, bar to psi, psi to bar, kpa converter, pressure units"
-      canonicalUrl="https://smartcalchub.com/conversion/pressure-converter"
+      canonicalUrl="https://smartcalhub.online/conversion/pressure-converter"
     >
       <div className="space-y-6">
         <div className="grid md:grid-cols-2 gap-6">

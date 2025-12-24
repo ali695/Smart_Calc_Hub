@@ -94,7 +94,7 @@ const AgeCalculator = () => {
         data={{
           name: "Age Calculator",
           description: "Calculate your exact age in years, months, days, and more",
-          url: "https://smartcalchub.com/calculator/age",
+          url: "https://smartcalhub.online/calculator/age",
           applicationCategory: "UtilityApplication",
           operatingSystem: "Any",
           offers: {
@@ -110,7 +110,7 @@ const AgeCalculator = () => {
       seoTitle="Age Calculator - Calculate Your Exact Age | SmartCalc Hub"
       seoDescription="Free age calculator to find your exact age in years, months, and days. Calculate total days lived, weeks, and days until your next birthday."
       keywords="age calculator, birthday calculator, how old am I, age in days, age in months"
-      canonicalUrl="https://smartcalchub.com/calculator/age"
+      canonicalUrl="https://smartcalhub.online/calculator/age"
       category="math"
       calculatorId="age"
       howItWorks="This calculator determines your precise age from your birth date to today. It shows your age in multiple formats: years/months/days, total days, total weeks, total months, and days until your next birthday."

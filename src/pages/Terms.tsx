@@ -7,7 +7,7 @@ const Terms = () => {
       <SEOHead
         title="Terms of Service | SmartCalc Hub"
         description="Read the terms of service for using SmartCalc Hub calculators and services."
-        canonicalUrl="https://smartcalchub.com/terms"
+        canonicalUrl="https://smartcalhub.online/terms"
       />
       
       <PageHeader 

@@ -76,7 +76,7 @@ const SleepCalculator = () => {
       seoTitle="Sleep Calculator - Find Optimal Bedtime | SmartCalc Hub"
       seoDescription="Calculate ideal bedtimes based on sleep cycles. Wake up refreshed by timing your sleep to align with natural 90-minute cycles."
       keywords="sleep calculator, bedtime calculator, sleep cycle calculator, optimal sleep time"
-      canonicalUrl="https://smartcalchub.com/calculator/sleep"
+      canonicalUrl="https://smartcalhub.online/calculator/sleep"
     >
       <div className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

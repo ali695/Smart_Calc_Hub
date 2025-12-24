@@ -95,7 +95,7 @@ const LoanCalculator = () => {
       seoTitle="Loan Calculator - Calculate Monthly Payments & Interest | SmartCalc Hub"
       seoDescription="Free loan calculator to calculate monthly payments, total interest, and loan amortization. Plan your finances with accurate loan estimates. Works for personal loans, auto loans, and more."
       keywords="loan calculator, monthly payment calculator, loan payment, interest calculator, amortization calculator, personal loan calculator"
-      canonicalUrl="https://smartcalchub.com/calculator/loan"
+      canonicalUrl="https://smartcalhub.online/calculator/loan"
       category="finance"
       calculatorId="loan"
       howItWorks="The loan calculator determines your monthly payment based on the loan amount (principal), annual interest rate, and loan term in years. It uses the standard amortization formula to calculate fixed monthly payments that will fully repay the loan by the end of the term. The calculator also shows you the total amount you'll pay and how much of that is interest."

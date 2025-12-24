@@ -99,7 +99,7 @@ const BMICalculator = () => {
         data={{
           name: "BMI Calculator",
           description: "Calculate your Body Mass Index and check if you're in a healthy weight range",
-          url: "https://smartcalchub.com/calculator/bmi",
+          url: "https://smartcalhub.online/calculator/bmi",
           applicationCategory: "HealthApplication",
           operatingSystem: "Any",
           offers: {
@@ -115,7 +115,7 @@ const BMICalculator = () => {
       seoTitle="BMI Calculator - Body Mass Index Calculator | SmartCalc Hub"
       seoDescription="Free BMI calculator to check your Body Mass Index. Instant BMI calculation with weight and height. Find if you're underweight, normal, overweight, or obese. Accurate BMI ranges."
       keywords="bmi calculator, body mass index, bmi chart, healthy weight, overweight, underweight, obesity calculator"
-      canonicalUrl="https://smartcalchub.com/calculator/bmi"
+      canonicalUrl="https://smartcalhub.online/calculator/bmi"
       category="health"
       calculatorId="bmi"
       howItWorks="The BMI calculator uses your height and weight to calculate your Body Mass Index. Simply enter your height in centimeters and weight in kilograms, and the calculator will instantly determine your BMI and category. BMI is calculated by dividing your weight in kilograms by the square of your height in meters."

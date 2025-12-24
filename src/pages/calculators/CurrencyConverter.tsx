@@ -160,7 +160,7 @@ const CurrencyConverter = () => {
         data={{
           name: "Currency Converter",
           description: "Convert between major world currencies",
-          url: "https://smartcalchub.com/calculator/currency"
+          url: "https://smartcalhub.online/calculator/currency"
         }}
       />
       <CalculatorLayout
@@ -169,7 +169,7 @@ const CurrencyConverter = () => {
         seoTitle="Currency Converter - Convert World Currencies | SmartCalc Hub"
         seoDescription="Free currency converter for 38+ world currencies. Convert USD, EUR, GBP, JPY, INR, PKR and more. Quick and accurate currency conversion."
         keywords="currency converter, exchange rate calculator, USD to EUR, currency exchange, forex calculator"
-        canonicalUrl="https://smartcalchub.com/calculator/currency"
+        canonicalUrl="https://smartcalhub.online/calculator/currency"
         category="conversion"
         calculatorId="currency"
         howItWorks="This currency converter allows you to convert between major world currencies. Select your source currency and target currency, enter the amount, and get instant conversion results. Note: This calculator uses sample exchange rates for demonstration. For actual transactions, always use current rates from reliable financial sources."
