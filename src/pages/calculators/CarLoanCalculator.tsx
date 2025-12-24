@@ -3,6 +3,7 @@ import { CalculatorLayout } from "@/components/CalculatorLayout";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
 
 const CarLoanCalculator = () => {
   const [carPrice, setCarPrice] = useState("");
@@ -14,6 +15,7 @@ const CarLoanCalculator = () => {
   const [totalLoanAmount, setTotalLoanAmount] = useState<number | null>(null);
   const [totalInterest, setTotalInterest] = useState<number | null>(null);
   const [totalCost, setTotalCost] = useState<number | null>(null);
+  const { updateAIInsight } = useCalculatorEnhancements();
 
   const calculateCarLoan = () => {
     const price = parseFloat(carPrice) || 0;
@@ -43,10 +45,33 @@ const CarLoanCalculator = () => {
       const total = monthly * months;
       const interest = total - loanAmount;
       
-      setMonthlyPayment(parseFloat(monthly.toFixed(2)));
-      setTotalLoanAmount(parseFloat(loanAmount.toFixed(2)));
-      setTotalInterest(parseFloat(interest.toFixed(2)));
-      setTotalCost(parseFloat((total + down + tradeIn).toFixed(2)));
+      const finalMonthly = parseFloat(monthly.toFixed(2));
+      const finalLoanAmount = parseFloat(loanAmount.toFixed(2));
+      const finalInterest = parseFloat(interest.toFixed(2));
+      const finalTotalCost = parseFloat((total + down + tradeIn).toFixed(2));
+      
+      setMonthlyPayment(finalMonthly);
+      setTotalLoanAmount(finalLoanAmount);
+      setTotalInterest(finalInterest);
+      setTotalCost(finalTotalCost);
+      
+      // Update AI insight with calculation data
+      updateAIInsight(
+        { 
+          carPrice: price, 
+          downPayment: down, 
+          tradeInValue: tradeIn, 
+          interestRate: parseFloat(interestRate), 
+          loanTermMonths: months 
+        },
+        { 
+          monthlyPayment: finalMonthly,
+          loanAmount: finalLoanAmount,
+          totalInterest: finalInterest,
+          totalCost: finalTotalCost,
+          loanTermYears: (months / 12).toFixed(1)
+        }
+      );
     }
   };
 
