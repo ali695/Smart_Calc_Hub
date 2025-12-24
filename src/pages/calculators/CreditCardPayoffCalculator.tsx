@@ -3,8 +3,10 @@ import { CalculatorLayout } from "@/components/CalculatorLayout";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
 
 const CreditCardPayoffCalculator = () => {
+  const { updateAIInsight } = useCalculatorEnhancements();
   const [balance, setBalance] = useState("");
   const [apr, setApr] = useState("");
   const [monthlyPayment, setMonthlyPayment] = useState("");
@@ -40,6 +42,10 @@ const CreditCardPayoffCalculator = () => {
       setMonthsToPayoff(months);
       setTotalInterest(parseFloat(totalInterestPaid.toFixed(2)));
       setTotalPaid(parseFloat((bal + totalInterestPaid).toFixed(2)));
+      updateAIInsight(
+        { balance: bal, apr: parseFloat(apr), monthlyPayment: payment },
+        { monthsToPayoff: months, totalInterest: totalInterestPaid.toFixed(2), totalPaid: (bal + totalInterestPaid).toFixed(2) }
+      );
     }
   };
 

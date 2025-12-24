@@ -11,7 +11,7 @@ import { usePrintCalculator } from "@/hooks/usePrintCalculator";
 import { Copy, Printer, Loader2 } from "lucide-react";
 
 const AreaPerimeterCalculator = () => {
-  const { isCalculating, handleCalculation, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
   const [shape, setShape] = useState("circle");
   const [value1, setValue1] = useState("");
@@ -47,6 +47,10 @@ const AreaPerimeterCalculator = () => {
     }
 
     setResult({ area, perimeter });
+    updateAIInsight(
+      { shape, dimension1: v1, dimension2: v2 || null },
+      { area: area.toFixed(2), perimeter: perimeter > 0 ? perimeter.toFixed(2) : "N/A" }
+    );
   };
 
   const faqs = [

@@ -16,7 +16,7 @@ const BuyVsRentCalculator = () => {
   const [monthlyRent, setMonthlyRent] = useState("");
   const [years, setYears] = useState("30");
   const [result, setResult] = useState<{ buyTotal: number; rentTotal: number; recommendation: string; savings: number } | null>(null);
-  const { isCalculating, handleCalculation, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
@@ -42,6 +42,10 @@ const BuyVsRentCalculator = () => {
     const savings = Math.abs(buyTotal - rentTotal);
 
     setResult({ buyTotal, rentTotal, recommendation, savings });
+    updateAIInsight(
+      { homePrice: price, downPaymentPercent: dp * 100, interestRate: rate * 100 * 12, monthlyRent: rent, years: parseFloat(years) },
+      { buyTotal, rentTotal, recommendation, potentialSavings: savings }
+    );
   };
 
   const faqs = [

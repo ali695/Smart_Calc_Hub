@@ -13,14 +13,19 @@ const CosineCalculator = () => {
   const [angle, setAngle] = useState("");
   const [unit, setUnit] = useState("degrees");
   const [result, setResult] = useState<number | null>(null);
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
     const a = parseFloat(angle);
     if (!isNaN(a)) {
       const radians = unit === "degrees" ? (a * Math.PI) / 180 : a;
-      setResult(Math.cos(radians));
+      const cosValue = Math.cos(radians);
+      setResult(cosValue);
+      updateAIInsight(
+        { angle: a, unit },
+        { cosine: cosValue.toFixed(6), radians: radians.toFixed(6) }
+      );
     }
   };
 

@@ -4,8 +4,10 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { useCalculatorEnhancements } from "@/hooks/useCalculatorEnhancements";
 
 const BudgetPlannerCalculator = () => {
+  const { updateAIInsight } = useCalculatorEnhancements();
   const [monthlyIncome, setMonthlyIncome] = useState("");
   const [housing, setHousing] = useState("");
   const [transportation, setTransportation] = useState("");
@@ -26,7 +28,7 @@ const BudgetPlannerCalculator = () => {
     const remaining = income - totalExpenses;
     const savingsRate = income > 0 ? ((remaining / income) * 100) : 0;
 
-    setResult({
+    const resultData = {
       income,
       totalExpenses,
       remaining,
@@ -34,7 +36,12 @@ const BudgetPlannerCalculator = () => {
       housingPercent: income > 0 ? ((housingCost / income) * 100) : 0,
       transportPercent: income > 0 ? ((transportCost / income) * 100) : 0,
       foodPercent: income > 0 ? ((foodCost / income) * 100) : 0,
-    });
+    };
+    setResult(resultData);
+    updateAIInsight(
+      { monthlyIncome: income, housing: housingCost, transportation: transportCost, food: foodCost, utilities: utilitiesCost, other: otherCost },
+      { totalExpenses, remaining, savingsRate: savingsRate.toFixed(1) + "%", housingPercent: resultData.housingPercent.toFixed(1) + "%" }
+    );
   };
 
   const faqs = [

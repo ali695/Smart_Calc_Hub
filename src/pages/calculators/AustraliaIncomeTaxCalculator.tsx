@@ -17,7 +17,7 @@ const AustraliaIncomeTaxCalculator = () => {
     takeHome: number;
     effectiveRate: number;
   } | null>(null);
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
@@ -43,13 +43,18 @@ const AustraliaIncomeTaxCalculator = () => {
     const totalTax = incomeTax + medicareLevy;
     const takeHome = grossIncome - totalTax;
 
+    const effectiveRate = (totalTax / grossIncome) * 100;
     setResult({
       incomeTax,
       medicareLevy,
       totalTax,
       takeHome,
-      effectiveRate: (totalTax / grossIncome) * 100,
+      effectiveRate,
     });
+    updateAIInsight(
+      { grossIncome, country: "Australia" },
+      { incomeTax, medicareLevy, totalTax, takeHome, effectiveRate: effectiveRate.toFixed(1) + "%" }
+    );
   };
 
   const faqs = [

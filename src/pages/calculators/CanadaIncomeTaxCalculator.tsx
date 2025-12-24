@@ -19,7 +19,7 @@ const CanadaIncomeTaxCalculator = () => {
     takeHome: number;
     effectiveRate: number;
   } | null>(null);
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
@@ -81,13 +81,18 @@ const CanadaIncomeTaxCalculator = () => {
     const totalTax = federalTax + provincialTax;
     const takeHome = grossIncome - totalTax;
 
+    const effectiveRate = (totalTax / grossIncome) * 100;
     setResult({
       federalTax,
       provincialTax,
       totalTax,
       takeHome,
-      effectiveRate: (totalTax / grossIncome) * 100,
+      effectiveRate,
     });
+    updateAIInsight(
+      { grossIncome, province, country: "Canada" },
+      { federalTax, provincialTax, totalTax, takeHome, effectiveRate: effectiveRate.toFixed(1) + "%" }
+    );
   };
 
   const faqs = [
