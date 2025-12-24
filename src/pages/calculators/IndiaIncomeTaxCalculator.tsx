@@ -20,7 +20,7 @@ const IndiaIncomeTaxCalculator = () => {
     takeHome: number;
     effectiveRate: number;
   } | null>(null);
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
@@ -74,6 +74,11 @@ const IndiaIncomeTaxCalculator = () => {
       takeHome,
       effectiveRate: (totalTax / grossIncome) * 100,
     });
+    
+    updateAIInsight(
+      { grossIncome, regime },
+      { taxableIncome: grossIncome, incomeTax, cess, totalTax, takeHome, effectiveRate: (totalTax / grossIncome) * 100 }
+    );
   };
 
   const faqs = [

@@ -10,7 +10,7 @@ import { usePrintCalculator } from "@/hooks/usePrintCalculator";
 import { Copy, Printer, Loader2 } from "lucide-react";
 
 const ProfitMarginCalculator = () => {
-  const { isCalculating, handleCalculation, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
   const [revenue, setRevenue] = useState("");
   const [cost, setCost] = useState("");
@@ -31,6 +31,7 @@ const ProfitMarginCalculator = () => {
     const markup = (profit / cst) * 100;
 
     setResult({ profit, margin, markup });
+    updateAIInsight({ revenue: rev, cost: cst }, { profit, margin, markup });
   };
 
   const faqs = [

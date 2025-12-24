@@ -11,17 +11,19 @@ import { Copy, Loader2, Printer } from "lucide-react";
 const RentAffordabilityCalculator = () => {
   const [income, setIncome] = useState("");
   const [result, setResult] = useState<{ conservative: number; moderate: number; stretch: number } | null>(null);
-  const { isCalculating, handleCalculation, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
     const monthlyIncome = parseFloat(income);
     if (!monthlyIncome || monthlyIncome <= 0) return;
-    setResult({
+    const resultData = {
       conservative: monthlyIncome * 0.25,
       moderate: monthlyIncome * 0.30,
       stretch: monthlyIncome * 0.35,
-    });
+    };
+    setResult(resultData);
+    updateAIInsight({ monthlyIncome }, resultData);
   };
 
   const faqs = [{ question: "How much rent can I afford?", answer: "The 30% rule suggests spending no more than 30% of gross monthly income on rent. Conservative is 25%, stretch is 35%." }];

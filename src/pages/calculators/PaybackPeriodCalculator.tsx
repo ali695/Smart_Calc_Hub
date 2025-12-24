@@ -12,7 +12,7 @@ const PaybackPeriodCalculator = () => {
   const [initialInvestment, setInitialInvestment] = useState("");
   const [annualCashFlow, setAnnualCashFlow] = useState("");
   const [result, setResult] = useState<{ years: number; months: number; totalMonths: number } | null>(null);
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
@@ -29,6 +29,10 @@ const PaybackPeriodCalculator = () => {
         months,
         totalMonths: parseFloat(totalMonths.toFixed(1))
       });
+      updateAIInsight(
+        { initialInvestment: investment, annualCashFlow: cashFlow },
+        { years, months, totalMonths: parseFloat(totalMonths.toFixed(1)) }
+      );
     }
   };
 

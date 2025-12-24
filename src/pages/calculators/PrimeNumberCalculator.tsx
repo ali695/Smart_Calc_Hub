@@ -14,7 +14,7 @@ const PrimeNumberCalculator = () => {
     isPrime: boolean;
     factors: number[];
   } | null>(null);
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
@@ -43,6 +43,7 @@ const PrimeNumberCalculator = () => {
     }
 
     setResult({ isPrime, factors });
+    updateAIInsight({ number: num }, { isPrime, factors });
   };
 
   const faqs = [

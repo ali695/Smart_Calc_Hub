@@ -16,7 +16,7 @@ const PercentageChangeCalculator = () => {
     change: number;
     type: string;
   } | null>(null);
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
@@ -30,6 +30,7 @@ const PercentageChangeCalculator = () => {
     const type = percentChange > 0 ? "Increase" : percentChange < 0 ? "Decrease" : "No Change";
 
     setResult({ percentChange, change, type });
+    updateAIInsight({ oldValue: old, newValue: newVal }, { percentChange, change, type });
   };
 
   const faqs = [

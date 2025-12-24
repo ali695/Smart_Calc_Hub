@@ -13,10 +13,8 @@ const WaterIntakeCalculator = () => {
   const [activity, setActivity] = useState("moderate");
   const [climate, setClimate] = useState("moderate");
   const [waterIntake, setWaterIntake] = useState<number | null>(null);
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
-
-  const { updateAIInsight } = useCalculatorEnhancements();
 
   const calculate = () => {
     const w = parseFloat(weight);
