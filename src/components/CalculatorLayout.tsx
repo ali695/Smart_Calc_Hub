@@ -6,6 +6,7 @@ import { RelatedCalculators } from "@/components/RelatedCalculators";
 import { AIInsightCard } from "@/components/AIInsightCard";
 import { CalculatorActions } from "@/components/CalculatorActions";
 import { RegionToggle } from "@/components/RegionToggle";
+import { CalculatorSEOContent } from "@/components/CalculatorSEOContent";
 import { useRecentCalculators } from "@/hooks/useRecentCalculators";
 import { useRealtimeHistory } from "@/hooks/useRealtimeHistory";
 import { useAnalytics } from "@/hooks/useAnalytics";
@@ -400,6 +401,8 @@ export const CalculatorLayout = ({
             </Accordion>
           </Card>
 
+          {/* SEO Content Section - unique content for each calculator */}
+          <CalculatorSEOContent calculatorSlug={calculatorSlug} />
 
           {/* Related Calculators Section */}
           {category && (
