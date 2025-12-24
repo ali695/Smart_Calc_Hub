@@ -49,6 +49,11 @@ const DEFAULT_MESSAGE: Message = {
 };
 
 const loadStoredMessages = (): { messages: Message[]; mode: ChatMode } => {
+  // SSR guard - return defaults during server render
+  if (typeof window === 'undefined') {
+    return { messages: [DEFAULT_MESSAGE], mode: "general" };
+  }
+  
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored) {
@@ -65,6 +70,9 @@ const loadStoredMessages = (): { messages: Message[]; mode: ChatMode } => {
 };
 
 const saveMessages = (messages: Message[], mode: ChatMode) => {
+  // SSR guard
+  if (typeof window === 'undefined') return;
+  
   try {
     const toStore = { messages: messages.slice(-MAX_STORED_MESSAGES), mode };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(toStore));

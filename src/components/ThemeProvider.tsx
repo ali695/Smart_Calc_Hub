@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { isBrowser, safeLocalStorage } from "@/utils/ssrGuards";
 
 type Theme = "dark" | "light" | "system";
 
@@ -26,11 +27,16 @@ export function ThemeProvider({
   storageKey = "smartcalc-theme",
   ...props
 }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(
-    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
-  );
+  const [theme, setTheme] = useState<Theme>(() => {
+    // SSR-safe initial state
+    if (!isBrowser) return defaultTheme;
+    return (safeLocalStorage.getItem(storageKey) as Theme) || defaultTheme;
+  });
 
   useEffect(() => {
+    // Only update DOM in browser
+    if (!isBrowser) return;
+    
     const root = window.document.documentElement;
 
     root.classList.remove("light", "dark");
@@ -51,7 +57,9 @@ export function ThemeProvider({
   const value = {
     theme,
     setTheme: (theme: Theme) => {
-      localStorage.setItem(storageKey, theme);
+      if (isBrowser) {
+        safeLocalStorage.setItem(storageKey, theme);
+      }
       setTheme(theme);
     },
   };

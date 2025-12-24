@@ -1,5 +1,6 @@
 import { ReactNode, useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
+import { isBrowser, safeWindow, safeDocument } from "@/utils/ssrGuards";
 
 type CategoryType = 
   | "home" | "finance" | "health" | "math" | "conversion" 
@@ -15,9 +16,11 @@ interface HeroSectionProps {
   className?: string;
 }
 
-// Create a global event for calculate pulse
+// Create a global event for calculate pulse (browser only)
 export const triggerCalculatePulse = () => {
-  window.dispatchEvent(new CustomEvent('calculatePulse'));
+  if (isBrowser && safeWindow) {
+    safeWindow.dispatchEvent(new CustomEvent('calculatePulse'));
+  }
 };
 
 // Gradient mappings for light and dark modes
@@ -100,8 +103,10 @@ export const HeroSection = ({
   const [isHovered, setIsHovered] = useState(false);
   const [isDark, setIsDark] = useState(false);
 
-  // Check for dark mode
+  // Check for dark mode (browser only)
   useEffect(() => {
+    if (!isBrowser || !safeDocument) return;
+    
     const checkDarkMode = () => {
       setIsDark(document.documentElement.classList.contains('dark'));
     };
@@ -113,8 +118,10 @@ export const HeroSection = ({
     return () => observer.disconnect();
   }, []);
 
-  // Listen for calculate pulse events
+  // Listen for calculate pulse events (browser only)
   useEffect(() => {
+    if (!isBrowser || !safeWindow) return;
+    
     const handlePulse = () => {
       setIsPulsing(true);
       setTimeout(() => setIsPulsing(false), 600);

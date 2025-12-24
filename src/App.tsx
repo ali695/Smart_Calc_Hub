@@ -160,13 +160,13 @@ import { ScrollToTop } from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
-// Analytics tracker component
+// Analytics tracker component - only runs in browser
 const AnalyticsTracker = () => {
   const location = useLocation();
 
   useEffect(() => {
-    // Track page view on route change in production
-    if (import.meta.env.PROD) {
+    // Track page view on route change in production (browser only)
+    if (typeof window !== 'undefined' && import.meta.env.PROD) {
       trackPageView(location.pathname + location.search);
     }
   }, [location]);
