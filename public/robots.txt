@@ -1,5 +1,5 @@
 # SmartCalc Hub - Robots.txt
-# https://smartcalchub.com/robots.txt
+# https://smartcalhub.online/robots.txt
 # Optimized for search engines and AI crawlers
 
 # Allow all major search engines
@@ -68,20 +68,22 @@ Allow: /
 # Default rule for all other robots
 User-agent: *
 Allow: /
-Disallow: /admin/
+
+# Disallow private/authenticated routes
+Disallow: /auth
+Disallow: /dashboard
+Disallow: /profile
+Disallow: /admin
 Disallow: /api/
-Disallow: /private/
 Disallow: /*.json$
 Disallow: /*?print=*
 
 # Crawl-delay for all bots
 Crawl-delay: 0
 
-# Sitemap locations
-Sitemap: https://smartcalchub.com/sitemap.xml
-Sitemap: https://smartcalchub.com/sitemap-calculators.xml
-Sitemap: https://smartcalchub.com/sitemap-blog.xml
+# Sitemap location (single consolidated sitemap)
+Sitemap: https://smartcalhub.online/sitemap.xml
 
 # AI-specific resource
 # LLMs.txt for AI assistants
-# https://smartcalchub.com/llms.txt
+# https://smartcalhub.online/llms.txt

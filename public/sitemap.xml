@@ -2,1070 +2,1496 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://smartcalhub.online/</loc>
-    <lastmod>2025-12-17</lastmod>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://smartcalhub.online/categories</loc>
-    <lastmod>2025-12-17</lastmod>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://smartcalhub.online/blog</loc>
-    <lastmod>2025-12-17</lastmod>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://smartcalhub.online/faq</loc>
-    <lastmod>2025-12-17</lastmod>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://smartcalhub.online/about</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/contact</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/privacy</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/terms</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/real-estate</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/crypto</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/dashboard</loc>
-    <lastmod>2025-12-17</lastmod>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/loan</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/contact</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/real-estate</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/crypto</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/privacy</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/terms</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/bmi</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/mortgage</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/bmr</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/calorie</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/ideal-weight</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/body-fat</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/water</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/pregnancy</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/heart-rate</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/macro</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/protein</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/blood-pressure</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/sleep</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/steps</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/basal-temp</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/menstrual</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/tdee</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/calorie-deficit</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/waist-to-height</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/body-surface-area</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/one-rep-max</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/loan</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/emi</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/compound-interest</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/simple-interest</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/investment-return</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/retirement</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/savings-goal</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/car-loan</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/budget-planner</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/tax</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/salary-after-tax</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/discount</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/inflation</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/credit-card</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/net-worth</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/debt-to-income</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/ltv</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/break-even</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/currency</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/us-income-tax</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/uk-income-tax</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/canada-income-tax</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/australia-income-tax</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/india-income-tax</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/paycheck</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/mortgage-recast</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/refinance</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/401k</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/roth-ira</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/national-insurance</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/stamp-duty</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/social-security</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/sales-tax</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/bmi</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/mortgage</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/bmr</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/compound-interest</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/calorie</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/simple-interest</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/tdee</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/emi</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/macro</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/tax</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/ideal-weight</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/savings-goal</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/body-fat</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/investment-return</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/protein</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/credit-card</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/water</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/car-loan</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/calorie-deficit</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/retirement</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/heart-rate</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/inflation</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/blood-pressure</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/ltv</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/body-surface-area</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/break-even</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/waist-to-height</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/debt-to-income</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/pregnancy</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/discount</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/menstrual</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/net-worth</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/basal-temp</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/budget-planner</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/steps</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/salary-after-tax</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/sleep</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/us-income-tax</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/one-rep-max</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/uk-income-tax</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/percentage</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/percentage-change</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/canada-income-tax</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/percentage-increase</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/australia-income-tax</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/percentage-decrease</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/india-income-tax</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/fraction</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/paycheck</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/fraction-decimal</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/mortgage-recast</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/average</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/refinance</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/standard-deviation</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/401k</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/quadratic</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/roth-ira</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/pythagoras</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/national-insurance</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/triangle-area</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/stamp-duty</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/circle</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/social-security</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/volume</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/sales-tax</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/area-perimeter</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/exponent</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/logarithm</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/factorial</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/permutation-combination</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/scientific-notation</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/ratio</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/probability</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/prime-number</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/square-root</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/sine</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/cosine</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/tangent</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/arcsin</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/arccos</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/arctan</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/radian-degree</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/age</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/profit-margin</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/calulator/length</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/percentage</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/weight</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/percentage-change</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/temperature</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/percentage-increase</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/area-converter</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/percentage-decrease</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/speed</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/fraction</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/energy-converter</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/fraction-decimal</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/pressure-converter</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/average</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/fuel-efficiency</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/standard-deviation</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/days</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/ratio</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/countdown</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/age</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/timezone</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/quadratic</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/data-transfer</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/area-perimeter</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/roman-numeral</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/volume</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/binary-decimal</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/prime</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/hex-decimal</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/profit-margin</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/base64</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/factorial</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/json-formatter</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/exponent</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/hash-generator</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/logarithm</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/password-generator</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/square-root</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/color-converter</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/pythagoras</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/ohms-law</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/triangle-area</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/power</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/circle</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/force</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/permutation-combination</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/torque</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/scientific-notation</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/kinetic-energy</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/probability</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/density</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/sine</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/stress-strain</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/cosine</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/growth-rate</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/tangent</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/conversion-rate</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/arcsin</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/payback-period</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/arccos</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/inventory-turnover</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/arctan</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/customer-lifetime-value</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/radian-degree</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/ph</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/length</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/molarity</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/weight</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/half-life</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/temperature</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/rent-affordability</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/currency</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/buy-vs-rent</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/timezone</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/cap-rate</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/fuel</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/property-tax</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/area-converter</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/house-flip</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/speed-converter</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/crypto-profit</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/energy-converter</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/dca</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/data-transfer</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/bitcoin</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/pressure-converter</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/calulator/mining-profit</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/roman-numeral</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/blog/how-to-calulate-monthly-loan-emi</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/days</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/blog/health-metrics-tracking-guide</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/countdown</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/blog/advanced-percentage-calulations-tricks</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/hash-generator</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/blog/currency-conversion-guide-2025</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/base64-encoder</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/blog/bmr-vs-bmi-explained</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/json-formatter</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/blog/top-financial-calulators-small-business</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/calculator/password-generator</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/color-converter</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/binary-decimal</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/hex-decimal</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/ohms-law</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/force</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/torque</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/power</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/stress-strain</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/growth-rate</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/customer-lifetime-value</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/inventory-turnover</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/conversion-rate</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/payback-period</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/ph</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/molarity-calculator</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/half-life</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/density-calculator</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/kinetic-energy</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/rent-affordability</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/buy-vs-rent</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/cap-rate</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/property-tax</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/house-flip</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/crypto-profit</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/dca</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/bitcoin-converter</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/calculator/mining-profit</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/how-to-calculate-monthly-loan-emi</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/complete-guide-mortgage-calculator</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://smartcalhub.online/blog/compound-interest-wealth-building</loc>
-    <lastmod>2025-12-17</lastmod>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/blog/mortgage-calulator-home-buying-guide</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/blog/bmi-calculator-guide-healthy-weight</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/blog/complete-guide-mortgage-calulator</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/blog/tax-calculator-guide-2025</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/blog/bmi-calulator-complete-guide</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/blog/retirement-calculator-planning-guide</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/blog/bmi-calulator-guide-healthy-weight</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/blog/percentage-calculator-tricks-shortcuts</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/blog/scientific-calulator-guide-engineers</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/blog/calorie-calculator-weight-management</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/blog/retirement-planning-calulator-guide</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/blog/retirement-calulator-planning-guide</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/blog/crypto-profit-calulator-guide</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/blog/real-estate-investment-calulator-guide</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/blog/tax-planning-calulator-tips</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/blog/tax-calulator-guide-2025</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/blog/business-metrics-calulator-guide</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/blog/percentage-calulator-tricks-shortcuts</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/blog/calorie-calulator-weight-management</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://smartcalhub.online/blog/currency-converter-forex-trading</loc>
-    <lastmod>2025-12-17</lastmod>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/blog/age-calulator-life-milestones</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/blog/age-calculator-life-milestones</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/blog/investment-return-calulator-roi</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/blog/investment-return-calculator-roi</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://smartcalhub.online/blog/unit-converter-guide-measurements</loc>
-    <lastmod>2025-12-17</lastmod>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://smartcalhub.online/blog/budget-planner-personal-finance</loc>
-    <lastmod>2025-12-17</lastmod>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://smartcalhub.online/blog/heart-rate-zones-training-guide</loc>
-    <lastmod>2025-12-17</lastmod>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/blog/macro-calulator-nutrition-guide</loc>
-    <lastmod>2025-12-17</lastmod>
+    <loc>https://smartcalhub.online/blog/macro-calculator-nutrition-guide</loc>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://smartcalhub.online/blog/quadratic-equation-solver-guide</loc>
-    <lastmod>2025-12-17</lastmod>
+    <lastmod>2025-12-24</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://smartcalhub.online/categories#finance</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/categories#health</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>weekly</changefreq>
+    <loc>https://smartcalhub.online/blog/body-fat-percentage-calculator-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/categories#math</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>weekly</changefreq>
+    <loc>https://smartcalhub.online/blog/savings-goal-calculator-financial-planning</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/categories#conversion</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>weekly</changefreq>
+    <loc>https://smartcalhub.online/blog/ideal-weight-calculator-health-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/categories#tech</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>weekly</changefreq>
+    <loc>https://smartcalhub.online/blog/time-value-money-calculator-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/categories#engineering</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>weekly</changefreq>
+    <loc>https://smartcalhub.online/blog/scientific-notation-calculator-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/categories#business</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>weekly</changefreq>
+    <loc>https://smartcalhub.online/blog/loan-to-value-calculator-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://smartcalhub.online/categories#science</loc>
-    <lastmod>2025-12-17</lastmod>
-    <changefreq>weekly</changefreq>
+    <loc>https://smartcalhub.online/blog/sleep-calculator-optimize-rest</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/break-even-analysis-calculator-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/tdee-calculator-complete-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/steps-to-calories-calculator-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/net-worth-calculator-wealth-tracking</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/credit-card-payoff-calculator-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/pregnancy-due-date-calculator-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/standard-deviation-calculator-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/ohms-law-calculator-electronics</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/water-intake-calculator-hydration</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/profit-margin-calculator-business</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/bmi-vs-body-fat-comparison</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/car-loan-calculator-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/menstrual-cycle-calculator-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/debt-to-income-ratio-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/inflation-calculator-purchasing-power</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/basal-metabolic-rate-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/volume-calculator-3d-shapes</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/blood-pressure-monitor-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/discount-calculator-shopping-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/probability-calculator-statistics</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/password-security-generator-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/area-perimeter-calculator-geometry</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/protein-intake-calculator-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/hash-generator-security-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/waist-to-height-ratio-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/one-rep-max-calculator-strength</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/json-formatter-developer-tool</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/base64-encoding-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/binary-decimal-converter-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/color-converter-hex-rgb-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/trigonometry-calculator-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/pythagorean-theorem-calculator</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/circle-calculator-geometry</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/factorial-calculator-math</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/permutation-combination-calculator</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/logarithm-calculator-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/ratio-calculator-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/fraction-calculator-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/average-calculator-statistics</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/energy-converter-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/pressure-converter-engineering</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/speed-converter-physics</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/fuel-efficiency-calculator-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/timezone-converter-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/roman-numeral-converter-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/days-between-dates-calculator</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/countdown-timer-calculator</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/real-estate-cap-rate-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/property-tax-calculator-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/rent-vs-buy-calculator-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/house-flipping-profit-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/crypto-profit-calculator-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/dca-investment-strategy-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/bitcoin-converter-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/mining-profitability-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/us-income-tax-calculator-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/uk-income-tax-calculator-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/canada-income-tax-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/australia-income-tax-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/india-income-tax-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/paycheck-calculator-take-home-pay</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/mortgage-recast-calculator-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/refinance-calculator-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/401k-retirement-calculator-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/roth-ira-calculator-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/national-insurance-uk-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/stamp-duty-calculator-uk</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/social-security-benefits-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/sales-tax-calculator-us</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/simple-interest-calculator-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/growth-rate-cagr-calculator</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/customer-lifetime-value-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/inventory-turnover-calculator</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/conversion-rate-optimization</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/payback-period-calculator-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/ph-calculator-chemistry</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/molarity-calculator-chemistry</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/half-life-calculator-physics</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/density-calculator-science</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/kinetic-energy-calculator-physics</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/force-calculator-physics</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/torque-calculator-engineering</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/power-calculator-engineering</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/stress-strain-calculator-materials</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/quadratic-formula-calculator-algebra</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://smartcalhub.online/blog/credit-score-improvement-guide</loc>
+    <lastmod>2025-12-24</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 </urlset>
