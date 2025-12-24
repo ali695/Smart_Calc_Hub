@@ -70,7 +70,7 @@ const WaistToHeightCalculator = () => {
       seoTitle="Waist-to-Height Ratio Calculator – WHtR Health Assessment | SmartCalc Hub"
       seoDescription="Free waist-to-height ratio calculator. Assess your health risk from central obesity with instant WHtR results."
       keywords="waist to height ratio, WHtR calculator, waist height ratio, central obesity, health risk calculator"
-      canonicalUrl="https://smartcalchub.com/health/waist-to-height-calculator"
+      canonicalUrl="https://smartcalhub.online/calculator/waist-to-height"
     >
       <div className="space-y-6">
         <div className="grid md:grid-cols-3 gap-6">

@@ -73,7 +73,7 @@ const KineticEnergyCalculator = () => {
       seoTitle="Kinetic Energy Calculator – KE = ½mv² | SmartCalc Hub"
       seoDescription="Free kinetic energy calculator. Calculate KE using mass and velocity (KE = ½mv²) for physics."
       keywords="kinetic energy calculator, KE calculator, physics energy, motion energy"
-      canonicalUrl="https://smartcalchub.com/science/kinetic-energy"
+      canonicalUrl="https://smartcalhub.online/calculator/kinetic-energy"
     >
       <div className="space-y-6">
         <div className="grid md:grid-cols-2 gap-6">

@@ -94,7 +94,7 @@ const CalorieDeficitCalculator = () => {
       seoTitle="Calorie Deficit Calculator – Weight Loss Calories | SmartCalc Hub"
       seoDescription="Free calorie deficit calculator to determine daily calorie intake for weight loss. Safe and sustainable deficit planning."
       keywords="calorie deficit calculator, weight loss calculator, calorie intake, daily calories, diet calculator"
-      canonicalUrl="https://smartcalchub.com/health/calorie-deficit-calculator"
+      canonicalUrl="https://smartcalhub.online/calculator/calorie-deficit"
     >
       <div className="space-y-6">
         <div className="grid md:grid-cols-2 gap-6">

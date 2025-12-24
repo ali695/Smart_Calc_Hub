@@ -65,7 +65,7 @@ const NetWorthCalculator = () => {
       seoTitle="Net Worth Calculator – Calculate Your Financial Worth | SmartCalc Hub"
       seoDescription="Free net worth calculator to track your assets and liabilities. Calculate your total financial worth instantly."
       keywords="net worth calculator, financial calculator, assets and liabilities, wealth calculator"
-      canonicalUrl="https://smartcalchub.com/finance/net-worth-calculator"
+      canonicalUrl="https://smartcalhub.online/calculator/net-worth"
     >
       <div className="space-y-6">
         <div className="space-y-4">

@@ -71,7 +71,7 @@ const AreaPerimeterCalculator = () => {
         data={{
           name: "Area & Perimeter Calculator",
           description: "Calculate the area and perimeter of common shapes including circles, squares, rectangles, and triangles",
-          url: "https://smartcalchub.com/math/area-perimeter-calculator"
+          url: "https://smartcalhub.online/calculator/area-perimeter"
         }}
       />
       <CalculatorLayout

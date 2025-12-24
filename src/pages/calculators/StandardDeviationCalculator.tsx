@@ -38,7 +38,7 @@ const StandardDeviationCalculator = () => {
       seoTitle="Standard Deviation Calculator - Variance & Mean | SmartCalc Hub"
       seoDescription="Free standard deviation calculator for statistics. Calculate SD, variance, and mean from any data set. Perfect for math, science, and data analysis."
       keywords="standard deviation calculator, variance calculator, mean calculator, statistics calculator, data analysis"
-      canonicalUrl="https://smartcalchub.com/calculator/standard-deviation"
+      canonicalUrl="https://smartcalhub.online/calculator/standard-deviation"
       category="math" 
       calculatorId="standard-deviation" 
       howItWorks="Enter numbers separated by commas or spaces." 

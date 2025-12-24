@@ -81,7 +81,7 @@ const HalfLifeCalculator = () => {
       seoTitle="Half-Life Calculator – Radioactive Decay | SmartCalc Hub"
       seoDescription="Free half-life calculator. Calculate radioactive decay time and remaining substance for nuclear physics."
       keywords="half-life calculator, radioactive decay, nuclear physics, exponential decay"
-      canonicalUrl="https://smartcalchub.com/science/half-life"
+      canonicalUrl="https://smartcalhub.online/calculator/half-life"
     >
       <div className="space-y-6">
         <div className="grid md:grid-cols-3 gap-6">

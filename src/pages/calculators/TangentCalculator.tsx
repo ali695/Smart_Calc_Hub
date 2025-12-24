@@ -71,7 +71,7 @@ const TangentCalculator = () => {
       seoTitle="Tangent Calculator – Calculate tan(θ) Online | SmartCalc Hub"
       seoDescription="Free online tangent calculator for angles in degrees or radians. Get accurate tan(θ) values instantly for trigonometry calculations."
       keywords="tangent calculator, tan calculator, trigonometry calculator, tan theta, trig functions"
-      canonicalUrl="https://smartcalchub.com/math/tangent-calculator"
+      canonicalUrl="https://smartcalhub.online/calculator/tangent"
     >
       <div className="space-y-6">
         <div className="grid md:grid-cols-2 gap-6">

@@ -56,7 +56,7 @@ const SquareRootCalculator = () => {
       seoTitle="Square Root Calculator – Calculate √x Instantly | SmartCalc Hub"
       seoDescription="Free online square root calculator. Find square roots of any positive number with accurate decimal results instantly."
       keywords="square root calculator, sqrt calculator, root calculator, math calculator"
-      canonicalUrl="https://smartcalchub.com/math/square-root-calculator"
+      canonicalUrl="https://smartcalhub.online/calculator/square-root"
     >
       <div className="space-y-6">
         <div className="space-y-2">

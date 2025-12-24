@@ -46,7 +46,7 @@ export const SchemaMarkup = ({ type, data }: SchemaMarkupProps) => {
           "@type": "WebApplication",
           "name": sanitizeString(webAppData.name, 100),
           "description": sanitizeString(webAppData.description, 500),
-          "url": sanitizeUrl(webAppData.url) || "https://smartcalchub.com",
+          "url": sanitizeUrl(webAppData.url) || "https://smartcalhub.online",
           "applicationCategory": "UtilityApplication",
           "offers": {
             "@type": "Offer",
@@ -77,13 +77,13 @@ export const SchemaMarkup = ({ type, data }: SchemaMarkupProps) => {
             "name": "SmartCalc Hub",
             "logo": {
               "@type": "ImageObject",
-              "url": "https://smartcalchub.com/logo.png"
+              "url": "https://smartcalhub.online/logo.png"
             }
           },
           "datePublished": blogData.datePublished,
           "dateModified": blogData.dateModified || blogData.datePublished,
-          "image": sanitizeUrl(blogData.image) || "https://smartcalchub.com/og-image.png",
-          "url": sanitizeUrl(blogData.url) || "https://smartcalchub.com"
+          "image": sanitizeUrl(blogData.image) || "https://smartcalhub.online/og-image.png",
+          "url": sanitizeUrl(blogData.url) || "https://smartcalhub.online"
         };
       
       case 'FAQPage':
@@ -106,8 +106,8 @@ export const SchemaMarkup = ({ type, data }: SchemaMarkupProps) => {
           ...baseContext,
           "@type": "Organization",
           "name": "SmartCalc Hub",
-          "url": "https://smartcalchub.com",
-          "logo": "https://smartcalchub.com/logo.png",
+          "url": "https://smartcalhub.online",
+          "logo": "https://smartcalhub.online/logo.png",
           "founder": {
             "@type": "Person",
             "name": "Ali Haider"
@@ -128,7 +128,7 @@ export const SchemaMarkup = ({ type, data }: SchemaMarkupProps) => {
             "@type": "ListItem",
             "position": index + 1,
             "name": sanitizeString(item.name, 100),
-            "item": sanitizeUrl(item.url) || "https://smartcalchub.com"
+            "item": sanitizeUrl(item.url) || "https://smartcalhub.online"
           }))
         };
       

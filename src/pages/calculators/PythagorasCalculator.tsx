@@ -61,7 +61,7 @@ const PythagorasCalculator = () => {
       seoTitle="Pythagorean Theorem Calculator – Right Triangle Calculator | SmartCalc Hub"
       seoDescription="Free Pythagorean theorem calculator to find the hypotenuse and properties of right triangles. Instant accurate results."
       keywords="pythagorean theorem calculator, right triangle calculator, hypotenuse calculator, pythagoras calculator"
-      canonicalUrl="https://smartcalchub.com/math/pythagoras-calculator"
+      canonicalUrl="https://smartcalhub.online/calculator/pythagoras"
     >
       <div className="space-y-6">
         <div className="grid md:grid-cols-2 gap-6">

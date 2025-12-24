@@ -55,7 +55,7 @@ const ProfitMarginCalculator = () => {
         data={{
           name: "Profit Margin & Markup Calculator",
           description: "Calculate profit, profit margin, and markup percentage for business and pricing decisions",
-          url: "https://smartcalchub.com/business/profit-margin-calculator"
+          url: "https://smartcalhub.online/calculator/profit-margin"
         }}
       />
       <CalculatorLayout

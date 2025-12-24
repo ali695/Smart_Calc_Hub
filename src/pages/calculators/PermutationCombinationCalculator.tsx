@@ -61,7 +61,7 @@ const PermutationCombinationCalculator = () => {
       seoTitle="Permutation & Combination Calculator – nPr and nCr | SmartCalc Hub"
       seoDescription="Free permutation and combination calculator for probability and statistics. Calculate nPr and nCr instantly with explanations."
       keywords="permutation calculator, combination calculator, nPr, nCr, probability calculator, statistics"
-      canonicalUrl="https://smartcalchub.com/math/permutation-combination-calculator"
+      canonicalUrl="https://smartcalhub.online/calculator/permutation-combination"
     >
       <div className="space-y-6">
         <div className="grid md:grid-cols-2 gap-6">

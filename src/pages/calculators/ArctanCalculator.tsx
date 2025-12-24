@@ -51,7 +51,7 @@ const ArctanCalculator = () => {
       seoTitle="Arctangent Calculator – Calculate tan⁻¹(x) Online | SmartCalc Hub"
       seoDescription="Free inverse tangent (arctan) calculator. Convert tangent ratios to angles in degrees or radians instantly."
       keywords="arctan calculator, inverse tangent, tan^-1, arctangent, trigonometry calculator"
-      canonicalUrl="https://smartcalchub.com/math/arctan-calculator"
+      canonicalUrl="https://smartcalhub.online/calculator/arctan"
     >
       <div className="space-y-6">
         <div className="grid md:grid-cols-2 gap-6">

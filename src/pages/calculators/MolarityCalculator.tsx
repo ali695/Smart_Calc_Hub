@@ -69,7 +69,7 @@ const MolarityCalculator = () => {
         data={{
           name: "Molarity Calculator",
           description: "Calculate solution molarity and dilutions for chemistry applications",
-          url: "https://smartcalchub.com/science/molarity-calculator",
+          url: "https://smartcalhub.online/calculator/molarity",
           applicationCategory: "ScienceApplication"
         }}
       />

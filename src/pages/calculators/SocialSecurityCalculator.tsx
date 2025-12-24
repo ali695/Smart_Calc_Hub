@@ -99,7 +99,7 @@ const SocialSecurityCalculator = () => {
         data={{
           name: "US Social Security Benefits Estimator",
           description: "Estimate your Social Security retirement benefits based on earnings history",
-          url: "https://smartcalchub.com/calculator/social-security",
+          url: "https://smartcalhub.online/calculator/social-security",
         }}
       />
       <CalculatorLayout

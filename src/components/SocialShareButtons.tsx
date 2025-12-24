@@ -12,7 +12,7 @@ interface SocialShareButtonsProps {
 export const SocialShareButtons = ({ url, title, description }: SocialShareButtonsProps) => {
   const [copied, setCopied] = useState(false);
   
-  const shareUrl = `https://smartcalchub.com${url}`;
+  const shareUrl = `https://smartcalhub.online${url}`;
   const encodedUrl = encodeURIComponent(shareUrl);
   const encodedTitle = encodeURIComponent(title);
   const encodedDescription = encodeURIComponent(description || title);

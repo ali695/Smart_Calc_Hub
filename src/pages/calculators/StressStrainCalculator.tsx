@@ -88,7 +88,7 @@ const StressStrainCalculator = () => {
         data={{
           name: "Stress-Strain Calculator",
           description: "Calculate stress, strain, and Young's modulus for material mechanics analysis",
-          url: "https://smartcalchub.com/calculator/stress-strain",
+          url: "https://smartcalhub.online/calculator/stress-strain",
           applicationCategory: "EngineeringApplication"
         }}
       />
@@ -103,7 +103,7 @@ const StressStrainCalculator = () => {
         seoTitle="Stress-Strain Calculator – Material Mechanics | SmartCalc Hub"
         seoDescription="Free stress-strain calculator. Calculate stress, strain, and Young's modulus for materials."
         keywords="stress strain calculator, Young's modulus, material mechanics, engineering calculator"
-        canonicalUrl="https://smartcalchub.com/calculator/stress-strain"
+        canonicalUrl="https://smartcalhub.online/calculator/stress-strain"
       >
         <div className="space-y-6">
           <div className="grid md:grid-cols-2 gap-6">

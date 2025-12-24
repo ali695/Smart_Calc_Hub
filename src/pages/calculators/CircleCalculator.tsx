@@ -59,7 +59,7 @@ const CircleCalculator = () => {
       seoTitle="Circle Calculator – Area, Circumference, Diameter | SmartCalc Hub"
       seoDescription="Free circle calculator to find area, circumference, and diameter from radius. Instant accurate results for all circle calculations."
       keywords="circle calculator, area of circle, circumference calculator, circle area, geometry calculator"
-      canonicalUrl="https://smartcalchub.com/math/circle-calculator"
+      canonicalUrl="https://smartcalhub.online/calculator/circle"
     >
       <div className="space-y-6">
         <div className="space-y-2">

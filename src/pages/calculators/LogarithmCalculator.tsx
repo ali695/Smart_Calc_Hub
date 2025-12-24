@@ -78,7 +78,7 @@ const LogarithmCalculator = () => {
       seoTitle="Logarithm Calculator – Calculate Log with Any Base | SmartCalc Hub"
       seoDescription="Free logarithm calculator to compute log values with any base. Perfect for math, science, and engineering calculations."
       keywords="logarithm calculator, log calculator, natural log, common log, math calculator"
-      canonicalUrl="https://smartcalchub.com/math/logarithm-calculator"
+      canonicalUrl="https://smartcalhub.online/calculator/logarithm"
     >
       <div className="space-y-6">
         <div className="grid md:grid-cols-2 gap-6">

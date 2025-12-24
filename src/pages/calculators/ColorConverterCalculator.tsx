@@ -91,7 +91,7 @@ const ColorConverterCalculator = () => {
       seoTitle="Color Converter – HEX, RGB, HSL Conversion | SmartCalc Hub"
       seoDescription="Free color converter. Convert between HEX, RGB, and HSL color formats instantly with live preview."
       keywords="color converter, hex to rgb, rgb to hsl, color code, css colors"
-      canonicalUrl="https://smartcalchub.com/calculator/color-converter"
+      canonicalUrl="https://smartcalhub.online/calculator/color-converter"
     >
       <div className="space-y-6">
         <div className="space-y-4">

@@ -56,7 +56,7 @@ const PregnancyCalculator = () => {
         data={{
           name: "Pregnancy Due Date Calculator",
           description: "Calculate your expected due date based on last menstrual period",
-          url: "https://smartcalchub.com/health/pregnancy-calculator"
+          url: "https://smartcalhub.online/calculator/pregnancy"
         }}
       />
       <CalculatorLayout

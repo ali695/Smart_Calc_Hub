@@ -58,7 +58,7 @@ const BreakEvenCalculator = () => {
         data={{
           name: "Break-Even Calculator",
           description: "Calculate the break-even point for your business to understand when you'll start making profit",
-          url: "https://smartcalchub.com/calculator/break-even",
+          url: "https://smartcalhub.online/calculator/break-even",
           applicationCategory: "FinanceApplication",
           operatingSystem: "Any",
           offers: {
@@ -74,7 +74,7 @@ const BreakEvenCalculator = () => {
       seoTitle="Break-Even Calculator - Business Profit Analysis | SmartCalc Hub"
       seoDescription="Free break-even calculator for businesses. Calculate break-even point, units needed, and revenue targets. Essential tool for pricing and financial planning."
       keywords="break even calculator, break even point, business calculator, profit calculator, contribution margin"
-      canonicalUrl="https://smartcalchub.com/calculator/break-even"
+      canonicalUrl="https://smartcalhub.online/calculator/break-even"
       category="business"
       calculatorId="break-even"
       howItWorks="Enter your fixed costs, variable cost per unit, and selling price. The calculator shows how many units you need to sell to break even."

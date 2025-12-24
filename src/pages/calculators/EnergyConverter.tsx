@@ -70,7 +70,7 @@ const EnergyConverter = () => {
       seoTitle="Energy Converter – Joules, Calories, kWh Conversion | SmartCalc Hub"
       seoDescription="Free energy unit converter. Convert between joules, calories, kilocalories, watt-hours, BTU, and more instantly."
       keywords="energy converter, joules to calories, kWh converter, BTU conversion, energy unit calculator"
-      canonicalUrl="https://smartcalchub.com/conversion/energy-converter"
+      canonicalUrl="https://smartcalhub.online/calculator/energy"
     >
       <div className="space-y-6">
         <div className="grid md:grid-cols-3 gap-6">

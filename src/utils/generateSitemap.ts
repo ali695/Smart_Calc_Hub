@@ -1,7 +1,7 @@
 import { calculators } from '@/data/calculators';
 import { blogPosts } from '@/data/blogPosts';
 
-const BASE_URL = 'https://smartcalchub.com';
+const BASE_URL = 'https://smartcalhub.online';
 
 interface SitemapUrl {
   loc: string;

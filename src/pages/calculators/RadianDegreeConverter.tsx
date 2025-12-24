@@ -53,7 +53,7 @@ const RadianDegreeConverter = () => {
       seoTitle="Radian to Degree Converter – Convert Angles Online | SmartCalc Hub"
       seoDescription="Free radian to degree converter. Instantly convert between radians and degrees for trigonometry calculations."
       keywords="radian to degree, degree to radian, angle converter, rad to deg, deg to rad"
-      canonicalUrl="https://smartcalchub.com/math/radian-degree-converter"
+      canonicalUrl="https://smartcalhub.online/calculator/radian-degree"
     >
       <div className="space-y-6">
         <div className="grid md:grid-cols-2 gap-6">
