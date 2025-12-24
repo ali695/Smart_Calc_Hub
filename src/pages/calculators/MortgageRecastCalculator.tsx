@@ -20,7 +20,7 @@ const MortgageRecastCalculator = () => {
     newBalance: number;
     totalSavings: number;
   } | null>(null);
-  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard } = useCalculatorEnhancements();
+  const { isCalculating, handleCalculation, handleKeyPress, copyToClipboard, updateAIInsight } = useCalculatorEnhancements();
   const { printCalculation } = usePrintCalculator();
 
   const calculate = () => {
@@ -38,6 +38,11 @@ const MortgageRecastCalculator = () => {
     const totalSavings = monthlySavings * months;
 
     setResult({ currentPayment, newPayment, monthlySavings, newBalance, totalSavings });
+    
+    updateAIInsight(
+      { currentBalance: balance, interestRate: rate * 12 * 100, remainingMonths: months, lumpSum: lump },
+      { currentPayment, newPayment, monthlySavings, newBalance, totalSavings }
+    );
   };
 
   const faqs = [
