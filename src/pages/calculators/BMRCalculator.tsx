@@ -80,7 +80,7 @@ const BMRCalculator = () => {
         data={{
           name: "BMR Calculator",
           description: "Calculate your Basal Metabolic Rate and daily calorie needs",
-          url: "https://smartcalchub.com/calculator/bmr"
+          url: "https://smartcalhub.online/calculator/bmr"
         }}
       />
       <CalculatorLayout
@@ -89,7 +89,7 @@ const BMRCalculator = () => {
         seoTitle="BMR Calculator - Calculate Basal Metabolic Rate | SmartCalc Hub"
         seoDescription="Free BMR calculator to find your basal metabolic rate and daily calorie requirements. Uses the Mifflin-St Jeor equation for accurate results."
         keywords="BMR calculator, basal metabolic rate, calorie calculator, TDEE calculator, metabolism calculator"
-        canonicalUrl="https://smartcalchub.com/calculator/bmr"
+        canonicalUrl="https://smartcalhub.online/calculator/bmr"
         category="health"
         calculatorId="bmr"
         howItWorks="The BMR calculator uses the Mifflin-St Jeor equation, which is considered one of the most accurate formulas for calculating basal metabolic rate. It takes into account your age, gender, weight, and height. The calculator then multiplies your BMR by your activity level to determine your Total Daily Energy Expenditure (TDEE)."

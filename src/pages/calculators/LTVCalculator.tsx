@@ -95,7 +95,7 @@ const LTVCalculator = () => {
       seoTitle="LTV Calculator - Loan-to-Value Ratio Calculator | SmartCalc Hub"
       seoDescription="Free LTV calculator to determine your loan-to-value ratio. Understand PMI requirements and get better mortgage terms with our easy-to-use calculator."
       keywords="LTV calculator, loan to value ratio, mortgage calculator, PMI calculator, home equity, down payment calculator"
-      canonicalUrl="https://smartcalchub.com/calculator/ltv"
+      canonicalUrl="https://smartcalhub.online/calculator/ltv"
       category="real-estate"
       calculatorId="ltv"
       howItWorks="Enter your loan amount and property value. The calculator will determine your LTV ratio and what it means for your mortgage, including PMI requirements and equity position."

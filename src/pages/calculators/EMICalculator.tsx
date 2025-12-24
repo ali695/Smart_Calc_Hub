@@ -82,7 +82,7 @@ const EMICalculator = () => {
       seoTitle="EMI Calculator – Calculate Monthly Loan Payments | SmartCalc Hub"
       seoDescription="Free EMI calculator to compute equated monthly installments for home loans, car loans, and personal loans. Get instant accurate results."
       keywords="emi calculator, loan emi, monthly installment calculator, home loan emi, car loan emi"
-      canonicalUrl="https://smartcalchub.com/finance/emi-calculator"
+      canonicalUrl="https://smartcalhub.online/finance/emi-calculator"
     >
       <div className="space-y-6">
         <div className="grid md:grid-cols-2 gap-6">

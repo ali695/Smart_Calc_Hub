@@ -59,7 +59,7 @@ const ArcsinCalculator = () => {
       seoTitle="Arcsine Calculator – Calculate sin⁻¹(x) Online | SmartCalc Hub"
       seoDescription="Free inverse sine (arcsin) calculator. Convert sine ratios to angles in degrees or radians instantly."
       keywords="arcsin calculator, inverse sine, sin^-1, arcsine, trigonometry calculator"
-      canonicalUrl="https://smartcalchub.com/math/arcsin-calculator"
+      canonicalUrl="https://smartcalhub.online/math/arcsin-calculator"
     >
       <div className="space-y-6">
         <div className="grid md:grid-cols-2 gap-6">

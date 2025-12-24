@@ -68,7 +68,7 @@ const BudgetPlannerCalculator = () => {
       seoTitle="Budget Planner Calculator – Monthly Budget Planning Tool | SmartCalc Hub"
       seoDescription="Free budget planner calculator. Track income, expenses, and savings rate to manage your finances better."
       keywords="budget calculator, budget planner, monthly budget, expense tracker, savings calculator"
-      canonicalUrl="https://smartcalchub.com/finance/budget-planner-calculator"
+      canonicalUrl="https://smartcalhub.online/finance/budget-planner-calculator"
     >
       <div className="space-y-6">
         <div className="space-y-4">

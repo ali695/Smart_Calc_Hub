@@ -60,14 +60,14 @@ const BlogWithPagination = () => {
     "@type": "Blog",
     "name": "SmartCalc Hub Blog",
     "description": "Insights, tips, and comprehensive guides about calculators, finance, health, mathematics, and productivity tools",
-    "url": "https://smartcalchub.com/blog",
+    "url": "https://smartcalhub.online/blog",
     "publisher": {
       "@type": "Organization",
       "name": "SmartCalc Hub",
-      "url": "https://smartcalchub.com",
+      "url": "https://smartcalhub.online",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://smartcalchub.com/logo.png"
+        "url": "https://smartcalhub.online/logo.png"
       }
     }
   };
@@ -79,8 +79,8 @@ const BlogWithPagination = () => {
         description="Comprehensive guides and insights about calculators, finance planning, health metrics, mathematical concepts, unit conversions, and productivity tools. Expert tips from professionals."
         keywords="calculator blog, finance guides, health calculators guide, math tutorials, conversion tips, productivity tools"
         ogType="website"
-        ogImage="https://smartcalchub.com/og-blog.png"
-        canonicalUrl="https://smartcalchub.com/blog"
+        ogImage="https://smartcalhub.online/og-blog.png"
+        canonicalUrl="https://smartcalhub.online/blog"
       />
 
       <script type="application/ld+json">

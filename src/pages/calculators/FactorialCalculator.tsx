@@ -68,7 +68,7 @@ const FactorialCalculator = () => {
       seoTitle="Factorial Calculator – Calculate n! Online | SmartCalc Hub"
       seoDescription="Free factorial calculator to compute n! for any non-negative integer. Get instant results with step-by-step calculation."
       keywords="factorial calculator, n factorial, math calculator, permutation calculator"
-      canonicalUrl="https://smartcalchub.com/math/factorial-calculator"
+      canonicalUrl="https://smartcalhub.online/math/factorial-calculator"
     >
       <div className="space-y-6">
         <div className="space-y-2">

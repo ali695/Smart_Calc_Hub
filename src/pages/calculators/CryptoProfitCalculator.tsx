@@ -51,7 +51,7 @@ const CryptoProfitCalculator = () => {
       seoTitle="Crypto Profit Calculator - Calculate Investment Returns | SmartCalc Hub"
       seoDescription="Free cryptocurrency profit calculator to compute your investment returns, ROI, and profit/loss. Essential tool for crypto traders and investors."
       keywords="crypto profit calculator, cryptocurrency calculator, bitcoin profit, ROI calculator, crypto investment, trading calculator"
-      canonicalUrl="https://smartcalchub.com/calculator/crypto-profit"
+      canonicalUrl="https://smartcalhub.online/calculator/crypto-profit"
       category="crypto" 
       calculatorId="crypto-profit" 
       howItWorks="Enter your buy price, sell price, and initial investment amount. The calculator determines your profit/loss, ROI percentage, number of coins purchased, and final portfolio value." 

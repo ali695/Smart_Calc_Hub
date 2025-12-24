@@ -84,7 +84,7 @@ const MolarityCalculator = () => {
       seoTitle="Molarity Calculator – Solution Concentration | SmartCalc Hub"
       seoDescription="Free molarity calculator. Calculate molar concentration and solution dilutions for chemistry."
       keywords="molarity calculator, molar concentration, solution chemistry, dilution calculator"
-      canonicalUrl="https://smartcalchub.com/science/molarity-calculator"
+      canonicalUrl="https://smartcalhub.online/science/molarity-calculator"
     >
       <div className="space-y-6">
         <div className="grid md:grid-cols-2 gap-6">

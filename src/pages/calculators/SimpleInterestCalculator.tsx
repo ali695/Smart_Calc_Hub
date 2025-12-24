@@ -53,7 +53,7 @@ const SimpleInterestCalculator = () => {
       seoTitle="Simple Interest Calculator – Calculate Interest Online | SmartCalc Hub"
       seoDescription="Free simple interest calculator to compute interest on loans and investments. Enter principal, rate, and time for instant accurate results."
       keywords="simple interest calculator, interest calculator, loan interest, investment interest, financial calculator"
-      canonicalUrl="https://smartcalchub.com/finance/simple-interest-calculator"
+      canonicalUrl="https://smartcalhub.online/finance/simple-interest-calculator"
     >
       <div className="space-y-6">
         <div className="grid md:grid-cols-2 gap-6">

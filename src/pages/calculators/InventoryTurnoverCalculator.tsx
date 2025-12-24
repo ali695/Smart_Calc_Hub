@@ -100,7 +100,7 @@ const InventoryTurnoverCalculator = () => {
         seoTitle="Inventory Turnover Calculator – Stock Efficiency | SmartCalc Hub"
         seoDescription="Free inventory turnover calculator. Calculate turnover ratio and days inventory outstanding."
         keywords="inventory turnover calculator, DIO, days inventory outstanding, stock efficiency, business metrics"
-        canonicalUrl="https://smartcalchub.com/calculator/inventory-turnover"
+        canonicalUrl="https://smartcalhub.online/calculator/inventory-turnover"
       >
         <div className="space-y-6">
           <div className="grid md:grid-cols-2 gap-6">

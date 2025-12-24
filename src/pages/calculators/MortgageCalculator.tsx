@@ -117,7 +117,7 @@ const MortgageCalculator = () => {
         data={{
           name: "Mortgage Calculator",
           description: "Calculate your monthly mortgage payment including principal, interest, taxes, and insurance",
-          url: "https://smartcalchub.com/calculator/mortgage"
+          url: "https://smartcalhub.online/calculator/mortgage"
         }}
       />
       <CalculatorLayout
@@ -126,7 +126,7 @@ const MortgageCalculator = () => {
         seoTitle="Mortgage Calculator - Calculate Home Loan Payments | SmartCalc Hub"
         seoDescription="Free mortgage calculator to estimate your monthly home loan payments including principal, interest, taxes, and insurance (PITI). Plan your home purchase with confidence."
         keywords="mortgage calculator, home loan calculator, mortgage payment, PITI calculator, home affordability calculator, monthly mortgage payment"
-        canonicalUrl="https://smartcalchub.com/calculator/mortgage"
+        canonicalUrl="https://smartcalhub.online/calculator/mortgage"
         category="finance"
         calculatorId="mortgage"
         howItWorks="This calculator helps you estimate your monthly mortgage payment based on the home price, down payment, interest rate, and loan term. It includes additional costs like property taxes, homeowners insurance, and PMI to give you a complete picture of your monthly housing expense."

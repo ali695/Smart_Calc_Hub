@@ -73,7 +73,7 @@ const SpeedConverter = () => {
       seoTitle="Speed Converter – Convert km/h, mph, m/s, Knots | SmartCalc Hub"
       seoDescription="Free speed converter for kilometers per hour, miles per hour, meters per second, knots and Mach. Instant accurate conversions."
       keywords="speed converter, km/h to mph, mph to km/h, velocity converter, mach converter"
-      canonicalUrl="https://smartcalchub.com/conversion/speed-converter"
+      canonicalUrl="https://smartcalhub.online/conversion/speed-converter"
     >
       <div className="space-y-6">
         <div className="grid md:grid-cols-2 gap-6">

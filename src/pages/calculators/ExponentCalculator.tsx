@@ -59,7 +59,7 @@ const ExponentCalculator = () => {
       seoTitle="Exponent Calculator – Calculate Powers Online | SmartCalc Hub"
       seoDescription="Free exponent calculator to compute base raised to any power. Supports positive, negative, and fractional exponents."
       keywords="exponent calculator, power calculator, exponential calculator, math calculator"
-      canonicalUrl="https://smartcalchub.com/math/exponent-calculator"
+      canonicalUrl="https://smartcalhub.online/math/exponent-calculator"
     >
       <div className="space-y-6">
         <div className="grid md:grid-cols-2 gap-6">

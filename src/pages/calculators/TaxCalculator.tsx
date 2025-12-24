@@ -74,7 +74,7 @@ const TaxCalculator = () => {
         data={{
           name: "Tax Calculator",
           description: "Calculate your income tax based on earnings and deductions",
-          url: "https://smartcalchub.com/calculator/tax",
+          url: "https://smartcalhub.online/calculator/tax",
           applicationCategory: "FinanceApplication",
           operatingSystem: "Any",
           offers: {
@@ -90,7 +90,7 @@ const TaxCalculator = () => {
         seoTitle="Tax Calculator - Calculate Income Tax | SmartCalc Hub"
         seoDescription="Free tax calculator to estimate your income tax liability. Calculate taxable income, tax amount, and net income after deductions."
         keywords="tax calculator, income tax calculator, tax estimator, deductions calculator, net income calculator"
-        canonicalUrl="https://smartcalchub.com/calculator/tax"
+        canonicalUrl="https://smartcalhub.online/calculator/tax"
         category="finance"
         calculatorId="tax"
         howItWorks="This tax calculator helps you estimate your income tax liability. Enter your gross income, applicable tax rate, and any deductions you qualify for. The calculator will show your taxable income (after deductions), the total tax amount, and your net income after tax. This is a simplified calculator; actual tax calculations may involve multiple brackets and additional factors."

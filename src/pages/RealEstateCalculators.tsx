@@ -17,7 +17,7 @@ const RealEstateCalculators = () => {
         description="Free real estate calculators for property investors and home buyers. Calculate rent affordability, cap rate, property taxes, and house flip profits instantly."
         keywords="real estate calculator, property investment, rent affordability, cap rate calculator, property tax, house flip calculator, buy vs rent"
         ogType="website"
-        canonicalUrl="https://smartcalchub.com/real-estate"
+        canonicalUrl="https://smartcalhub.online/real-estate"
       />
       
       <SchemaMarkup
@@ -25,7 +25,7 @@ const RealEstateCalculators = () => {
         data={{
           name: "Real Estate Calculators - SmartCalc Hub",
           description: "Free online real estate calculators for property investment analysis and home buying decisions",
-          url: "https://smartcalchub.com/real-estate",
+          url: "https://smartcalhub.online/real-estate",
           applicationCategory: "FinanceApplication",
           operatingSystem: "Any",
           offers: {
