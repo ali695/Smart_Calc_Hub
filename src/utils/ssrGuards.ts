@@ -11,9 +11,20 @@
 export const isBrowser = typeof window !== 'undefined';
 
 /**
- * Check if code is running during SSR/pre-rendering
+ * Check if code is running during SSR (Node / no-window environment)
  */
 export const isSSR = !isBrowser;
+
+/**
+ * react-snap sets window.__isReactSnap__ = true while pre-rendering.
+ * We use this to prevent API/auth/analytics calls during SSG.
+ */
+export const isReactSnap = isBrowser && (window as any).__isReactSnap__ === true;
+
+/**
+ * True for any kind of pre-rendering (SSR or react-snap).
+ */
+export const isPrerendering = isSSR || isReactSnap;
 
 /**
  * Safely access window object
