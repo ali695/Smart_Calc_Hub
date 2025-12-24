@@ -6,9 +6,26 @@ import { useAIInsightContext } from "@/components/CalculatorLayout";
 export const useCalculatorEnhancements = () => {
   const [isCalculating, setIsCalculating] = useState(false);
   const aiContext = useAIInsightContext();
-  
+
   // Store pending AI insight updates that couldn't be applied due to context not being ready
   const pendingUpdate = useRef<{ inputs: Record<string, any>; results: Record<string, any> } | null>(null);
+
+  // Bridge for calculators that call this hook outside of the AIInsightContext provider.
+  // Calculator pages render <CalculatorLayout> inside the same component, so hooks run
+  // before the Provider exists; we use a lightweight DOM event so CalculatorLayout can
+  // still receive inputs/results.
+  const emitAIInsightUpdate = useCallback(
+    (inputs: Record<string, any>, results: Record<string, any>) => {
+      if (typeof window === "undefined") return;
+      const calculatorSlug = window.location?.pathname?.split("/").pop() || "";
+      window.dispatchEvent(
+        new CustomEvent("smartcalc:ai-insight", {
+          detail: { calculatorSlug, inputs, results },
+        })
+      );
+    },
+    []
+  );
 
   // Apply pending updates when context becomes available
   useEffect(() => {
@@ -37,6 +54,8 @@ export const useCalculatorEnhancements = () => {
 
         // If inputs/results are explicitly passed, use them.
         if (options?.inputs && options?.results) {
+          emitAIInsightUpdate(options.inputs, options.results);
+
           if (aiContext) {
             aiContext.setInputs(options.inputs);
             aiContext.setResults(options.results);
@@ -56,7 +75,7 @@ export const useCalculatorEnhancements = () => {
         setIsCalculating(false);
       }
     },
-    [aiContext]
+    [aiContext, emitAIInsightUpdate]
   );
 
   const handleKeyPress = useCallback(
@@ -86,9 +105,12 @@ export const useCalculatorEnhancements = () => {
   }, []);
 
   // Helper to update AI insight context directly.
-  // Now handles the case where context isn't ready yet by storing for later.
+  // Now handles the case where context isn't ready yet by storing for later,
+  // and also emits an event so CalculatorLayout can always receive updates.
   const updateAIInsight = useCallback(
     (inputs: Record<string, any>, results: Record<string, any>) => {
+      emitAIInsightUpdate(inputs, results);
+
       if (aiContext) {
         aiContext.setInputs(inputs);
         aiContext.setResults(results);
@@ -97,7 +119,7 @@ export const useCalculatorEnhancements = () => {
         pendingUpdate.current = { inputs, results };
       }
     },
-    [aiContext]
+    [aiContext, emitAIInsightUpdate]
   );
 
   return {
