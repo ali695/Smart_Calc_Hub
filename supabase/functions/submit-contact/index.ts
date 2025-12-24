@@ -6,15 +6,15 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
-// Email validation regex - strict pattern
+// Validation patterns
 const EMAIL_REGEX = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 
 // Rate limiting configuration
 const RATE_LIMIT_WINDOW_MS = 60000; // 1 minute
-const MAX_REQUESTS_PER_WINDOW = 5;
+const MAX_REQUESTS_PER_WINDOW = 3; // Stricter for contact form
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
 
-// Clean up old rate limit entries periodically
+// Clean up old rate limit entries
 const cleanupRateLimits = () => {
   const now = Date.now();
   for (const [ip, data] of rateLimitMap.entries()) {
@@ -51,6 +51,15 @@ const getClientIP = (req: Request): string => {
          'unknown';
 };
 
+// Sanitize string input
+const sanitizeString = (input: string, maxLength: number): string => {
+  if (!input || typeof input !== 'string') return '';
+  return input
+    .replace(/[<>]/g, '') // Remove angle brackets
+    .trim()
+    .slice(0, maxLength);
+};
+
 serve(async (req) => {
   // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
@@ -69,7 +78,7 @@ serve(async (req) => {
     // Rate limiting check
     const clientIP = getClientIP(req);
     if (isRateLimited(clientIP)) {
-      console.log('Rate limit exceeded for IP');
+      console.log('Rate limit exceeded for contact form');
       return new Response(
         JSON.stringify({ error: 'Too many requests. Please try again later.' }),
         { status: 429, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
@@ -86,9 +95,18 @@ serve(async (req) => {
       );
     }
 
-    const { email } = body;
+    const { name, email, message } = body;
 
-    // Validate email presence
+    // Validate and sanitize name
+    const cleanName = sanitizeString(name, 100);
+    if (!cleanName || cleanName.length < 1) {
+      return new Response(
+        JSON.stringify({ error: 'Name is required' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // Validate email
     if (!email || typeof email !== 'string') {
       return new Response(
         JSON.stringify({ error: 'Email is required' }),
@@ -96,21 +114,19 @@ serve(async (req) => {
       );
     }
 
-    // Trim and lowercase email
     const cleanEmail = email.trim().toLowerCase();
-
-    // Validate email format
-    if (!EMAIL_REGEX.test(cleanEmail)) {
+    if (!EMAIL_REGEX.test(cleanEmail) || cleanEmail.length > 255) {
       return new Response(
         JSON.stringify({ error: 'Invalid email format' }),
         { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
 
-    // Validate email length
-    if (cleanEmail.length > 255) {
+    // Validate and sanitize message
+    const cleanMessage = sanitizeString(message, 2000);
+    if (!cleanMessage || cleanMessage.length < 10) {
       return new Response(
-        JSON.stringify({ error: 'Email address is too long' }),
+        JSON.stringify({ error: 'Message must be at least 10 characters' }),
         { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
@@ -129,39 +145,19 @@ serve(async (req) => {
 
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
-    // Check for existing subscription using email_hash (more secure)
-    // The trigger will create email_hash automatically
-    const { data: existing } = await supabase
-      .from('newsletter_subscribers')
-      .select('id')
-      .eq('email', cleanEmail)
-      .maybeSingle();
-
-    if (existing) {
-      // Don't reveal if email exists - return same success message
-      return new Response(
-        JSON.stringify({ success: true }),
-        { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-      );
-    }
-
-    // Insert new subscriber
+    // Insert contact message
     const { error } = await supabase
-      .from('newsletter_subscribers')
-      .insert([{ email: cleanEmail }]);
+      .from('contact_messages')
+      .insert([{
+        name: cleanName,
+        email: cleanEmail,
+        message: cleanMessage
+      }]);
 
     if (error) {
-      // Handle unique constraint violation silently
-      if (error.code === '23505') {
-        return new Response(
-          JSON.stringify({ success: true }),
-          { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-        );
-      }
-
       console.error('Database error:', error.code);
       return new Response(
-        JSON.stringify({ error: 'Failed to subscribe. Please try again.' }),
+        JSON.stringify({ error: 'Failed to submit message. Please try again.' }),
         { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
