@@ -4,9 +4,11 @@ import App from "./App.tsx";
 import "./index.css";
 import { ThemeProvider } from "./components/ThemeProvider";
 import { initGA } from '@/utils/analytics';
+import { isReactSnap } from "@/utils/ssrGuards";
 
 // Initialize Google Analytics in production (client-side only)
-if (typeof window !== 'undefined' && import.meta.env.PROD) {
+// Avoid loading third-party scripts during react-snap pre-rendering.
+if (typeof window !== 'undefined' && import.meta.env.PROD && !isReactSnap) {
   initGA();
 }
 
