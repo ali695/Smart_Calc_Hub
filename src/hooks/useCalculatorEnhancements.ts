@@ -1,4 +1,4 @@
-import { useState, useCallback, KeyboardEvent } from "react";
+import { useState, useCallback, KeyboardEvent, useEffect, useRef } from "react";
 import { toast } from "@/hooks/use-toast";
 import { triggerCalculatePulse } from "@/components/HeroSection";
 import { useAIInsightContext } from "@/components/CalculatorLayout";
@@ -6,6 +6,18 @@ import { useAIInsightContext } from "@/components/CalculatorLayout";
 export const useCalculatorEnhancements = () => {
   const [isCalculating, setIsCalculating] = useState(false);
   const aiContext = useAIInsightContext();
+  
+  // Store pending AI insight updates that couldn't be applied due to context not being ready
+  const pendingUpdate = useRef<{ inputs: Record<string, any>; results: Record<string, any> } | null>(null);
+
+  // Apply pending updates when context becomes available
+  useEffect(() => {
+    if (aiContext && pendingUpdate.current) {
+      aiContext.setInputs(pendingUpdate.current.inputs);
+      aiContext.setResults(pendingUpdate.current.results);
+      pendingUpdate.current = null;
+    }
+  }, [aiContext]);
 
   const handleCalculation = useCallback(
     async (
@@ -24,8 +36,15 @@ export const useCalculatorEnhancements = () => {
         triggerCalculatePulse();
 
         // If inputs/results are explicitly passed, use them.
-        if (aiContext && options?.inputs) aiContext.setInputs(options.inputs);
-        if (aiContext && options?.results) aiContext.setResults(options.results);
+        if (options?.inputs && options?.results) {
+          if (aiContext) {
+            aiContext.setInputs(options.inputs);
+            aiContext.setResults(options.results);
+          } else {
+            // Store for later when context becomes available
+            pendingUpdate.current = { inputs: options.inputs, results: options.results };
+          }
+        }
       } catch (error) {
         console.error("Calculation error:", error);
         toast({
@@ -67,13 +86,16 @@ export const useCalculatorEnhancements = () => {
   }, []);
 
   // Helper to update AI insight context directly.
-  // Key fix: calculators should be able to call this even if the button handler
-  // isn't passing options into handleCalculation.
+  // Now handles the case where context isn't ready yet by storing for later.
   const updateAIInsight = useCallback(
     (inputs: Record<string, any>, results: Record<string, any>) => {
-      if (!aiContext) return;
-      aiContext.setInputs(inputs);
-      aiContext.setResults(results);
+      if (aiContext) {
+        aiContext.setInputs(inputs);
+        aiContext.setResults(results);
+      } else {
+        // Store for later when context becomes available
+        pendingUpdate.current = { inputs, results };
+      }
     },
     [aiContext]
   );
