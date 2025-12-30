@@ -1,10 +1,10 @@
-import { Search, Calculator as CalcIcon, TrendingUp, CheckCircle, DollarSign, Activity, Percent, Clock } from "lucide-react";
+import { Search, Calculator as CalcIcon, TrendingUp, CheckCircle, DollarSign, Activity, Percent, Clock, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { calculators, categories } from "@/data/calculators";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { RecentlyUsedCalculators } from "@/components/RecentlyUsedCalculators";
 import { FeaturedPosts } from "@/components/FeaturedPosts";
 import { Testimonials } from "@/components/Testimonials";
@@ -12,18 +12,52 @@ import { Testimonials } from "@/components/Testimonials";
 const Index = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isVisible, setIsVisible] = useState(false);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const searchRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setIsVisible(true);
   }, []);
 
-  const filteredCalculators = calculators.filter(calc =>
-    calc.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    calc.description.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  // Close suggestions when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+        setShowSuggestions(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
-  const scrollToCalculators = () => {
-    document.getElementById("calculators")?.scrollIntoView({ behavior: "smooth" });
+  const filteredCalculators = calculators.filter(calc => {
+    const matchesSearch = calc.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      calc.description.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesCategory = !selectedCategory || calc.category.toLowerCase() === selectedCategory.toLowerCase();
+    return matchesSearch && matchesCategory;
+  });
+
+  // Search suggestions - show top 5 matches
+  const searchSuggestions = searchQuery.length > 0 
+    ? calculators.filter(calc => 
+        calc.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        calc.description.toLowerCase().includes(searchQuery.toLowerCase())
+      ).slice(0, 5)
+    : [];
+
+  const scrollToCalculators = (category?: string) => {
+    if (category) {
+      setSelectedCategory(category);
+    }
+    setTimeout(() => {
+      document.getElementById("calculators")?.scrollIntoView({ behavior: "smooth" });
+    }, 50);
+  };
+
+  const clearFilters = () => {
+    setSelectedCategory(null);
+    setSearchQuery("");
   };
 
   const featuredCalculators = [
@@ -66,58 +100,83 @@ const Index = () => {
               Get instant, accurate results with our easy-to-use tools.
             </p>
 
-            {/* CTA Buttons - Staggered Animation with Enhanced Hover */}
+            {/* CTA Buttons - Clean Professional Style */}
             <div className={`flex flex-col sm:flex-row gap-4 justify-center items-center transition-all duration-700 delay-400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
               <Button 
                 size="lg" 
-                onClick={scrollToCalculators}
-                className="group bg-gradient-to-r from-primary to-primary-glow hover:shadow-glow transition-all duration-300 hover:-translate-y-1 hover:scale-105 text-lg px-8 relative overflow-hidden"
+                onClick={() => scrollToCalculators()}
+                className="bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 text-lg px-8"
               >
-                <span className="relative z-10">Explore All Calculators</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-primary-glow to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                Explore All Calculators
               </Button>
               <Button 
                 size="lg" 
                 variant="outline"
-                onClick={scrollToCalculators}
-                className="group border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:-translate-y-1 hover:scale-105 text-lg px-8 relative overflow-hidden"
+                onClick={() => scrollToCalculators()}
+                className="border-2 border-primary/50 text-foreground hover:border-primary hover:bg-primary/10 transition-all duration-300 text-lg px-8"
               >
-                <span className="relative z-10">See Popular Tools</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-primary to-primary-glow opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                See Popular Tools
               </Button>
             </div>
 
-            {/* Search Bar - Staggered Animation with Enhanced Interaction */}
+            {/* Search Bar with Suggestions */}
             <div className={`max-w-2xl mx-auto transition-all duration-700 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-              <div className="relative group">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground group-focus-within:text-primary transition-colors duration-300 group-focus-within:scale-110" />
+              <div className="relative" ref={searchRef}>
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground z-10" />
                 <Input
                   type="text"
                   placeholder="Search calculators… e.g., Loan, BMI, Tax, Age"
-                  className="pl-12 h-14 text-base shadow-large hover:shadow-xl focus:shadow-xl transition-all duration-300 rounded-xl border-2 focus:border-primary group-focus-within:scale-[1.02]"
+                  className="pl-12 h-14 text-base shadow-medium rounded-xl border-2 focus:border-primary transition-all duration-300"
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onChange={(e) => {
+                    setSearchQuery(e.target.value);
+                    setShowSuggestions(true);
+                  }}
+                  onFocus={() => setShowSuggestions(true)}
                 />
-                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary/20 to-primary-glow/20 opacity-0 group-focus-within:opacity-100 transition-opacity duration-300 pointer-events-none blur-xl" />
+                
+                {/* Search Suggestions Dropdown */}
+                {showSuggestions && searchSuggestions.length > 0 && (
+                  <div className="absolute top-full left-0 right-0 mt-2 bg-card border border-border rounded-xl shadow-large overflow-hidden z-50">
+                    {searchSuggestions.map((calc) => {
+                      const Icon = calc.icon;
+                      return (
+                        <Link
+                          key={calc.id}
+                          to={calc.path}
+                          className="flex items-center gap-3 px-4 py-3 hover:bg-muted/50 transition-colors duration-200"
+                          onClick={() => setShowSuggestions(false)}
+                        >
+                          <div className="p-2 rounded-lg bg-primary/10">
+                            <Icon className="h-4 w-4 text-primary" />
+                          </div>
+                          <div className="flex-1">
+                            <p className="font-medium text-sm">{calc.title}</p>
+                            <p className="text-xs text-muted-foreground">{calc.category}</p>
+                          </div>
+                          <ArrowRight className="h-4 w-4 text-muted-foreground" />
+                        </Link>
+                      );
+                    })}
+                  </div>
+                )}
               </div>
             </div>
 
-            {/* Category Pills - Staggered Animation */}
+            {/* Category Pills - Click to filter and scroll */}
             <div className={`flex flex-wrap justify-center gap-3 transition-all duration-700 delay-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-              {categories.map((category, index) => {
+              {categories.map((category) => {
                 const Icon = category.icon;
+                const isActive = selectedCategory === category.name;
                 return (
                   <Button
                     key={category.id}
-                    variant="secondary"
-                    className="group gap-2 hover:-translate-y-1 hover:scale-105 transition-all duration-300 shadow-soft hover:shadow-large"
-                    style={{ animationDelay: `${index * 50}ms` }}
-                    asChild
+                    variant={isActive ? "default" : "secondary"}
+                    className={`gap-2 transition-all duration-300 ${isActive ? 'ring-2 ring-primary ring-offset-2 ring-offset-background' : ''}`}
+                    onClick={() => scrollToCalculators(category.name)}
                   >
-                    <Link to={`/categories#${category.id}`}>
-                      <Icon className={`h-4 w-4 ${category.color} group-hover:scale-110 transition-transform duration-300`} />
-                      {category.name}
-                    </Link>
+                    <Icon className={`h-4 w-4 ${category.color}`} />
+                    {category.name}
                   </Button>
                 );
               })}
@@ -198,20 +257,32 @@ const Index = () => {
       <section id="calculators" className="py-16 md:py-24 scroll-mt-20">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-              Popular Calculators
-            </h2>
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold">
+                {selectedCategory ? `${selectedCategory} Calculators` : 'Popular Calculators'}
+              </h2>
+              {selectedCategory && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={clearFilters}
+                  className="mt-4 text-muted-foreground hover:text-foreground"
+                >
+                  Clear filter ×
+                </Button>
+              )}
+            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredCalculators.slice(0, 6).map((calc, index) => {
+              {filteredCalculators.slice(0, selectedCategory ? 12 : 6).map((calc) => {
                 const Icon = calc.icon;
                 return (
                   <Link key={calc.id} to={calc.path}>
-                    <Card className="h-full card-glow-hover hover:shadow-medium transition-all duration-300 cursor-pointer group border hover:border-primary/50 overflow-hidden">
+                    <Card className="h-full hover:shadow-medium transition-all duration-300 cursor-pointer group border hover:border-primary/30 hover:-translate-y-1">
                       <CardHeader className="relative">
                         <div className="flex items-center gap-3 mb-2">
                           <div className="p-3 rounded-lg bg-primary/10 group-hover:bg-primary/15 transition-colors duration-300">
-                            <Icon className="h-6 w-6 text-primary group-hover:scale-105 transition-transform duration-300" />
+                            <Icon className="h-6 w-6 text-primary" />
                           </div>
                           <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
                             {calc.category}
@@ -238,12 +309,18 @@ const Index = () => {
                 <p className="text-lg text-muted-foreground">
                   No calculators found. Try a different search term.
                 </p>
+                <Button variant="ghost" onClick={clearFilters} className="mt-4">
+                  Clear filters
+                </Button>
               </div>
             )}
 
             <div className="text-center mt-12">
-              <Button size="lg" asChild>
-                <Link to="/categories">View All Calculators</Link>
+              <Button size="lg" asChild className="bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300">
+                <Link to="/categories" className="inline-flex items-center gap-2">
+                  View All Calculators
+                  <ArrowRight className="h-5 w-5" />
+                </Link>
               </Button>
             </div>
           </div>
