@@ -81,11 +81,12 @@ const BlogPost = () => {
       <article className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
         {/* Featured Image Hero Banner */}
         <div className="relative w-full h-64 md:h-80 lg:h-96 overflow-hidden">
-          <div 
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ 
-              backgroundImage: `url(${getBlogHeroImage(post.category)})`,
-            }}
+          <img 
+            src={getBlogHeroImage(post.category)}
+            alt={`Hero image for ${post.title} - ${post.category} article`}
+            title={post.title}
+            className="absolute inset-0 w-full h-full object-cover"
+            loading="eager"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 mix-blend-overlay" />
