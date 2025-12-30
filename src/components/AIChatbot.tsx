@@ -158,7 +158,8 @@ export const AIChatbot = () => {
 
   const handleSend = async (messageText?: string) => {
     const textToSend = messageText || input;
-    if ((!textToSend.trim() && !uploadedImage) || isLoading) return;
+    if (!textToSend.trim() && !uploadedImage) return;
+    if (isLoading && !messageText) return; // Only block if no explicit message
 
     const userMessage: Message = { 
       role: "user", 
@@ -471,7 +472,6 @@ export const AIChatbot = () => {
                   size="icon"
                   onClick={() => fileInputRef.current?.click()}
                   className="shrink-0"
-                  disabled={isLoading}
                   title="Upload image"
                 >
                   <Image className="h-4 w-4" />
@@ -487,12 +487,11 @@ export const AIChatbot = () => {
                     }
                   }}
                   className="flex-1 bg-background border-border/50 focus:border-primary transition-colors text-sm"
-                  disabled={isLoading}
                 />
                 <Button 
                   onClick={() => handleSend()} 
                   size="icon" 
-                  disabled={isLoading || (!input.trim() && !uploadedImage)}
+                  disabled={!input.trim() && !uploadedImage}
                   className="shadow-md hover:shadow-lg transition-all bg-primary"
                 >
                   {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
