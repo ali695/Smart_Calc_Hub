@@ -80,6 +80,8 @@ const HeartRateCalculator = () => {
       howItWorks="This calculator estimates your maximum heart rate using the 220-age formula, then calculates training zones as percentages of max HR. Each zone targets different fitness goals and intensities."
       formula="Max HR = 220 - Age | Zone % = Max HR × (percentage range)"
       faqs={faqs}
+      category="health"
+      calculatorId="heart-rate"
     >
       <div className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
