@@ -17,9 +17,9 @@ interface HeroSectionProps {
   showBackgroundImage?: boolean;
 }
 
-// Background images for categories
+// Background images for categories and pages
 const categoryImages: Record<string, string> = {
-  home: "/blog-hero-math-new.webp",
+  home: "/hero-calculators.webp",
   finance: "/blog-hero-finance-new.webp",
   health: "/blog-hero-health-new.webp",
   math: "/blog-hero-math-new.webp",
@@ -30,11 +30,11 @@ const categoryImages: Record<string, string> = {
   business: "/blog-hero-business-new.webp",
   "real-estate": "/blog-hero-finance-new.webp",
   crypto: "/blog-hero-finance-new.webp",
-  blog: "/blog-hero-tech-new.webp",
-  faq: "/blog-hero-math-new.webp",
-  contact: "/blog-hero-business-new.webp",
-  about: "/blog-hero-science-new.webp",
-  utility: "/blog-hero-tech-new.webp"
+  blog: "/hero-blog.webp",
+  faq: "/hero-faq.webp",
+  contact: "/hero-contact.webp",
+  about: "/hero-about.webp",
+  utility: "/hero-calculators.webp"
 };
 
 // Create a global event for calculate pulse (browser only)
