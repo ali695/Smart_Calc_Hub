@@ -14,7 +14,28 @@ interface HeroSectionProps {
   icon?: ReactNode;
   children?: ReactNode;
   className?: string;
+  showBackgroundImage?: boolean;
 }
+
+// Background images for categories
+const categoryImages: Record<string, string> = {
+  home: "/blog-hero-math-new.webp",
+  finance: "/blog-hero-finance-new.webp",
+  health: "/blog-hero-health-new.webp",
+  math: "/blog-hero-math-new.webp",
+  conversion: "/blog-hero-conversion-new.webp",
+  tech: "/blog-hero-tech-new.webp",
+  engineering: "/blog-hero-engineering-new.webp",
+  science: "/blog-hero-science-new.webp",
+  business: "/blog-hero-business-new.webp",
+  "real-estate": "/blog-hero-finance-new.webp",
+  crypto: "/blog-hero-finance-new.webp",
+  blog: "/blog-hero-tech-new.webp",
+  faq: "/blog-hero-math-new.webp",
+  contact: "/blog-hero-business-new.webp",
+  about: "/blog-hero-science-new.webp",
+  utility: "/blog-hero-tech-new.webp"
+};
 
 // Create a global event for calculate pulse (browser only)
 export const triggerCalculatePulse = () => {
@@ -97,7 +118,8 @@ export const HeroSection = ({
   description,
   icon,
   children,
-  className
+  className,
+  showBackgroundImage = true
 }: HeroSectionProps) => {
   const [isPulsing, setIsPulsing] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -135,6 +157,7 @@ export const HeroSection = ({
   const normalizedCategory = category.toLowerCase().replace(/\s+/g, '-');
   const gradientConfig = gradients[normalizedCategory] || gradients.home;
   const gradient = isDark ? gradientConfig.dark : gradientConfig.light;
+  const backgroundImage = categoryImages[normalizedCategory] || categoryImages.home;
 
   return (
     <section
@@ -153,9 +176,32 @@ export const HeroSection = ({
         className
       )}
     >
+      {/* Blurred background image */}
+      {showBackgroundImage && (
+        <div 
+          className="absolute inset-0 z-0"
+          style={{
+            backgroundImage: `url(${backgroundImage})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            filter: "blur(8px) brightness(0.7)",
+            transform: "scale(1.1)"
+          }}
+        />
+      )}
+      
+      {/* Gradient overlay */}
+      <div 
+        className="absolute inset-0 z-[1]"
+        style={{
+          background: gradient,
+          opacity: 0.85
+        }}
+      />
+      
       {/* Radial lighting overlay for depth */}
       <div 
-        className="absolute inset-0 pointer-events-none z-[1]"
+        className="absolute inset-0 pointer-events-none z-[2]"
         style={{
           background: "radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.12), transparent 70%)"
         }}

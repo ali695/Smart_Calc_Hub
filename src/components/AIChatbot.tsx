@@ -416,13 +416,13 @@ export const AIChatbot = () => {
                 
                 {isTyping && !streamedContent && (
                   <div className="flex justify-start animate-in fade-in slide-in-from-bottom-2 duration-300">
-                    <div className="bg-muted/80 border border-border/50 rounded-2xl px-4 py-3 flex items-center gap-2">
-                      <div className="flex gap-1">
-                        <span className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
-                        <span className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
-                        <span className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+                    <div className="bg-muted/80 border border-border/50 rounded-2xl px-4 py-3 flex items-center gap-3">
+                      <div className="flex items-center gap-1.5">
+                        <span className="w-2 h-2 bg-primary/80 rounded-full animate-[typing-bounce_1.4s_ease-in-out_infinite]" />
+                        <span className="w-2 h-2 bg-primary/80 rounded-full animate-[typing-bounce_1.4s_ease-in-out_0.2s_infinite]" />
+                        <span className="w-2 h-2 bg-primary/80 rounded-full animate-[typing-bounce_1.4s_ease-in-out_0.4s_infinite]" />
                       </div>
-                      <span className="text-sm text-muted-foreground">Thinking...</span>
+                      <span className="text-xs text-muted-foreground">Thinking...</span>
                     </div>
                   </div>
                 )}

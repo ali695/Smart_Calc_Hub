@@ -680,8 +680,18 @@ All colors MUST be HSL.
     padding: 4rem 0;
     background-size: 200% 200%;
     animation: heroGradientFlow 10s ease infinite;
-    transition: filter 0.6s ease, background 0.6s ease;
-    position: relative;
+  }
+
+  /* Typing bounce animation for chatbot */
+  @keyframes typing-bounce {
+    0%, 60%, 100% {
+      transform: translateY(0);
+      opacity: 0.4;
+    }
+    30% {
+      transform: translateY(-4px);
+      opacity: 1;
+    }
   }
 
   /* Hero gradient flow animation */
