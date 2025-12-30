@@ -82,7 +82,7 @@ const BlogPost = () => {
         {/* Featured Image Hero Banner */}
         <div className="relative w-full h-64 md:h-80 lg:h-96 overflow-hidden">
           <img 
-            src={getBlogHeroImage(post.category)}
+            src={post.image || getBlogHeroImage(post.category)}
             alt={`Hero image for ${post.title} - ${post.category} article`}
             title={post.title}
             className="absolute inset-0 w-full h-full object-cover"
