@@ -177,34 +177,20 @@ export const HeroSection = ({
       )}
     >
       {/* Blurred background image */}
-      {showBackgroundImage && (
-        <div 
-          className="absolute inset-0 z-0"
-          style={{
-            backgroundImage: `url(${backgroundImage})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            filter: "blur(8px) brightness(0.7)",
-            transform: "scale(1.1)"
-          }}
-        />
-      )}
-      
-      {/* Gradient overlay */}
       <div 
-        className="absolute inset-0 z-[1]"
+        className="absolute inset-0 z-0"
         style={{
-          background: gradient,
-          opacity: 0.85
+          backgroundImage: `url(${backgroundImage})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          filter: "blur(6px)",
+          transform: "scale(1.05)"
         }}
       />
       
-      {/* Radial lighting overlay for depth */}
+      {/* Dark overlay for text readability */}
       <div 
-        className="absolute inset-0 pointer-events-none z-[2]"
-        style={{
-          background: "radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.12), transparent 70%)"
-        }}
+        className="absolute inset-0 z-[1] bg-black/40"
       />
       
       {/* Content */}
