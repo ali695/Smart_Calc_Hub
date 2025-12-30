@@ -20,18 +20,18 @@ export const getCategoryOGImage = (category: string): string => {
  */
 export const getBlogHeroImage = (category: string): string => {
   const heroMap: Record<string, string> = {
-    finance: '/blog-hero-finance.webp',
-    health: '/blog-hero-health.webp',
-    math: '/blog-hero-math.webp',
-    conversion: '/blog-hero-conversion.webp',
-    business: '/blog-hero-business.webp',
-    utility: '/blog-hero-tech.webp',
-    engineering: '/blog-hero-engineering.webp',
-    tech: '/blog-hero-tech.webp',
-    science: '/blog-hero-science.webp',
+    finance: '/blog-hero-finance-new.webp',
+    health: '/blog-hero-health-new.webp',
+    math: '/blog-hero-math-new.webp',
+    conversion: '/blog-hero-conversion-new.webp',
+    business: '/blog-hero-business-new.webp',
+    utility: '/blog-hero-tech-new.webp',
+    engineering: '/blog-hero-engineering-new.webp',
+    tech: '/blog-hero-tech-new.webp',
+    science: '/blog-hero-science-new.webp',
   };
 
-  return heroMap[category.toLowerCase()] || '/blog-hero-finance.webp';
+  return heroMap[category.toLowerCase()] || '/blog-hero-finance-new.webp';
 };
 
 export const getBlogOGImage = (): string => {

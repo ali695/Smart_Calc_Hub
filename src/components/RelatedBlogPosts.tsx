@@ -42,7 +42,8 @@ export const RelatedBlogPosts = ({ currentPostId, currentCategory, allPosts }: R
                 <div className="aspect-video overflow-hidden relative">
                   <img 
                     src={heroImage} 
-                    alt={`Hero image for ${post.title}`}
+                    alt={`${post.title} - ${post.category} related article`}
+                    title={post.title}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     loading="lazy"
                   />

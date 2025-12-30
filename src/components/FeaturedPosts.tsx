@@ -29,11 +29,13 @@ export const FeaturedPosts = () => {
                   {post.image ? (
                     <img 
                       src={post.image} 
-                      alt={post.title} 
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-103" 
+                      alt={`${post.title} - ${post.category} featured article`}
+                      title={post.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-103"
+                      loading="lazy"
                     />
                   ) : (
-                    <div className="w-full h-full bg-gradient-to-br from-primary/20 via-primary-glow/20 to-accent/20" />
+                    <div className="w-full h-full bg-gradient-to-br from-primary/20 via-primary-glow/20 to-accent/20" aria-label={`Decorative background for ${post.title}`} />
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                   <div className="absolute bottom-3 left-3">

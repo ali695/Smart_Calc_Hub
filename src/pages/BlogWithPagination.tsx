@@ -164,9 +164,15 @@ const BlogWithPagination = () => {
                     <Card key={post.id} className="group card-shine card-flip card-glow-hover hover:shadow-large transition-all duration-500 cursor-pointer flex flex-col border-2 border-border hover:border-primary overflow-hidden">
                       <div className="aspect-video overflow-hidden relative">
                         {post.image ? (
-                          <img src={post.image} alt={post.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                          <img 
+                            src={post.image} 
+                            alt={`${post.title} - ${post.category} article thumbnail`}
+                            title={post.title}
+                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                            loading="lazy"
+                          />
                         ) : (
-                          <div className="w-full h-full bg-gradient-to-br from-primary/20 via-primary-glow/20 to-accent/20" />
+                          <div className="w-full h-full bg-gradient-to-br from-primary/20 via-primary-glow/20 to-accent/20" aria-label={`Decorative background for ${post.title}`} />
                         )}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                         <div className="absolute bottom-4 left-4">

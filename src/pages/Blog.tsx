@@ -103,8 +103,10 @@ const Blog = () => {
                 <div className="aspect-video overflow-hidden relative">
                   <img 
                     src={heroImage} 
-                    alt={post.title} 
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                    alt={`${post.title} - ${post.category} article thumbnail`}
+                    title={post.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4">
