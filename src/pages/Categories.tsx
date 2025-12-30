@@ -109,14 +109,14 @@ const Categories = () => {
                   const CalcIcon = calc.icon;
                   return (
                     <Link key={calc.id} to={calc.path}>
-                      <Card className="h-full hover:shadow-xl transition-all duration-300 hover:-translate-y-2 cursor-pointer group border-2 hover:border-primary">
+                      <Card className="h-full hover:shadow-medium transition-all duration-300 cursor-pointer group border hover:border-primary/30 hover:-translate-y-1">
                         <CardHeader>
                           <div className="flex items-center gap-3 mb-2">
-                            <div className="p-3 rounded-lg bg-gradient-to-br from-primary/20 to-accent/20 group-hover:from-primary/30 group-hover:to-accent/30 transition-all">
+                            <div className="p-3 rounded-lg bg-gradient-to-br from-primary/10 to-accent/10">
                               <CalcIcon className="h-6 w-6 text-primary" />
                             </div>
                           </div>
-                          <CardTitle className="group-hover:text-primary transition-colors">
+                          <CardTitle className="group-hover:text-primary transition-colors duration-300">
                             {calc.title}
                           </CardTitle>
                         </CardHeader>
@@ -174,21 +174,21 @@ const Categories = () => {
                     const CalcIcon = calc.icon;
                     return (
                       <Link key={calc.id} to={calc.path}>
-                        <Card className="h-full card-glow-hover transition-all duration-300 cursor-pointer group border hover:border-primary overflow-hidden">
+                        <Card className="h-full hover:shadow-medium transition-all duration-300 cursor-pointer group border hover:border-primary/30 hover:-translate-y-1">
                           <CardHeader className="relative">
                             <div className="flex items-center gap-3 mb-2">
                               <div className={`p-3 rounded-lg bg-gradient-to-br ${
-                                category.id === 'finance' ? 'from-green-500/10 to-green-600/10 group-hover:from-green-500/20 group-hover:to-green-600/20' :
-                                category.id === 'health' ? 'from-red-500/10 to-red-600/10 group-hover:from-red-500/20 group-hover:to-red-600/20' :
-                                category.id === 'math' ? 'from-blue-500/10 to-blue-600/10 group-hover:from-blue-500/20 group-hover:to-blue-600/20' :
-                                category.id === 'real-estate' ? 'from-amber-500/10 to-amber-600/10 group-hover:from-amber-500/20 group-hover:to-amber-600/20' :
-                                category.id === 'crypto' ? 'from-yellow-500/10 to-yellow-600/10 group-hover:from-yellow-500/20 group-hover:to-yellow-600/20' :
-                                'from-purple-500/10 to-purple-600/10 group-hover:from-purple-500/20 group-hover:to-purple-600/20'
+                                category.id === 'finance' ? 'from-green-500/10 to-green-600/10' :
+                                category.id === 'health' ? 'from-red-500/10 to-red-600/10' :
+                                category.id === 'math' ? 'from-blue-500/10 to-blue-600/10' :
+                                category.id === 'real-estate' ? 'from-amber-500/10 to-amber-600/10' :
+                                category.id === 'crypto' ? 'from-yellow-500/10 to-yellow-600/10' :
+                                'from-purple-500/10 to-purple-600/10'
                               } transition-all`}>
-                                <CalcIcon className={`h-6 w-6 ${category.color} transition-transform`} />
+                                <CalcIcon className={`h-6 w-6 ${category.color}`} />
                               </div>
                             </div>
-                            <CardTitle className="group-hover:text-primary transition-colors">
+                            <CardTitle className="group-hover:text-primary transition-colors duration-300">
                               {calc.title}
                             </CardTitle>
                           </CardHeader>

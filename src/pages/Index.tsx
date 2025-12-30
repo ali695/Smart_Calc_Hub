@@ -13,7 +13,6 @@ const Index = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isVisible, setIsVisible] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const searchRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -31,13 +30,6 @@ const Index = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const filteredCalculators = calculators.filter(calc => {
-    const matchesSearch = calc.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      calc.description.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCategory = !selectedCategory || calc.category.toLowerCase() === selectedCategory.toLowerCase();
-    return matchesSearch && matchesCategory;
-  });
-
   // Search suggestions - show top 5 matches
   const searchSuggestions = searchQuery.length > 0 
     ? calculators.filter(calc => 
@@ -46,18 +38,8 @@ const Index = () => {
       ).slice(0, 5)
     : [];
 
-  const scrollToCalculators = (category?: string) => {
-    if (category) {
-      setSelectedCategory(category);
-    }
-    setTimeout(() => {
-      document.getElementById("calculators")?.scrollIntoView({ behavior: "smooth" });
-    }, 50);
-  };
-
-  const clearFilters = () => {
-    setSelectedCategory(null);
-    setSearchQuery("");
+  const scrollToCalculators = () => {
+    document.getElementById("calculators")?.scrollIntoView({ behavior: "smooth" });
   };
 
   const featuredCalculators = [
@@ -120,13 +102,13 @@ const Index = () => {
             </div>
 
             {/* Search Bar with Suggestions */}
-            <div className={`max-w-2xl mx-auto transition-all duration-700 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <div className={`max-w-2xl mx-auto transition-all duration-700 delay-500 relative ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`} style={{ zIndex: 60 }}>
               <div className="relative" ref={searchRef}>
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground z-10" />
                 <Input
                   type="text"
                   placeholder="Search calculators… e.g., Loan, BMI, Tax, Age"
-                  className="pl-12 h-14 text-base shadow-medium rounded-xl border-2 focus:border-primary transition-all duration-300"
+                  className="pl-12 h-14 text-base shadow-medium rounded-xl border-2 focus:border-primary transition-all duration-300 bg-background"
                   value={searchQuery}
                   onChange={(e) => {
                     setSearchQuery(e.target.value);
@@ -137,24 +119,24 @@ const Index = () => {
                 
                 {/* Search Suggestions Dropdown */}
                 {showSuggestions && searchSuggestions.length > 0 && (
-                  <div className="absolute top-full left-0 right-0 mt-2 bg-card border border-border rounded-xl shadow-large overflow-hidden z-50">
+                  <div className="absolute top-full left-0 right-0 mt-2 bg-card border border-border rounded-xl shadow-2xl overflow-hidden" style={{ zIndex: 70 }}>
                     {searchSuggestions.map((calc) => {
                       const Icon = calc.icon;
                       return (
                         <Link
                           key={calc.id}
                           to={calc.path}
-                          className="flex items-center gap-3 px-4 py-3 hover:bg-muted/50 transition-colors duration-200"
+                          className="flex items-center gap-3 px-4 py-3 hover:bg-muted/50 transition-colors duration-200 border-b border-border/50 last:border-b-0"
                           onClick={() => setShowSuggestions(false)}
                         >
                           <div className="p-2 rounded-lg bg-primary/10">
                             <Icon className="h-4 w-4 text-primary" />
                           </div>
-                          <div className="flex-1">
-                            <p className="font-medium text-sm">{calc.title}</p>
+                          <div className="flex-1 min-w-0">
+                            <p className="font-medium text-sm truncate">{calc.title}</p>
                             <p className="text-xs text-muted-foreground">{calc.category}</p>
                           </div>
-                          <ArrowRight className="h-4 w-4 text-muted-foreground" />
+                          <ArrowRight className="h-4 w-4 text-muted-foreground flex-shrink-0" />
                         </Link>
                       );
                     })}
@@ -163,20 +145,21 @@ const Index = () => {
               </div>
             </div>
 
-            {/* Category Pills - Click to filter and scroll */}
+            {/* Category Pills - Navigate to categories page */}
             <div className={`flex flex-wrap justify-center gap-3 transition-all duration-700 delay-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
               {categories.map((category) => {
                 const Icon = category.icon;
-                const isActive = selectedCategory === category.name;
                 return (
                   <Button
                     key={category.id}
-                    variant={isActive ? "default" : "secondary"}
-                    className={`gap-2 transition-all duration-300 ${isActive ? 'ring-2 ring-primary ring-offset-2 ring-offset-background' : ''}`}
-                    onClick={() => scrollToCalculators(category.name)}
+                    variant="secondary"
+                    className="gap-2 transition-all duration-300"
+                    asChild
                   >
-                    <Icon className={`h-4 w-4 ${category.color}`} />
-                    {category.name}
+                    <Link to={`/categories#${category.id}`}>
+                      <Icon className={`h-4 w-4 ${category.color}`} />
+                      {category.name}
+                    </Link>
                   </Button>
                 );
               })}
@@ -257,24 +240,12 @@ const Index = () => {
       <section id="calculators" className="py-16 md:py-24 scroll-mt-20">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold">
-                {selectedCategory ? `${selectedCategory} Calculators` : 'Popular Calculators'}
-              </h2>
-              {selectedCategory && (
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={clearFilters}
-                  className="mt-4 text-muted-foreground hover:text-foreground"
-                >
-                  Clear filter ×
-                </Button>
-              )}
-            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+              Popular Calculators
+            </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredCalculators.slice(0, selectedCategory ? 12 : 6).map((calc) => {
+              {calculators.slice(0, 6).map((calc) => {
                 const Icon = calc.icon;
                 return (
                   <Link key={calc.id} to={calc.path}>
@@ -302,18 +273,6 @@ const Index = () => {
                 );
               })}
             </div>
-
-            {filteredCalculators.length === 0 && (
-              <div className="text-center py-12">
-                <CalcIcon className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-                <p className="text-lg text-muted-foreground">
-                  No calculators found. Try a different search term.
-                </p>
-                <Button variant="ghost" onClick={clearFilters} className="mt-4">
-                  Clear filters
-                </Button>
-              </div>
-            )}
 
             <div className="text-center mt-12">
               <Button size="lg" asChild className="bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300">

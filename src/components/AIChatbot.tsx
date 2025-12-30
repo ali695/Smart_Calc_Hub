@@ -254,20 +254,26 @@ export const AIChatbot = () => {
 
   return (
     <>
+      {/* Floating toggle button - always visible when chat is closed */}
       {!isOpen && (
         <Button
           onClick={() => setIsOpen(true)}
           size="lg"
-          className="fixed bottom-6 right-6 z-50 h-14 w-14 rounded-full shadow-glow hover:shadow-neon-hover transition-all duration-300 hover:scale-110 bg-gradient-to-r from-primary to-primary-glow"
+          className="fixed bottom-6 right-6 z-50 h-14 w-14 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 bg-primary"
           aria-label="Open AI Assistant"
         >
           <MessageCircle className="h-6 w-6" />
         </Button>
       )}
 
+      {/* Chat window - responsive design */}
       {isOpen && (
-        <Card className="fixed bottom-0 right-0 md:bottom-6 md:right-6 z-50 w-full h-full md:w-[440px] md:h-[620px] md:max-h-[90vh] shadow-2xl animate-scale-in flex flex-col md:rounded-xl rounded-none border-0">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3 bg-gradient-to-r from-primary to-primary-glow text-primary-foreground md:rounded-t-xl px-4">
+        <Card className="fixed z-50 shadow-2xl animate-scale-in flex flex-col border-0 
+          bottom-6 right-6 w-[380px] h-[550px] max-h-[80vh] rounded-xl
+          max-md:bottom-0 max-md:right-0 max-md:left-0 max-md:w-full max-md:h-[70vh] max-md:rounded-t-xl max-md:rounded-b-none">
+          
+          {/* Header */}
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3 bg-primary text-primary-foreground rounded-t-xl max-md:rounded-t-xl px-4">
             <div className="flex items-center gap-2">
               <div className="p-1.5 bg-white/20 rounded-lg">
                 <Sparkles className="h-5 w-5" />
@@ -282,7 +288,7 @@ export const AIChatbot = () => {
             <div className="flex items-center gap-1">
               {messages.length > 1 && (
                 <Badge variant="secondary" className="text-[10px] h-5 bg-white/20 text-white border-0">
-                  {messages.length} msgs
+                  {messages.length}
                 </Badge>
               )}
               <Button
