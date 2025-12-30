@@ -76,22 +76,18 @@ const Categories = () => {
             </div>
           </div>
 
-          {/* Category Filter Chips with Glow */}
+          {/* Category Filter Chips */}
           <div className="flex flex-wrap justify-center gap-3 mb-12">
             {categories.map((category) => {
               const Icon = category.icon;
-              const glowClass = category.id === 'finance' ? 'glow-finance' : 
-                              category.id === 'health' ? 'glow-health' : 
-                              category.id === 'math' ? 'glow-math' : 
-                              category.id === 'conversion' ? 'glow-conversion' : '';
               return (
                 <a
                   key={category.id}
                   href={`#${category.id}`}
-                  className={`group glass-card flex items-center gap-2 px-6 py-3 rounded-full border-2 border-border hover:border-primary transition-all duration-300 hover:-translate-y-1 ${glowClass}`}
+                  className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-border bg-card/50 hover:border-primary/50 hover:bg-card transition-colors duration-200"
                 >
-                  <Icon className={`h-5 w-5 ${category.color}`} />
-                  <span className="font-semibold">{category.name}</span>
+                  <Icon className={`h-4 w-4 ${category.color}`} />
+                  <span className="font-medium text-sm">{category.name}</span>
                 </a>
               );
             })}

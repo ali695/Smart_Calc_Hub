@@ -33,7 +33,6 @@ export const NewsletterSignup = () => {
         return;
       }
 
-      // Don't reveal if already subscribed - same success message for all
       toast.success("Thank you!", {
         description: "You'll receive our latest calculator tips and financial insights."
       });
@@ -51,33 +50,24 @@ export const NewsletterSignup = () => {
   };
 
   return (
-    <section className="relative py-16 md:py-24 overflow-hidden mt-16" aria-label="Newsletter subscription">
-      {/* Gradient Background with Glassmorphism */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-primary/5 to-accent/10 dark:from-primary/15 dark:via-primary/8 dark:to-accent/15" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent" />
-      
-      {/* Decorative Glow Elements */}
-      <div className="absolute top-0 left-1/4 w-64 h-64 md:w-96 md:h-96 bg-primary/15 rounded-full blur-3xl animate-pulse" />
-      <div className="absolute bottom-0 right-1/4 w-48 h-48 md:w-72 md:h-72 bg-accent/15 rounded-full blur-3xl" />
+    <section className="relative py-16 md:py-20 overflow-hidden" aria-label="Newsletter subscription">
+      {/* Dark gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
+      <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5" />
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-3xl mx-auto">
-          {/* Glass Card */}
-          <div className="relative backdrop-blur-xl bg-background/40 dark:bg-background/30 border border-border/30 dark:border-white/10 rounded-3xl p-6 md:p-10 shadow-2xl shadow-primary/10 animate-fade-in">
-            {/* Subtle inner glow */}
-            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/5 to-transparent pointer-events-none" />
+        <div className="max-w-2xl mx-auto">
+          {/* Card with subtle border */}
+          <div className="relative bg-card/50 dark:bg-card/30 backdrop-blur-sm border border-border/50 rounded-2xl p-8 md:p-10">
             
-            {/* Icon with Glow */}
-            <div className="relative inline-flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-gradient-to-br from-primary to-accent mb-6 shadow-lg shadow-primary/40">
-              <Mail className="h-7 w-7 md:h-8 md:w-8 text-primary-foreground" />
-              <div className="absolute inset-0 rounded-2xl bg-primary/30 blur-xl -z-10" />
+            {/* Icon */}
+            <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-primary mb-6">
+              <Mail className="h-7 w-7 text-primary-foreground" />
             </div>
             
-            {/* Heading with Gradient Text */}
-            <h2 className="text-2xl md:text-4xl font-bold mb-4">
-              <span className="bg-gradient-to-r from-primary via-primary-glow to-accent bg-clip-text text-transparent animate-gradient-x">
-                Stay Ahead
-              </span>{" "}
+            {/* Heading */}
+            <h2 className="text-2xl md:text-3xl font-bold mb-3">
+              <span className="text-primary">Stay Ahead</span>{" "}
               <span className="text-foreground">of the Curve</span>
             </h2>
             
@@ -88,7 +78,7 @@ export const NewsletterSignup = () => {
             </p>
             
             {/* Form */}
-            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 md:gap-4 max-w-lg">
+            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-lg">
               <div className="relative flex-1">
                 <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                 <Input
@@ -96,7 +86,7 @@ export const NewsletterSignup = () => {
                   placeholder="Enter your email address"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="pl-12 h-12 md:h-14 text-base bg-background/60 dark:bg-background/40 border-border/40 focus:border-primary focus:ring-2 focus:ring-primary/20 rounded-xl transition-all"
+                  className="pl-12 h-12 text-base bg-background border-border focus:border-primary rounded-lg transition-colors"
                   required
                   aria-label="Email address"
                 />
@@ -105,7 +95,7 @@ export const NewsletterSignup = () => {
                 type="submit" 
                 disabled={isSubmitting}
                 size="lg"
-                className="h-12 md:h-14 px-6 md:px-8 rounded-xl bg-gradient-to-r from-primary to-accent hover:opacity-90 hover:scale-[1.02] transition-all duration-300 shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 font-semibold"
+                className="h-12 px-6 rounded-lg bg-primary hover:bg-primary/90 transition-colors font-medium"
               >
                 {isSubmitting ? (
                   <span className="flex items-center gap-2">
@@ -114,7 +104,7 @@ export const NewsletterSignup = () => {
                   </span>
                 ) : (
                   <span className="flex items-center gap-2">
-                    <Send className="h-5 w-5" />
+                    <Send className="h-4 w-4" />
                     <span>Subscribe</span>
                   </span>
                 )}
@@ -122,23 +112,17 @@ export const NewsletterSignup = () => {
             </form>
             
             {/* Trust Indicators */}
-            <div className="flex flex-wrap items-center justify-start gap-4 md:gap-8 mt-8 text-sm text-muted-foreground">
-              <div className="flex items-center gap-2 transition-transform hover:scale-105">
-                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10">
-                  <Sparkles className="h-4 w-4 text-primary" />
-                </div>
+            <div className="flex flex-wrap items-center gap-6 mt-8 text-sm text-muted-foreground">
+              <div className="flex items-center gap-2">
+                <Sparkles className="h-4 w-4 text-primary" />
                 <span>Free forever</span>
               </div>
-              <div className="flex items-center gap-2 transition-transform hover:scale-105">
-                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10">
-                  <Bell className="h-4 w-4 text-primary" />
-                </div>
+              <div className="flex items-center gap-2">
+                <Bell className="h-4 w-4 text-primary" />
                 <span>Weekly insights</span>
               </div>
-              <div className="flex items-center gap-2 transition-transform hover:scale-105">
-                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10">
-                  <BellOff className="h-4 w-4 text-primary" />
-                </div>
+              <div className="flex items-center gap-2">
+                <BellOff className="h-4 w-4 text-primary" />
                 <span>Unsubscribe anytime</span>
               </div>
             </div>
