@@ -17,24 +17,24 @@ interface HeroSectionProps {
   showBackgroundImage?: boolean;
 }
 
-// Background images for categories and pages
-const categoryImages: Record<string, string> = {
-  home: "/hero-calculators.webp",
-  finance: "/blog-hero-finance-new.webp",
-  health: "/blog-hero-health-new.webp",
-  math: "/blog-hero-math-new.webp",
-  conversion: "/blog-hero-conversion-new.webp",
-  tech: "/blog-hero-tech-new.webp",
-  engineering: "/blog-hero-engineering-new.webp",
-  science: "/blog-hero-science-new.webp",
-  business: "/blog-hero-business-new.webp",
-  "real-estate": "/blog-hero-finance-new.webp",
-  crypto: "/blog-hero-finance-new.webp",
-  blog: "/hero-blog.webp",
-  faq: "/hero-faq.webp",
-  contact: "/hero-contact.webp",
-  about: "/hero-about.webp",
-  utility: "/hero-calculators.webp"
+// Background images and fallback colors for categories and pages
+const categoryImages: Record<string, { image: string; fallback: string }> = {
+  home: { image: "/hero-calculators.webp", fallback: "#1a5fb4" },
+  finance: { image: "/blog-hero-finance-new.webp", fallback: "#1a7f37" },
+  health: { image: "/blog-hero-health-new.webp", fallback: "#c53030" },
+  math: { image: "/blog-hero-math-new.webp", fallback: "#0891b2" },
+  conversion: { image: "/blog-hero-conversion-new.webp", fallback: "#7c3aed" },
+  tech: { image: "/blog-hero-tech-new.webp", fallback: "#0f766e" },
+  engineering: { image: "/blog-hero-engineering-new.webp", fallback: "#1e40af" },
+  science: { image: "/blog-hero-science-new.webp", fallback: "#4f46e5" },
+  business: { image: "/blog-hero-business-new.webp", fallback: "#1e3a5f" },
+  "real-estate": { image: "/blog-hero-finance-new.webp", fallback: "#c2410c" },
+  crypto: { image: "/blog-hero-finance-new.webp", fallback: "#b45309" },
+  blog: { image: "/hero-blog.webp", fallback: "#6b21a8" },
+  faq: { image: "/hero-faq.webp", fallback: "#0d9488" },
+  contact: { image: "/hero-contact.webp", fallback: "#0369a1" },
+  about: { image: "/hero-about.webp", fallback: "#9333ea" },
+  utility: { image: "/hero-calculators.webp", fallback: "#1a5fb4" }
 };
 
 // Create a global event for calculate pulse (browser only)
@@ -157,7 +157,16 @@ export const HeroSection = ({
   const normalizedCategory = category.toLowerCase().replace(/\s+/g, '-');
   const gradientConfig = gradients[normalizedCategory] || gradients.home;
   const gradient = isDark ? gradientConfig.dark : gradientConfig.light;
-  const backgroundImage = categoryImages[normalizedCategory] || categoryImages.home;
+  const imageConfig = categoryImages[normalizedCategory] || categoryImages.home;
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  // Preload image
+  useEffect(() => {
+    if (!isBrowser) return;
+    const img = new Image();
+    img.src = imageConfig.image;
+    img.onload = () => setImageLoaded(true);
+  }, [imageConfig.image]);
 
   return (
     <section
@@ -165,9 +174,7 @@ export const HeroSection = ({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       style={{
-        background: gradient,
-        backgroundSize: "200% 200%",
-        animation: "heroGradientFlow 10s ease infinite",
+        backgroundColor: imageConfig.fallback,
         filter: isPulsing ? "brightness(1.08)" : isHovered ? "brightness(1.03)" : isDark ? "brightness(0.9)" : "brightness(1)",
         transition: "filter 0.3s ease"
       }}
@@ -176,15 +183,16 @@ export const HeroSection = ({
         className
       )}
     >
-      {/* Blurred background image */}
+      {/* Blurred background image with fade-in */}
       <div 
-        className="absolute inset-0 z-0"
+        className="absolute inset-0 z-0 transition-opacity duration-500"
         style={{
-          backgroundImage: `url(${backgroundImage})`,
+          backgroundImage: `url(${imageConfig.image})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           filter: "blur(6px)",
-          transform: "scale(1.05)"
+          transform: "scale(1.05)",
+          opacity: imageLoaded ? 1 : 0
         }}
       />
       
