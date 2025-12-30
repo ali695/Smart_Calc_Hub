@@ -99,52 +99,51 @@ const Blog = () => {
                 const heroImage = post.image || getBlogHeroImage(post.category);
                 
                 return (
-              <Card key={post.id} className="group hover:shadow-lg transition-all duration-300 cursor-pointer flex flex-col border border-border hover:border-primary/50 overflow-hidden rounded-xl">
-                <div className="aspect-video overflow-hidden relative">
-                  <img 
-                    src={heroImage} 
-                    alt={`${post.title} - ${post.category} article thumbnail`}
-                    title={post.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4">
-                    <span className="px-3 py-1.5 sm:px-4 sm:py-2 bg-primary text-primary-foreground rounded-full text-xs sm:text-sm font-semibold shadow-lg">
-                      {post.category}
-                    </span>
-                  </div>
-                </div>
-                <CardHeader className="flex-grow">
-                  <div className="flex items-center gap-2 text-xs text-muted-foreground mb-2">
-                    <Calendar className="h-3 w-3" />
-                    <span>{post.date}</span>
-                    <span>•</span>
-                    <span>{post.readTime}</span>
-                  </div>
-                  <CardTitle className="group-hover:text-primary transition-colors line-clamp-2">
-                    {post.title}
-                  </CardTitle>
-                  <CardDescription className="line-clamp-3">
-                    {post.excerpt}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <User className="h-4 w-4" />
-                      <span>{post.author}</span>
+              <Link key={post.id} to={`/blog/${post.id}`} className="block">
+                <Card className="group hover:shadow-lg transition-all duration-300 cursor-pointer flex flex-col border border-border hover:border-primary/50 overflow-hidden rounded-xl h-full">
+                  <div className="aspect-video overflow-hidden relative">
+                    <img 
+                      src={heroImage} 
+                      alt={`${post.title} - ${post.category} article thumbnail`}
+                      title={post.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4">
+                      <span className="px-3 py-1.5 sm:px-4 sm:py-2 bg-primary text-primary-foreground rounded-full text-xs sm:text-sm font-semibold shadow-lg">
+                        {post.category}
+                      </span>
                     </div>
-                    <Link 
-                      to={`/blog/${post.id}`}
-                      className="flex items-center gap-1 text-sm font-medium text-primary hover:gap-2 transition-all"
-                    >
-                      Read more
-                      <ArrowRight className="h-4 w-4" />
-                    </Link>
                   </div>
-                </CardContent>
-              </Card>
+                  <CardHeader className="flex-grow">
+                    <div className="flex items-center gap-2 text-xs text-muted-foreground mb-2">
+                      <Calendar className="h-3 w-3" />
+                      <span>{post.date}</span>
+                      <span>•</span>
+                      <span>{post.readTime}</span>
+                    </div>
+                    <CardTitle className="group-hover:text-primary transition-colors line-clamp-2">
+                      {post.title}
+                    </CardTitle>
+                    <CardDescription className="line-clamp-3">
+                      {post.excerpt}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <User className="h-4 w-4" />
+                        <span>{post.author}</span>
+                      </div>
+                      <span className="flex items-center gap-1 text-sm font-medium text-primary group-hover:gap-2 transition-all">
+                        Read more
+                        <ArrowRight className="h-4 w-4" />
+                      </span>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
                 );
               })}
             </div>
