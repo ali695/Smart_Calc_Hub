@@ -43,7 +43,7 @@ const CONTEXT_WINDOW = 10;
 
 const DEFAULT_MESSAGE: Message = {
   role: "assistant",
-  content: "Hello! I'm **SmartCalc AI** — your intelligent calculation assistant.\n\nI can:\n- 🧮 Solve math problems step-by-step\n- 💰 Explain financial calculations\n- ❤️ Interpret health metrics\n- 📸 Analyze images you upload\n\nWhat can I help you with today?",
+  content: "Hi! I'm **SmartCalc AI**. How can I help you today?",
   timestamp: Date.now(),
   confidence: 100,
 };
