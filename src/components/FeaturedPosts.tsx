@@ -80,7 +80,7 @@ export const FeaturedPosts = () => {
         <div className="text-center mt-8">
           <Link 
             to="/blog"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-all duration-300 shadow-lg hover:shadow-xl"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-all duration-300"
           >
             View All Articles
             <ArrowRight className="h-5 w-5" />
