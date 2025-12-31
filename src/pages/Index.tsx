@@ -119,7 +119,7 @@ const Index = () => {
                 
                 {/* Search Suggestions Dropdown */}
                 {showSuggestions && searchSuggestions.length > 0 && (
-                  <div className="absolute top-full left-0 right-0 mt-2 bg-card border border-border rounded-xl shadow-2xl overflow-hidden" style={{ zIndex: 70 }}>
+                  <div className="absolute top-full left-0 right-0 mt-2 bg-card border border-border rounded-xl shadow-2xl overflow-hidden z-40">
                     {searchSuggestions.map((calc) => {
                       const Icon = calc.icon;
                       return (
