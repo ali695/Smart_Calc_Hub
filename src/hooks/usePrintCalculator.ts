@@ -205,9 +205,7 @@ export const usePrintCalculator = () => {
           </div>
 
           <script>
-            window.onload = function() {
-              window.print();
-            };
+            // Don't auto-print - let user review first and click Print manually
             window.onafterprint = function() {
               window.close();
             };
