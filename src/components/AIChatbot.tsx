@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
+import { createPortal } from "react-dom";
 import { MessageCircle, X, Send, Loader2, Calculator, HelpCircle, BookOpen, RefreshCw, Trash2, Sparkles, ThumbsUp, ThumbsDown, Image, Brain, DollarSign, Heart, Beaker, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -253,14 +254,16 @@ export const AIChatbot = () => {
   const currentCalculator = getCalculatorFromPath(location.pathname);
   const currentModeConfig = useMemo(() => MODES.find(m => m.id === mode), [mode]);
 
-  return (
+  const portalTarget = typeof window !== "undefined" ? document.body : null;
+
+  const ui = (
     <>
       {/* Floating toggle button - always visible when chat is closed */}
       {!isOpen && (
         <Button
           onClick={() => setIsOpen(true)}
           size="lg"
-          className="fixed bottom-6 right-6 z-50 h-14 w-14 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 bg-primary"
+          className="fixed bottom-6 right-6 z-[100] h-14 w-14 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 bg-primary"
           aria-label="Open AI Assistant"
         >
           <MessageCircle className="h-6 w-6" />
@@ -269,7 +272,7 @@ export const AIChatbot = () => {
 
       {/* Chat window - responsive design */}
       {isOpen && (
-        <Card className="fixed z-50 shadow-2xl animate-scale-in flex flex-col border-0 
+        <Card className="fixed z-[100] shadow-2xl animate-scale-in flex flex-col border-0 
           bottom-6 right-6 w-[380px] h-[550px] max-h-[80vh] rounded-xl
           max-md:bottom-0 max-md:right-0 max-md:left-0 max-md:w-full max-md:h-[70vh] max-md:rounded-t-xl max-md:rounded-b-none">
           

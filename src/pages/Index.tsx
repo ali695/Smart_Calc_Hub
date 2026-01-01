@@ -102,7 +102,7 @@ const Index = () => {
             </div>
 
             {/* Search Bar with Suggestions */}
-            <div className={`max-w-2xl mx-auto transition-all duration-700 delay-500 relative ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`} style={{ zIndex: 60 }}>
+            <div className={`max-w-2xl mx-auto transition-all duration-700 delay-500 relative z-40 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
               <div className="relative" ref={searchRef}>
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground z-10" />
                 <Input
