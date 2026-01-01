@@ -506,4 +506,8 @@ export const AIChatbot = () => {
       )}
     </>
   );
+
+  // Render into a portal so it sits above all stacking contexts
+  if (!portalTarget) return null;
+  return createPortal(ui, portalTarget);
 };
