@@ -11,7 +11,7 @@ interface SitemapUrl {
 }
 
 export const generateSitemapXML = (): string => {
-  const currentDate = '2025-12-17'; // Fixed date for consistency
+  const currentDate = '2025-01-17'; // Updated date for new content
   
   const urls: SitemapUrl[] = [];
 
