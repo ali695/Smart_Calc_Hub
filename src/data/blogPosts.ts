@@ -10,6 +10,10 @@ export interface BlogPost {
   seoDescription: string;
   keywords: string[];
   image?: string;
+  relatedCalculators?: {
+    name: string;
+    path: string;
+  }[];
   content: {
     introduction: string;
     sections: {
@@ -1937,6 +1941,11 @@ export const blogPosts: BlogPost[] = [
     seoTitle: "Stock Market Investing for Beginners 2025 | Complete Investment Guide",
     seoDescription: "Master stock market investing with our beginner's guide. Learn portfolio diversification, risk management, index funds vs individual stocks, and long-term wealth building strategies.",
     keywords: ["stock market investing", "beginner investing", "portfolio diversification", "index funds", "stock trading basics"],
+    relatedCalculators: [
+      { name: "Investment Return Calculator", path: "/calculator/investment-return" },
+      { name: "Compound Interest Calculator", path: "/calculator/compound-interest" },
+      { name: "Retirement Calculator", path: "/calculator/retirement" }
+    ],
     content: {
       introduction: "Investing in the stock market is one of the most powerful ways to build long-term wealth and achieve financial independence. While the market may seem intimidating to beginners, understanding fundamental principles can transform your financial future. This comprehensive guide covers everything from opening your first brokerage account to building a diversified portfolio that aligns with your goals and risk tolerance.",
       sections: [
@@ -1961,6 +1970,11 @@ export const blogPosts: BlogPost[] = [
     seoTitle: "Emergency Fund Calculator 2025 | How Much to Save Guide",
     seoDescription: "Calculate your ideal emergency fund amount. Learn how many months expenses to save, where to keep emergency savings, and strategies to build financial security.",
     keywords: ["emergency fund calculator", "emergency savings", "financial security", "rainy day fund", "savings goal"],
+    relatedCalculators: [
+      { name: "Savings Goal Calculator", path: "/calculator/savings-goal" },
+      { name: "Budget Planner", path: "/calculator/budget-planner" },
+      { name: "Net Worth Calculator", path: "/calculator/net-worth" }
+    ],
     content: {
       introduction: "An emergency fund is your financial safety net—money set aside for unexpected expenses like job loss, medical emergencies, car repairs, or home maintenance. Without adequate savings, these surprises force you into debt, derailing your financial progress. Understanding how much to save and where to keep it provides peace of mind and financial stability during life's inevitable challenges.",
       sections: [
@@ -1984,6 +1998,11 @@ export const blogPosts: BlogPost[] = [
     seoTitle: "Passive Income Calculator 2025 | Multiple Income Streams Guide",
     seoDescription: "Calculate passive income potential from dividends, real estate, and online businesses. Learn proven strategies to build wealth through multiple income streams.",
     keywords: ["passive income calculator", "dividend income", "rental income", "income streams", "financial independence"],
+    relatedCalculators: [
+      { name: "Investment Return Calculator", path: "/calculator/investment-return" },
+      { name: "Retirement Calculator", path: "/calculator/retirement" },
+      { name: "Compound Interest Calculator", path: "/calculator/compound-interest" }
+    ],
     content: {
       introduction: "Passive income is money earned with minimal ongoing effort after initial setup—the holy grail of financial independence. Whether through dividend investing, rental properties, or digital products, passive income streams can eventually replace your salary and provide true freedom. This guide explores various passive income sources and helps you calculate realistic expectations for each approach.",
       sections: [
@@ -2007,6 +2026,11 @@ export const blogPosts: BlogPost[] = [
     seoTitle: "Debt Payoff Calculator 2025 | Snowball vs Avalanche Strategy",
     seoDescription: "Calculate debt payoff timeline using snowball or avalanche methods. Compare strategies, calculate interest savings, and create your debt-free plan.",
     keywords: ["debt payoff calculator", "debt snowball", "debt avalanche", "pay off debt", "debt free"],
+    relatedCalculators: [
+      { name: "Credit Card Payoff Calculator", path: "/calculator/credit-card" },
+      { name: "Loan Calculator", path: "/calculator/loan" },
+      { name: "Simple Interest Calculator", path: "/calculator/simple-interest" }
+    ],
     content: {
       introduction: "Crushing debt requires strategy, not just willpower. The two most popular approaches—debt snowball and debt avalanche—offer different paths to the same destination: debt freedom. Understanding both methods and calculating your personal payoff timeline empowers you to choose the strategy that fits your psychology and saves the most money.",
       sections: [
@@ -2030,6 +2054,11 @@ export const blogPosts: BlogPost[] = [
     seoTitle: "Down Payment Calculator 2025 | Home Buying Savings Guide",
     seoDescription: "Calculate down payment requirements for home buying. Compare 3%, 10%, 20% down payment options and understand PMI costs and savings strategies.",
     keywords: ["down payment calculator", "home buying", "house down payment", "PMI calculator", "first time home buyer"],
+    relatedCalculators: [
+      { name: "Mortgage Calculator", path: "/calculator/mortgage" },
+      { name: "Savings Goal Calculator", path: "/calculator/savings-goal" },
+      { name: "LTV Calculator", path: "/calculator/ltv" }
+    ],
     content: {
       introduction: "Saving for a down payment is often the biggest hurdle to homeownership. Understanding your options—from 3% first-time buyer programs to the traditional 20%—helps you create a realistic savings plan. This guide breaks down down payment requirements, PMI implications, and strategies to reach your homeownership goals faster.",
       sections: [
@@ -2053,6 +2082,11 @@ export const blogPosts: BlogPost[] = [
     seoTitle: "Weight Loss Calculator 2025 | Calorie Deficit Guide",
     seoDescription: "Calculate your optimal calorie deficit for weight loss. Learn TDEE-based approach, safe weight loss rates, and sustainable strategies for lasting results.",
     keywords: ["weight loss calculator", "calorie deficit", "TDEE calculator", "lose weight", "healthy weight loss"],
+    relatedCalculators: [
+      { name: "TDEE Calculator", path: "/calculator/tdee" },
+      { name: "Calorie Deficit Calculator", path: "/calculator/calorie-deficit" },
+      { name: "BMI Calculator", path: "/calculator/bmi" }
+    ],
     content: {
       introduction: "Sustainable weight loss comes down to one principle: calorie deficit. When you consume fewer calories than your body burns, you lose weight. Understanding your Total Daily Energy Expenditure (TDEE) and creating an appropriate deficit enables healthy, lasting weight loss without extreme measures or metabolic damage.",
       sections: [
@@ -2099,6 +2133,11 @@ export const blogPosts: BlogPost[] = [
     seoTitle: "Running Pace Calculator 2025 | Race Training Guide",
     seoDescription: "Calculate running paces for training and racing. Learn pace zones, race predictions, and strategies for 5K, 10K, half marathon, and marathon success.",
     keywords: ["running pace calculator", "marathon pace", "race time calculator", "running training", "pace zones"],
+    relatedCalculators: [
+      { name: "Heart Rate Calculator", path: "/calculator/heart-rate" },
+      { name: "Calorie Calculator", path: "/calculator/calorie" },
+      { name: "Steps Calculator", path: "/calculator/steps" }
+    ],
     content: {
       introduction: "Understanding pace is fundamental to running success. Whether training for your first 5K or chasing a marathon PR, proper pacing optimizes performance and prevents burnout. This guide helps you calculate training paces, predict race times, and develop race-day strategies for any distance.",
       sections: [
@@ -2122,6 +2161,11 @@ export const blogPosts: BlogPost[] = [
     seoTitle: "Protein Intake Calculator 2025 | Muscle Building Nutrition Guide",
     seoDescription: "Calculate optimal daily protein intake for muscle building and weight loss. Learn protein requirements, timing, best sources, and supplementation strategies.",
     keywords: ["protein calculator", "protein intake", "muscle building", "protein requirements", "daily protein"],
+    relatedCalculators: [
+      { name: "Protein Calculator", path: "/calculator/protein" },
+      { name: "Macro Calculator", path: "/calculator/macro" },
+      { name: "TDEE Calculator", path: "/calculator/tdee" }
+    ],
     content: {
       introduction: "Protein is the building block of muscle and essential for countless bodily functions. Whether you are building muscle, losing fat, or maintaining health, adequate protein intake is crucial. Understanding your individual requirements and optimizing protein consumption supports your fitness and health goals effectively.",
       sections: [
@@ -2145,6 +2189,11 @@ export const blogPosts: BlogPost[] = [
     seoTitle: "Linear Equations Calculator 2025 | Algebra Solving Guide",
     seoDescription: "Master linear equations with step-by-step solutions. Learn algebraic methods for one-variable equations and systems of linear equations.",
     keywords: ["linear equations calculator", "solve for x", "algebra solver", "systems of equations", "equation solving"],
+    relatedCalculators: [
+      { name: "Quadratic Calculator", path: "/calculator/quadratic" },
+      { name: "Percentage Calculator", path: "/calculator/percentage" },
+      { name: "Ratio Calculator", path: "/calculator/ratio" }
+    ],
     content: {
       introduction: "Linear equations form the foundation of algebra and appear throughout mathematics, science, and everyday problem-solving. From calculating break-even points in business to converting temperatures, linear equations help us model and solve real-world problems. Mastering solution techniques builds essential mathematical fluency.",
       sections: [
@@ -2168,6 +2217,11 @@ export const blogPosts: BlogPost[] = [
     seoTitle: "Statistics Calculator 2025 | Mean Median Mode Guide",
     seoDescription: "Calculate mean, median, mode, and standard deviation with examples. Master statistical analysis fundamentals for data interpretation and decision-making.",
     keywords: ["statistics calculator", "mean median mode", "standard deviation", "statistical analysis", "data analysis"],
+    relatedCalculators: [
+      { name: "Standard Deviation Calculator", path: "/calculator/standard-deviation" },
+      { name: "Average Calculator", path: "/calculator/average" },
+      { name: "Probability Calculator", path: "/calculator/probability" }
+    ],
     content: {
       introduction: "Statistics transforms raw data into meaningful insights. Understanding measures of central tendency (mean, median, mode) and dispersion (standard deviation, variance) is essential for data analysis, research, and informed decision-making. These fundamental concepts appear everywhere from business analytics to scientific research.",
       sections: [
@@ -2260,6 +2314,11 @@ export const blogPosts: BlogPost[] = [
     seoTitle: "Time Value of Money Calculator 2025 | PV FV Analysis Guide",
     seoDescription: "Master time value of money with present and future value calculations. Learn discounted cash flow analysis for investment decisions and financial planning.",
     keywords: ["time value of money", "present value calculator", "future value", "discounted cash flow", "NPV calculator"],
+    relatedCalculators: [
+      { name: "Compound Interest Calculator", path: "/calculator/compound-interest" },
+      { name: "Investment Return Calculator", path: "/calculator/investment-return" },
+      { name: "Retirement Calculator", path: "/calculator/retirement" }
+    ],
     content: {
       introduction: "The time value of money is one of finance's most important concepts: a dollar today is worth more than a dollar tomorrow because of its earning potential. Understanding present value, future value, and discounting enables better financial decisions regarding investments, loans, and long-term planning.",
       sections: [
@@ -2306,6 +2365,11 @@ export const blogPosts: BlogPost[] = [
     seoTitle: "Fuel Economy Calculator 2025 | MPG & Gas Savings Guide",
     seoDescription: "Calculate vehicle fuel economy and gas costs. Learn MPG optimization, fuel-efficient driving techniques, and compare vehicle operating expenses.",
     keywords: ["fuel economy calculator", "MPG calculator", "gas mileage", "fuel efficiency", "gas savings"],
+    relatedCalculators: [
+      { name: "Fuel Efficiency Calculator", path: "/calculator/fuel" },
+      { name: "Speed Converter", path: "/calculator/speed-converter" },
+      { name: "Budget Planner", path: "/calculator/budget-planner" }
+    ],
     content: {
       introduction: "Understanding your vehicle's fuel economy helps you budget transportation costs, compare vehicles, and identify opportunities for savings. With fuel prices fluctuating significantly, optimizing fuel efficiency can save hundreds or thousands of dollars annually.",
       sections: [
@@ -2329,6 +2393,11 @@ export const blogPosts: BlogPost[] = [
     seoTitle: "BAC Calculator 2025 | Blood Alcohol Content Guide",
     seoDescription: "Calculate estimated blood alcohol content and understand alcohol metabolism. Learn impairment levels, legal limits, and responsible drinking guidelines.",
     keywords: ["BAC calculator", "blood alcohol content", "alcohol metabolism", "drunk driving", "responsible drinking"],
+    relatedCalculators: [
+      { name: "Body Fat Calculator", path: "/calculator/body-fat" },
+      { name: "BMI Calculator", path: "/calculator/bmi" },
+      { name: "Ideal Weight Calculator", path: "/calculator/ideal-weight" }
+    ],
     content: {
       introduction: "Understanding blood alcohol content (BAC) helps you make informed decisions about drinking and driving safety. While BAC calculators provide estimates, individual metabolism varies significantly. This guide explains how BAC is calculated, what levels mean, and promotes responsible alcohol consumption.",
       sections: [

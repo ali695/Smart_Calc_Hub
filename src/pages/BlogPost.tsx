@@ -1,7 +1,8 @@
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, Calendar, User, Clock, Tag } from "lucide-react";
+import { ArrowLeft, Calendar, User, Clock, Tag, Calculator } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { getBlogPost, blogPosts } from "@/data/blogPosts";
 import { SEOHead } from "@/components/SEOHead";
 import { getBlogOGImage, getBlogHeroImage } from "@/utils/ogImageMapping";
@@ -175,6 +176,30 @@ const BlogPost = () => {
                 </div>
               </CardContent>
             </Card>
+
+            {/* Related Calculators Section */}
+            {post.relatedCalculators && post.relatedCalculators.length > 0 && (
+              <Card className="glass-card mt-8 border-2 border-accent/20 bg-gradient-to-br from-accent/5 to-primary/5">
+                <CardContent className="pt-6">
+                  <div className="flex items-center gap-2 mb-4">
+                    <Calculator className="h-6 w-6 text-primary" />
+                    <h3 className="text-xl font-bold">Try These Calculators</h3>
+                  </div>
+                  <p className="text-muted-foreground mb-4">
+                    Put this knowledge into practice with our free calculators:
+                  </p>
+                  <div className="flex flex-wrap gap-3">
+                    {post.relatedCalculators.map((calc, index) => (
+                      <Link key={index} to={calc.path}>
+                        <Button variant="outline" className="hover:bg-primary hover:text-primary-foreground transition-all">
+                          {calc.name}
+                        </Button>
+                      </Link>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            )}
 
             {/* Social Share Buttons */}
             <div className="mt-8">

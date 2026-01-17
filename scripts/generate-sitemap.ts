@@ -209,6 +209,7 @@ const calculatorPaths: string[] = [
 // BLOG POST SLUGS (from src/data/blogPosts.ts)
 // ============================================
 const blogSlugs: string[] = [
+  // Original 90 blog posts
   'how-to-calculate-monthly-loan-emi',
   'complete-guide-mortgage-calculator',
   'compound-interest-wealth-building',
@@ -318,6 +319,48 @@ const blogSlugs: string[] = [
   'stress-strain-calculator-materials',
   'quadratic-formula-calculator-algebra',
   'credit-score-improvement-guide',
+  
+  // 30 New SEO-optimized blog posts (added January 2025)
+  'stock-market-investing-beginners-guide',
+  'emergency-fund-calculator-savings-guide',
+  'passive-income-ideas-calculator',
+  'debt-payoff-calculator-snowball-avalanche',
+  'down-payment-calculator-home-buying',
+  'weight-loss-calculator-sustainable-goals',
+  'intermittent-fasting-calculator-schedule',
+  'running-pace-calculator-training',
+  'protein-intake-bodybuilding-calculator',
+  'linear-equations-calculator-algebra',
+  'statistics-calculator-data-analysis',
+  'trigonometry-functions-calculator-guide',
+  'electricity-cost-calculator-energy-savings',
+  'solar-panel-calculator-energy-production',
+  'time-value-money-calculator-pv-fv',
+  'npv-irr-calculator-investment-analysis',
+  'fuel-economy-calculator-mpg-savings',
+  'bac-calculator-alcohol-metabolism',
+  'ovulation-fertility-calculator-conception',
+  'college-savings-calculator-529-plan',
+  'social-security-retirement-calculator',
+  'apy-calculator-savings-interest',
+  'lease-vs-buy-car-calculator',
+  'gpa-calculator-grade-average',
+  'tip-calculator-restaurant-service',
+  'hourly-to-salary-calculator',
+  'rental-property-roi-calculator',
+  'home-equity-heloc-calculator',
+  'dividend-yield-calculator-income-investing',
+  'inflation-impact-calculator-purchasing-power',
+  'keto-macros-calculator-ketogenic-diet',
+  'retirement-age-planner-calculator',
+  'startup-costs-calculator-business',
+  'cash-flow-statement-calculator',
+  'metric-imperial-conversion-guide',
+  'asset-allocation-calculator-portfolio',
+  'fire-retirement-calculator-financial-independence',
+  'pregnancy-weight-gain-calculator',
+  'strength-training-volume-calculator',
+  'wedding-budget-calculator-planning',
 ];
 
 // ============================================
