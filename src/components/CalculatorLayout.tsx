@@ -3,6 +3,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { ReactNode, useEffect, createContext, useContext, useState, useCallback } from "react";
 import { SEOHead } from "@/components/SEOHead";
 import { RelatedCalculators } from "@/components/RelatedCalculators";
+import { CrossCategoryCalculators } from "@/components/CrossCategoryCalculators";
 import { AIInsightCard } from "@/components/AIInsightCard";
 import { CalculatorActions } from "@/components/CalculatorActions";
 import { RegionToggle } from "@/components/RegionToggle";
@@ -433,6 +434,15 @@ export const CalculatorLayout = ({
               category={category.toLowerCase()} 
               currentCalculatorId={calculatorId}
               maxItems={4}
+            />
+          )}
+
+          {/* Cross-Category Calculators for internal linking */}
+          {category && (
+            <CrossCategoryCalculators
+              currentCategory={category.toLowerCase()}
+              currentCalculatorId={calculatorId}
+              maxItems={6}
             />
           )}
         </div>
