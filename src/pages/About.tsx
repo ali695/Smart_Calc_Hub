@@ -1,10 +1,18 @@
 import { Calculator, Heart, Target, Users, Lightbulb, Shield, Zap, CheckCircle, Info } from "lucide-react";
 import { Link } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
+import { SEOHead } from "@/components/SEOHead";
+import { getFullUrl } from "@/config/siteConfig";
 
 const About = () => {
   return (
     <div className="min-h-screen">
+      <SEOHead
+        title="About SmartCalc Hub | Free Online Calculators"
+        description="Learn about SmartCalc Hub – your trusted source for 90+ free, accurate online calculators for finance, health, math, and conversions."
+        keywords="about SmartCalc Hub, free calculators, online calculator tools, calculator website"
+        canonicalUrl={getFullUrl("/about")}
+      />
       <PageHeader 
         title="About SmartCalc Hub"
         description="Your trusted source for fast, accurate, and free online calculators"

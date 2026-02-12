@@ -8,6 +8,8 @@ import { useState, useEffect, useRef } from "react";
 import { RecentlyUsedCalculators } from "@/components/RecentlyUsedCalculators";
 import { FeaturedPosts } from "@/components/FeaturedPosts";
 import { Testimonials } from "@/components/Testimonials";
+import { SEOHead } from "@/components/SEOHead";
+import { getFullUrl } from "@/config/siteConfig";
 
 const Index = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -51,6 +53,13 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
+      <SEOHead
+        title="SmartCalc Hub – Free Online Calculators"
+        description="Free online calculators for finance, health, math, and conversions. Get instant, accurate results with 90+ easy-to-use calculator tools."
+        keywords="online calculator, free calculator, finance calculator, health calculator, math calculator, unit converter, SmartCalc Hub"
+        canonicalUrl={getFullUrl("/")}
+        ogImage={getFullUrl("/og-image.png")}
+      />
       {/* Hero Section */}
       <section className="relative bg-gradient-hero py-20 md:py-32 overflow-hidden">
         {/* Animated Geometric Grid Background */}
