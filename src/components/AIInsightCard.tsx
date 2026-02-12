@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { supabase } from "@/integrations/supabase/client";
-import { isReactSnap } from "@/utils/ssrGuards";
+
 import { useRegion } from "@/contexts/RegionContext";
 import { 
   Sparkles, 
@@ -110,8 +110,6 @@ export const AIInsightCard = ({
   }, [insight?.interpretation]);
 
   const fetchInsight = useCallback(async (force: boolean = false) => {
-    // Never call backend during react-snap pre-rendering
-    if (isReactSnap) return;
     if (!results || Object.keys(results).length === 0) return;
     
     // Rate limiting check
@@ -180,7 +178,7 @@ export const AIInsightCard = ({
 
   // Auto-trigger when results change
   useEffect(() => {
-    if (isReactSnap) return;
+    
     if (autoTrigger && results && Object.keys(results).length > 0 && !hasTriggered) {
       const timer = setTimeout(() => {
         fetchInsight();

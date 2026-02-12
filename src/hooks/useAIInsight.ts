@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { isReactSnap } from "@/utils/ssrGuards";
+
 
 interface AIInsightResult {
   interpretation: string;
@@ -23,8 +23,6 @@ export const useAIInsight = ({ calculatorName, category }: UseAIInsightOptions) 
     inputs: Record<string, any>,
     results: Record<string, any>
   ) => {
-    // Never call backend during react-snap pre-rendering
-    if (isReactSnap) return;
 
     if (!results || Object.keys(results).length === 0) {
       return;

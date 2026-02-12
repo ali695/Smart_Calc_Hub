@@ -1,31 +1,21 @@
 import { StrictMode } from 'react';
-import { createRoot, hydrateRoot } from "react-dom/client";
+import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 import { ThemeProvider } from "./components/ThemeProvider";
 import { initGA } from '@/utils/analytics';
-import { isReactSnap } from "@/utils/ssrGuards";
 
-// Initialize Google Analytics in production (client-side only)
-// Avoid loading third-party scripts during react-snap pre-rendering.
-if (typeof window !== 'undefined' && import.meta.env.PROD && !isReactSnap) {
+// Initialize Google Analytics in production
+if (typeof window !== 'undefined' && import.meta.env.PROD) {
   initGA();
 }
 
 const rootElement = document.getElementById("root")!;
 
-const AppWithProviders = (
+createRoot(rootElement).render(
   <StrictMode>
     <ThemeProvider defaultTheme="system" storageKey="smartcalc-theme">
       <App />
     </ThemeProvider>
   </StrictMode>
 );
-
-// Use hydration if the page was pre-rendered by react-snap
-// Check if root has children (pre-rendered HTML exists)
-if (rootElement.hasChildNodes()) {
-  hydrateRoot(rootElement, AppWithProviders);
-} else {
-  createRoot(rootElement).render(AppWithProviders);
-}

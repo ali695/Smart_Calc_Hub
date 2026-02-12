@@ -1,47 +1,22 @@
 /**
- * SSR Guard Utilities
+ * Browser Environment Guard Utilities
  * 
- * These utilities help guard client-only code during SSR/pre-rendering.
- * Use these to prevent errors when code runs in a non-browser environment.
+ * These utilities help guard client-only code safely.
  */
 
-/**
- * Check if code is running in a browser environment
- */
+/** Check if code is running in a browser environment */
 export const isBrowser = typeof window !== 'undefined';
 
-/**
- * Check if code is running during SSR (Node / no-window environment)
- */
+/** Check if code is running during SSR (Node / no-window environment) */
 export const isSSR = !isBrowser;
 
-/**
- * react-snap sets window.__isReactSnap__ = true while pre-rendering.
- * We use this to prevent API/auth/analytics calls during SSG.
- */
-export const isReactSnap = isBrowser && (window as any).__isReactSnap__ === true;
-
-/**
- * True for any kind of pre-rendering (SSR or react-snap).
- */
-export const isPrerendering = isSSR || isReactSnap;
-
-/**
- * Safely access window object
- * Returns undefined during SSR
- */
+/** Safely access window object — undefined during SSR */
 export const safeWindow = isBrowser ? window : undefined;
 
-/**
- * Safely access document object
- * Returns undefined during SSR
- */
+/** Safely access document object — undefined during SSR */
 export const safeDocument = isBrowser ? document : undefined;
 
-/**
- * Safely access localStorage
- * Returns a mock object during SSR that does nothing
- */
+/** Safely access localStorage — mock during SSR */
 export const safeLocalStorage = isBrowser 
   ? window.localStorage 
   : {
@@ -53,10 +28,7 @@ export const safeLocalStorage = isBrowser
       length: 0,
     };
 
-/**
- * Safely access sessionStorage
- * Returns a mock object during SSR that does nothing
- */
+/** Safely access sessionStorage — mock during SSR */
 export const safeSessionStorage = isBrowser 
   ? window.sessionStorage 
   : {
@@ -68,11 +40,7 @@ export const safeSessionStorage = isBrowser
       length: 0,
     };
 
-/**
- * Execute a function only in browser environment
- * @param fn Function to execute
- * @param fallback Optional fallback value for SSR
- */
+/** Execute a function only in browser environment */
 export function browserOnly<T>(fn: () => T, fallback?: T): T | undefined {
   if (isBrowser) {
     return fn();
@@ -80,10 +48,7 @@ export function browserOnly<T>(fn: () => T, fallback?: T): T | undefined {
   return fallback;
 }
 
-/**
- * Get current URL path safely
- * Returns '/' during SSR
- */
+/** Get current URL path safely — '/' during SSR */
 export const getCurrentPath = (): string => {
   if (isBrowser) {
     return window.location.pathname;
@@ -91,10 +56,7 @@ export const getCurrentPath = (): string => {
   return '/';
 };
 
-/**
- * Get current URL origin safely
- * Returns empty string during SSR
- */
+/** Get current URL origin safely — '' during SSR */
 export const getCurrentOrigin = (): string => {
   if (isBrowser) {
     return window.location.origin;
