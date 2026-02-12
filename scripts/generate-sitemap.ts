@@ -186,8 +186,10 @@ const calculatorPaths: string[] = [
   
   // Science calculators
   '/calculator/ph',
+  '/calculator/molarity',
   '/calculator/molarity-calculator',
   '/calculator/half-life',
+  '/calculator/density',
   '/calculator/density-calculator',
   '/calculator/kinetic-energy',
   
