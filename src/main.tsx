@@ -2,7 +2,6 @@ import { StrictMode } from 'react';
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
-import { ThemeProvider } from "./components/ThemeProvider";
 import { initGA } from '@/utils/analytics';
 
 // Initialize Google Analytics in production
@@ -14,8 +13,6 @@ const rootElement = document.getElementById("root")!;
 
 createRoot(rootElement).render(
   <StrictMode>
-    <ThemeProvider defaultTheme="system" storageKey="smartcalc-theme">
-      <App />
-    </ThemeProvider>
+    <App />
   </StrictMode>
 );
