@@ -157,6 +157,7 @@ import RealEstateCalculators from "./pages/RealEstateCalculators";
 import CryptoCalculators from "./pages/CryptoCalculators";
 import AdminDashboard from "./pages/AdminDashboard";
 import { ScrollToTop } from "./components/ScrollToTop";
+import { HelmetProvider } from "react-helmet-async";
 
 const queryClient = new QueryClient();
 
@@ -175,6 +176,7 @@ const AnalyticsTracker = () => {
 };
 
 const App = () => (
+  <HelmetProvider>
   <QueryClientProvider client={queryClient}>
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <RegionProvider>
@@ -344,6 +346,7 @@ const App = () => (
       </RegionProvider>
     </ThemeProvider>
   </QueryClientProvider>
+  </HelmetProvider>
 );
 
 export default App;

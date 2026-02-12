@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { isBrowser, safeDocument } from "@/utils/ssrGuards";
+import { Helmet } from "react-helmet-async";
 import { siteConfig } from "@/config/siteConfig";
 
 interface SEOHeadProps {
@@ -25,108 +24,69 @@ export const SEOHead = ({
   publishedTime,
   modifiedTime
 }: SEOHeadProps) => {
-  useEffect(() => {
-    // Only update DOM in browser environment
-    if (!isBrowser || !safeDocument) return;
-    
-    // Update document title
-    document.title = title;
+  const currentUrl = canonicalUrl || (typeof window !== 'undefined' ? window.location.href : siteConfig.baseUrl);
+  const currentPath = canonicalUrl 
+    ? new URL(canonicalUrl).pathname 
+    : (typeof window !== 'undefined' ? window.location.pathname : '/');
 
-    // Update or create meta tags
-    const updateMetaTag = (property: string, content: string, isProperty = false) => {
-      const attribute = isProperty ? 'property' : 'name';
-      let element = document.querySelector(`meta[${attribute}="${property}"]`);
-      
-      if (!element) {
-        element = document.createElement('meta');
-        element.setAttribute(attribute, property);
-        document.head.appendChild(element);
-      }
-      
-      element.setAttribute('content', content);
-    };
+  return (
+    <Helmet>
+      <title>{title}</title>
 
-    // Update link tags
-    const updateLinkTag = (rel: string, href: string) => {
-      let element = document.querySelector(`link[rel="${rel}"]`);
-      if (!element) {
-        element = document.createElement('link');
-        element.setAttribute('rel', rel);
-        document.head.appendChild(element);
-      }
-      element.setAttribute('href', href);
-    };
+      {/* Standard meta tags */}
+      <meta name="description" content={description} />
+      <meta name="keywords" content={keywords} />
+      <meta name="author" content={author} />
+      <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+      <meta name="googlebot" content="index, follow" />
 
-    // Standard meta tags
-    updateMetaTag('description', description);
-    updateMetaTag('keywords', keywords);
-    updateMetaTag('author', author);
-    updateMetaTag('robots', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
-    updateMetaTag('googlebot', 'index, follow');
+      {/* Open Graph tags */}
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:type" content={ogType} />
+      <meta property="og:url" content={currentUrl} />
+      <meta property="og:image" content={ogImage} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content={`${title} - SmartCalc Hub`} />
+      <meta property="og:site_name" content="SmartCalc Hub" />
+      <meta property="og:locale" content="en_US" />
 
-    // Open Graph tags
-    updateMetaTag('og:title', title, true);
-    updateMetaTag('og:description', description, true);
-    updateMetaTag('og:type', ogType, true);
-    updateMetaTag('og:url', canonicalUrl || window.location.href, true);
-    updateMetaTag('og:image', ogImage, true);
-    updateMetaTag('og:image:width', '1200', true);
-    updateMetaTag('og:image:height', '630', true);
-    updateMetaTag('og:image:alt', `${title} - SmartCalc Hub`, true);
-    updateMetaTag('og:site_name', 'SmartCalc Hub', true);
-    updateMetaTag('og:locale', 'en_US', true);
+      {/* Article-specific OG tags */}
+      {ogType === 'article' && publishedTime && (
+        <meta property="article:published_time" content={publishedTime} />
+      )}
+      {ogType === 'article' && modifiedTime && (
+        <meta property="article:modified_time" content={modifiedTime} />
+      )}
+      {ogType === 'article' && publishedTime && (
+        <meta property="article:author" content={author} />
+      )}
+      {ogType === 'article' && publishedTime && (
+        <meta property="article:section" content="Calculators & Finance" />
+      )}
 
-    // Article-specific OG tags
-    if (ogType === 'article' && publishedTime) {
-      updateMetaTag('article:published_time', publishedTime, true);
-      if (modifiedTime) {
-        updateMetaTag('article:modified_time', modifiedTime, true);
-      }
-      updateMetaTag('article:author', author, true);
-      updateMetaTag('article:section', 'Calculators & Finance', true);
-    }
+      {/* Twitter Card tags */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={ogImage} />
+      <meta name="twitter:image:alt" content={`${title} - SmartCalc Hub`} />
+      <meta name="twitter:site" content="@SmartCalcHub" />
+      <meta name="twitter:creator" content="@ali_haiderseo" />
 
-    // Twitter Card tags
-    updateMetaTag('twitter:card', 'summary_large_image');
-    updateMetaTag('twitter:title', title);
-    updateMetaTag('twitter:description', description);
-    updateMetaTag('twitter:image', ogImage);
-    updateMetaTag('twitter:image:alt', `${title} - SmartCalc Hub`);
-    updateMetaTag('twitter:site', '@SmartCalcHub');
-    updateMetaTag('twitter:creator', '@ali_haiderseo');
+      {/* Additional SEO meta tags */}
+      <meta name="theme-color" content="#3b82f6" />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+      <meta name="format-detection" content="telephone=no" />
 
-    // Additional SEO meta tags
-    updateMetaTag('theme-color', '#3b82f6');
-    updateMetaTag('apple-mobile-web-app-capable', 'yes');
-    updateMetaTag('apple-mobile-web-app-status-bar-style', 'default');
-    updateMetaTag('format-detection', 'telephone=no');
+      {/* Canonical URL */}
+      {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
 
-    // Canonical URL
-    if (canonicalUrl) {
-      updateLinkTag('canonical', canonicalUrl);
-    }
-
-    // Hreflang tags for international SEO
-    const currentPath = canonicalUrl ? new URL(canonicalUrl).pathname : window.location.pathname;
-    
-    // Remove existing hreflang tags
-    document.querySelectorAll('link[hreflang]').forEach(el => el.remove());
-    
-    // Add hreflang tags
-    const hreflangs = [
-      { lang: 'en', url: `${siteConfig.baseUrl}${currentPath}` },
-      { lang: 'x-default', url: `${siteConfig.baseUrl}${currentPath}` }
-    ];
-    
-    hreflangs.forEach(({ lang, url }) => {
-      const link = document.createElement('link');
-      link.setAttribute('rel', 'alternate');
-      link.setAttribute('hreflang', lang);
-      link.setAttribute('href', url);
-      document.head.appendChild(link);
-    });
-
-  }, [title, description, keywords, ogType, ogImage, canonicalUrl, author, publishedTime, modifiedTime]);
-
-  return null;
+      {/* Hreflang tags */}
+      <link rel="alternate" hrefLang="en" href={`${siteConfig.baseUrl}${currentPath}`} />
+      <link rel="alternate" hrefLang="x-default" href={`${siteConfig.baseUrl}${currentPath}`} />
+    </Helmet>
+  );
 };

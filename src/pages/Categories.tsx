@@ -6,6 +6,8 @@ import { useState, useEffect } from "react";
 import { Search, Linkedin, Instagram, Facebook, Mail, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PageHeader } from "@/components/PageHeader";
+import { SEOHead } from "@/components/SEOHead";
+import { getFullUrl } from "@/config/siteConfig";
 
 const Categories = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -54,6 +56,12 @@ const Categories = () => {
 
   return (
     <div className="min-h-screen">
+      <SEOHead
+        title="All Calculators – Browse by Category | SmartCalc Hub"
+        description="Browse 90+ free online calculators organized by category: finance, health, math, conversions, tech, engineering, business, and science."
+        keywords="all calculators, calculator categories, finance calculators, health calculators, math calculators, unit converters"
+        canonicalUrl={getFullUrl("/categories")}
+      />
       <PageHeader 
         title="All Calculators"
         description="Explore our full suite of free, accurate online calculators"

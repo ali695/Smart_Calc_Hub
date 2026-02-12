@@ -8,6 +8,8 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import { expandedFAQs } from "@/data/expandedFAQs";
 import { PageHeader } from "@/components/PageHeader";
+import { SEOHead } from "@/components/SEOHead";
+import { getFullUrl } from "@/config/siteConfig";
 
 const FAQ = () => {
   const faqCategories = [
@@ -47,6 +49,12 @@ const FAQ = () => {
 
   return (
     <div className="min-h-screen">
+      <SEOHead
+        title="FAQ – Frequently Asked Questions | SmartCalc Hub"
+        description="Find answers to common questions about SmartCalc Hub's free online calculators for finance, health, math, conversions, and more."
+        keywords="FAQ, frequently asked questions, calculator help, SmartCalc Hub support"
+        canonicalUrl={getFullUrl("/faq")}
+      />
       <PageHeader 
         title="Frequently Asked Questions"
         description="Find answers to common questions about SmartCalc Hub calculators"

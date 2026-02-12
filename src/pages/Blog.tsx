@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import { useState, useMemo } from "react";
 import { PageHeader } from "@/components/PageHeader";
 import { getBlogHeroImage } from "@/utils/ogImageMapping";
+import { SEOHead } from "@/components/SEOHead";
+import { getFullUrl } from "@/config/siteConfig";
 
 import { blogPosts } from "@/data/blogPosts";
 
@@ -33,6 +35,13 @@ const Blog = () => {
 
   return (
     <div className="min-h-screen">
+      <SEOHead
+        title="Blog & Insights | SmartCalc Hub"
+        description="Tips, guides, and insights on finance, health, math, and productivity. Learn how to get the most from our free online calculator tools."
+        keywords="calculator blog, finance tips, health guides, math tutorials, SmartCalc Hub blog"
+        canonicalUrl={getFullUrl("/blog")}
+        ogImage={getFullUrl("/og-blog.png")}
+      />
       {/* Hero Header */}
       <PageHeader 
         title="Blog & Insights"
