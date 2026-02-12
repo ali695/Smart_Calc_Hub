@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
 import { User, Session } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
-import { isReactSnap } from "@/utils/ssrGuards";
+
 
 interface AuthContextType {
   user: User | null;
@@ -33,11 +33,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // During react-snap pre-rendering we must not call auth APIs (keeps network active and can stall SSG)
-    if (isReactSnap) {
-      setIsLoading(false);
-      return;
-    }
 
     // Set up auth state listener FIRST
     const {

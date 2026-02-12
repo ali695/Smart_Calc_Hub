@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { isReactSnap } from "@/utils/ssrGuards";
+
 
 type EventType = 'page_view' | 'calculation' | 'favorite' | 'share' | 'export' | 'ai_insight';
 
@@ -10,8 +10,6 @@ export const useAnalytics = () => {
     calculatorSlug?: string,
     metadata?: Record<string, any>
   ) => {
-    // Never hit backend during react-snap pre-rendering (SSG)
-    if (isReactSnap) return;
 
     const {
       data: { user },

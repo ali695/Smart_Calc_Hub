@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { supabase } from "@/integrations/supabase/client";
-import { isReactSnap } from "@/utils/ssrGuards";
+
 import { 
   Sparkles, 
   RefreshCw, 
@@ -74,8 +74,6 @@ export const AIInsightPanel = ({
   const [hasTriggered, setHasTriggered] = useState(false);
 
   const fetchInsight = useCallback(async () => {
-    // Never call backend during react-snap pre-rendering
-    if (isReactSnap) return;
     if (!results || Object.keys(results).length === 0) return;
     
     setIsLoading(true);
@@ -113,7 +111,7 @@ export const AIInsightPanel = ({
 
   // Auto-trigger when results change
   useEffect(() => {
-    if (isReactSnap) return;
+    
     if (autoTrigger && results && Object.keys(results).length > 0 && !hasTriggered) {
       // Small delay to ensure results are rendered first
       const timer = setTimeout(() => {

@@ -8,7 +8,6 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import { RegionProvider } from "@/contexts/RegionContext";
 import { useEffect } from "react";
 import { trackPageView } from "@/utils/analytics";
-import { isReactSnap } from "@/utils/ssrGuards";
 import { ThemeProvider } from "./components/ThemeProvider";
 import Index from "./pages/Index";
 import Categories from "./pages/Categories";
@@ -166,9 +165,8 @@ const AnalyticsTracker = () => {
   const location = useLocation();
 
   useEffect(() => {
-    // Track page view on route change in production (browser only)
-    // Skip during react-snap pre-rendering.
-    if (typeof window !== 'undefined' && import.meta.env.PROD && !isReactSnap) {
+    // Track page view on route change in production
+    if (typeof window !== 'undefined' && import.meta.env.PROD) {
       trackPageView(location.pathname + location.search);
     }
   }, [location]);
