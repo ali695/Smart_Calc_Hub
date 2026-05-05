@@ -36,7 +36,10 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           {/* About Section */}
           <div className="lg:col-span-2">
-            <h3 className="text-xl font-bold mb-4">SmartCalc Hub</h3>
+            <div className="flex items-center gap-2 mb-4">
+              <img src="/favicon.svg" alt="SmartCalc Hub logo" className="h-8 w-8" />
+              <h3 className="text-xl font-bold">SmartCalc Hub</h3>
+            </div>
             <p className="text-muted-foreground mb-4">
               Your trusted platform for accurate, free, and easy-to-use calculators across finance, health, math, and more. 
               Empowering you with tools for smarter decisions.
