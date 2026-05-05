@@ -82,7 +82,8 @@ Deno.serve(async (req) => {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
   } catch (error) {
-    return new Response(JSON.stringify({ prerendered: false, reason: error.message }), {
+    console.error('Prerender error:', error);
+    return new Response(JSON.stringify({ prerendered: false, reason: 'Failed to prerender content' }), {
       status: 500,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
