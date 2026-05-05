@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="SmartCalc Hub favicon">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0A9CFF"/>
+      <stop offset="100%" stop-color="#0574D9"/>
+    </linearGradient>
+  </defs>
+  <rect x="24" y="24" width="464" height="464" rx="104" fill="url(#g)"/>
+  <rect x="154" y="112" width="204" height="288" rx="36" fill="none" stroke="#FFFFFF" stroke-width="30"/>
+  <rect x="187" y="156" width="138" height="31" rx="13" fill="#FFFFFF"/>
+  <rect x="187" y="226" width="30" height="30" rx="9" fill="#FFFFFF"/>
+  <rect x="246" y="226" width="30" height="30" rx="9" fill="#FFFFFF"/>
+  <rect x="305" y="226" width="30" height="30" rx="9" fill="#FFFFFF"/>
+  <rect x="187" y="288" width="30" height="30" rx="9" fill="#FFFFFF"/>
+  <rect x="246" y="288" width="30" height="30" rx="9" fill="#FFFFFF"/>
+  <rect x="187" y="350" width="30" height="30" rx="9" fill="#FFFFFF"/>
+  <rect x="246" y="350" width="30" height="30" rx="9" fill="#FFFFFF"/>
+  <rect x="305" y="288" width="30" height="92" rx="9" fill="#FFFFFF"/>
+</svg>

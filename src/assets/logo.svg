@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="270" viewBox="0 0 1180 270" role="img" aria-label="SmartCalc Hub logo">
+  <defs>
+    <linearGradient id="tile" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0A9CFF"/>
+      <stop offset="100%" stop-color="#0574D9"/>
+    </linearGradient>
+  </defs>
+  <rect x="22" y="32" width="206" height="206" rx="46" fill="url(#tile)"/>
+  <rect x="83" y="76" width="84" height="118" rx="15" fill="none" stroke="#FFFFFF" stroke-width="13"/>
+  <rect x="97" y="95" width="56" height="13" rx="5" fill="#FFFFFF"/>
+  <rect x="97" y="125" width="13" height="13" rx="4" fill="#FFFFFF"/>
+  <rect x="121" y="125" width="13" height="13" rx="4" fill="#FFFFFF"/>
+  <rect x="145" y="125" width="13" height="13" rx="4" fill="#FFFFFF"/>
+  <rect x="97" y="153" width="13" height="13" rx="4" fill="#FFFFFF"/>
+  <rect x="121" y="153" width="13" height="13" rx="4" fill="#FFFFFF"/>
+  <rect x="97" y="181" width="13" height="13" rx="4" fill="#FFFFFF"/>
+  <rect x="121" y="181" width="13" height="13" rx="4" fill="#FFFFFF"/>
+  <rect x="145" y="153" width="13" height="41" rx="4" fill="#FFFFFF"/>
+  <text x="270" y="151" font-family="Inter, Poppins, Arial, sans-serif" font-size="76" font-weight="800" fill="#0A9CFF">SmartCalc</text>
+  <text x="713" y="151" font-family="Inter, Poppins, Arial, sans-serif" font-size="76" font-weight="800" fill="#2AB7FF">Hub</text>
+  <rect x="274" y="174" width="304" height="8" rx="4" fill="#0A9CFF" opacity="0.78"/>
+</svg>
