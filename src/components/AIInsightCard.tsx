@@ -76,7 +76,7 @@ export const AIInsightCard = ({
   const [isOpen, setIsOpen] = useState(true);
   const [displayedText, setDisplayedText] = useState("");
   const [isTyping, setIsTyping] = useState(false);
-  const typingRef = useRef<NodeJS.Timeout | null>(null);
+  const typingRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Create cache key
   const getCacheKey = useCallback(() => {
