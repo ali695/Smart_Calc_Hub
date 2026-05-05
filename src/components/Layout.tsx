@@ -67,7 +67,7 @@ export const Layout = ({ children }: LayoutProps) => {
           <div className="flex h-16 items-center justify-between">
             {/* Logo with Schema Markup */}
             <Link to="/" className="flex items-center gap-2 font-bold text-xl" itemScope itemType="https://schema.org/Organization">
-              <Calculator className="h-6 w-6 text-primary" />
+              <img src="/logo.svg" alt="SmartCalc Hub logo" className="h-8 w-8" itemProp="logo" />
               <span className="bg-gradient-primary bg-clip-text text-transparent" itemProp="name">
                 SmartCalc Hub
               </span>
