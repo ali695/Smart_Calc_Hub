@@ -1,49 +1,47 @@
-# Complete Project Archive (Full, Nothing Excluded) — Plan
+# Upgrade React to v19 (latest)
 
-## Goal
-Create a single ZIP containing the **entire** project as-is, including `node_modules/` and `.git/`, so it can be unzipped and run immediately without any install step.
+Currently on React 18.3.1. Latest stable is React 19.x. This is a major version upgrade.
 
-## What will be included
+## What changes
 
-Everything in the project root, with no exclusions:
+**Dependency bumps:**
+- `react`: ^18.3.1 → ^19.2.0
+- `react-dom`: ^18.3.1 → ^19.2.0
+- `@types/react`: ^18.3.23 → ^19.2.0
+- `@types/react-dom`: ^18.3.7 → ^19.2.0
 
-| Item | Size | Notes |
-|---|---|---|
-| `src/` | 2.2 MB | All source code |
-| `public/` | 18 MB | All static assets (favicons, blog images, sitemap) |
-| `supabase/` | 67 KB | Edge functions + config |
-| `cloudflare-worker/` | 5.5 KB | Prerender proxy worker |
-| `scripts/` | 25 KB | Sitemap generation scripts |
-| `node_modules/` | 359 MB | All installed dependencies (included as requested) |
-| `.git/` | 512 KB | Full git history |
-| `.lovable/`, `.workspace/` | small | Internal editor metadata |
-| `index.html`, `package.json`, `bun.lock`, `package-lock.json` | — | Entry + dependency lockfiles |
-| `vite.config.ts`, `tailwind.config.ts`, `postcss.config.js` | — | Build config |
-| `tsconfig*.json`, `eslint.config.js`, `components.json` | — | Tooling config |
-| `README.md`, `.gitignore`, `.env` | — | Docs + env (contains public Supabase anon key) |
+**Compatible with React 19 (no changes needed):**
+- All `@radix-ui/*` packages (current versions support React 19)
+- `@tanstack/react-query` v5
+- `react-router-dom` v6
+- `react-hook-form`, `react-helmet-async`, `react-markdown`, `recharts`, `sonner`, `cmdk`, `input-otp`, `vaul`, `next-themes`, `embla-carousel-react`, `lucide-react`
+- `react-is` is already at v19
 
-**Estimated final ZIP size: ~150–200 MB** (compressed from ~380 MB; `node_modules` compresses heavily).
+**Needs verification / possible peer-dep override:**
+- `react-day-picker@8.10.1` — officially lists React 18 in peer deps. v9 supports React 19 but has a different API. Plan: keep v8 and add `overrides` in package.json to allow React 19, since runtime usage is compatible. (Alternative: upgrade to react-day-picker v9 — would require updating Calendar component API.)
+- `react-resizable-panels@2.1.9` — supports React 19 in recent patch versions, should be fine.
+- `vaul@0.9.9` — peer dep is React 18. Add to overrides; works fine at runtime. (vaul 1.x supports React 19 but has minor API differences.)
 
-## Steps
+## Approach
 
-1. **Create ZIP** of the entire `/dev-server` directory with no excludes.
-2. **Write to** `/mnt/documents/smartcalc-hub-full.zip`.
-3. **Verify** — check file count, total size, and that `node_modules/`, `.git/`, `src/`, `public/` are all present.
-4. **Deliver** as a downloadable artifact.
+1. Update the 4 versions in `package.json`.
+2. Add `overrides` block to force React 19 resolution for transitive peer deps:
+   ```json
+   "overrides": {
+     "react": "^19.2.0",
+     "react-dom": "^19.2.0"
+   }
+   ```
+3. Let the package install run, then verify the build succeeds.
+4. Smoke-test in preview: home page, a calculator page, theme toggle, dialog/sheet (Radix), and the AI chatbot.
 
-## Notes / Warnings
+## Risk / rollback
 
-- **Large file**: ~150–200 MB download. Browsers and email may struggle.
-- **Platform-specific binaries**: `node_modules` contains native binaries (esbuild, swc, rollup) compiled for the current Linux x64 sandbox. If the user unzips on Windows or macOS, they will need to delete `node_modules` and run `bun install` (or `npm install`) anyway. Including it only saves time on a Linux x64 machine.
-- **`.env` included**: contains the `VITE_SUPABASE_PUBLISHABLE_KEY` (public anon key — safe). No private keys are stored in `.env`.
-- **`.git/` included**: full version history is preserved.
+- React 19 removes some legacy APIs (`propTypes`, `defaultProps` on function components, string refs, legacy context). A quick scan of the codebase doesn't show usage of these, but if the build breaks I'll fix the specific call sites.
+- If `react-day-picker` or `vaul` misbehave at runtime, fallback is to either upgrade them to their React-19-native major versions (small API migration) or pin React back to 18.
 
-## After download
+## What I will NOT change
 
-```bash
-unzip smartcalc-hub-full.zip -d smartcalc-hub
-cd smartcalc-hub
-bun dev   # or: npm run dev
-# If you get binary errors on a non-Linux-x64 machine:
-rm -rf node_modules && bun install && bun dev
-```
+- No design changes, no feature changes, no refactors beyond what's required for the upgrade to compile and run.
+
+Approve and I'll apply the upgrade.
