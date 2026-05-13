@@ -47,8 +47,20 @@ function extractRoutes() {
 }
 
 function startServer() {
-  const handler = sirv(DIST, { single: true, dev: false });
-  const server = createServer(handler);
+  // Cache pristine index.html — once we start writing snapshots, we must NOT
+  // serve them as the SPA fallback, otherwise later routes hydrate from
+  // earlier snapshots and end up with the wrong content.
+  const pristineIndex = readFileSync(join(DIST, "index.html"), "utf8");
+  const assets = sirv(DIST, { single: false, dev: false, etag: true });
+  const server = createServer((req, res) => {
+    // Serve real assets (JS/CSS/fonts/images) from disk.
+    const isAsset = /\.[a-zA-Z0-9]+(\?|$)/.test(req.url);
+    if (isAsset) return assets(req, res);
+    // Everything else → pristine index.html (SPA fallback).
+    res.setHeader("Content-Type", "text/html; charset=utf-8");
+    res.setHeader("Cache-Control", "no-store");
+    res.end(pristineIndex);
+  });
   return new Promise((res) => server.listen(PORT, () => res(server)));
 }
 
