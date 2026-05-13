@@ -67,19 +67,8 @@ function startServer() {
 async function renderRoute(browser, route) {
   const page = await browser.newPage();
   await page.setViewport({ width: 1280, height: 800 });
-  // Block analytics / external trackers to speed up + avoid network noise.
-  await page.setRequestInterception(true);
-  page.on("request", (req) => {
-    const url = req.url();
-    if (
-      url.includes("google-analytics") ||
-      url.includes("googletagmanager") ||
-      url.includes("doubleclick")
-    ) {
-      return req.abort();
-    }
-    req.continue();
-  });
+  const errors = [];
+  page.on("pageerror", (e) => errors.push(e.message));
 
   const url = `http://localhost:${PORT}${route}`;
   try {
@@ -90,17 +79,30 @@ async function renderRoute(browser, route) {
     if (!res || !res.ok()) {
       throw new Error(`HTTP ${res ? res.status() : "no response"} for ${route}`);
     }
-    // Give Helmet + late effects a moment to settle.
-    await new Promise((r) => setTimeout(r, 400));
+    // Wait until React has mounted and rendered the route's <h1>.
+    // (Helmet's effect flushes around the same time.)
+    await page
+      .waitForFunction(
+        () => {
+          const root = document.getElementById("root");
+          return !!root && root.children.length > 0 && !!document.querySelector("h1");
+        },
+        { timeout: 15000 },
+      )
+      .catch(() => {});
+    // Give late effects (lazy SEO content, JSON-LD) one more tick.
+    await new Promise((r) => setTimeout(r, 800));
 
-    const html = await page.evaluate(() => "<!doctype html>\n" + document.documentElement.outerHTML);
+    const html = await page.evaluate(
+      () => "<!doctype html>\n" + document.documentElement.outerHTML,
+    );
 
     const outDir = route === "/" ? DIST : join(DIST, route);
     mkdirSync(outDir, { recursive: true });
     writeFileSync(join(outDir, "index.html"), html, "utf8");
-    return { route, ok: true };
+    return { route, ok: true, errors };
   } catch (err) {
-    return { route, ok: false, error: err.message };
+    return { route, ok: false, error: err.message, errors };
   } finally {
     await page.close();
   }
