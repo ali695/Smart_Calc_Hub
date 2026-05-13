@@ -19,7 +19,10 @@ import puppeteer from "puppeteer";
 
 const DIST = resolve("dist");
 const PORT = 4173;
-const CONCURRENCY = Number(process.env.PRERENDER_CONCURRENCY ?? 2);
+// NOTE: must stay at 1. With multiple concurrent Puppeteer pages on the same
+// browser, react-helmet-async fails to flush per-page <title> updates and
+// snapshots end up with the static index.html title. Sequential is reliable.
+const CONCURRENCY = Number(process.env.PRERENDER_CONCURRENCY ?? 1);
 
 // Routes that require auth or shouldn't be indexed/prerendered.
 const SKIP = new Set([
