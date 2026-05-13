@@ -1,5 +1,5 @@
 import { StrictMode } from 'react';
-import { createRoot } from "react-dom/client";
+import { createRoot, hydrateRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 import { initGA } from '@/utils/analytics';
@@ -10,9 +10,15 @@ if (typeof window !== 'undefined' && import.meta.env.PROD) {
 }
 
 const rootElement = document.getElementById("root")!;
-
-createRoot(rootElement).render(
+const tree = (
   <StrictMode>
     <App />
   </StrictMode>
 );
+
+// If pre-rendered HTML is present, hydrate; otherwise mount fresh (dev / SPA fallback).
+if (rootElement.hasChildNodes()) {
+  hydrateRoot(rootElement, tree);
+} else {
+  createRoot(rootElement).render(tree);
+}
