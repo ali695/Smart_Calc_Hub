@@ -110,6 +110,63 @@ export type Database = {
         }
         Relationships: []
       }
+      blog_posts: {
+        Row: {
+          author_id: string | null
+          category: string | null
+          content_html: string
+          content_json: Json | null
+          cover_image: string | null
+          created_at: string
+          excerpt: string | null
+          id: string
+          published_at: string | null
+          seo_description: string | null
+          seo_title: string | null
+          slug: string
+          status: string
+          tags: string[] | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          author_id?: string | null
+          category?: string | null
+          content_html?: string
+          content_json?: Json | null
+          cover_image?: string | null
+          created_at?: string
+          excerpt?: string | null
+          id?: string
+          published_at?: string | null
+          seo_description?: string | null
+          seo_title?: string | null
+          slug: string
+          status?: string
+          tags?: string[] | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          author_id?: string | null
+          category?: string | null
+          content_html?: string
+          content_json?: Json | null
+          cover_image?: string | null
+          created_at?: string
+          excerpt?: string | null
+          id?: string
+          published_at?: string | null
+          seo_description?: string | null
+          seo_title?: string | null
+          slug?: string
+          status?: string
+          tags?: string[] | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       calculator_history: {
         Row: {
           calculator_slug: string
@@ -137,6 +194,63 @@ export type Database = {
         }
         Relationships: []
       }
+      calculators_cms: {
+        Row: {
+          category: string | null
+          created_at: string
+          created_by: string | null
+          definition: Json | null
+          description: string | null
+          icon: string | null
+          id: string
+          is_custom: boolean
+          keywords: string[] | null
+          name: string
+          seo_content_html: string | null
+          seo_description: string | null
+          seo_title: string | null
+          slug: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string
+          created_by?: string | null
+          definition?: Json | null
+          description?: string | null
+          icon?: string | null
+          id?: string
+          is_custom?: boolean
+          keywords?: string[] | null
+          name: string
+          seo_content_html?: string | null
+          seo_description?: string | null
+          seo_title?: string | null
+          slug: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string | null
+          created_at?: string
+          created_by?: string | null
+          definition?: Json | null
+          description?: string | null
+          icon?: string | null
+          id?: string
+          is_custom?: boolean
+          keywords?: string[] | null
+          name?: string
+          seo_content_html?: string | null
+          seo_description?: string | null
+          seo_title?: string | null
+          slug?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       contact_messages: {
         Row: {
           email: string
@@ -158,6 +272,42 @@ export type Database = {
           message?: string
           name?: string | null
           submitted_at?: string | null
+        }
+        Relationships: []
+      }
+      faq_items: {
+        Row: {
+          answer_html: string
+          category: string | null
+          created_at: string
+          id: string
+          is_active: boolean
+          page_key: string
+          question: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          answer_html: string
+          category?: string | null
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          page_key?: string
+          question: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          answer_html?: string
+          category?: string | null
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          page_key?: string
+          question?: string
+          sort_order?: number
+          updated_at?: string
         }
         Relationships: []
       }
@@ -203,6 +353,39 @@ export type Database = {
           id?: string
           is_active?: boolean
           subscribed_at?: string
+        }
+        Relationships: []
+      }
+      page_content: {
+        Row: {
+          block_key: string
+          created_at: string
+          id: string
+          page_key: string
+          updated_at: string
+          updated_by: string | null
+          value_html: string | null
+          value_text: string | null
+        }
+        Insert: {
+          block_key: string
+          created_at?: string
+          id?: string
+          page_key: string
+          updated_at?: string
+          updated_by?: string | null
+          value_html?: string | null
+          value_text?: string | null
+        }
+        Update: {
+          block_key?: string
+          created_at?: string
+          id?: string
+          page_key?: string
+          updated_at?: string
+          updated_by?: string | null
+          value_html?: string | null
+          value_text?: string | null
         }
         Relationships: []
       }
@@ -259,12 +442,27 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      assign_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _target_user: string
+        }
+        Returns: undefined
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
           _user_id: string
         }
         Returns: boolean
+      }
+      is_editor_or_admin: { Args: { _user_id: string }; Returns: boolean }
+      revoke_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _target_user: string
+        }
+        Returns: undefined
       }
     }
     Enums: {
