@@ -7,6 +7,8 @@ import { SEOHead } from "@/components/SEOHead";
 import { Loader2 } from "lucide-react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 
+
+
 interface Row {
   slug: string;
   name: string;
@@ -52,13 +54,8 @@ const CustomCalculatorPage = () => {
         canonicalUrl={`https://smartcalhub.online/calculator/${row.slug}`}
       />
       <div className="container mx-auto px-4 py-6 space-y-4">
-        <Breadcrumbs
-          items={[
-            { label: "Home", href: "/" },
-            { label: "Calculators", href: "/categories" },
-            { label: row.name },
-          ]}
-        />
+        <Breadcrumbs />
+
         <h1 className="text-2xl md:text-3xl font-bold">{row.name}</h1>
         {row.description && <p className="text-muted-foreground">{row.description}</p>}
 
