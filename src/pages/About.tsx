@@ -3,8 +3,13 @@ import { Link } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { SEOHead } from "@/components/SEOHead";
 import { getFullUrl } from "@/config/siteConfig";
+import { useEditableText } from "@/hooks/useEditableText";
+import { RichTextRender } from "@/components/admin/RichTextRender";
 
 const About = () => {
+  const heading = useEditableText("about", "heading", "About SmartCalc Hub");
+  const intro = useEditableText("about", "intro_html", "");
+  const mission = useEditableText("about", "mission_html", "");
   return (
     <div className="min-h-screen">
       <SEOHead
@@ -14,11 +19,17 @@ const About = () => {
         canonicalUrl={getFullUrl("/about")}
       />
       <PageHeader 
-        title="About SmartCalc Hub"
+        title={heading}
         description="Your trusted source for fast, accurate, and free online calculators"
         icon={<Info className="h-10 w-10" />}
         category="about"
       />
+      {(intro || mission) && (
+        <div className="container mx-auto px-4 pt-8 max-w-3xl space-y-4">
+          {intro && <RichTextRender html={intro} />}
+          {mission && <RichTextRender html={mission} />}
+        </div>
+      )}
 
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-5xl mx-auto">
