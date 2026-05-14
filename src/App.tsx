@@ -156,6 +156,16 @@ import K401Calculator from "./pages/calculators/K401Calculator";
 import RealEstateCalculators from "./pages/RealEstateCalculators";
 import CryptoCalculators from "./pages/CryptoCalculators";
 import AdminDashboard from "./pages/AdminDashboard";
+import CmsHome from "./pages/admin/CmsHome";
+import BlogList from "./pages/admin/BlogList";
+import BlogEditor from "./pages/admin/BlogEditor";
+import PagesList from "./pages/admin/PagesList";
+import PageEditor from "./pages/admin/PageEditor";
+import CalculatorList from "./pages/admin/CalculatorList";
+import CalculatorEditor from "./pages/admin/CalculatorEditor";
+import AdminUsers from "./pages/admin/Users";
+import BlogPostRouter from "./pages/BlogPostRouter";
+import CustomCalculator from "./pages/CustomCalculator";
 import { ScrollToTop } from "./components/ScrollToTop";
 import { HelmetProvider } from "react-helmet-async";
 
@@ -197,11 +207,19 @@ const App = () => (
                 <Route path="/real-estate" element={<RealEstateCalculators />} />
                 <Route path="/crypto" element={<CryptoCalculators />} />
                 <Route path="/admin" element={<AdminDashboard />} />
+                <Route path="/admin/cms" element={<CmsHome />} />
+                <Route path="/admin/cms/blogs" element={<BlogList />} />
+                <Route path="/admin/cms/blogs/:id" element={<BlogEditor />} />
+                <Route path="/admin/cms/pages" element={<PagesList />} />
+                <Route path="/admin/cms/pages/:key" element={<PageEditor />} />
+                <Route path="/admin/cms/calculators" element={<CalculatorList />} />
+                <Route path="/admin/cms/calculators/:id" element={<CalculatorEditor />} />
+                <Route path="/admin/cms/users" element={<AdminUsers />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/faq" element={<FAQ />} />
                 <Route path="/blog" element={<Blog />} />
-                <Route path="/blog/:slug" element={<BlogPost />} />
+                <Route path="/blog/:slug" element={<BlogPostRouter />} />
                 <Route path="/blog-generator" element={<BlogGenerator />} />
               <Route path="/calculator/bmi" element={<BMICalculator />} />
               <Route path="/calculator/loan" element={<LoanCalculator />} />
