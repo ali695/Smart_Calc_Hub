@@ -9,7 +9,14 @@ import { Badge } from "@/components/ui/badge";
 import { Plus, Pencil, Trash2, Search, Loader2, ExternalLink } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useUserRole } from "@/hooks/useUserRole";
-import { calculatorsList as codeCalcs } from "@/data/calculators";
+import { calculators as codeCalcsRaw } from "@/data/calculators";
+
+const codeCalcs = codeCalcsRaw.map((c) => ({
+  slug: c.id,
+  title: c.title,
+  description: c.description,
+  category: c.category,
+}));
 
 interface Row {
   id: string;
