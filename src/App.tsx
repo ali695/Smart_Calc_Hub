@@ -355,6 +355,7 @@ const App = () => (
               <Route path="/calculator/401k" element={<K401Calculator />} />
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/terms" element={<Terms />} />
+              <Route path="/calculator/:slug" element={<CustomCalculator />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Layout>
