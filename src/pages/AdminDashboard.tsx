@@ -129,6 +129,15 @@ export const AdminDashboard = () => {
         category="business"
       />
 
+      {isAdmin && (
+        <a
+          href="/admin/cms"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-primary text-primary-foreground text-sm font-medium hover:opacity-90"
+        >
+          → Open Content CMS (manage blogs, pages, calculators)
+        </a>
+      )}
+
       <section aria-label="Admin dashboard content" className="space-y-6">
         <Card>
           <CardHeader>
