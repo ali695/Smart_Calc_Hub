@@ -10,12 +10,16 @@ import { FeaturedPosts } from "@/components/FeaturedPosts";
 import { Testimonials } from "@/components/Testimonials";
 import { SEOHead } from "@/components/SEOHead";
 import { getFullUrl } from "@/config/siteConfig";
+import { useEditableText } from "@/hooks/useEditableText";
 
 const Index = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isVisible, setIsVisible] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
+  const heroTitle = useEditableText("home", "hero_title", "Fast, Smart & Accurate Calculators for Everyone");
+  const heroSubtitle = useEditableText("home", "hero_subtitle", "Free online calculators for finance, health, math, and conversions. Get instant, accurate results with our easy-to-use tools.");
+  const heroCta = useEditableText("home", "hero_cta", "Explore All Calculators");
 
   useEffect(() => {
     setIsVisible(true);
@@ -79,16 +83,14 @@ const Index = () => {
 
             {/* Main Headline - Staggered Animation */}
             <h1 className={`text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-              <span className="block animate-fade-in-up">Fast, Smart & Accurate</span>
-              <span className="block bg-gradient-to-r from-primary via-primary-glow to-primary bg-clip-text text-transparent mt-2 bg-[length:200%_auto] animate-gradient-flow">
-                Calculators for Everyone
+              <span className="block bg-gradient-to-r from-primary via-primary-glow to-primary bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient-flow">
+                {heroTitle}
               </span>
             </h1>
             
             {/* Description - Staggered Animation */}
             <p className={`text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-              Free online calculators for finance, health, math, and conversions. 
-              Get instant, accurate results with our easy-to-use tools.
+              {heroSubtitle}
             </p>
 
             {/* CTA Buttons - Clean Professional Style */}
@@ -98,7 +100,7 @@ const Index = () => {
                 onClick={() => scrollToCalculators()}
                 className="bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 text-lg px-8"
               >
-                Explore All Calculators
+                {heroCta}
               </Button>
               <Button 
                 size="lg" 
