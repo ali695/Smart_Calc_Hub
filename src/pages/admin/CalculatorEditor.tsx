@@ -11,6 +11,7 @@ import { RichTextEditor } from "@/components/admin/RichTextEditor";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, Save, ArrowLeft, Plus, Trash2, Eye } from "lucide-react";
 import { DynamicCalculator } from "@/components/DynamicCalculator";
+import { evaluateFormula } from "@/lib/safeFormula";
 
 interface InputDef {
   key: string;
@@ -77,8 +78,46 @@ const CalculatorEditor = () => {
 
   const setDef = (d: Definition) => set("definition", d);
 
+  const validateDefinition = (d: Definition): string[] => {
+    const errs: string[] = [];
+    const seenInputs = new Set<string>();
+    d.inputs.forEach((inp, i) => {
+      if (!inp.key || !/^[a-zA-Z_][a-zA-Z0-9_]*$/.test(inp.key)) errs.push(`Input #${i + 1}: invalid key "${inp.key}"`);
+      if (seenInputs.has(inp.key)) errs.push(`Input #${i + 1}: duplicate key "${inp.key}"`);
+      seenInputs.add(inp.key);
+    });
+    const scope: Record<string, number | string> = {};
+    d.inputs.forEach((inp) => {
+      scope[inp.key] = inp.type === "number" ? Number(inp.default ?? 1) || 1 : String(inp.default ?? (inp.options?.[0]?.value ?? ""));
+    });
+    const seenOuts = new Set<string>();
+    d.outputs.forEach((out, i) => {
+      if (!out.key) errs.push(`Output #${i + 1}: missing key`);
+      if (seenOuts.has(out.key)) errs.push(`Output #${i + 1}: duplicate key "${out.key}"`);
+      seenOuts.add(out.key);
+      if (!out.formula?.trim()) {
+        errs.push(`Output "${out.label || out.key}": formula is empty`);
+        return;
+      }
+      const r = evaluateFormula(out.formula, scope);
+      if (!r.ok) errs.push(`Output "${out.label || out.key}": ${r.error}`);
+    });
+    return errs;
+  };
+
   const save = async (publish = false) => {
     if (!row) return;
+    if (publish && row.is_custom) {
+      const errs = validateDefinition(row.definition ?? { inputs: [], outputs: [] });
+      if (errs.length > 0) {
+        toast({
+          title: "Cannot publish — fix formula errors",
+          description: errs.slice(0, 4).join(" • "),
+          variant: "destructive",
+        });
+        return;
+      }
+    }
     setSaving(true);
     const payload: any = {
       slug: row.slug,
@@ -219,7 +258,13 @@ const CalculatorEditor = () => {
               <p className="text-xs text-muted-foreground">
                 Use input keys directly. Functions: + - * / ^ sqrt() log() sin() cos() abs() min() max(). Example: <code>principal * (rate/1200) / (1 - (1 + rate/1200)^(-years*12))</code>
               </p>
-              {def.outputs.map((out, i) => (
+              {def.outputs.map((out, i) => {
+                const sampleScope: Record<string, number | string> = {};
+                def.inputs.forEach((inp) => {
+                  sampleScope[inp.key] = inp.type === "number" ? Number(inp.default ?? 1) || 1 : String(inp.default ?? (inp.options?.[0]?.value ?? ""));
+                });
+                const check = out.formula?.trim() ? evaluateFormula(out.formula, sampleScope) : { ok: false, error: "Empty formula" };
+                return (
                 <div key={i} className="border rounded-md p-3 grid sm:grid-cols-6 gap-2 items-end">
                   <div className="space-y-1">
                     <Label className="text-xs">Key</Label>
@@ -231,7 +276,17 @@ const CalculatorEditor = () => {
                   </div>
                   <div className="space-y-1 sm:col-span-2">
                     <Label className="text-xs">Formula</Label>
-                    <Input value={out.formula} onChange={(e) => updOutput(i, { formula: e.target.value })} />
+                    <Input
+                      value={out.formula}
+                      onChange={(e) => updOutput(i, { formula: e.target.value })}
+                      className={check.ok ? "" : "border-destructive focus-visible:ring-destructive"}
+                    />
+                    {!check.ok && (
+                      <p className="text-xs text-destructive">⚠ {check.error}</p>
+                    )}
+                    {check.ok && (
+                      <p className="text-xs text-muted-foreground">≈ {String(check.value)}</p>
+                    )}
                   </div>
                   <div className="space-y-1">
                     <Label className="text-xs">Format</Label>
@@ -244,7 +299,8 @@ const CalculatorEditor = () => {
                   </div>
                   <Button variant="ghost" size="sm" onClick={() => delOutput(i)}><Trash2 className="h-4 w-4" /></Button>
                 </div>
-              ))}
+                );
+              })}
             </Card>
 
             <Card className="p-4">

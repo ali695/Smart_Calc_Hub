@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { HelpCircle, MessageSquare } from "lucide-react";
 import {
   Accordion,
@@ -10,8 +11,26 @@ import { expandedFAQs } from "@/data/expandedFAQs";
 import { PageHeader } from "@/components/PageHeader";
 import { SEOHead } from "@/components/SEOHead";
 import { getFullUrl } from "@/config/siteConfig";
+import { useEditableText } from "@/hooks/useEditableText";
+import { supabase } from "@/integrations/supabase/client";
+import { RichTextRender } from "@/components/admin/RichTextRender";
+
+interface DbFaq { question: string; answer_html: string; category: string | null; }
 
 const FAQ = () => {
+  const heading = useEditableText("faq", "heading", "Frequently Asked Questions");
+  const intro = useEditableText("faq", "intro_html", "Find answers to common questions about SmartCalc Hub calculators");
+  const [dbFaqs, setDbFaqs] = useState<DbFaq[]>([]);
+  useEffect(() => {
+    supabase
+      .from("faq_items")
+      .select("question, answer_html, category")
+      .eq("page_key", "faq")
+      .eq("is_active", true)
+      .order("sort_order")
+      .then(({ data }) => setDbFaqs((data as DbFaq[]) ?? []));
+  }, []);
+
   const faqCategories = [
     {
       category: "Finance",
@@ -56,14 +75,39 @@ const FAQ = () => {
         canonicalUrl={getFullUrl("/faq")}
       />
       <PageHeader 
-        title="Frequently Asked Questions"
-        description="Find answers to common questions about SmartCalc Hub calculators"
+        title={heading}
+        description={intro}
         icon={<HelpCircle className="h-10 w-10" />}
         category="faq"
       />
 
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-4xl mx-auto">
+
+          {dbFaqs.length > 0 && (
+            <Card className="mb-6 shadow-large border-2 border-primary/20">
+              <CardContent className="pt-8 pb-6">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="p-3 rounded-xl bg-gradient-to-br from-primary/20 to-primary-glow/20">
+                    <HelpCircle className="h-6 w-6 text-primary" />
+                  </div>
+                  <h2 className="text-3xl font-bold bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
+                    Featured
+                  </h2>
+                </div>
+                <Accordion type="single" collapsible className="w-full">
+                  {dbFaqs.map((f, i) => (
+                    <AccordionItem key={`db-${i}`} value={`db-${i}`}>
+                      <AccordionTrigger className="text-left hover:text-primary">{f.question}</AccordionTrigger>
+                      <AccordionContent>
+                        <RichTextRender html={f.answer_html} className="prose prose-sm dark:prose-invert max-w-none" />
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+              </CardContent>
+            </Card>
+          )}
 
           <div className="space-y-6">
             {faqCategories.map((category, idx) => (
