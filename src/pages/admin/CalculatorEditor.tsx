@@ -299,7 +299,8 @@ const CalculatorEditor = () => {
                   </div>
                   <Button variant="ghost" size="sm" onClick={() => delOutput(i)}><Trash2 className="h-4 w-4" /></Button>
                 </div>
-              ))}
+                );
+              })}
             </Card>
 
             <Card className="p-4">
