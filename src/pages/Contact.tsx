@@ -8,6 +8,9 @@ import { Mail, Send, HelpCircle, Shield, Lightbulb, Loader2 } from "lucide-react
 import { SEOHead } from "@/components/SEOHead";
 import { PageHeader } from "@/components/PageHeader";
 import { useContactForm } from "@/hooks/useContactForm";
+import { useEditableText } from "@/hooks/useEditableText";
+import { useEditableHtml } from "@/hooks/useEditableHtml";
+import { RichTextRender } from "@/components/admin/RichTextRender";
 
 const quickFaqs = [
   {
@@ -33,6 +36,9 @@ const Contact = () => {
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
   const { submitContact, isSubmitting } = useContactForm();
+  const heading = useEditableText("contact", "heading", "Contact Us");
+  const intro = useEditableText("contact", "intro_html", "Have questions or feedback? We'd love to hear from you.");
+  const introHtml = useEditableHtml("contact", "intro_html", "");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -55,11 +61,16 @@ const Contact = () => {
       />
       
       <PageHeader 
-        title="Contact Us"
-        description="Have questions or feedback? We'd love to hear from you."
+        title={heading}
+        description={intro}
         icon={<Mail className="h-10 w-10" />}
         category="contact"
       />
+      {introHtml && introHtml !== intro && (
+        <div className="container mx-auto px-4 pt-6">
+          <RichTextRender html={introHtml} className="prose dark:prose-invert max-w-3xl mx-auto" />
+        </div>
+      )}
       
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-6xl mx-auto">
