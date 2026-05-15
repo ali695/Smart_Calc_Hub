@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { HelpCircle, MessageSquare } from "lucide-react";
 import {
   Accordion,
@@ -10,8 +11,26 @@ import { expandedFAQs } from "@/data/expandedFAQs";
 import { PageHeader } from "@/components/PageHeader";
 import { SEOHead } from "@/components/SEOHead";
 import { getFullUrl } from "@/config/siteConfig";
+import { useEditableText } from "@/hooks/useEditableText";
+import { supabase } from "@/integrations/supabase/client";
+import { RichTextRender } from "@/components/admin/RichTextRender";
+
+interface DbFaq { question: string; answer_html: string; category: string | null; }
 
 const FAQ = () => {
+  const heading = useEditableText("faq", "heading", "Frequently Asked Questions");
+  const intro = useEditableText("faq", "intro_html", "Find answers to common questions about SmartCalc Hub calculators");
+  const [dbFaqs, setDbFaqs] = useState<DbFaq[]>([]);
+  useEffect(() => {
+    supabase
+      .from("faq_items")
+      .select("question, answer_html, category")
+      .eq("page_key", "faq")
+      .eq("is_active", true)
+      .order("sort_order")
+      .then(({ data }) => setDbFaqs((data as DbFaq[]) ?? []));
+  }, []);
+
   const faqCategories = [
     {
       category: "Finance",
