@@ -11,6 +11,7 @@ import { RichTextEditor } from "@/components/admin/RichTextEditor";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, Save, ArrowLeft, Plus, Trash2, Eye } from "lucide-react";
 import { DynamicCalculator } from "@/components/DynamicCalculator";
+import { evaluateFormula } from "@/lib/safeFormula";
 
 interface InputDef {
   key: string;
@@ -77,8 +78,46 @@ const CalculatorEditor = () => {
 
   const setDef = (d: Definition) => set("definition", d);
 
+  const validateDefinition = (d: Definition): string[] => {
+    const errs: string[] = [];
+    const seenInputs = new Set<string>();
+    d.inputs.forEach((inp, i) => {
+      if (!inp.key || !/^[a-zA-Z_][a-zA-Z0-9_]*$/.test(inp.key)) errs.push(`Input #${i + 1}: invalid key "${inp.key}"`);
+      if (seenInputs.has(inp.key)) errs.push(`Input #${i + 1}: duplicate key "${inp.key}"`);
+      seenInputs.add(inp.key);
+    });
+    const scope: Record<string, number | string> = {};
+    d.inputs.forEach((inp) => {
+      scope[inp.key] = inp.type === "number" ? Number(inp.default ?? 1) || 1 : String(inp.default ?? (inp.options?.[0]?.value ?? ""));
+    });
+    const seenOuts = new Set<string>();
+    d.outputs.forEach((out, i) => {
+      if (!out.key) errs.push(`Output #${i + 1}: missing key`);
+      if (seenOuts.has(out.key)) errs.push(`Output #${i + 1}: duplicate key "${out.key}"`);
+      seenOuts.add(out.key);
+      if (!out.formula?.trim()) {
+        errs.push(`Output "${out.label || out.key}": formula is empty`);
+        return;
+      }
+      const r = evaluateFormula(out.formula, scope);
+      if (!r.ok) errs.push(`Output "${out.label || out.key}": ${r.error}`);
+    });
+    return errs;
+  };
+
   const save = async (publish = false) => {
     if (!row) return;
+    if (publish && row.is_custom) {
+      const errs = validateDefinition(row.definition ?? { inputs: [], outputs: [] });
+      if (errs.length > 0) {
+        toast({
+          title: "Cannot publish — fix formula errors",
+          description: errs.slice(0, 4).join(" • "),
+          variant: "destructive",
+        });
+        return;
+      }
+    }
     setSaving(true);
     const payload: any = {
       slug: row.slug,
