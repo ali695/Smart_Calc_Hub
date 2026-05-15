@@ -258,7 +258,13 @@ const CalculatorEditor = () => {
               <p className="text-xs text-muted-foreground">
                 Use input keys directly. Functions: + - * / ^ sqrt() log() sin() cos() abs() min() max(). Example: <code>principal * (rate/1200) / (1 - (1 + rate/1200)^(-years*12))</code>
               </p>
-              {def.outputs.map((out, i) => (
+              {def.outputs.map((out, i) => {
+                const sampleScope: Record<string, number | string> = {};
+                def.inputs.forEach((inp) => {
+                  sampleScope[inp.key] = inp.type === "number" ? Number(inp.default ?? 1) || 1 : String(inp.default ?? (inp.options?.[0]?.value ?? ""));
+                });
+                const check = out.formula?.trim() ? evaluateFormula(out.formula, sampleScope) : { ok: false, error: "Empty formula" };
+                return (
                 <div key={i} className="border rounded-md p-3 grid sm:grid-cols-6 gap-2 items-end">
                   <div className="space-y-1">
                     <Label className="text-xs">Key</Label>
@@ -270,7 +276,17 @@ const CalculatorEditor = () => {
                   </div>
                   <div className="space-y-1 sm:col-span-2">
                     <Label className="text-xs">Formula</Label>
-                    <Input value={out.formula} onChange={(e) => updOutput(i, { formula: e.target.value })} />
+                    <Input
+                      value={out.formula}
+                      onChange={(e) => updOutput(i, { formula: e.target.value })}
+                      className={check.ok ? "" : "border-destructive focus-visible:ring-destructive"}
+                    />
+                    {!check.ok && (
+                      <p className="text-xs text-destructive">⚠ {check.error}</p>
+                    )}
+                    {check.ok && (
+                      <p className="text-xs text-muted-foreground">≈ {String(check.value)}</p>
+                    )}
                   </div>
                   <div className="space-y-1">
                     <Label className="text-xs">Format</Label>
