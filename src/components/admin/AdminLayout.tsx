@@ -1,6 +1,7 @@
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { Link, useLocation, Navigate } from "react-router-dom";
 import { useUserRole } from "@/hooks/useUserRole";
+import { supabase } from "@/integrations/supabase/client";
 import {
   LayoutDashboard, FileText, FileEdit, Calculator, Users, Loader2, Menu, X, ArrowLeft,
 } from "lucide-react";
