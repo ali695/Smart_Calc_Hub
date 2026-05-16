@@ -25,8 +25,15 @@ export const AdminLayout = ({ children, requireAdmin = false }: Props) => {
   const { isAdmin, isEditor, isLoading } = useUserRole();
   const location = useLocation();
   const [open, setOpen] = useState(false);
+  const [adminExists, setAdminExists] = useState<boolean | null>(null);
 
-  if (isLoading) {
+  useEffect(() => {
+    if (!isLoading && !isEditor) {
+      supabase.rpc("admin_exists").then(({ data }) => setAdminExists(Boolean(data)));
+    }
+  }, [isLoading, isEditor]);
+
+  if (isLoading || (!isEditor && adminExists === null)) {
     return (
       <div className="flex items-center justify-center min-h-[60vh] text-muted-foreground">
         <Loader2 className="h-5 w-5 mr-2 animate-spin" /> Loading...
@@ -34,7 +41,9 @@ export const AdminLayout = ({ children, requireAdmin = false }: Props) => {
     );
   }
 
-  if (!isEditor) return <Navigate to="/auth" replace />;
+  if (!isEditor) {
+    return <Navigate to={adminExists ? "/auth" : "/admin/setup"} replace />;
+  }
   if (requireAdmin && !isAdmin) return <Navigate to="/admin/cms" replace />;
 
   return (
