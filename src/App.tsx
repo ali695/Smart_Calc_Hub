@@ -164,6 +164,7 @@ import PageEditor from "./pages/admin/PageEditor";
 import CalculatorList from "./pages/admin/CalculatorList";
 import CalculatorEditor from "./pages/admin/CalculatorEditor";
 import AdminUsers from "./pages/admin/Users";
+import AdminSetup from "./pages/admin/Setup";
 import BlogPostRouter from "./pages/BlogPostRouter";
 import CustomCalculator from "./pages/CustomCalculator";
 import { ScrollToTop } from "./components/ScrollToTop";
