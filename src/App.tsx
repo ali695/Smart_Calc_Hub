@@ -208,6 +208,7 @@ const App = () => (
                 <Route path="/real-estate" element={<RealEstateCalculators />} />
                 <Route path="/crypto" element={<CryptoCalculators />} />
                 <Route path="/admin" element={<AdminDashboard />} />
+                <Route path="/admin/setup" element={<AdminSetup />} />
                 <Route path="/admin/cms" element={<CmsHome />} />
                 <Route path="/admin/cms/blogs" element={<BlogList />} />
                 <Route path="/admin/cms/blogs/:id" element={<BlogEditor />} />
