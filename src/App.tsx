@@ -164,6 +164,7 @@ import PageEditor from "./pages/admin/PageEditor";
 import CalculatorList from "./pages/admin/CalculatorList";
 import CalculatorEditor from "./pages/admin/CalculatorEditor";
 import AdminUsers from "./pages/admin/Users";
+import AdminSetup from "./pages/admin/Setup";
 import BlogPostRouter from "./pages/BlogPostRouter";
 import CustomCalculator from "./pages/CustomCalculator";
 import { ScrollToTop } from "./components/ScrollToTop";
@@ -207,6 +208,7 @@ const App = () => (
                 <Route path="/real-estate" element={<RealEstateCalculators />} />
                 <Route path="/crypto" element={<CryptoCalculators />} />
                 <Route path="/admin" element={<AdminDashboard />} />
+                <Route path="/admin/setup" element={<AdminSetup />} />
                 <Route path="/admin/cms" element={<CmsHome />} />
                 <Route path="/admin/cms/blogs" element={<BlogList />} />
                 <Route path="/admin/cms/blogs/:id" element={<BlogEditor />} />
