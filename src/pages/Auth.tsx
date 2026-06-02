@@ -21,22 +21,26 @@ const Auth = () => {
   const { user, signIn, signUp, resetPassword, isLoading: authLoading } = useAuth();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  
+
+  const redirectParam = searchParams.get("redirect");
+  const safeRedirect = redirectParam && redirectParam.startsWith("/") && !redirectParam.startsWith("//")
+    ? redirectParam
+    : "/";
+
   const [activeTab, setActiveTab] = useState(searchParams.get("mode") === "signup" ? "signup" : "login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-const [isGoogleLoading, setIsGoogleLoading] = useState(false);
-  const [isGitHubLoading, setIsGitHubLoading] = useState(false);
+  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
   const [showReset, setShowReset] = useState(false);
 
   // Redirect if already logged in
   useEffect(() => {
     if (user && !authLoading) {
-      navigate("/", { replace: true });
+      navigate(safeRedirect, { replace: true });
     }
-  }, [user, authLoading, navigate]);
+  }, [user, authLoading, navigate, safeRedirect]);
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -77,7 +81,7 @@ const [isGoogleLoading, setIsGoogleLoading] = useState(false);
         title: "Welcome back!",
         description: "You have successfully signed in."
       });
-      navigate("/");
+      navigate(safeRedirect, { replace: true });
     }
   };
 
@@ -174,10 +178,10 @@ const [isGoogleLoading, setIsGoogleLoading] = useState(false);
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-          redirectTo: `${window.location.origin}/`,
+          redirectTo: `${window.location.origin}${safeRedirect}`,
         },
       });
-      
+
       if (error) throw error;
     } catch (error: any) {
       toast({
@@ -186,27 +190,6 @@ const [isGoogleLoading, setIsGoogleLoading] = useState(false);
         variant: "destructive",
       });
       setIsGoogleLoading(false);
-    }
-  };
-
-  const handleGitHubSignIn = async () => {
-    setIsGitHubLoading(true);
-    try {
-      const { error } = await supabase.auth.signInWithOAuth({
-        provider: "github",
-        options: {
-          redirectTo: `${window.location.origin}/`,
-        },
-      });
-      
-      if (error) throw error;
-    } catch (error: any) {
-      toast({
-        title: "GitHub Sign In Failed",
-        description: error.message || "Failed to sign in with GitHub",
-        variant: "destructive",
-      });
-      setIsGitHubLoading(false);
     }
   };
 
