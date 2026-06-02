@@ -156,6 +156,7 @@ import K401Calculator from "./pages/calculators/K401Calculator";
 import RealEstateCalculators from "./pages/RealEstateCalculators";
 import CryptoCalculators from "./pages/CryptoCalculators";
 import AdminDashboard from "./pages/AdminDashboard";
+import AdminEntry from "./pages/admin/AdminEntry";
 import CmsHome from "./pages/admin/CmsHome";
 import BlogList from "./pages/admin/BlogList";
 import BlogEditor from "./pages/admin/BlogEditor";
@@ -207,7 +208,8 @@ const App = () => (
                 <Route path="/categories" element={<Categories />} />
                 <Route path="/real-estate" element={<RealEstateCalculators />} />
                 <Route path="/crypto" element={<CryptoCalculators />} />
-                <Route path="/admin" element={<AdminDashboard />} />
+                <Route path="/admin" element={<AdminEntry />} />
+                <Route path="/admin/legacy" element={<AdminDashboard />} />
                 <Route path="/admin/setup" element={<AdminSetup />} />
                 <Route path="/admin/cms" element={<CmsHome />} />
                 <Route path="/admin/cms/blogs" element={<BlogList />} />
